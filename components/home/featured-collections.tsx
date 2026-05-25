@@ -14,7 +14,7 @@ const COLLECTION_IMAGES: Record<string, string> = {
   uefa: "/collections/uefa.png",
   conmebol: "/collections/conmebol.png",
   "new-arrivals": "/collections/new-arrivals.png",
-  // "best-sellers": "/collections/best-sellers.png", — design handoff; falls back to decorative tile.
+  "best-sellers": "/collections/best-sellers.png",
 };
 
 export function FeaturedCollections({

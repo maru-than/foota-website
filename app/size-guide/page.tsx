@@ -17,6 +17,7 @@ export default function SizeGuidePage() {
         eyebrow="Help"
         title="Size Guide"
         description="Shirts vary by era and manufacturer — use these measurements as a guide before picking your size."
+        image="/pages/size-guide.png"
       />
       <Container className="py-12 lg:py-16">
         <div className="max-w-3xl">

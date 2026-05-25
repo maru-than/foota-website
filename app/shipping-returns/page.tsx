@@ -17,6 +17,7 @@ export default function ShippingReturnsPage() {
         eyebrow="Help"
         title="Shipping & Returns"
         description="Getting your jersey, and what to do if it isn't quite right."
+        image="/pages/shipping-returns.png"
       />
       <Container className="py-12 lg:py-16">
         <div className="max-w-3xl">

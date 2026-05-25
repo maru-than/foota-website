@@ -16,6 +16,7 @@ export default function ContactPage() {
         eyebrow="Get in touch"
         title="Contact us"
         description="Questions about a shirt, an order or authenticity? We're happy to help."
+        image="/pages/contact.png"
       />
       <Container className="py-12 lg:py-16">
         <div className="grid gap-12 lg:grid-cols-[1fr_320px]">

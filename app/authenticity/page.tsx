@@ -17,6 +17,7 @@ export default function AuthenticityPage() {
         eyebrow="Our promise"
         title="Quality check"
         description="Every 2026 shirt is inspected before it ships."
+        image="/pages/authenticity.png"
       />
       <Container className="py-12 lg:py-16">
         <div className="max-w-3xl">

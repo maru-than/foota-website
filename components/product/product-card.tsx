@@ -94,21 +94,6 @@ export function ProductCard({
           compareAt={product.compareAtPrice}
           className="text-sm font-bold text-fg-1"
         />
-        <div className="flex gap-1">
-          {chips.map((v) => (
-            <span
-              key={v.id}
-              className="flex h-8 min-w-8 items-center justify-center border border-line-accent px-1 text-xs font-bold text-fg-2"
-            >
-              {v.title}
-            </span>
-          ))}
-          {extra > 0 ? (
-            <span className="flex h-8 min-w-8 items-center justify-center px-1 text-xs font-bold text-accent">
-              +{extra}
-            </span>
-          ) : null}
-        </div>
       </div>
     </Link>
   );

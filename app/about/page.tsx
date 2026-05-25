@@ -16,6 +16,7 @@ export default function AboutPage() {
         eyebrow="Our story"
         title="A home for jerseys."
         description="The home for the World cup 2026 — every nation's home shirt, in one place."
+        image="/pages/about.png"
       />
       <Container className="py-12 lg:py-16">
         <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-fg-2 [&_h2]:text-fg-1">
