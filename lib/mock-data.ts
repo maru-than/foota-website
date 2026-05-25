@@ -1,231 +1,96 @@
 import type {
   Collection,
   JerseyBadge,
-  JerseyEra,
-  JerseyType,
   Product,
   ProductVariant,
 } from "./shopify/types";
 
 /* ------------------------------------------------------------------ */
-/*  Local development catalogue.                                       */
-/*  Used automatically whenever Shopify env vars are not configured,   */
-/*  so the storefront is fully previewable offline. Shaped exactly     */
-/*  like the normalized `Product`/`Collection` types the components    */
-/*  consume, so swapping to live Shopify data needs no UI changes.     */
+/*  Foota catalogue — FIFA World Cup 2026.                             */
+/*  The shop sells official 2026 home jerseys for the 48 nations of    */
+/*  the first 48-team World Cup, co-hosted by the USA, Canada & Mexico.*/
+/*  Images live in /public/jerseys/home/<slug>.jpg (and away/).        */
+/*  fallback; shaped exactly like the normalized Shopify types.        */
 /* ------------------------------------------------------------------ */
 
 const CURRENCY = "CHF";
 const SIZES = ["S", "M", "L", "XL", "XXL"] as const;
 
+const REGION: Record<string, string> = {
+  UEFA: "Europe",
+  CONMEBOL: "South America",
+  CONCACAF: "North & Central America",
+  CAF: "Africa",
+  AFC: "Asia",
+  OFC: "Oceania",
+};
+
 interface Spec {
-  handle: string;
-  title: string;
-  club?: string;
-  nation?: string;
-  season: string;
-  type: JerseyType;
-  era: JerseyEra;
-  badge?: JerseyBadge;
+  slug: string; // matches /public/jerseys/home|away/<slug>.jpg and the handle
+  nation: string;
+  conf: keyof typeof REGION;
   price: number;
+  host?: boolean;
+  isNew?: boolean;
   soldOut?: string[];
-  blurb: string;
 }
 
+// Ordered so marquee / new drops surface first in "New arrivals".
 const SPECS: Spec[] = [
-  {
-    handle: "ac-milan-2006-07-home",
-    title: "AC Milan 2006/07 Home Jersey",
-    club: "AC Milan",
-    season: "2006/07",
-    type: "Home",
-    era: "Retro",
-    badge: "Retro",
-    price: 119,
-    soldOut: ["XXL"],
-    blurb:
-      "The shirt of Milan's seventh European crown — bold rossoneri stripes worn through the 2007 Champions League triumph in Athens.",
-  },
-  {
-    handle: "brazil-2002-home",
-    title: "Brazil 2002 Home Jersey",
-    nation: "Brazil",
-    season: "2002",
-    type: "Home",
-    era: "Retro",
-    badge: "Retro",
-    price: 129,
-    blurb:
-      "Canary yellow from the Seleção's fifth World Cup — the shirt of the Ronaldo, Rivaldo and Ronaldinho front line.",
-  },
-  {
-    handle: "arsenal-2025-26-home",
-    title: "Arsenal 2025/26 Home Jersey",
-    club: "Arsenal",
-    season: "2025/26",
-    type: "Home",
-    era: "Current",
-    badge: "New",
-    price: 99,
-    blurb:
-      "The latest home shirt from North London — classic red and white, reworked for the new season.",
-  },
-  {
-    handle: "inter-milan-1997-98-away",
-    title: "Inter Milan 1997/98 Away Jersey",
-    club: "Inter Milan",
-    season: "1997/98",
-    type: "Away",
-    era: "Retro",
-    badge: "Rare Find",
-    price: 149,
-    soldOut: ["S", "XXL"],
-    blurb:
-      "Ronaldo's UEFA Cup-winning season in deep navy. A genuinely hard-to-find away shirt for the collector.",
-  },
-  {
-    handle: "switzerland-2024-home",
-    title: "Switzerland 2024 Home Jersey",
-    nation: "Switzerland",
-    season: "2024",
-    type: "Home",
-    era: "Current",
-    price: 89,
-    blurb:
-      "The Nati's home shirt — crisp red with the white cross, made for a new generation of supporters.",
-  },
-  {
-    handle: "fc-barcelona-2010-11-home",
-    title: "FC Barcelona 2010/11 Home Jersey",
-    club: "FC Barcelona",
-    season: "2010/11",
-    type: "Home",
-    era: "Retro",
-    badge: "Retro",
-    price: 139,
-    blurb:
-      "Blaugrana stripes from the Guardiola era — the shirt of arguably the finest club side ever assembled.",
-  },
-  {
-    handle: "juventus-2025-26-home",
-    title: "Juventus 2025/26 Home Jersey",
-    club: "Juventus",
-    season: "2025/26",
-    type: "Home",
-    era: "Current",
-    badge: "New",
-    price: 99,
-    blurb: "Black and white from Turin, freshly drawn for the new campaign.",
-  },
-  {
-    handle: "germany-1990-home",
-    title: "Germany 1990 Home Jersey",
-    nation: "Germany",
-    season: "1990",
-    type: "Home",
-    era: "Retro",
-    badge: "Retro",
-    price: 134,
-    blurb:
-      "The geometric colourway of the 1990 World Cup winners — an undisputed design classic.",
-  },
-  {
-    handle: "manchester-united-1998-99-home",
-    title: "Manchester United 1998/99 Home Jersey",
-    club: "Manchester United",
-    season: "1998/99",
-    type: "Home",
-    era: "Retro",
-    badge: "Rare Find",
-    price: 159,
-    soldOut: ["XXL"],
-    blurb:
-      "The Treble shirt — worn through the most famous comeback in Camp Nou history.",
-  },
-  {
-    handle: "france-1998-home",
-    title: "France 1998 Home Jersey",
-    nation: "France",
-    season: "1998",
-    type: "Home",
-    era: "Retro",
-    badge: "Retro",
-    price: 144,
-    blurb:
-      "Les Bleus on home soil — the shirt of a first World Cup, won in Saint-Denis.",
-  },
-  {
-    handle: "real-madrid-2025-26-away",
-    title: "Real Madrid 2025/26 Away Jersey",
-    club: "Real Madrid",
-    season: "2025/26",
-    type: "Away",
-    era: "Current",
-    badge: "New",
-    price: 99,
-    blurb: "A modern away shirt from the Bernabéu, ready for the road.",
-  },
-  {
-    handle: "liverpool-2005-home",
-    title: "Liverpool 2005 Home Jersey",
-    club: "Liverpool",
-    season: "2004/05",
-    type: "Home",
-    era: "Retro",
-    badge: "Rare Find",
-    price: 154,
-    soldOut: ["S"],
-    blurb:
-      "Istanbul. Three goals down, then immortal — the most romantic Liverpool shirt of the modern era.",
-  },
-  {
-    handle: "argentina-1986-home",
-    title: "Argentina 1986 Home Jersey",
-    nation: "Argentina",
-    season: "1986",
-    type: "Home",
-    era: "Retro",
-    badge: "Retro",
-    price: 139,
-    blurb:
-      "Albiceleste stripes from Mexico '86 — the shirt of the greatest individual tournament ever played.",
-  },
-  {
-    handle: "netherlands-1988-home",
-    title: "Netherlands 1988 Home Jersey",
-    nation: "Netherlands",
-    season: "1988",
-    type: "Home",
-    era: "Retro",
-    badge: "Retro",
-    price: 129,
-    blurb:
-      "Oranje geometry from the '88 European Championship — and Van Basten's impossible volley.",
-  },
-  {
-    handle: "napoli-1987-88-home",
-    title: "Napoli 1987/88 Home Jersey",
-    club: "Napoli",
-    season: "1987/88",
-    type: "Home",
-    era: "Retro",
-    badge: "Rare Find",
-    price: 149,
-    soldOut: ["S", "XL"],
-    blurb: "Sky blue from Maradona's Napoli — a shirt that carried a city's dreams.",
-  },
-  {
-    handle: "england-1990-home",
-    title: "England 1990 Home Jersey",
-    nation: "England",
-    season: "1990",
-    type: "Home",
-    era: "Retro",
-    badge: "Retro",
-    price: 119,
-    blurb:
-      "Italia '90 — the shirt of Gazza's tears and a nation half in love with its team again.",
-  },
+  // UEFA
+  { slug: "england", nation: "England", conf: "UEFA", price: 119, isNew: true, soldOut: ["XXL"] },
+  { slug: "france", nation: "France", conf: "UEFA", price: 119, isNew: true },
+  { slug: "spain", nation: "Spain", conf: "UEFA", price: 119, isNew: true },
+  { slug: "portugal", nation: "Portugal", conf: "UEFA", price: 119, isNew: true },
+  { slug: "germany", nation: "Germany", conf: "UEFA", price: 119, soldOut: ["S"] },
+  { slug: "netherlands", nation: "Netherlands", conf: "UEFA", price: 109 },
+  { slug: "belgium", nation: "Belgium", conf: "UEFA", price: 109 },
+  { slug: "croatia", nation: "Croatia", conf: "UEFA", price: 109 },
+  { slug: "switzerland", nation: "Switzerland", conf: "UEFA", price: 99 },
+  { slug: "austria", nation: "Austria", conf: "UEFA", price: 99 },
+  { slug: "scotland", nation: "Scotland", conf: "UEFA", price: 99 },
+  { slug: "norway", nation: "Norway", conf: "UEFA", price: 99, isNew: true },
+  // CONMEBOL
+  { slug: "argentina", nation: "Argentina", conf: "CONMEBOL", price: 119, isNew: true, soldOut: ["XXL"] },
+  { slug: "brazil", nation: "Brazil", conf: "CONMEBOL", price: 119, isNew: true },
+  { slug: "uruguay", nation: "Uruguay", conf: "CONMEBOL", price: 109 },
+  { slug: "colombia", nation: "Colombia", conf: "CONMEBOL", price: 109, isNew: true },
+  { slug: "ecuador", nation: "Ecuador", conf: "CONMEBOL", price: 99 },
+  { slug: "paraguay", nation: "Paraguay", conf: "CONMEBOL", price: 89 },
+  { slug: "venezuela", nation: "Venezuela", conf: "CONMEBOL", price: 89 },
+  { slug: "bolivia", nation: "Bolivia", conf: "CONMEBOL", price: 89 },
+  // CONCACAF (incl. hosts)
+  { slug: "usa", nation: "USA", conf: "CONCACAF", price: 119, host: true, soldOut: ["XXL"] },
+  { slug: "mexico", nation: "Mexico", conf: "CONCACAF", price: 119, host: true },
+  { slug: "canada", nation: "Canada", conf: "CONCACAF", price: 109, host: true },
+  { slug: "costa-rica", nation: "Costa Rica", conf: "CONCACAF", price: 99 },
+  { slug: "jamaica", nation: "Jamaica", conf: "CONCACAF", price: 99, isNew: true },
+  { slug: "panama", nation: "Panama", conf: "CONCACAF", price: 89 },
+  { slug: "honduras", nation: "Honduras", conf: "CONCACAF", price: 89 },
+  { slug: "haiti", nation: "Haiti", conf: "CONCACAF", price: 89 },
+  { slug: "curacao", nation: "Curaçao", conf: "CONCACAF", price: 89, isNew: true },
+  { slug: "el-salvador", nation: "El Salvador", conf: "CONCACAF", price: 89 },
+  // CAF
+  { slug: "morocco", nation: "Morocco", conf: "CAF", price: 109, isNew: true, soldOut: ["S"] },
+  { slug: "senegal", nation: "Senegal", conf: "CAF", price: 109, soldOut: ["XXL"] },
+  { slug: "ivory-coast", nation: "Ivory Coast", conf: "CAF", price: 99 },
+  { slug: "egypt", nation: "Egypt", conf: "CAF", price: 99 },
+  { slug: "algeria", nation: "Algeria", conf: "CAF", price: 99 },
+  { slug: "ghana", nation: "Ghana", conf: "CAF", price: 99 },
+  { slug: "cape-verde", nation: "Cape Verde", conf: "CAF", price: 89, isNew: true },
+  { slug: "south-africa", nation: "South Africa", conf: "CAF", price: 89 },
+  // AFC
+  { slug: "japan", nation: "Japan", conf: "AFC", price: 109, isNew: true, soldOut: ["XL"] },
+  { slug: "south-korea", nation: "South Korea", conf: "AFC", price: 109 },
+  { slug: "australia", nation: "Australia", conf: "AFC", price: 99 },
+  { slug: "saudi-arabia", nation: "Saudi Arabia", conf: "AFC", price: 99 },
+  { slug: "iran", nation: "Iran", conf: "AFC", price: 99 },
+  { slug: "qatar", nation: "Qatar", conf: "AFC", price: 99 },
+  { slug: "iraq", nation: "Iraq", conf: "AFC", price: 89 },
+  { slug: "jordan", nation: "Jordan", conf: "AFC", price: 89, isNew: true },
+  { slug: "united-arab-emirates", nation: "United Arab Emirates", conf: "AFC", price: 89 },
+  // OFC
+  { slug: "new-zealand", nation: "New Zealand", conf: "OFC", price: 99, isNew: true },
 ];
 
 function makeVariants(
@@ -242,49 +107,62 @@ function makeVariants(
   }));
 }
 
+function describe(spec: Spec): string {
+  if (spec.host) {
+    return `${spec.nation}'s home shirt for the 2026 FIFA World Cup — a co-host nation, playing the first 48-team finals on home soil across the USA, Canada and Mexico.`;
+  }
+  return `${spec.nation}'s home shirt for the 2026 FIFA World Cup — ${REGION[spec.conf]}'s representative at the first 48-nation finals across the USA, Canada and Mexico.`;
+}
+
 function makeProduct(spec: Spec, index: number): Product {
   const id = `gid://mock/Product/${index + 1}`;
   const soldOut = spec.soldOut ?? [];
   const variants = makeVariants(id, spec.price, soldOut);
   const money = { amount: spec.price.toFixed(2), currencyCode: CURRENCY };
-  const teamName = spec.club ?? spec.nation ?? null;
-  // Stagger timestamps so "Newest" sorting is deterministic.
-  const created = new Date(2026, 4, 1);
-  created.setDate(created.getDate() - index * 9);
+  const badge: JerseyBadge = spec.host ? "Host" : spec.isNew ? "New" : null;
+  const image = {
+    url: `/jerseys/home/${spec.slug}.jpg`,
+    altText: `${spec.nation} 2026 home jersey`,
+  };
+  const lead = describe(spec);
+  // Stagger timestamps so "New arrivals" / "Newest" sorting is deterministic.
+  const created = new Date(2026, 4, 20);
+  created.setDate(created.getDate() - index * 2);
 
   const tags = [
-    spec.club ? `club:${spec.club}` : null,
-    spec.nation ? `nation:${spec.nation}` : null,
-    `season:${spec.season}`,
-    spec.type ? `type:${spec.type}` : null,
-    `era:${spec.era}`,
-    spec.badge ? `badge:${spec.badge}` : null,
+    `nation:${spec.nation}`,
+    `confederation:${spec.conf}`,
+    "season:2026",
+    "type:Home",
+    "era:Current",
+    badge ? `badge:${badge}` : null,
   ].filter((t): t is string => Boolean(t));
 
   return {
     id,
-    handle: spec.handle,
-    title: spec.title,
-    description: spec.blurb,
-    descriptionHtml: `<p>${spec.blurb}</p><p>Each shirt is inspected and graded by our team before it joins the archive. Officially licensed where applicable.</p>`,
+    handle: `${spec.slug}-2026-home`,
+    title: `${spec.nation} 2026 Home Jersey`,
+    description: lead,
+    descriptionHtml: `<p>${lead}</p><p>Official home jersey · sizes S–XXL. Inspected before it ships, dispatched worldwide in 48h.</p>`,
     availableForSale: variants.some((v) => v.availableForSale),
     tags,
     options: [{ id: `${id}/option/size`, name: "Size", values: [...SIZES] }],
     priceRange: { minVariantPrice: money, maxVariantPrice: money },
     compareAtPrice: null,
-    featuredImage: null,
-    images: [],
+    featuredImage: image,
+    images: [image],
     variants,
     meta: {
-      club: spec.club ?? null,
-      nation: spec.nation ?? null,
-      season: spec.season,
-      type: spec.type,
-      era: spec.era,
-      badge: spec.badge ?? null,
-      teamName,
+      club: null,
+      nation: spec.nation,
+      confederation: spec.conf,
+      season: "2026",
+      type: "Home",
+      era: "Current",
+      badge,
+      teamName: spec.nation,
     },
-    seo: { title: spec.title, description: spec.blurb },
+    seo: { title: `${spec.nation} 2026 Home Jersey`, description: lead },
     createdAt: created.toISOString(),
     updatedAt: created.toISOString(),
   };
@@ -303,32 +181,53 @@ interface CollectionRule {
 
 const COLLECTION_RULES: CollectionRule[] = [
   {
-    handle: "club-jerseys",
-    title: "Club Jerseys",
+    handle: "hosts",
+    title: "Host Nations",
     description:
-      "Shirts from the clubs that shaped the game — league nights, derby days and European epics.",
-    match: (p) => p.meta.club !== null,
+      "USA · Canada · Mexico — hosting the first 48-team World Cup across 16 cities.",
+    match: (p) => p.meta.badge === "Host",
   },
   {
-    handle: "national-teams",
-    title: "National Teams",
-    description:
-      "International shirts from World Cups and continental tournaments across the decades.",
-    match: (p) => p.meta.nation !== null,
+    handle: "uefa",
+    title: "Europe",
+    description: "UEFA nations heading to the 2026 World Cup.",
+    match: (p) => p.meta.confederation === "UEFA",
   },
   {
-    handle: "retro-classics",
-    title: "Retro Classics",
-    description:
-      "Archive shirts from the seasons that became legend — vintage cuts, unmistakable colourways.",
-    match: (p) => p.meta.era === "Retro",
+    handle: "conmebol",
+    title: "South America",
+    description: "CONMEBOL nations heading to the 2026 World Cup.",
+    match: (p) => p.meta.confederation === "CONMEBOL",
+  },
+  {
+    handle: "concacaf",
+    title: "North & Central America",
+    description: "CONCACAF nations heading to the 2026 World Cup.",
+    match: (p) => p.meta.confederation === "CONCACAF",
+  },
+  {
+    handle: "caf",
+    title: "Africa",
+    description: "CAF nations heading to the 2026 World Cup.",
+    match: (p) => p.meta.confederation === "CAF",
+  },
+  {
+    handle: "afc",
+    title: "Asia",
+    description: "AFC nations heading to the 2026 World Cup.",
+    match: (p) => p.meta.confederation === "AFC",
+  },
+  {
+    handle: "ofc",
+    title: "Oceania",
+    description: "OFC nations heading to the 2026 World Cup.",
+    match: (p) => p.meta.confederation === "OFC",
   },
   {
     handle: "new-arrivals",
     title: "New Arrivals",
-    description:
-      "The latest jerseys to land in the archive — current-season kits and fresh rare finds.",
-    match: (p) => p.meta.badge === "New" || p.meta.era === "Current",
+    description: "The latest shirts to land in the archive.",
+    match: (p) => p.meta.badge === "New",
   },
 ];
 
@@ -340,6 +239,16 @@ export const MOCK_COLLECTIONS: Collection[] = COLLECTION_RULES.map((rule, i) => 
   image: null,
   seo: { title: rule.title, description: rule.description },
 }));
+
+/** Confederations for the homepage "Shop by confederation" section. */
+export const MOCK_CONFEDERATIONS = [
+  { name: "Europe", abbr: "UEFA", handle: "uefa" },
+  { name: "South America", abbr: "CONMEBOL", handle: "conmebol" },
+  { name: "N. & C. America", abbr: "CONCACAF", handle: "concacaf" },
+  { name: "Africa", abbr: "CAF", handle: "caf" },
+  { name: "Asia", abbr: "AFC", handle: "afc" },
+  { name: "Oceania", abbr: "OFC", handle: "ofc" },
+];
 
 /* ------------------------------- Lookups -------------------------------- */
 
@@ -361,29 +270,15 @@ export function getMockCollectionProducts(handle: string): Product[] {
   return MOCK_PRODUCTS.filter(rule.match);
 }
 
-export function getMockNewArrivals(limit = 8): Product[] {
-  // Current-season and "New" shirts first, then most-recent retros.
-  const ranked = [...MOCK_PRODUCTS].sort((a, b) => {
-    const score = (p: Product) =>
-      (p.meta.badge === "New" ? 2 : 0) + (p.meta.era === "Current" ? 1 : 0);
-    const diff = score(b) - score(a);
-    if (diff !== 0) return diff;
-    return b.createdAt.localeCompare(a.createdAt);
-  });
-  return ranked.slice(0, limit);
-}
-
 export function searchMockProducts(query: string): Product[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   return MOCK_PRODUCTS.filter((p) => {
     const haystack = [
       p.title,
-      p.meta.club,
       p.meta.nation,
+      p.meta.confederation,
       p.meta.season,
-      p.meta.type,
-      p.meta.era,
       ...p.tags,
     ]
       .filter(Boolean)
@@ -397,13 +292,12 @@ export function getMockRecommendations(productId: string, limit = 4): Product[] 
   const current = MOCK_PRODUCTS.find((p) => p.id === productId);
   const pool = MOCK_PRODUCTS.filter((p) => p.id !== productId);
   if (!current) return pool.slice(0, limit);
-  // Prefer same era, then everything else.
-  const ranked = pool.sort((a, b) => {
-    const score = (p: Product) =>
-      (p.meta.era === current.meta.era ? 1 : 0) +
-      (p.meta.type === current.meta.type ? 1 : 0);
-    return score(b) - score(a);
-  });
+  // Prefer the same confederation — group-stage neighbours.
+  const ranked = pool.sort(
+    (a, b) =>
+      (b.meta.confederation === current.meta.confederation ? 1 : 0) -
+      (a.meta.confederation === current.meta.confederation ? 1 : 0),
+  );
   return ranked.slice(0, limit);
 }
 
@@ -417,8 +311,3 @@ export function findMockVariant(
   }
   return undefined;
 }
-
-/** Curated club list for the homepage "Shop by club" section. */
-export const MOCK_CLUBS: string[] = Array.from(
-  new Set(MOCK_PRODUCTS.map((p) => p.meta.club).filter((c): c is string => Boolean(c))),
-);
