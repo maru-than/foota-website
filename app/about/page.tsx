@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Foota Jerseys is the home for the 2026 international tournament — every nation's home shirt in one place.",
+    "Foota Jerseys is the home for the World cup 2026 — every nation's home shirt in one place.",
 };
 
 export default function AboutPage() {
@@ -15,7 +15,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="Our story"
         title="A home for jerseys."
-        description="The home for the 2026 international tournament — every nation's home shirt, in one place."
+        description="The home for the World cup 2026 — every nation's home shirt, in one place."
       />
       <Container className="py-12 lg:py-16">
         <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-fg-2 [&_h2]:text-fg-1">
@@ -24,7 +24,7 @@ export default function AboutPage() {
               Built for the summer of 2026
             </h2>
             <p>
-              The 2026 international tournament is the biggest ever — 48 nations,
+              The World cup 2026 is the biggest ever — 48 nations,
               16 cities, one summer across the USA, Canada and Mexico. Foota is
               built for it: one place to find the home shirt of every side in the
               draw.

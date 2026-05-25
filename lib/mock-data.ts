@@ -126,9 +126,9 @@ type Kit = "Home" | "Away";
 function describe(spec: Spec, kit: Kit): string {
   const shirt = kit === "Home" ? "home shirt" : "away shirt";
   if (spec.host) {
-    return `${spec.nation}'s ${shirt} for the 2026 international tournament — a co-host nation, playing the first 48-team finals on home soil across the USA, Canada and Mexico.`;
+    return `${spec.nation}'s ${shirt} for the World cup 2026 — a co-host nation, playing the first 48-team finals on home soil across the USA, Canada and Mexico.`;
   }
-  return `${spec.nation}'s ${shirt} for the 2026 international tournament — ${REGION[spec.conf]}'s representative at the first 48-nation finals across the USA, Canada and Mexico.`;
+  return `${spec.nation}'s ${shirt} for the World cup 2026 — ${REGION[spec.conf]}'s representative at the first 48-nation finals across the USA, Canada and Mexico.`;
 }
 
 function makeProduct(spec: Spec, kit: Kit, index: number): Product {
