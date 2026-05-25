@@ -4,15 +4,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import type { JerseyBadge } from "@/lib/shopify/types";
 
+// Solid backings so badges stay legible overlaid on white product tiles.
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] leading-none",
+  "inline-flex items-center rounded-none px-2 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.14em]",
   {
     variants: {
       variant: {
-        new: "bg-grass text-bone",
-        rare: "bg-burgundy text-bone",
-        retro: "bg-ink text-bone",
-        outline: "border border-line bg-paper/80 text-muted",
+        new: "bg-accent text-bg-1",
+        limited: "border border-accent bg-bg-1 text-accent",
+        sale: "bg-danger text-bg-1",
+        retro: "border border-line-2 bg-bg-1 text-fg-2",
+        outline: "border border-line-2 bg-bg-1 text-fg-2",
       },
     },
     defaultVariants: {
@@ -26,9 +28,7 @@ export interface BadgeProps
     VariantProps<typeof badgeVariants> {}
 
 export function Badge({ className, variant, ...props }: BadgeProps) {
-  return (
-    <span className={cn(badgeVariants({ variant }), className)} {...props} />
-  );
+  return <span className={cn(badgeVariants({ variant }), className)} {...props} />;
 }
 
 /** Map a jersey badge label to a Badge variant. */
@@ -36,10 +36,12 @@ export function jerseyBadgeVariant(
   badge: JerseyBadge,
 ): NonNullable<BadgeProps["variant"]> {
   switch (badge) {
+    case "Host":
+      return "new"; // lime fill — marquee host nations
     case "New":
-      return "new";
+      return "limited"; // lime outline — new drops
     case "Rare Find":
-      return "rare";
+      return "limited";
     case "Retro":
       return "retro";
     default:

@@ -25,27 +25,27 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? <span className="eyebrow text-grass">{eyebrow}</span> : null}
+      {eyebrow ? <span className="eyebrow text-accent">{eyebrow}</span> : null}
       <div
         className={cn(
           "flex w-full items-end justify-between gap-6",
           align === "center" && "justify-center",
         )}
       >
-        <h2 className="text-balance text-3xl leading-[1.05] sm:text-4xl">
+        <h2 className="text-balance text-3xl font-bold leading-[1.02] tracking-[-0.03em] sm:text-4xl">
           {title}
         </h2>
         {action ? (
           <Link
             href={action.href}
-            className="hidden shrink-0 border-b border-ink/30 pb-1 text-sm transition-colors hover:border-ink sm:inline-block"
+            className="hidden shrink-0 items-center gap-1.5 border-b border-line-accent pb-1 text-sm text-fg-1 transition-colors hover:border-accent hover:text-accent sm:inline-flex"
           >
             {action.label}
           </Link>
         ) : null}
       </div>
       {description ? (
-        <p className="max-w-2xl text-pretty text-sm leading-relaxed text-muted sm:text-base">
+        <p className="max-w-2xl text-pretty text-sm leading-relaxed text-fg-2 sm:text-base">
           {description}
         </p>
       ) : null}
