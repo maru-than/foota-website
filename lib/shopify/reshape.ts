@@ -55,6 +55,8 @@ function normalizeBadge(value: string | null): JerseyBadge {
     case "rare find":
     case "rare":
       return "Rare Find";
+    case "host":
+      return "Host";
     default:
       return null;
   }
@@ -78,6 +80,7 @@ export function parseJerseyMeta(
 
   const club = get("club");
   const nation = get("nation");
+  const confederation = get("confederation");
   const season = get("season");
   const type = normalizeType(get("type"));
   const badge = normalizeBadge(get("badge"));
@@ -95,6 +98,7 @@ export function parseJerseyMeta(
   return {
     club,
     nation,
+    confederation,
     season,
     type,
     era,

@@ -20,6 +20,14 @@ import type {
 } from "./types";
 
 const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+const CONFEDERATION_ORDER = [
+  "UEFA",
+  "CONMEBOL",
+  "CONCACAF",
+  "CAF",
+  "AFC",
+  "OFC",
+];
 
 const SHOPIFY_PRODUCT_SORT: Record<
   SortKey,
@@ -47,6 +55,14 @@ export function applyFilters(
     if (
       filters.nation?.length &&
       !(p.meta.nation && filters.nation.includes(p.meta.nation))
+    )
+      return false;
+    if (
+      filters.confederation?.length &&
+      !(
+        p.meta.confederation &&
+        filters.confederation.includes(p.meta.confederation)
+      )
     )
       return false;
     if (
@@ -98,6 +114,7 @@ export function applySort(products: Product[], sort: SortKey): Product[] {
 export interface Facets {
   clubs: string[];
   nations: string[];
+  confederations: string[];
   seasons: string[];
   sizes: string[];
   types: string[];
@@ -108,6 +125,7 @@ export interface Facets {
 export function deriveFacets(products: Product[]): Facets {
   const clubs = new Set<string>();
   const nations = new Set<string>();
+  const confederations = new Set<string>();
   const seasons = new Set<string>();
   const sizes = new Set<string>();
   const types = new Set<string>();
@@ -118,6 +136,7 @@ export function deriveFacets(products: Product[]): Facets {
   for (const p of products) {
     if (p.meta.club) clubs.add(p.meta.club);
     if (p.meta.nation) nations.add(p.meta.nation);
+    if (p.meta.confederation) confederations.add(p.meta.confederation);
     if (p.meta.season) seasons.add(p.meta.season);
     if (p.meta.type) types.add(p.meta.type);
     eras.add(p.meta.era);
@@ -130,6 +149,9 @@ export function deriveFacets(products: Product[]): Facets {
   return {
     clubs: [...clubs].sort(),
     nations: [...nations].sort(),
+    confederations: [...confederations].sort(
+      (a, b) => CONFEDERATION_ORDER.indexOf(a) - CONFEDERATION_ORDER.indexOf(b),
+    ),
     seasons: [...seasons].sort().reverse(),
     sizes: [...sizes].sort(
       (a, b) => SIZE_ORDER.indexOf(a) - SIZE_ORDER.indexOf(b),

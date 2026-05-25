@@ -121,14 +121,16 @@ export interface ProductOption {
   values: string[];
 }
 
-export type JerseyBadge = "Retro" | "New" | "Rare Find" | null;
+export type JerseyBadge = "Retro" | "New" | "Rare Find" | "Host" | null;
 export type JerseyType = "Home" | "Away" | "Third" | "Goalkeeper" | null;
 export type JerseyEra = "Current" | "Retro";
 
 export interface JerseyMeta {
   club: string | null;
   nation: string | null;
-  season: string | null; // "2006/07"
+  /** Confederation: UEFA, CONMEBOL, CONCACAF, CAF, AFC, OFC. */
+  confederation: string | null;
+  season: string | null; // "2026"
   type: JerseyType;
   era: JerseyEra;
   badge: JerseyBadge;
@@ -204,6 +206,7 @@ export type SortKey = "featured" | "newest" | "price-asc" | "price-desc";
 export interface ProductFilters {
   club?: string[];
   nation?: string[];
+  confederation?: string[];
   season?: string[];
   size?: string[];
   type?: string[]; // Home / Away / Third / Goalkeeper

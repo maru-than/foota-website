@@ -35,6 +35,7 @@ export function parseFilterParams(sp: SearchParamsRecord): {
     filters: {
       club: toArray(sp.club),
       nation: toArray(sp.nation),
+      confederation: toArray(sp.confederation),
       season: toArray(sp.season),
       size: toArray(sp.size),
       type: toArray(sp.type),
@@ -49,6 +50,7 @@ export function activeFilterCount(f: ProductFilters): number {
   return (
     (f.club?.length ?? 0) +
     (f.nation?.length ?? 0) +
+    (f.confederation?.length ?? 0) +
     (f.season?.length ?? 0) +
     (f.size?.length ?? 0) +
     (f.type?.length ?? 0) +
