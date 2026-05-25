@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--bg-1);}
+  .wrap{padding:20px 24px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .a{background:var(--bg-2);border:1px solid var(--line-1);padding:18px;display:flex;flex-direction:column;gap:10px;}
+  .a.dark{background:#0a0a0a;}
+  .a.lime{background:var(--accent);color:#111;border-color:var(--accent);}
+  .a.gold{background:#D4B26A;color:#111;border-color:#D4B26A;}
+  .wm{font-family:var(--font-display);font-size:48px;line-height:.9;letter-spacing:-.03em;text-transform:uppercase;}
+  .a .wm{color:var(--accent);}
+  .a.lime .wm{color:#111;}
+  .a.gold .wm{color:#111;}
+  .a.dark .wm{color:var(--accent);}
+  .l{font:600 10px/1 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);}
+  .a.lime .l, .a.gold .l{color:rgba(17,17,17,.6);}
+</style></head>
+<body><div class="wrap">
+  <div class="a"><span class="l">On bg-2</span><div class="wm">Foota</div></div>
+  <div class="a dark"><span class="l">On pitch (bg-0)</span><div class="wm">Foota</div></div>
+  <div class="a lime"><span class="l">On accent (KO black)</span><div class="wm">Foota</div></div>
+  <div class="a gold"><span class="l">On gold (alt)</span><div class="wm">Foota</div></div>
+</div></body></html>

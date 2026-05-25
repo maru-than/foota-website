@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--bg-1);}
+  .wrap{padding:20px 24px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+  .w{display:flex;flex-direction:column;gap:8px;border:1px solid var(--line-1);padding:14px 12px;}
+  .sample{font-family:var(--font-ui);font-size:32px;line-height:1;letter-spacing:-.03em;color:var(--fg-1);}
+  .l{font:600 10px/1 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);}
+  .v{font:700 11px/1 var(--font-ui);color:var(--accent);font-variant-numeric:tabular-nums;}
+  .w200 .sample{font-weight:200;}
+  .w300 .sample{font-weight:300;}
+  .w400 .sample{font-weight:400;}
+  .w500 .sample{font-weight:500;}
+  .w600 .sample{font-weight:600;}
+  .w700 .sample{font-weight:700;}
+  .w800 .sample{font-weight:800;}
+  .w900 .sample{font-weight:900;}
+  .w350 .sample{font-weight:350;}
+</style></head>
+<body><div class="wrap">
+  <div class="w w200"><div class="sample">Foota</div><span class="l">UltraLight</span><span class="v">200</span></div>
+  <div class="w w300"><div class="sample">Foota</div><span class="l">Thin</span><span class="v">300</span></div>
+  <div class="w w400"><div class="sample">Foota</div><span class="l">Regular</span><span class="v">400</span></div>
+  <div class="w w500"><div class="sample">Foota</div><span class="l">Medium</span><span class="v">500</span></div>
+  <div class="w w600"><div class="sample">Foota</div><span class="l">SemiBold</span><span class="v">600</span></div>
+  <div class="w w700"><div class="sample">Foota</div><span class="l">Bold</span><span class="v">700</span></div>
+  <div class="w w800"><div class="sample">Foota</div><span class="l">Black</span><span class="v">800</span></div>
+  <div class="w w900"><div class="sample">Foota</div><span class="l">UltraBlack</span><span class="v">900</span></div>
+  <div class="w w350" style="grid-column:span 1"><div class="sample">Foota</div><span class="l">Light</span><span class="v">350</span></div>
+</div></body></html>

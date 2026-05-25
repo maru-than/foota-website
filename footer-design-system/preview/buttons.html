@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--bg-1);}
+  .wrap{padding:24px;display:flex;flex-direction:column;gap:14px;}
+  .row{display:flex;gap:12px;align-items:center;}
+  .l{min-width:80px;font:600 10px/1 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);}
+  .btn{font:700 14px/1 var(--font-ui);letter-spacing:-.03em;padding:14px 20px;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:10px;}
+  .btn.primary{background:var(--accent);color:#111;}
+  .btn.primary-hover{background:var(--accent-hi);color:#111;}
+  .btn.primary-press{background:var(--accent-lo);color:#111;}
+  .btn.ghost{background:transparent;color:var(--fg-1);border:1px solid var(--line-accent);}
+  .btn.ghost:hover, .btn.ghost-hover{background:var(--accent-12);border-color:var(--accent);}
+  .btn.icon{background:transparent;color:var(--fg-1);border:1px solid var(--line-1);padding:14px;}
+  .btn.disabled{background:var(--bg-3);color:var(--fg-4);cursor:not-allowed;}
+  .arrow{font:700 14px/1 var(--font-ui);}
+</style></head>
+<body><div class="wrap">
+  <div class="row"><span class="l">Primary</span>
+    <button class="btn primary">Add to bag <span class="arrow">→</span></button>
+    <button class="btn primary-hover">Hover</button>
+    <button class="btn primary-press">Press</button>
+    <button class="btn disabled">Out of stock</button>
+  </div>
+  <div class="row"><span class="l">Ghost</span>
+    <button class="btn ghost">View jersey</button>
+    <button class="btn ghost-hover">Hover</button>
+    <button class="btn ghost" style="border-color:var(--accent);background:var(--accent-12);color:var(--accent);">Selected</button>
+    <button class="btn icon" aria-label="bag">⌕</button>
+  </div>
+</div></body></html>

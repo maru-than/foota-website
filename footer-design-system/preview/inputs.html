@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--bg-1);}
+  .wrap{padding:24px;display:flex;flex-direction:column;gap:14px;max-width:520px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .label{font:600 10px/1 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);}
+  input, select{background:transparent;border:none;border-bottom:1px solid var(--line-2);color:var(--fg-1);font:500 14px/1 var(--font-ui);letter-spacing:-.03em;padding:10px 0;outline:none;}
+  input:focus, .focus{border-bottom-color:var(--accent);}
+  input::placeholder{color:var(--fg-4);}
+  .group{display:flex;gap:24px;}
+  .group .field{flex:1;}
+  .helper{font:500 11px/1.3 var(--font-ui);color:var(--fg-3);letter-spacing:-.02em;}
+  .err{color:var(--danger);}
+</style></head>
+<body><div class="wrap">
+  <div class="group">
+    <div class="field"><span class="label">Email</span><input type="text" value="you@foota.com" class="focus"><span class="helper">Focused — accent underline</span></div>
+    <div class="field"><span class="label">Country</span><input type="text" placeholder="Select a country"><span class="helper">Empty / placeholder state</span></div>
+  </div>
+  <div class="field"><span class="label">Shirt name <span style="color:var(--accent);">(max 12)</span></span><input type="text" value="MORATA"><span class="helper err">Cannot exceed 12 characters</span></div>
+</div></body></html>

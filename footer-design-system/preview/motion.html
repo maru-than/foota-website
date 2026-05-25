@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--bg-1);}
+  .wrap{padding:24px;display:flex;flex-direction:column;gap:16px;}
+  .row{display:flex;align-items:center;gap:18px;}
+  .l{min-width:120px;font:600 11px/1 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);}
+  .v{font:500 12px/1.45 var(--font-ui);color:var(--fg-2);letter-spacing:-.02em;flex:1;}
+  .v b{color:var(--accent);}
+  .demo{width:60px;height:24px;background:var(--accent);}
+  .lin{height:2px;background:linear-gradient(90deg,var(--accent),var(--accent) 25%,transparent 25%,transparent);background-size:24px 100%;animation:slide 1.2s linear infinite;width:120px;}
+  @keyframes slide{from{background-position:0 0;}to{background-position:24px 0;}}
+  .hover-demo{padding:10px 18px;background:var(--accent);color:#111;font:700 13px/1 var(--font-ui);letter-spacing:-.03em;cursor:pointer;transition:background 160ms cubic-bezier(.22,1,.36,1);}
+  .hover-demo:hover{background:var(--accent-hi);}
+  .press-demo{padding:10px 18px;background:var(--accent);color:#111;font:700 13px/1 var(--font-ui);letter-spacing:-.03em;cursor:pointer;transition:transform 80ms linear;}
+  .press-demo:active{background:var(--accent-lo);transform:scale(.97);}
+</style></head>
+<body><div class="wrap">
+  <div class="row"><span class="l">Hover</span><button class="hover-demo">Hover me</button><span class="v">160ms · <b>--ease</b> · color step lighter</span></div>
+  <div class="row"><span class="l">Press</span><button class="press-demo">Press me</button><span class="v">80ms · linear · color step darker + scale .97</span></div>
+  <div class="row"><span class="l">Ticker · loading</span><div class="lin"></div><span class="v">1.2s linear · marquee/loading rhythm</span></div>
+  <div class="row"><span class="l">Page transition</span><span class="v">240ms <b>--ease</b> opacity fade. No bounces. No springs. Never decorative — motion confirms an action.</span></div>
+</div></body></html>

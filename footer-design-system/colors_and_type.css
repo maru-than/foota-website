@@ -1,0 +1,217 @@
+/* ============================================================
+   FOOTA DESIGN SYSTEM — colors & type
+   Sport · energetic · modern · linear. Dark base, sharp corners.
+   ============================================================ */
+
+/* ---------- Fonts ---------- */
+@font-face { font-family:"Geist"; font-weight:200; font-style:normal; font-display:swap;
+  src:url("fonts/Geist-UltraLight.otf") format("opentype"); }
+@font-face { font-family:"Geist"; font-weight:300; font-style:normal; font-display:swap;
+  src:url("fonts/Geist-Thin.otf") format("opentype"); }
+@font-face { font-family:"Geist"; font-weight:350; font-style:normal; font-display:swap;
+  src:url("fonts/Geist-Light.otf") format("opentype"); }
+@font-face { font-family:"Geist"; font-weight:400; font-style:normal; font-display:swap;
+  src:url("fonts/Geist-Regular.otf") format("opentype"); }
+@font-face { font-family:"Geist"; font-weight:500; font-style:normal; font-display:swap;
+  src:url("fonts/Geist-Medium.otf") format("opentype"); }
+@font-face { font-family:"Geist"; font-weight:600; font-style:normal; font-display:swap;
+  src:url("fonts/Geist-SemiBold.otf") format("opentype"); }
+@font-face { font-family:"Geist"; font-weight:700; font-style:normal; font-display:swap;
+  src:url("fonts/Geist-Bold.otf") format("opentype"); }
+@font-face { font-family:"Geist"; font-weight:800; font-style:normal; font-display:swap;
+  src:url("fonts/Geist-Black.otf") format("opentype"); }
+@font-face { font-family:"Geist"; font-weight:900; font-style:normal; font-display:swap;
+  src:url("fonts/Geist-UltraBlack.otf") format("opentype"); }
+@font-face { font-family:"Sonara"; font-weight:400; font-style:normal; font-display:swap;
+  src:url("fonts/Sonara.otf") format("opentype"); }
+
+:root {
+  /* ===== Color: base ===== */
+  --bg-0: #0A0A0A;          /* pitch */
+  --bg-1: #111111;          /* primary surface */
+  --bg-2: #181818;          /* card */
+  --bg-3: #222222;          /* elevated card / chip (Figma base) */
+  --bg-4: #2C2C2C;          /* hover surface */
+
+  /* ===== Color: foreground ===== */
+  --fg-1: #FFFFFF;          /* primary text, headlines */
+  --fg-2: rgba(255,255,255,0.72);  /* body, secondary */
+  --fg-3: rgba(255,255,255,0.48);  /* muted, captions */
+  --fg-4: rgba(255,255,255,0.24);  /* disabled, placeholder */
+
+  /* ===== Color: accent (Voltron lime — from Figma) ===== */
+  --accent: #C1FF56;        /* primary accent */
+  --accent-hi: #D4FF7A;     /* hover */
+  --accent-lo: #A8E640;     /* press */
+  --accent-12: rgba(193,255,86,0.12);  /* tint surface */
+  --accent-20: rgba(193,255,86,0.20);  /* borders, dividers */
+  --accent-40: rgba(193,255,86,0.40);
+
+  /* ===== Color: alternate gold/beige (Champion palette) ===== */
+  --gold: #D4B26A;          /* warm champion gold */
+  --gold-hi: #E8C994;       /* hover gold */
+  --gold-lo: #B8924C;       /* press gold */
+  --beige: #E8DCC4;          /* cream beige */
+  --beige-mute: #C7B894;
+
+  /* ===== Color: lines ===== */
+  --line-1: rgba(255,255,255,0.08);  /* hairline */
+  --line-2: rgba(255,255,255,0.16);  /* divider */
+  --line-3: rgba(255,255,255,0.32);  /* strong */
+  --line-accent: rgba(193,255,86,0.20);  /* accent hairline (Figma) */
+
+  /* ===== Color: semantic ===== */
+  --success: #6FE38A;
+  --warn:    #FFC555;
+  --danger:  #FF5C5C;
+  --info:    #6EC6FF;
+
+  /* ===== Type families ===== */
+  --font-display: "Sonara", "Eurostile Extended", "Bank Gothic", sans-serif;
+  --font-ui: "Geist", -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "JetBrains Mono", monospace;
+
+  /* ===== Type scale ===== */
+  --t-display-xl: 96px;
+  --t-display-l:  64px;     /* hero logo size (Figma) */
+  --t-display-m:  48px;
+  --t-h1: 40px;
+  --t-h2: 32px;
+  --t-h3: 24px;             /* product title (Figma) */
+  --t-h4: 18px;
+  --t-body: 15px;
+  --t-small: 14px;          /* UI body (Figma) */
+  --t-caption: 12px;
+  --t-micro: 11px;          /* uppercase labels */
+
+  /* ===== Tracking (linear/sport feel — tight) ===== */
+  --tr-display: -0.03em;
+  --tr-tight: -0.030em;     /* Figma value */
+  --tr-normal: 0em;
+  --tr-wide: 0.04em;
+  --tr-upper: 0.12em;       /* uppercase labels */
+
+  /* ===== Line height ===== */
+  --lh-tight: 100%;         /* Figma uses 100% on everything */
+  --lh-snug: 1.15;
+  --lh-body: 1.45;
+
+  /* ===== Spacing scale (4-base) ===== */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;             /* Figma card padding */
+  --s-7:  32px;
+  --s-8:  40px;
+  --s-9:  48px;
+  --s-10: 64px;
+  --s-11: 80px;
+  --s-12: 96px;
+
+  /* ===== Radii — sharp by default ===== */
+  --r-0: 0px;               /* default — sharp corners */
+  --r-1: 2px;               /* near-sharp accent */
+  --r-2: 4px;
+  --r-pill: 999px;
+
+  /* ===== Borders ===== */
+  --b-hair: 1px solid var(--line-1);
+  --b-div:  1px solid var(--line-2);
+  --b-accent: 1px solid var(--line-accent);
+  --b-accent-solid: 1px solid var(--accent);
+
+  /* ===== Shadows — minimal / functional only ===== */
+  --shadow-1: 0 1px 0 rgba(255,255,255,0.04) inset;       /* edge highlight on cards */
+  --shadow-2: 0 8px 24px rgba(0,0,0,0.4);                  /* floating menu */
+  --shadow-glow: 0 0 0 1px var(--accent), 0 0 24px rgba(193,255,86,0.32); /* focus ring */
+
+  /* ===== Motion ===== */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);   /* fast-out, settle */
+  --ease-linear: linear;
+  --dur-1: 80ms;
+  --dur-2: 160ms;
+  --dur-3: 240ms;
+  --dur-4: 400ms;
+}
+
+/* ============================================================
+   Semantic element styles — drop on any page for default Foota look
+   ============================================================ */
+html, body {
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-family: var(--font-ui);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--tr-tight);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+}
+
+.display, .foota-logo {
+  font-family: var(--font-display);
+  font-size: var(--t-display-l);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-display);
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+h1, .h1 {
+  font-family: var(--font-ui); font-weight: 700;
+  font-size: var(--t-h1); line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight); color: var(--fg-1);
+}
+h2, .h2 {
+  font-family: var(--font-ui); font-weight: 700;
+  font-size: var(--t-h2); line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight); color: var(--fg-1);
+}
+h3, .h3 {
+  font-family: var(--font-ui); font-weight: 700;
+  font-size: var(--t-h3); line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight); color: var(--fg-1);
+}
+h4, .h4 {
+  font-family: var(--font-ui); font-weight: 600;
+  font-size: var(--t-h4); line-height: var(--lh-snug);
+  letter-spacing: var(--tr-tight); color: var(--fg-1);
+}
+p, .body {
+  font-family: var(--font-ui); font-weight: 400;
+  font-size: var(--t-body); line-height: var(--lh-body);
+  letter-spacing: var(--tr-tight); color: var(--fg-2);
+}
+.small {
+  font-size: var(--t-small); letter-spacing: var(--tr-tight);
+  font-weight: 600; color: var(--fg-1);
+}
+.caption {
+  font-size: var(--t-caption); letter-spacing: var(--tr-tight);
+  color: var(--fg-3);
+}
+.label, .eyebrow {
+  font-family: var(--font-ui); font-weight: 400;
+  font-size: var(--t-micro);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+.price {
+  font-family: var(--font-ui); font-weight: 700;
+  font-size: var(--t-small); letter-spacing: var(--tr-tight);
+  color: var(--fg-1);
+  font-variant-numeric: tabular-nums;
+}
+.kicker {                  /* green country/club name above price (Figma) */
+  font-family: var(--font-ui); font-weight: 700;
+  font-size: var(--t-h3); letter-spacing: var(--tr-tight);
+  color: var(--accent);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hi); }
+
+::selection { background: var(--accent); color: var(--bg-1); }

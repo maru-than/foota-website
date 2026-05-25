@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--bg-1);}
+  .wrap{padding:20px 24px;display:flex;flex-direction:column;gap:12px;}
+  .row{display:flex;gap:14px;align-items:center;}
+  .l{min-width:120px;font:600 10px/1 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);}
+  .v{font:500 12px/1.4 var(--font-ui);color:var(--fg-2);letter-spacing:-.02em;flex:1;}
+  .v b{color:var(--accent);}
+  .grid-demo{height:120px;background:
+    repeating-linear-gradient(90deg, transparent 0 calc(100%/12 - 1px), rgba(193,255,86,.10) calc(100%/12 - 1px) calc(100%/12)),
+    var(--bg-2);
+    border:1px solid var(--line-1);position:relative;}
+  .grid-demo .gutter{position:absolute;left:24px;right:24px;top:0;bottom:0;border-left:1px dashed var(--accent-20);border-right:1px dashed var(--accent-20);}
+  .grid-demo .center{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed var(--accent-20);}
+  .grid-demo .label{position:absolute;top:8px;left:32px;font:600 10px/1 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);}
+</style></head>
+<body><div class="wrap">
+  <div class="grid-demo"><div class="gutter"></div><div class="center"></div><div class="label">12-col · 24px gutter · 1440 max</div></div>
+  <div class="row"><span class="l">Page</span><span class="v">12-col grid · <b>1440</b> max width · <b>24px</b> outer gutters · <b>24px</b> column gap</span></div>
+  <div class="row"><span class="l">Mobile</span><span class="v">4-col grid · <b>16px</b> outer · <b>12px</b> gap · everything stacks below 768px</span></div>
+  <div class="row"><span class="l">Card grid</span><span class="v">Product grid is <b>4-up desktop / 2-up tablet / 1-up mobile</b>. Cards always touch (no shadow halo).</span></div>
+</div></body></html>

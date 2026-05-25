@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--bg-1);}
+  .wrap{padding:20px 24px;display:flex;flex-direction:column;gap:14px;}
+  .row{display:flex;gap:10px;}
+  .sw{flex:1;height:80px;border:1px solid var(--line-1);display:flex;flex-direction:column;justify-content:space-between;padding:10px 12px;}
+  .sw .n{font:600 11px/1 var(--font-ui);letter-spacing:.1em;text-transform:uppercase;}
+  .sw .h{font:700 12px/1 var(--font-ui);letter-spacing:-.03em;font-variant-numeric:tabular-nums;}
+  .fg1{color:#fff;}
+  .fg2{color:rgba(255,255,255,.72);}
+  .fg3{color:rgba(255,255,255,.48);}
+  .fg4{color:rgba(255,255,255,.24);}
+  .success{background:#181818;color:var(--success);}
+  .warn{background:#181818;color:var(--warn);}
+  .danger{background:#181818;color:var(--danger);}
+  .info{background:#181818;color:var(--info);}
+  .fgrow .sw{background:#181818;}
+</style></head>
+<body><div class="wrap">
+  <div class="row fgrow">
+    <div class="sw"><span class="n fg1">fg-1 · primary</span><span class="h fg1">#FFFFFF</span></div>
+    <div class="sw"><span class="n fg2">fg-2 · body</span><span class="h fg2">72% white</span></div>
+    <div class="sw"><span class="n fg3">fg-3 · muted</span><span class="h fg3">48% white</span></div>
+    <div class="sw"><span class="n fg4">fg-4 · disabled</span><span class="h fg4">24% white</span></div>
+  </div>
+  <div class="row">
+    <div class="sw success"><span class="n">success</span><span class="h">#6FE38A</span></div>
+    <div class="sw warn"><span class="n">warn</span><span class="h">#FFC555</span></div>
+    <div class="sw danger"><span class="n">danger · out of stock</span><span class="h">#FF5C5C</span></div>
+    <div class="sw info"><span class="n">info</span><span class="h">#6EC6FF</span></div>
+  </div>
+</div></body></html>
