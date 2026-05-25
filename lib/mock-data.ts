@@ -9,7 +9,7 @@ import type {
 /*  Foota catalogue — summer 2026.                                     */
 /*  The shop sells 2026 home jerseys for the 48 nations of             */
 /*  the first 48-team summer, co-hosted by the USA, Canada & Mexico.   */
-/*  Images live in /public/jerseys/home/<slug>.jpg (and away/).        */
+/*  Images live in /public/jerseys/home-transparent/<slug>.webp (and away-transparent/). */
 /*  Handle format: `<slug>-home` and `<slug>-away`.                    */
 /*  fallback; shaped exactly like the normalized Shopify types.        */
 /* ------------------------------------------------------------------ */
@@ -27,7 +27,7 @@ const REGION: Record<string, string> = {
 };
 
 interface Spec {
-  slug: string; // matches /public/jerseys/home|away/<slug>.jpg and the handle
+  slug: string; // matches /public/jerseys/home-transparent|away-transparent/<slug>.webp and the handle
   nation: string;
   conf: keyof typeof REGION;
   price: number;
@@ -145,7 +145,7 @@ function makeProduct(spec: Spec, kit: Kit, index: number): Product {
   const badge: JerseyBadge = spec.host ? "Host" : spec.isNew ? "New" : null;
   const kitSlug = kit.toLowerCase(); // "home" | "away"
   const image = {
-    url: `/jerseys/${kitSlug}/${spec.slug}.jpg`,
+    url: `/jerseys/${kitSlug}-transparent/${spec.slug}.webp`,
     altText: `${spec.nation} 2026 ${kitSlug} jersey`,
   };
   const lead = describe(spec, kit);
