@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Globe } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { FOOTER_NAV } from "@/lib/navigation";
@@ -14,63 +15,66 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-paper">
-      <Container className="py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
-          <div className="max-w-sm">
-            <Link href="/" className="font-display text-2xl tracking-tight">
-              Foota Jerseys
-            </Link>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              A curated home for authentic, retro and iconic football shirts —
-              from clubs and nations around the world.
-            </p>
+    <footer className="border-t border-line-accent bg-bg-1">
+      <Container className="grid gap-12 py-16 lg:grid-cols-[1.5fr_2fr] lg:gap-16">
+        <div className="max-w-sm">
+          <Link
+            href="/"
+            className="display block text-5xl text-accent sm:text-6xl"
+          >
+            Foota
+          </Link>
+          <p className="mt-4 text-sm leading-relaxed text-fg-2">
+            A home for jerseys. Official 2026 FIFA World Cup home shirts — every
+            nation, dispatched worldwide.
+          </p>
 
-            <p className="eyebrow mt-8 text-grass">Newsletter</p>
-            <p className="mt-2 text-sm text-muted">
-              New drops, rare finds and jersey stories.
-            </p>
-            <NewsletterForm className="mt-3 max-w-xs" inputClassName="bg-bone" />
-
-            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2">
-              {SOCIALS.map(({ label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="text-xs uppercase tracking-[0.12em] text-muted transition-colors hover:text-ink"
-                >
-                  {label}
-                </a>
-              ))}
-            </div>
+          <div className="mt-8">
+            <span className="eyebrow text-fg-3">Get the drop</span>
+            <NewsletterForm className="mt-3 max-w-xs" />
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-            {FOOTER_NAV.map((column) => (
-              <nav key={column.title} aria-label={column.title}>
-                <h3 className="eyebrow text-ink">{column.title}</h3>
-                <ul className="mt-4 space-y-2.5">
-                  {column.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-sm text-muted transition-colors hover:text-ink"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+          <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2">
+            {SOCIALS.map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                className="text-xs uppercase tracking-[0.12em] text-fg-3 transition-colors hover:text-accent"
+              >
+                {label}
+              </a>
             ))}
           </div>
         </div>
+
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          {FOOTER_NAV.map((column) => (
+            <nav key={column.title} aria-label={column.title}>
+              <h3 className="eyebrow text-fg-3">{column.title}</h3>
+              <ul className="mt-4 space-y-2.5">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-fg-2 transition-colors hover:text-accent"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+        </div>
       </Container>
 
-      <div className="border-t border-line">
-        <Container className="flex flex-col items-center justify-between gap-3 py-6 text-xs text-muted sm:flex-row">
-          <p>© {year} Foota Jerseys. A home for jerseys.</p>
-          <p>Secure checkout powered by Shopify.</p>
+      <div className="border-t border-line-1">
+        <Container className="flex flex-col items-center justify-between gap-3 py-5 text-[11px] uppercase tracking-[0.12em] text-fg-3 sm:flex-row">
+          <span>© {year} Foota Jerseys</span>
+          <span className="hidden sm:block">A home for jerseys · Dispatched worldwide</span>
+          <span className="inline-flex items-center gap-2 text-fg-1">
+            <Globe className="size-3.5" strokeWidth={1.5} /> EN · CHF
+          </span>
         </Container>
       </div>
     </footer>

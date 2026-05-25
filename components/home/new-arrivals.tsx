@@ -8,7 +8,7 @@ export function NewArrivals({ products }: { products: Product[] }) {
   if (products.length === 0) return null;
 
   return (
-    <section className="border-t border-line py-20 lg:py-24">
+    <section className="border-t border-line-1 py-16 lg:py-20">
       <Container>
         <Reveal>
           <SectionHeading

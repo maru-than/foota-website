@@ -14,16 +14,12 @@ export function ProductGrid({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-x-6 md:gap-y-10 lg:grid-cols-4",
+        "grid grid-cols-1 gap-6 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
         className,
       )}
     >
       {products.map((product, i) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          priority={i < priorityCount}
-        />
+        <ProductCard key={product.id} product={product} priority={i < priorityCount} />
       ))}
     </div>
   );

@@ -13,7 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { JerseyPlaceholder } from "@/components/ui/jersey-placeholder";
-import { Price } from "@/components/ui/price";
+import { cn, formatPrice } from "@/lib/utils";
 import { searchAction } from "@/app/actions/search";
 import type { Product } from "@/lib/shopify/types";
 
@@ -63,8 +63,7 @@ export function SearchOverlay({
     router.push(`/search?q=${encodeURIComponent(term)}`);
   }
 
-  const showEmpty =
-    query.trim().length >= 2 && results.length === 0 && !isPending;
+  const showEmpty = query.trim().length >= 2 && results.length === 0 && !isPending;
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -83,61 +82,67 @@ export function SearchOverlay({
 
         <form
           onSubmit={goToResults}
-          className="flex items-center gap-3 border-b border-line px-5"
+          className="flex items-center gap-3 border-b border-line-accent px-5"
         >
-          <SearchIcon className="size-5 shrink-0 text-muted" />
+          <SearchIcon className="size-5 shrink-0 text-fg-3" strokeWidth={1.5} />
           <input
             ref={inputRef}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search clubs, nations, seasons…"
-            className="h-14 flex-1 bg-transparent text-base text-ink outline-none placeholder:text-muted/70"
+            className="h-14 flex-1 bg-transparent text-base tracking-[-0.02em] text-fg-1 outline-none placeholder:text-fg-4"
           />
         </form>
 
         <div className="max-h-[52vh] overflow-y-auto">
           {showEmpty ? (
-            <p className="px-5 py-8 text-center text-sm text-muted">
+            <p className="px-5 py-8 text-center text-sm text-fg-3">
               No jerseys match &ldquo;{query.trim()}&rdquo;.
             </p>
           ) : null}
 
           {results.length > 0 ? (
             <>
-              <ul className="divide-y divide-line">
+              <ul className="divide-y divide-line-1">
                 {results.map((p) => (
                   <li key={p.id}>
                     <Link
                       href={`/products/${p.handle}`}
                       onClick={() => handleOpenChange(false)}
-                      className="flex items-center gap-4 px-5 py-3 transition-colors hover:bg-ink/[0.03]"
+                      className="flex items-center gap-4 px-5 py-3 transition-colors hover:bg-bg-3"
                     >
-                      <div className="relative aspect-[4/5] w-11 shrink-0 overflow-hidden border border-line bg-paper">
+                      <div
+                        className={cn(
+                          "relative aspect-[4/5] w-11 shrink-0 overflow-hidden border border-line-1",
+                          p.featuredImage ? "bg-white" : "jersey-frame",
+                        )}
+                      >
                         {p.featuredImage ? (
                           <Image
                             src={p.featuredImage.url}
                             alt={p.featuredImage.altText}
                             fill
                             sizes="44px"
-                            className="object-cover"
+                            className="object-contain p-1"
                           />
                         ) : (
-                          <JerseyPlaceholder />
+                          <JerseyPlaceholder label={p.meta.teamName ?? undefined} className="p-1" />
                         )}
                       </div>
                       <div className="flex-1">
                         {p.meta.teamName ? (
-                          <span className="text-[11px] uppercase tracking-[0.1em] text-muted">
+                          <span className="text-[11px] uppercase tracking-[0.1em] text-accent">
                             {p.meta.teamName}
                           </span>
                         ) : null}
-                        <p className="text-sm text-ink">{p.title}</p>
+                        <p className="text-sm text-fg-1">{p.title}</p>
                       </div>
-                      <Price
-                        amount={p.priceRange.minVariantPrice.amount}
-                        currencyCode={p.priceRange.minVariantPrice.currencyCode}
-                        className="text-sm text-muted"
-                      />
+                      <span className="text-sm font-bold tabular-nums text-fg-3">
+                        {formatPrice(
+                          p.priceRange.minVariantPrice.amount,
+                          p.priceRange.minVariantPrice.currencyCode,
+                        )}
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -145,7 +150,7 @@ export function SearchOverlay({
               <button
                 type="button"
                 onClick={goToResults}
-                className="block w-full border-t border-line px-5 py-3 text-left text-xs uppercase tracking-[0.12em] text-grass transition-colors hover:bg-ink/[0.03]"
+                className="block w-full border-t border-line-1 px-5 py-3 text-left text-xs uppercase tracking-[0.12em] text-accent transition-colors hover:bg-bg-3"
               >
                 View all results
               </button>
@@ -153,7 +158,7 @@ export function SearchOverlay({
           ) : null}
 
           {query.trim().length < 2 ? (
-            <p className="px-5 py-8 text-center text-sm text-muted">
+            <p className="px-5 py-8 text-center text-sm text-fg-3">
               Try a club, a nation or a season — &ldquo;Milan&rdquo;,
               &ldquo;Brazil&rdquo;, &ldquo;1998&rdquo;.
             </p>

@@ -40,30 +40,25 @@ export function VariantSelector({
       {product.options.map((option) => (
         <div key={option.id}>
           <div className="mb-2.5 flex items-center justify-between">
-            <span className="text-sm font-medium text-ink">
+            <span className="eyebrow text-fg-3">
               {option.name}
               {selected[option.name] ? (
-                <span className="ml-2 text-muted">{selected[option.name]}</span>
+                <span className="ml-2 text-fg-1">{selected[option.name]}</span>
               ) : null}
             </span>
             {option.name.toLowerCase() === "size" ? (
               <Link
                 href="/size-guide"
-                className="text-xs text-muted underline-offset-2 transition-colors hover:text-ink hover:underline"
+                className="text-xs font-semibold text-accent transition-colors hover:text-accent-hi"
               >
-                Size guide
+                Size guide →
               </Link>
             ) : null}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {option.values.map((value) => {
               const isSelected = selected[option.name] === value;
-              const available = isValueAvailable(
-                product,
-                selected,
-                option.name,
-                value,
-              );
+              const available = isValueAvailable(product, selected, option.name, value);
               return (
                 <button
                   key={value}
@@ -72,12 +67,12 @@ export function VariantSelector({
                   aria-pressed={isSelected}
                   onClick={() => onChange(option.name, value)}
                   className={cn(
-                    "min-w-12 border px-3 py-2.5 text-sm transition-colors",
+                    "flex size-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-foota",
                     isSelected
-                      ? "border-ink bg-ink text-bone"
-                      : "border-line hover:border-ink",
+                      ? "border-accent bg-accent text-bg-1"
+                      : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",
                     !available &&
-                      "cursor-not-allowed text-muted/40 line-through hover:border-line",
+                      "cursor-not-allowed border-line-1 text-fg-4 line-through hover:border-line-1 hover:bg-transparent",
                   )}
                 >
                   {value}

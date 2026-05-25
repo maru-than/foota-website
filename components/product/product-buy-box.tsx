@@ -1,12 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ShoppingBag } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, Truck } from "lucide-react";
 
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
-import { Price } from "@/components/ui/price";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import type { Product, ProductVariant } from "@/lib/shopify/types";
 import { VariantSelector } from "./variant-selector";
 
@@ -29,16 +28,19 @@ function findVariant(
   );
 }
 
+const TRUST = [
+  { Icon: Truck, title: "Worldwide shipping", note: "Tracked · dispatched in 48h" },
+  { Icon: ShieldCheck, title: "Authentic", note: "Inspected & graded" },
+  { Icon: Sparkles, title: "Official replica", note: "Licensed 2026 kit" },
+];
+
 export function ProductBuyBox({ product }: { product: Product }) {
   const { addItem, isPending } = useCart();
   const [selected, setSelected] = useState<Record<string, string>>(() =>
     defaultOptions(product),
   );
 
-  const variant = useMemo(
-    () => findVariant(product, selected),
-    [product, selected],
-  );
+  const variant = useMemo(() => findVariant(product, selected), [product, selected]);
   const available = variant?.availableForSale ?? false;
   const price = variant?.price ?? product.priceRange.minVariantPrice;
 
@@ -58,45 +60,44 @@ export function ProductBuyBox({ product }: { product: Product }) {
         <span
           className={cn(
             "inline-block size-2 rounded-full",
-            available ? "bg-grass" : "bg-burgundy",
+            available ? "bg-accent" : "bg-danger",
           )}
         />
-        <span className="text-muted">
-          {available ? "In stock — ready to ship" : "Currently sold out"}
+        <span className="text-fg-3">
+          {available ? "In stock · ready to ship" : "Currently sold out"}
         </span>
       </div>
 
-      <Button
-        type="button"
-        onClick={add}
-        disabled={!available || isPending}
-        size="lg"
-        className="w-full uppercase tracking-[0.12em]"
-      >
-        <ShoppingBag className="size-4" />
-        {available ? "Add to bag" : "Sold out"}
+      <Button onClick={add} disabled={!available || isPending} className="w-full">
+        {available
+          ? `Add to bag — ${formatPrice(price.amount, price.currencyCode)}`
+          : "Sold out"}
+        {available ? <ArrowRight className="size-4" strokeWidth={1.5} /> : null}
       </Button>
 
-      {/* Sticky add-to-cart bar — mobile only. */}
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-between gap-3 border-t border-line bg-bone/95 px-5 py-3 backdrop-blur lg:hidden">
+      <div className="grid grid-cols-3 gap-3 border-t border-line-1 pt-5">
+        {TRUST.map(({ Icon, title, note }) => (
+          <div key={title} className="flex gap-2.5">
+            <Icon className="size-[18px] shrink-0 text-accent" strokeWidth={1.5} />
+            <div className="flex flex-col gap-0.5">
+              <b className="text-xs font-bold tracking-[-0.02em] text-fg-1">{title}</b>
+              <span className="text-[11px] leading-snug text-fg-3">{note}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Sticky add-to-bag bar — mobile only. */}
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-between gap-3 border-t border-line-accent bg-bg-1/95 px-4 py-3 backdrop-blur lg:hidden">
         <div className="flex min-w-0 flex-col">
           {product.meta.teamName ? (
-            <span className="truncate text-xs text-muted">
-              {product.meta.teamName}
-            </span>
+            <span className="truncate text-xs text-fg-3">{product.meta.teamName}</span>
           ) : null}
-          <Price
-            amount={price.amount}
-            currencyCode={price.currencyCode}
-            className="text-sm font-medium"
-          />
+          <span className="text-sm font-bold tabular-nums text-accent">
+            {formatPrice(price.amount, price.currencyCode)}
+          </span>
         </div>
-        <Button
-          type="button"
-          onClick={add}
-          disabled={!available || isPending}
-          className="shrink-0 uppercase tracking-[0.12em]"
-        >
+        <Button onClick={add} disabled={!available || isPending} className="shrink-0">
           {available ? "Add to bag" : "Sold out"}
         </Button>
       </div>

@@ -9,12 +9,6 @@ import type { Product } from "@/lib/shopify/types";
 import { FilterPanel, FiltersDrawer } from "./filters";
 import { SortSelect } from "./sort-select";
 
-/**
- * Shared filter sidebar + sort toolbar + product grid.
- * Used by both /shop and /collections/[handle]. Filtering and sorting are
- * driven through the URL by the client Filters/Sort components and applied
- * server-side by the page that renders this.
- */
 export function ProductBrowser({
   products,
   facets,
@@ -26,7 +20,7 @@ export function ProductBrowser({
 }) {
   return (
     <Container className="py-10 lg:py-14">
-      <div className="lg:grid lg:grid-cols-[260px_1fr] lg:gap-12">
+      <div className="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
         <aside className="hidden lg:block">
           <Suspense fallback={null}>
             <FilterPanel facets={facets} />
@@ -34,13 +28,14 @@ export function ProductBrowser({
         </aside>
 
         <div>
-          <div className="mb-8 flex items-center justify-between gap-4 border-b border-line pb-4">
+          <div className="mb-8 flex items-center justify-between gap-4 border-b border-line-1 pb-4">
             <div className="flex items-center gap-4">
               <Suspense fallback={null}>
                 <FiltersDrawer facets={facets} resultCount={products.length} />
               </Suspense>
-              <p className="text-sm text-muted">
-                {products.length} {products.length === 1 ? "jersey" : "jerseys"}
+              <p className="text-sm text-fg-3">
+                <b className="font-bold tabular-nums text-fg-1">{products.length}</b>{" "}
+                {products.length === 1 ? "jersey" : "jerseys"}
               </p>
             </div>
             <Suspense fallback={null}>
@@ -52,9 +47,11 @@ export function ProductBrowser({
             <ProductGrid products={products} priorityCount={4} />
           ) : (
             <div className="flex flex-col items-center gap-4 py-20 text-center">
-              <p className="font-display text-2xl">No jerseys match these filters.</p>
-              <p className="text-sm text-muted">Try removing a filter or two.</p>
-              <Button asChild variant="outline">
+              <p className="text-2xl font-bold tracking-[-0.03em]">
+                No jerseys match these filters.
+              </p>
+              <p className="text-sm text-fg-3">Try removing a filter or two.</p>
+              <Button asChild variant="secondary">
                 <Link href={clearHref}>Clear filters</Link>
               </Button>
             </div>

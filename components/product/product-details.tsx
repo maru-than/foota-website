@@ -15,13 +15,13 @@ export function ProductDetails({ product }: { product: Product }) {
     <Accordion
       type="multiple"
       defaultValue={["description"]}
-      className="border-t border-line"
+      className="border-t border-line-1"
     >
       <AccordionItem value="description">
         <AccordionTrigger>Description</AccordionTrigger>
         <AccordionContent>
           <div
-            className="[&_a]:text-grass [&_a]:underline [&_p]:mb-3 [&_p:last-child]:mb-0"
+            className="[&_a]:text-accent [&_a]:underline [&_p]:mb-3 [&_p:last-child]:mb-0"
             dangerouslySetInnerHTML={{
               __html: product.descriptionHtml || `<p>${product.description}</p>`,
             }}
@@ -33,10 +33,10 @@ export function ProductDetails({ product }: { product: Product }) {
         <AccordionTrigger>Condition &amp; Authenticity</AccordionTrigger>
         <AccordionContent>
           <p>
-            Every shirt is inspected and graded by our team before it joins the
-            archive. Retro and rare shirts are checked against original
-            references for badges, fonts and manufacturing details. Where a
-            shirt is officially licensed, it is sourced as such.
+            Every shirt is inspected and graded before it joins the archive.
+            Retro and rare shirts are checked against original references for
+            badges, fonts and manufacturing details. Officially licensed where
+            applicable.
           </p>
         </AccordionContent>
       </AccordionItem>
@@ -45,12 +45,11 @@ export function ProductDetails({ product }: { product: Product }) {
         <AccordionTrigger>Size Guide</AccordionTrigger>
         <AccordionContent>
           <p>
-            Football shirts vary by era and manufacturer — retro shirts often
-            fit smaller than modern kits. See our{" "}
-            <Link href="/size-guide" className="text-grass underline">
+            Retro shirts often fit smaller than modern kits. See the{" "}
+            <Link href="/size-guide" className="text-accent underline">
               full size guide
             </Link>{" "}
-            for measurements before choosing your size.
+            for measurements before picking your size.
           </p>
         </AccordionContent>
       </AccordionItem>
@@ -59,12 +58,12 @@ export function ProductDetails({ product }: { product: Product }) {
         <AccordionTrigger>Shipping &amp; Returns</AccordionTrigger>
         <AccordionContent>
           <p>
-            Worldwide shipping with tracking on every order. Returns accepted
-            within 30 days on unworn shirts with tags. See{" "}
-            <Link href="/shipping-returns" className="text-grass underline">
+            Worldwide shipping with tracking, dispatched in 48h. Returns within
+            30 days on unworn shirts with tags. See{" "}
+            <Link href="/shipping-returns" className="text-accent underline">
               shipping &amp; returns
             </Link>{" "}
-            for full details.
+            for details.
           </p>
         </AccordionContent>
       </AccordionItem>

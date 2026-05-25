@@ -3,21 +3,13 @@
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 /**
- * Newsletter capture. No backend by design — shows a client-side success
- * state. Wire to Shopify / an ESP (Klaviyo, Mailchimp) in production.
+ * Newsletter capture. No backend by design — client-side success state.
+ * Wire to Shopify / an ESP in production.
  */
-export function NewsletterForm({
-  className,
-  inputClassName,
-}: {
-  className?: string;
-  inputClassName?: string;
-}) {
+export function NewsletterForm({ className }: { className?: string }) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -29,27 +21,34 @@ export function NewsletterForm({
 
   if (submitted) {
     return (
-      <p className="flex items-center gap-2 text-sm text-grass">
-        <Check className="size-4" />
-        You&apos;re in the dressing room. Watch your inbox.
+      <p className={cn("flex items-center gap-2 text-sm text-accent", className)}>
+        <Check className="size-4" strokeWidth={1.5} />
+        You&apos;re on the list. Watch your inbox.
       </p>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className={cn("flex gap-2", className)}>
-      <Input
+    <form
+      onSubmit={onSubmit}
+      className={cn("flex border border-line-accent", className)}
+    >
+      <input
         type="email"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email address"
+        placeholder="you@inbox.com"
         aria-label="Email address"
-        className={inputClassName}
+        className="min-w-0 flex-1 bg-transparent px-4 text-sm tracking-[-0.03em] text-fg-1 outline-none placeholder:text-fg-4"
       />
-      <Button type="submit" size="icon" aria-label="Subscribe" className="shrink-0">
-        <ArrowRight className="size-4" />
-      </Button>
+      <button
+        type="submit"
+        aria-label="Subscribe"
+        className="flex shrink-0 items-center justify-center bg-accent px-4 text-bg-1 transition-colors duration-150 ease-foota hover:bg-accent-hi"
+      >
+        <ArrowRight className="size-4" strokeWidth={1.5} />
+      </button>
     </form>
   );
 }

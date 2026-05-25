@@ -2,9 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Badge, jerseyBadgeVariant } from "@/components/ui/badge";
-import { JerseyPlaceholder } from "@/components/ui/jersey-placeholder";
-import { Price } from "@/components/ui/price";
-import { cn } from "@/lib/utils";
+import { Jersey, teamColors } from "@/components/ui/jersey-placeholder";
+import { cn, formatPrice } from "@/lib/utils";
 import type { Product } from "@/lib/shopify/types";
 
 export function ProductCard({
@@ -17,11 +16,26 @@ export function ProductCard({
   const { meta } = product;
   const primary = product.featuredImage;
   const secondary = product.images[1];
-  const sizes = "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw";
+  const sizes =
+    "(max-width: 480px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 22vw";
+  const kit = teamColors(meta.teamName ?? product.title);
+  const chips = product.variants.slice(0, 4);
+  const extra = product.variants.length - chips.length;
+  const caption = [meta.confederation, meta.season].filter(Boolean).join(" · ");
+  const money = product.priceRange.minVariantPrice;
 
   return (
-    <Link href={`/products/${product.handle}`} className="group block">
-      <div className="relative aspect-[4/5] w-full overflow-hidden border border-line bg-paper">
+    <Link
+      href={`/products/${product.handle}`}
+      aria-label={product.title}
+      className="group flex flex-col bg-bg-3 transition-transform duration-300 ease-foota hover:-translate-y-1"
+    >
+      <div
+        className={cn(
+          "relative flex aspect-[4/5] items-center justify-center overflow-hidden",
+          primary ? "bg-white" : "jersey-frame grid-texture p-5",
+        )}
+      >
         {primary ? (
           <>
             <Image
@@ -31,7 +45,7 @@ export function ProductCard({
               sizes={sizes}
               priority={priority}
               className={cn(
-                "object-cover transition-transform duration-700 ease-out group-hover:scale-105",
+                "object-contain p-3 transition-opacity duration-500",
                 secondary && "group-hover:opacity-0",
               )}
             />
@@ -41,47 +55,54 @@ export function ProductCard({
                 alt={secondary.altText}
                 fill
                 sizes={sizes}
-                className="object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+                className="object-contain p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               />
             ) : null}
           </>
         ) : (
-          <JerseyPlaceholder
-            label={meta.teamName ?? undefined}
-            sublabel={meta.season ?? undefined}
-            className="transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          <Jersey
+            color1={kit.color1}
+            color2={kit.color2}
+            number={kit.number}
+            className="relative z-[2] max-w-[68%]"
           />
         )}
 
         {meta.badge ? (
-          <div className="absolute left-3 top-3">
+          <span className="absolute left-3 top-3 z-[3]">
             <Badge variant={jerseyBadgeVariant(meta.badge)}>{meta.badge}</Badge>
-          </div>
+          </span>
         ) : null}
         {!product.availableForSale ? (
-          <div className="absolute right-3 top-3">
+          <span className="absolute right-3 top-3 z-[3]">
             <Badge variant="outline">Sold out</Badge>
-          </div>
+          </span>
         ) : null}
       </div>
 
-      <div className="mt-3 flex flex-col gap-1">
-        {meta.teamName ? (
-          <span className="text-[11px] uppercase tracking-[0.12em] text-muted">
-            {meta.teamName}
+      <div className="flex flex-col gap-3 border border-t-0 border-line-accent p-5">
+        <div className="flex flex-col gap-1.5">
+          <span className="text-xl font-bold leading-none tracking-[-0.03em] text-accent">
+            {meta.teamName ?? product.title}
           </span>
-        ) : null}
-        <h3 className="text-pretty text-sm font-medium leading-snug text-ink transition-colors group-hover:text-grass">
-          {product.title}
-        </h3>
-        <div className="mt-0.5 flex items-center justify-between gap-2">
-          <Price
-            amount={product.priceRange.minVariantPrice.amount}
-            currencyCode={product.priceRange.minVariantPrice.currencyCode}
-            className="text-sm"
-          />
-          {meta.season ? (
-            <span className="text-xs text-muted">{meta.season}</span>
+          {caption ? <span className="text-xs text-fg-3">{caption}</span> : null}
+        </div>
+        <span className="text-sm font-bold tabular-nums text-fg-1">
+          {formatPrice(money.amount, money.currencyCode)}
+        </span>
+        <div className="flex gap-1">
+          {chips.map((v) => (
+            <span
+              key={v.id}
+              className="flex h-8 min-w-8 items-center justify-center border border-line-accent px-1 text-xs font-bold text-fg-2"
+            >
+              {v.title}
+            </span>
+          ))}
+          {extra > 0 ? (
+            <span className="flex h-8 min-w-8 items-center justify-center px-1 text-xs font-bold text-accent">
+              +{extra}
+            </span>
           ) : null}
         </div>
       </div>
