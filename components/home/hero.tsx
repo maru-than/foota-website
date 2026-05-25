@@ -1,88 +1,166 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import {
+  AR,
+  BR,
+  DE,
+  ES,
+  FR,
+  GB_ENG,
+  NL,
+  PT,
+} from "country-flag-icons/react/3x2";
 
-import { Button } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { cn } from "@/lib/utils";
 
-const STATS = [
-  { value: "48", label: "Nations" },
-  { value: "16", label: "Host cities" },
-  { value: "Jun 11", label: "Kickoff" },
+type Nation = {
+  slug: string;
+  name: string;
+  Flag: React.ComponentType<{
+    title?: string;
+    className?: string;
+    style?: React.CSSProperties;
+  }>;
+};
+
+/* 8 most famous footballing nations. */
+const NATIONS: Nation[] = [
+  { slug: "brazil", name: "Brazil", Flag: BR },
+  { slug: "argentina", name: "Argentina", Flag: AR },
+  { slug: "germany", name: "Germany", Flag: DE },
+  { slug: "france", name: "France", Flag: FR },
+  { slug: "england", name: "England", Flag: GB_ENG },
+  { slug: "spain", name: "Spain", Flag: ES },
+  { slug: "portugal", name: "Portugal", Flag: PT },
+  { slug: "netherlands", name: "Netherlands", Flag: NL },
 ];
 
+const AUTO_MS = 3000;
+const MANUAL_HOLD_MS = 6000;
+
 export function Hero() {
+  const [activeSlug, setActiveSlug] = useState(NATIONS[0].slug);
+  const [mode, setMode] = useState<"auto" | "manual">("auto");
+  const active = NATIONS.find((n) => n.slug === activeSlug) ?? NATIONS[0];
+
+  /* Auto-advance one flag per second while in auto mode. */
+  useEffect(() => {
+    if (mode !== "auto") return;
+    const id = window.setInterval(() => {
+      setActiveSlug((slug) => {
+        const i = NATIONS.findIndex((n) => n.slug === slug);
+        return NATIONS[(i + 1) % NATIONS.length].slug;
+      });
+    }, AUTO_MS);
+    return () => window.clearInterval(id);
+  }, [mode]);
+
+  /* After a manual click, hold for 3s then resume auto. */
+  const resumeTimer = useRef<number | null>(null);
+  useEffect(() => () => {
+    if (resumeTimer.current) window.clearTimeout(resumeTimer.current);
+  }, []);
+
+  const handleSelect = useCallback((slug: string) => {
+    setActiveSlug(slug);
+    setMode("manual");
+    if (resumeTimer.current) window.clearTimeout(resumeTimer.current);
+    resumeTimer.current = window.setTimeout(() => {
+      setMode("auto");
+    }, MANUAL_HOLD_MS);
+  }, []);
+
   return (
-    <section className="hero-grid-texture relative overflow-hidden border-b border-line-accent bg-bg-1">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(80% 60% at 70% 30%, rgba(193,255,86,.06), transparent 60%)",
-        }}
-      />
-      <Container className="relative grid items-center gap-12 py-16 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:py-24">
-        <Reveal className="flex flex-col gap-6">
-          <h1 className="display text-fg-1" style={{ fontSize: "clamp(44px, 8vw, 92px)", lineHeight: 0.9 }}>
-            A home for jerseys<span className="text-accent">.</span>
-          </h1>
-          <p className="max-w-md text-[17px] leading-relaxed text-fg-2">
-            Every nation at the 2026 FIFA World Cup. Official home shirts from
-            all 48 teams — dispatched worldwide, in 48h.
-          </p>
-          <div className="mt-1 flex flex-wrap items-center gap-5">
-            <Button asChild>
-              <Link href="/shop">
-                Shop jerseys <ArrowRight className="size-4" strokeWidth={1.5} />
-              </Link>
-            </Button>
-            <Link
-              href="/collections/hosts"
-              className="border-b border-line-accent pb-1 text-[13px] font-semibold text-fg-1 transition-colors hover:border-accent hover:text-accent"
-            >
-              View the hosts →
-            </Link>
-          </div>
-          <div className="mt-6 grid grid-cols-3 gap-8 border-t border-line-1 pt-6">
-            {STATS.map((s) => (
-              <div key={s.label} className="flex flex-col gap-1">
-                <b className="text-2xl font-bold tracking-[-0.03em] text-accent tabular-nums">
-                  {s.value}
-                </b>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-fg-3">
-                  {s.label}
-                </span>
-              </div>
+    <section className="relative overflow-hidden bg-bg-0">
+      {/* 8-column grid — the spine of the Foota mark. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 flex">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div key={i} className="h-full flex-1 border-r border-white/20" />
+        ))}
+      </div>
+
+      <div className="relative flex min-h-[600px] flex-col items-center justify-center gap-5 px-6 pb-32 pt-12 sm:gap-6 lg:min-h-[90svh]">
+        <Reveal className="flex flex-col items-center gap-5 sm:gap-6">
+          <div className="relative h-[220px] w-[176px] shrink-0 sm:h-[260px] sm:w-[208px] lg:h-[300px] lg:w-[240px]">
+            {NATIONS.map(({ slug, name }) => (
+              <Image
+                key={slug}
+                src={`/jerseys/home-transparent/${slug}.webp`}
+                alt={slug === active.slug ? `${name} 2026 home jersey` : ""}
+                aria-hidden={slug !== active.slug}
+                fill
+                priority={slug === NATIONS[0].slug}
+                sizes="(max-width: 640px) 176px, (max-width: 1024px) 208px, 240px"
+                className={cn(
+                  "object-contain transition-opacity duration-300 ease-out",
+                  slug === active.slug ? "opacity-100" : "opacity-0",
+                )}
+              />
             ))}
           </div>
-        </Reveal>
 
-        <Reveal delay={120} className="relative flex items-center justify-center">
-          <div className="relative flex aspect-[5/6] w-full max-w-[420px] items-center justify-center overflow-hidden border border-line-accent bg-white">
-            <Image
-              src="/jerseys/home/brazil.jpg"
-              alt="Brazil 2026 home jersey"
-              fill
-              sizes="(max-width: 1024px) 70vw, 420px"
-              priority
-              className="object-contain p-6"
-            />
-          </div>
-          <div className="absolute right-0 top-8 hidden min-w-[160px] flex-col gap-1 border border-line-accent bg-bg-1 p-3 sm:flex lg:-right-4">
-            <span className="eyebrow text-fg-3">Featured</span>
-            <span className="text-sm font-bold tracking-[-0.03em]">Brazil · Home</span>
-            <span className="text-sm font-bold tracking-[-0.03em] text-accent tabular-nums">
-              CHF 119.00
-            </span>
-          </div>
-          <div className="absolute bottom-14 left-0 hidden flex-col gap-1 border border-line-accent bg-bg-1 p-3 sm:flex lg:-left-6">
-            <span className="eyebrow text-fg-3">In stock</span>
-            <span className="text-sm font-bold tracking-[-0.03em]">All sizes S–XXL</span>
+          <h1
+            className="display text-center text-fg-1"
+            style={{ fontSize: "clamp(36px, 6vw, 64px)" }}
+          >
+            A home for jerseys<span className="text-accent">.</span>
+          </h1>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href={`/products/${active.slug}-home`}
+              className="inline-flex w-[160px] items-center justify-center bg-accent px-5 py-3 text-[20px] font-semibold lowercase text-bg-0 transition-colors hover:bg-accent-hi"
+            >
+              buy now
+            </Link>
+            <Link
+              href="/shop"
+              className="inline-flex w-[160px] items-center justify-center border border-white/25 px-5 py-3 text-[20px] font-semibold lowercase text-fg-1 transition-colors hover:border-white/60 hover:bg-white/5"
+            >
+              see all
+            </Link>
           </div>
         </Reveal>
-      </Container>
+      </div>
+
+      {/* Nation flag selector. */}
+      <div
+        role="tablist"
+        aria-label="Choose a nation"
+        className="absolute inset-x-0 bottom-10 flex flex-wrap items-center justify-center gap-3 px-6 sm:gap-4"
+      >
+        {NATIONS.map(({ slug, name, Flag }) => {
+          const isActive = slug === activeSlug;
+          return (
+            <button
+              key={slug}
+              role="tab"
+              aria-selected={isActive}
+              aria-label={name}
+              onClick={() => handleSelect(slug)}
+              className={cn(
+                "group relative overflow-hidden transition-transform duration-200",
+                "h-[44px] w-[64px] sm:h-[48px] sm:w-[70px]",
+                isActive && "scale-110",
+              )}
+            >
+              <Flag
+                title={name}
+                className="h-full w-full object-cover transition-[filter] duration-200 group-hover:!filter-none"
+                style={
+                  isActive
+                    ? undefined
+                    : { filter: "brightness(0.6) saturate(0.75)" }
+                }
+              />
+            </button>
+          );
+        })}
+      </div>
     </section>
   );
 }

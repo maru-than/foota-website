@@ -18,7 +18,7 @@ const geist = Geist({
 
 // Gambarino — Foota display face, used for the logo and hero lockups only.
 const gambarino = localFont({
-  src: "./fonts/Gambarino-Regular.otf",
+  src: "./fonts/Gambarino-Regular.woff2",
   variable: "--font-gambarino",
   weight: "400",
   style: "normal",
@@ -34,11 +34,10 @@ export const metadata: Metadata = {
     template: "%s | Foota Jerseys",
   },
   description:
-    "Shop official 2026 FIFA World Cup home jerseys — all 48 nations, dispatched worldwide.",
+    "Shop 2026 international home jerseys for every nation in the 48-team field — dispatched worldwide.",
   applicationName: "Foota Jerseys",
   keywords: [
-    "World Cup 2026 jerseys",
-    "FIFA World Cup 2026 shirts",
+    "2026 international football jerseys",
     "national team jerseys",
     "2026 home jerseys",
     "football shirts",
@@ -50,14 +49,14 @@ export const metadata: Metadata = {
     siteName: "Foota Jerseys",
     title: "Foota Jerseys | A home for jerseys",
     description:
-      "Official 2026 FIFA World Cup home jerseys from all 48 nations. A home for jerseys.",
+      "2026 international home jerseys from all 48 nations. A home for jerseys.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Foota Jerseys | A home for jerseys",
     description:
-      "Official 2026 FIFA World Cup home jerseys from all 48 nations. A home for jerseys.",
+      "2026 international home jerseys from all 48 nations. A home for jerseys.",
   },
   robots: {
     index: true,

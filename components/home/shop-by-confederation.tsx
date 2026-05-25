@@ -13,7 +13,7 @@ export function ShopByConfederation() {
           <SectionHeading
             eyebrow="By confederation"
             title="Shop by region"
-            description="Six confederations, 48 nations, one World Cup."
+            description="Six confederations, 48 nations, one summer."
             action={{ label: "All nations", href: "/shop" }}
           />
         </Reveal>

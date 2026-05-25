@@ -20,8 +20,8 @@ export function ProductBrowser({
 }) {
   return (
     <Container className="py-10 lg:py-14">
-      <div className="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
-        <aside className="hidden lg:block">
+      <div className="md:grid md:grid-cols-[220px_1fr] md:gap-10 lg:grid-cols-[240px_1fr] lg:gap-12">
+        <aside className="hidden md:block">
           <Suspense fallback={null}>
             <FilterPanel facets={facets} />
           </Suspense>
@@ -30,9 +30,11 @@ export function ProductBrowser({
         <div>
           <div className="mb-8 flex items-center justify-between gap-4 border-b border-line-1 pb-4">
             <div className="flex items-center gap-4">
-              <Suspense fallback={null}>
-                <FiltersDrawer facets={facets} resultCount={products.length} />
-              </Suspense>
+              <div className="md:hidden">
+                <Suspense fallback={null}>
+                  <FiltersDrawer facets={facets} resultCount={products.length} />
+                </Suspense>
+              </div>
               <p className="text-sm text-fg-3">
                 <b className="font-bold tabular-nums text-fg-1">{products.length}</b>{" "}
                 {products.length === 1 ? "jersey" : "jerseys"}

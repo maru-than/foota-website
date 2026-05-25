@@ -1,7 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import * as React from "react";
 
+import { AuthenticityModal } from "@/components/info/authenticity-modal";
+import { ShippingReturnsModal } from "@/components/info/shipping-returns-modal";
+import { SizeGuideModal } from "@/components/info/size-guide-modal";
 import {
   Accordion,
   AccordionContent,
@@ -9,6 +12,28 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import type { Product } from "@/lib/shopify/types";
+
+/**
+ * Inline trigger styled to match the prior <Link className="text-accent underline">
+ * usage. Forwards ref/props so Radix Slot (asChild on the modal trigger) can wire
+ * up its onClick, data-state, aria-* etc. onto the underlying <button>.
+ */
+const InlineTrigger = React.forwardRef<
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement>
+>(function InlineTrigger({ className, ...props }, ref) {
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className={
+        "text-accent underline underline-offset-2 transition-colors hover:text-accent-hi focus:outline-none focus-visible:text-accent-hi" +
+        (className ? ` ${className}` : "")
+      }
+      {...props}
+    />
+  );
+});
 
 export function ProductDetails({ product }: { product: Product }) {
   return (
@@ -30,13 +55,16 @@ export function ProductDetails({ product }: { product: Product }) {
       </AccordionItem>
 
       <AccordionItem value="authenticity">
-        <AccordionTrigger>Condition &amp; Authenticity</AccordionTrigger>
+        <AccordionTrigger>Condition &amp; Quality Check</AccordionTrigger>
         <AccordionContent>
           <p>
             Every shirt is inspected and graded before it joins the archive.
-            Retro and rare shirts are checked against original references for
-            badges, fonts and manufacturing details. Officially licensed where
-            applicable.
+            Each piece is checked against reference photos for stitching, badge
+            alignment, fonts and finish. Inspected before dispatch.{" "}
+            <AuthenticityModal>
+              <InlineTrigger>See our full quality promise</InlineTrigger>
+            </AuthenticityModal>
+            .
           </p>
         </AccordionContent>
       </AccordionItem>
@@ -45,10 +73,10 @@ export function ProductDetails({ product }: { product: Product }) {
         <AccordionTrigger>Size Guide</AccordionTrigger>
         <AccordionContent>
           <p>
-            Retro shirts often fit smaller than modern kits. See the{" "}
-            <Link href="/size-guide" className="text-accent underline">
-              full size guide
-            </Link>{" "}
+            Retro shirts often fit smaller than modern kits. Open the{" "}
+            <SizeGuideModal>
+              <InlineTrigger>full size guide</InlineTrigger>
+            </SizeGuideModal>{" "}
             for measurements before picking your size.
           </p>
         </AccordionContent>
@@ -60,9 +88,9 @@ export function ProductDetails({ product }: { product: Product }) {
           <p>
             Worldwide shipping with tracking, dispatched in 48h. Returns within
             30 days on unworn shirts with tags. See{" "}
-            <Link href="/shipping-returns" className="text-accent underline">
-              shipping &amp; returns
-            </Link>{" "}
+            <ShippingReturnsModal>
+              <InlineTrigger>shipping &amp; returns</InlineTrigger>
+            </ShippingReturnsModal>{" "}
             for details.
           </p>
         </AccordionContent>

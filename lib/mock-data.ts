@@ -6,10 +6,11 @@ import type {
 } from "./shopify/types";
 
 /* ------------------------------------------------------------------ */
-/*  Foota catalogue — FIFA World Cup 2026.                             */
-/*  The shop sells official 2026 home jerseys for the 48 nations of    */
-/*  the first 48-team World Cup, co-hosted by the USA, Canada & Mexico.*/
+/*  Foota catalogue — summer 2026.                                     */
+/*  The shop sells 2026 home jerseys for the 48 nations of             */
+/*  the first 48-team summer, co-hosted by the USA, Canada & Mexico.   */
 /*  Images live in /public/jerseys/home/<slug>.jpg (and away/).        */
+/*  Handle format: `<slug>-home` and `<slug>-away`.                    */
 /*  fallback; shaped exactly like the normalized Shopify types.        */
 /* ------------------------------------------------------------------ */
 
@@ -30,6 +31,8 @@ interface Spec {
   nation: string;
   conf: keyof typeof REGION;
   price: number;
+  /** Optional discounted selling price; `price` becomes the "was" compareAt. */
+  salePrice?: number;
   host?: boolean;
   isNew?: boolean;
   soldOut?: string[];
@@ -46,7 +49,7 @@ const SPECS: Spec[] = [
   { slug: "netherlands", nation: "Netherlands", conf: "UEFA", price: 109 },
   { slug: "belgium", nation: "Belgium", conf: "UEFA", price: 109 },
   { slug: "croatia", nation: "Croatia", conf: "UEFA", price: 109 },
-  { slug: "switzerland", nation: "Switzerland", conf: "UEFA", price: 99 },
+  { slug: "switzerland", nation: "Switzerland", conf: "UEFA", price: 99, salePrice: 79 },
   { slug: "austria", nation: "Austria", conf: "UEFA", price: 99 },
   { slug: "scotland", nation: "Scotland", conf: "UEFA", price: 99 },
   { slug: "norway", nation: "Norway", conf: "UEFA", price: 99, isNew: true },
@@ -77,14 +80,14 @@ const SPECS: Spec[] = [
   { slug: "egypt", nation: "Egypt", conf: "CAF", price: 99 },
   { slug: "algeria", nation: "Algeria", conf: "CAF", price: 99 },
   { slug: "ghana", nation: "Ghana", conf: "CAF", price: 99 },
-  { slug: "cape-verde", nation: "Cape Verde", conf: "CAF", price: 89, isNew: true },
+  { slug: "cape-verde", nation: "Cape Verde", conf: "CAF", price: 89, salePrice: 69, isNew: true },
   { slug: "south-africa", nation: "South Africa", conf: "CAF", price: 89 },
   // AFC
   { slug: "japan", nation: "Japan", conf: "AFC", price: 109, isNew: true, soldOut: ["XL"] },
   { slug: "south-korea", nation: "South Korea", conf: "AFC", price: 109 },
   { slug: "australia", nation: "Australia", conf: "AFC", price: 99 },
   { slug: "saudi-arabia", nation: "Saudi Arabia", conf: "AFC", price: 99 },
-  { slug: "iran", nation: "Iran", conf: "AFC", price: 99 },
+  { slug: "iran", nation: "Iran", conf: "AFC", price: 99, salePrice: 79 },
   { slug: "qatar", nation: "Qatar", conf: "AFC", price: 99 },
   { slug: "iraq", nation: "Iraq", conf: "AFC", price: 89 },
   { slug: "jordan", nation: "Jordan", conf: "AFC", price: 89, isNew: true },
@@ -107,24 +110,46 @@ function makeVariants(
   }));
 }
 
-function describe(spec: Spec): string {
+/* Nations whose away kit hasn't been photographed yet — home-only. */
+const NO_AWAY = new Set([
+  "bolivia",
+  "costa-rica",
+  "el-salvador",
+  "honduras",
+  "jamaica",
+  "united-arab-emirates",
+  "venezuela",
+]);
+
+type Kit = "Home" | "Away";
+
+function describe(spec: Spec, kit: Kit): string {
+  const shirt = kit === "Home" ? "home shirt" : "away shirt";
   if (spec.host) {
-    return `${spec.nation}'s home shirt for the 2026 FIFA World Cup — a co-host nation, playing the first 48-team finals on home soil across the USA, Canada and Mexico.`;
+    return `${spec.nation}'s ${shirt} for the 2026 international tournament — a co-host nation, playing the first 48-team finals on home soil across the USA, Canada and Mexico.`;
   }
-  return `${spec.nation}'s home shirt for the 2026 FIFA World Cup — ${REGION[spec.conf]}'s representative at the first 48-nation finals across the USA, Canada and Mexico.`;
+  return `${spec.nation}'s ${shirt} for the 2026 international tournament — ${REGION[spec.conf]}'s representative at the first 48-nation finals across the USA, Canada and Mexico.`;
 }
 
-function makeProduct(spec: Spec, index: number): Product {
+function makeProduct(spec: Spec, kit: Kit, index: number): Product {
   const id = `gid://mock/Product/${index + 1}`;
   const soldOut = spec.soldOut ?? [];
-  const variants = makeVariants(id, spec.price, soldOut);
-  const money = { amount: spec.price.toFixed(2), currencyCode: CURRENCY };
+  const onSale =
+    typeof spec.salePrice === "number" && spec.salePrice < spec.price;
+  const sellingPrice = onSale ? (spec.salePrice as number) : spec.price;
+  const variants = makeVariants(id, sellingPrice, soldOut);
+  const money = { amount: sellingPrice.toFixed(2), currencyCode: CURRENCY };
+  const compareAtPrice = onSale
+    ? { amount: spec.price.toFixed(2), currencyCode: CURRENCY }
+    : null;
   const badge: JerseyBadge = spec.host ? "Host" : spec.isNew ? "New" : null;
+  const kitSlug = kit.toLowerCase(); // "home" | "away"
   const image = {
-    url: `/jerseys/home/${spec.slug}.jpg`,
-    altText: `${spec.nation} 2026 home jersey`,
+    url: `/jerseys/${kitSlug}/${spec.slug}.jpg`,
+    altText: `${spec.nation} 2026 ${kitSlug} jersey`,
   };
-  const lead = describe(spec);
+  const lead = describe(spec, kit);
+  const title = `${spec.nation} 2026 ${kit} Jersey`;
   // Stagger timestamps so "New arrivals" / "Newest" sorting is deterministic.
   const created = new Date(2026, 4, 20);
   created.setDate(created.getDate() - index * 2);
@@ -133,22 +158,22 @@ function makeProduct(spec: Spec, index: number): Product {
     `nation:${spec.nation}`,
     `confederation:${spec.conf}`,
     "season:2026",
-    "type:Home",
+    `type:${kit}`,
     "era:Current",
     badge ? `badge:${badge}` : null,
   ].filter((t): t is string => Boolean(t));
 
   return {
     id,
-    handle: `${spec.slug}-2026-home`,
-    title: `${spec.nation} 2026 Home Jersey`,
+    handle: `${spec.slug}-${kitSlug}`,
+    title,
     description: lead,
-    descriptionHtml: `<p>${lead}</p><p>Official home jersey · sizes S–XXL. Inspected before it ships, dispatched worldwide in 48h.</p>`,
+    descriptionHtml: `<p>${lead}</p><p>2026 ${kitSlug} jersey · sizes S–XXL. Inspected before it ships, dispatched worldwide in 48h.</p>`,
     availableForSale: variants.some((v) => v.availableForSale),
     tags,
     options: [{ id: `${id}/option/size`, name: "Size", values: [...SIZES] }],
     priceRange: { minVariantPrice: money, maxVariantPrice: money },
-    compareAtPrice: null,
+    compareAtPrice,
     featuredImage: image,
     images: [image],
     variants,
@@ -157,18 +182,31 @@ function makeProduct(spec: Spec, index: number): Product {
       nation: spec.nation,
       confederation: spec.conf,
       season: "2026",
-      type: "Home",
+      type: kit,
       era: "Current",
       badge,
       teamName: spec.nation,
     },
-    seo: { title: `${spec.nation} 2026 Home Jersey`, description: lead },
+    seo: { title, description: lead },
     createdAt: created.toISOString(),
     updatedAt: created.toISOString(),
   };
 }
 
-export const MOCK_PRODUCTS: Product[] = SPECS.map(makeProduct);
+// Each nation contributes a home product; an away product where photographed.
+// Pair them so a nation's two kits sit adjacent in the catalogue ordering.
+const PRODUCT_PAIRS: Array<{ spec: Spec; kit: Kit }> = SPECS.flatMap((spec) =>
+  NO_AWAY.has(spec.slug)
+    ? [{ spec, kit: "Home" as Kit }]
+    : [
+        { spec, kit: "Home" as Kit },
+        { spec, kit: "Away" as Kit },
+      ],
+);
+
+export const MOCK_PRODUCTS: Product[] = PRODUCT_PAIRS.map(({ spec, kit }, i) =>
+  makeProduct(spec, kit, i),
+);
 
 /* ------------------------------ Collections ----------------------------- */
 
@@ -179,48 +217,68 @@ interface CollectionRule {
   match: (p: Product) => boolean;
 }
 
+const BEST_SELLER_NATIONS = new Set([
+  "brazil",
+  "argentina",
+  "france",
+  "england",
+  "germany",
+  "spain",
+  "portugal",
+  "netherlands",
+]);
+
 const COLLECTION_RULES: CollectionRule[] = [
+  {
+    handle: "best-sellers",
+    title: "Best Sellers",
+    description: "The shirts moving fastest from the archive.",
+    match: (p) =>
+      !!p.meta.nation &&
+      BEST_SELLER_NATIONS.has(p.meta.nation.toLowerCase()) &&
+      p.meta.type === "Home",
+  },
   {
     handle: "hosts",
     title: "Host Nations",
     description:
-      "USA · Canada · Mexico — hosting the first 48-team World Cup across 16 cities.",
+      "USA · Canada · Mexico — hosting the first 48-team summer across 16 cities.",
     match: (p) => p.meta.badge === "Host",
   },
   {
     handle: "uefa",
     title: "Europe",
-    description: "UEFA nations heading to the 2026 World Cup.",
+    description: "UEFA nations playing in summer 2026.",
     match: (p) => p.meta.confederation === "UEFA",
   },
   {
     handle: "conmebol",
     title: "South America",
-    description: "CONMEBOL nations heading to the 2026 World Cup.",
+    description: "CONMEBOL nations playing in summer 2026.",
     match: (p) => p.meta.confederation === "CONMEBOL",
   },
   {
     handle: "concacaf",
     title: "North & Central America",
-    description: "CONCACAF nations heading to the 2026 World Cup.",
+    description: "CONCACAF nations playing in summer 2026.",
     match: (p) => p.meta.confederation === "CONCACAF",
   },
   {
     handle: "caf",
     title: "Africa",
-    description: "CAF nations heading to the 2026 World Cup.",
+    description: "CAF nations playing in summer 2026.",
     match: (p) => p.meta.confederation === "CAF",
   },
   {
     handle: "afc",
     title: "Asia",
-    description: "AFC nations heading to the 2026 World Cup.",
+    description: "AFC nations playing in summer 2026.",
     match: (p) => p.meta.confederation === "AFC",
   },
   {
     handle: "ofc",
     title: "Oceania",
-    description: "OFC nations heading to the 2026 World Cup.",
+    description: "OFC nations playing in summer 2026.",
     match: (p) => p.meta.confederation === "OFC",
   },
   {

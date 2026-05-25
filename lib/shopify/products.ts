@@ -85,16 +85,36 @@ export function applyFilters(
   });
 }
 
-/** Rank for "New Arrivals": current-season / "New" shirts first, then recency. */
+/** Rank for "New Arrivals": current-season / "New" shirts first, then recency.
+ *  Once ranked, walks confederations round-robin so the visible row spans
+ *  regions instead of clustering on whichever confederation has the most
+ *  "New"-tagged items (today: UEFA). */
 export function pickNewArrivals(products: Product[], limit = 8): Product[] {
   const score = (p: Product) =>
     (p.meta.badge === "New" ? 2 : 0) + (p.meta.era === "Current" ? 1 : 0);
-  return [...products]
-    .sort((a, b) => {
-      const diff = score(b) - score(a);
-      return diff !== 0 ? diff : b.createdAt.localeCompare(a.createdAt);
-    })
-    .slice(0, limit);
+
+  const ranked = [...products].sort((a, b) => {
+    const diff = score(b) - score(a);
+    return diff !== 0 ? diff : b.createdAt.localeCompare(a.createdAt);
+  });
+
+  const buckets = new Map<string, Product[]>();
+  for (const p of ranked) {
+    const key = p.meta.confederation ?? "_";
+    if (!buckets.has(key)) buckets.set(key, []);
+    buckets.get(key)!.push(p);
+  }
+
+  const out: Product[] = [];
+  while (out.length < limit && buckets.size > 0) {
+    for (const [key, bucket] of [...buckets]) {
+      if (out.length >= limit) break;
+      const next = bucket.shift();
+      if (next) out.push(next);
+      if (bucket.length === 0) buckets.delete(key);
+    }
+  }
+  return out;
 }
 
 export function applySort(products: Product[], sort: SortKey): Product[] {

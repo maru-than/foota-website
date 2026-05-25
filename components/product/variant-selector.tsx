@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
+import { SizeGuideModal } from "@/components/info/size-guide-modal";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/shopify/types";
 
@@ -47,12 +46,14 @@ export function VariantSelector({
               ) : null}
             </span>
             {option.name.toLowerCase() === "size" ? (
-              <Link
-                href="/size-guide"
-                className="text-xs font-semibold text-accent transition-colors hover:text-accent-hi"
-              >
-                Size guide →
-              </Link>
+              <SizeGuideModal>
+                <button
+                  type="button"
+                  className="text-xs font-semibold text-accent transition-colors hover:text-accent-hi focus:outline-none focus-visible:text-accent-hi"
+                >
+                  Size guide →
+                </button>
+              </SizeGuideModal>
             ) : null}
           </div>
           <div className="flex flex-wrap gap-1.5">

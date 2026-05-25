@@ -1,7 +1,8 @@
 const ITEMS = [
   "Worldwide shipping available",
-  "World Cup 2026 · all 48 nations",
-  "Official home shirts",
+  "New shirts added weekly",
+  "Summer 2026 · all 48 nations",
+  "Home shirts for every side",
   "Dispatched in 48h",
 ];
 

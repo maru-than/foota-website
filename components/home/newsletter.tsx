@@ -12,7 +12,7 @@ export function Newsletter() {
             Join the dressing room
           </h2>
           <p className="mt-4 text-pretty leading-relaxed text-fg-2">
-            First access to new drops, restocks and World Cup 2026 stories.
+            First access to new drops, restocks and summer 2026 stories.
           </p>
           <NewsletterForm className="mt-7 w-full max-w-md" />
         </Reveal>

@@ -3,7 +3,8 @@ import Link from "next/link";
 
 import { Badge, jerseyBadgeVariant } from "@/components/ui/badge";
 import { Jersey, teamColors } from "@/components/ui/jersey-placeholder";
-import { cn, formatPrice } from "@/lib/utils";
+import { Price } from "@/components/ui/price";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/shopify/types";
 
 export function ProductCard({
@@ -17,7 +18,7 @@ export function ProductCard({
   const primary = product.featuredImage;
   const secondary = product.images[1];
   const sizes =
-    "(max-width: 480px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 22vw";
+    "(max-width: 640px) 45vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 22vw";
   const kit = teamColors(meta.teamName ?? product.title);
   const chips = product.variants.slice(0, 4);
   const extra = product.variants.length - chips.length;
@@ -87,9 +88,12 @@ export function ProductCard({
           </span>
           {caption ? <span className="text-xs text-fg-3">{caption}</span> : null}
         </div>
-        <span className="text-sm font-bold tabular-nums text-fg-1">
-          {formatPrice(money.amount, money.currencyCode)}
-        </span>
+        <Price
+          amount={money.amount}
+          currencyCode={money.currencyCode}
+          compareAt={product.compareAtPrice}
+          className="text-sm font-bold text-fg-1"
+        />
         <div className="flex gap-1">
           {chips.map((v) => (
             <span

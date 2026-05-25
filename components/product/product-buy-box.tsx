@@ -5,6 +5,7 @@ import { ArrowRight, ShieldCheck, Sparkles, Truck } from "lucide-react";
 
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
+import { Price } from "@/components/ui/price";
 import { cn, formatPrice } from "@/lib/utils";
 import type { Product, ProductVariant } from "@/lib/shopify/types";
 import { VariantSelector } from "./variant-selector";
@@ -30,8 +31,8 @@ function findVariant(
 
 const TRUST = [
   { Icon: Truck, title: "Worldwide shipping", note: "Tracked · dispatched in 48h" },
-  { Icon: ShieldCheck, title: "Authentic", note: "Inspected & graded" },
-  { Icon: Sparkles, title: "Official replica", note: "Licensed 2026 kit" },
+  { Icon: ShieldCheck, title: "Inspected on arrival", note: "Stitching, crest & fonts" },
+  { Icon: Sparkles, title: "New condition", note: "Photographed & condition-checked" },
 ];
 
 export function ProductBuyBox({ product }: { product: Product }) {
@@ -91,11 +92,19 @@ export function ProductBuyBox({ product }: { product: Product }) {
       <div className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-between gap-3 border-t border-line-accent bg-bg-1/95 px-4 py-3 backdrop-blur lg:hidden">
         <div className="flex min-w-0 flex-col">
           {product.meta.teamName ? (
-            <span className="truncate text-xs text-fg-3">{product.meta.teamName}</span>
+            <span className="truncate text-xs text-fg-3">
+              {product.meta.teamName}
+              {selected.Size ? (
+                <span className="text-fg-2"> · Size {selected.Size}</span>
+              ) : null}
+            </span>
           ) : null}
-          <span className="text-sm font-bold tabular-nums text-accent">
-            {formatPrice(price.amount, price.currencyCode)}
-          </span>
+          <Price
+            amount={price.amount}
+            currencyCode={price.currencyCode}
+            compareAt={product.compareAtPrice}
+            className="text-sm font-bold text-accent"
+          />
         </div>
         <Button onClick={add} disabled={!available || isPending} className="shrink-0">
           {available ? "Add to bag" : "Sold out"}

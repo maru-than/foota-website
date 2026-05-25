@@ -8,7 +8,7 @@ import { ProductGallery } from "@/components/product/product-gallery";
 import { RelatedProducts } from "@/components/product/related-products";
 import { Badge, jerseyBadgeVariant } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
-import { formatPrice } from "@/lib/utils";
+import { Price } from "@/components/ui/price";
 import {
   getProduct,
   getProductRecommendations,
@@ -119,9 +119,12 @@ export default async function ProductPage({
             <p className="mt-2 text-sm text-fg-3">{product.title}</p>
 
             <div className="mt-5">
-              <span className="text-2xl font-bold tabular-nums text-fg-1">
-                {formatPrice(price.amount, price.currencyCode)}
-              </span>
+              <Price
+                amount={price.amount}
+                currencyCode={price.currencyCode}
+                compareAt={product.compareAtPrice}
+                className="text-2xl font-bold text-fg-1"
+              />
             </div>
 
             <div className="mt-8">

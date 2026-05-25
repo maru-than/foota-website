@@ -3,7 +3,6 @@ import { Globe } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { FOOTER_NAV } from "@/lib/navigation";
-import { NewsletterForm } from "./newsletter-form";
 
 const SOCIALS = [
   { label: "Instagram", href: "#" },
@@ -25,14 +24,9 @@ export function Footer() {
             Foota
           </Link>
           <p className="mt-4 text-sm leading-relaxed text-fg-2">
-            A home for jerseys. Official 2026 FIFA World Cup home shirts — every
-            nation, dispatched worldwide.
+            A home for jerseys. 2026 international home shirts — every nation,
+            dispatched worldwide.
           </p>
-
-          <div className="mt-8">
-            <span className="eyebrow text-fg-3">Get the drop</span>
-            <NewsletterForm className="mt-3 max-w-xs" />
-          </div>
 
           <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2">
             {SOCIALS.map(({ label, href }) => (

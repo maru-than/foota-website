@@ -7,13 +7,14 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { Collection } from "@/lib/shopify/types";
 
-const FEATURED_ORDER = ["hosts", "uefa", "conmebol", "new-arrivals"];
+const FEATURED_ORDER = ["hosts", "uefa", "conmebol", "best-sellers"];
 
 const COLLECTION_IMAGES: Record<string, string> = {
   hosts: "/collections/hosts.png",
   uefa: "/collections/uefa.png",
   conmebol: "/collections/conmebol.png",
   "new-arrivals": "/collections/new-arrivals.png",
+  // "best-sellers": "/collections/best-sellers.png", — design handoff; falls back to decorative tile.
 };
 
 export function FeaturedCollections({
@@ -38,7 +39,7 @@ export function FeaturedCollections({
             description="Start with the hosts, a confederation, or the latest drops."
           />
         </Reveal>
-        <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
           {list.map((collection, i) => {
             const image = COLLECTION_IMAGES[collection.handle];
             return (

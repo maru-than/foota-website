@@ -28,7 +28,7 @@ export default function OpengraphImage() {
             color: "#C1FF56",
           }}
         >
-          FIFA World Cup 2026
+          Summer 2026 · 48 Nations
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
@@ -43,7 +43,7 @@ export default function OpengraphImage() {
             A home for jerseys<span style={{ color: "#C1FF56" }}>.</span>
           </div>
           <div style={{ display: "flex", marginTop: 28, fontSize: 28, color: "rgba(255,255,255,0.72)" }}>
-            Official home jerseys · all 48 nations.
+            Home jerseys · all 48 nations.
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
