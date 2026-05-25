@@ -31,9 +31,9 @@ export default async function ShopPage({
   return (
     <>
       <PageHeader
-        eyebrow="The Archive"
+        eyebrow="World Cup 2026"
         title="Shop all jerseys"
-        description="Every shirt in the collection — authentic, retro and iconic, filterable by club, nation, season and more."
+        description="Official 2026 World Cup home jerseys — all 48 nations. Filter by confederation, nation and size."
       />
       <ProductBrowser products={products} facets={facets} clearHref="/shop" />
     </>

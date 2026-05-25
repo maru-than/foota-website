@@ -6,21 +6,21 @@ import { Container } from "@/components/ui/container";
 export const metadata: Metadata = {
   title: "Authenticity",
   description:
-    "How we grade and verify every shirt in the Foota archive — Authentic, Retro and Rare Find.",
+    "Every 2026 World Cup home jersey at Foota is an official replica, inspected before it ships.",
 };
 
-const GRADES = [
+const POINTS = [
   {
-    name: "Authentic",
-    text: "Current and recent-season shirts sourced as officially licensed product, in new condition.",
+    name: "Official replica",
+    text: "Every 2026 home shirt is an official replica, sourced as licensed product in new condition.",
   },
   {
-    name: "Retro",
-    text: "Archive shirts from past seasons. Vintage cuts and colourways, checked against original references.",
+    name: "Quality-checked",
+    text: "Each shirt is inspected for print, badge and stitching before it ships.",
   },
   {
-    name: "Rare Find",
-    text: "Hard-to-source shirts with limited availability — verified, graded and described in detail.",
+    name: "Dispatched worldwide",
+    text: "Tracked shipping to every nation, dispatched within 48 hours.",
   },
 ];
 
@@ -30,35 +30,34 @@ export default function AuthenticityPage() {
       <PageHeader
         eyebrow="Our promise"
         title="Authenticity & Condition"
-        description="Every jersey is inspected and graded by our team before it joins the archive."
+        description="Every 2026 World Cup shirt is official and inspected before it ships."
       />
       <Container className="py-12 lg:py-16">
-        <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-muted [&_h2]:text-ink">
+        <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-fg-2 [&_h2]:text-fg-1">
           <section className="space-y-3">
-            <h2 className="font-display text-2xl">How we grade</h2>
+            <h2 className="text-2xl font-bold tracking-[-0.03em]">What you get</h2>
             <p>
-              We classify every shirt so you always know what you&apos;re
-              buying. Where a shirt is officially licensed, it is sourced as
-              such; retro and rare shirts are checked against original
-              references for badges, fonts and manufacturing details.
+              Foota stocks official 2026 home jerseys for all 48 World Cup
+              nations. Each one is sourced as licensed product and checked against
+              official references for badge, crest and manufacturing details.
             </p>
           </section>
 
           <section className="grid gap-4 sm:grid-cols-3">
-            {GRADES.map((grade) => (
-              <div key={grade.name} className="border border-line bg-paper p-5">
-                <h3 className="eyebrow text-grass">{grade.name}</h3>
-                <p className="mt-3 text-sm">{grade.text}</p>
+            {POINTS.map((point) => (
+              <div key={point.name} className="border border-line-accent bg-bg-2 p-5">
+                <h3 className="eyebrow text-accent">{point.name}</h3>
+                <p className="mt-3 text-sm">{point.text}</p>
               </div>
             ))}
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-2xl">Inspection</h2>
+            <h2 className="text-2xl font-bold tracking-[-0.03em]">Inspection</h2>
             <p>
               Each shirt is photographed, measured and condition-checked. Any
-              notable flaws are described on the product page, so there are no
-              surprises when your jersey arrives.
+              notable details are described on the product page — no surprises
+              when your jersey arrives.
             </p>
           </section>
         </div>

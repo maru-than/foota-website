@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Foota Jerseys is a curated home for authentic, retro and iconic football shirts — chosen for the moments they belong to.",
+    "Foota Jerseys is the home for the 2026 FIFA World Cup — every nation's official home shirt in one place.",
 };
 
 export default function AboutPage() {
@@ -15,36 +15,34 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="Our story"
         title="A home for jerseys."
-        description="Foota Jerseys is a curated destination for football fans, collectors and anyone who loves the culture of the game."
+        description="The home for the 2026 FIFA World Cup — every nation's home shirt, in one place."
       />
       <Container className="py-12 lg:py-16">
-        <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-muted [&_h2]:text-ink">
+        <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-fg-2 [&_h2]:text-fg-1">
           <section className="space-y-3">
-            <h2 className="font-display text-2xl">More than a shop</h2>
+            <h2 className="text-2xl font-bold tracking-[-0.03em]">
+              Built for the World Cup
+            </h2>
             <p>
-              We started Foota with a simple belief: a football shirt is never
-              just a shirt. It&apos;s a season, a city, a player, a night you
-              never forgot. Our archive is built around that idea — shirts
-              chosen for the stories they carry, not just the badge on the
-              chest.
+              The 2026 FIFA World Cup is the biggest ever — 48 nations, 16 cities,
+              one tournament across the USA, Canada and Mexico. Foota is built for
+              it: one place to find the home shirt of every side in the draw.
             </p>
           </section>
           <section className="space-y-3">
-            <h2 className="font-display text-2xl">What we curate</h2>
+            <h2 className="text-2xl font-bold tracking-[-0.03em]">What we stock</h2>
             <p>
-              From current-season club and national-team kits to deep-cut retro
-              classics and genuinely rare finds, every jersey is selected by
-              hand. We care about the eras that mattered and the designs that
-              became part of football&apos;s visual language.
+              All 48 qualified nations, from the co-hosts to the debutants —
+              grouped by confederation so you can shop your continent, your rivals
+              or your second team. Official 2026 home jerseys, sizes S–XXL.
             </p>
           </section>
           <section className="space-y-3">
-            <h2 className="font-display text-2xl">How we work</h2>
+            <h2 className="text-2xl font-bold tracking-[-0.03em]">How we work</h2>
             <p>
-              Each shirt is inspected and graded before it reaches the archive.
-              Checkout, payments and fulfilment are handled securely through
-              Shopify, so you can shop with confidence wherever you are in the
-              world.
+              Every shirt is inspected before it ships and dispatched worldwide in
+              48 hours. Checkout, payments and fulfilment run securely through
+              Shopify, so you can back your nation from anywhere.
             </p>
           </section>
         </div>

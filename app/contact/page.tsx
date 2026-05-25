@@ -22,17 +22,17 @@ export default function ContactPage() {
           <div className="max-w-2xl">
             <ContactForm />
           </div>
-          <aside className="space-y-8 text-sm text-muted">
+          <aside className="space-y-8 text-sm text-fg-3">
             <div>
-              <h2 className="eyebrow text-ink">Email</h2>
+              <h2 className="eyebrow text-fg-1">Email</h2>
               <p className="mt-2">hello@footajerseys.com</p>
             </div>
             <div>
-              <h2 className="eyebrow text-ink">Support hours</h2>
+              <h2 className="eyebrow text-fg-1">Support hours</h2>
               <p className="mt-2">Monday – Friday, 9:00 – 17:00 CET</p>
             </div>
             <div>
-              <h2 className="eyebrow text-ink">Returns</h2>
+              <h2 className="eyebrow text-fg-1">Returns</h2>
               <p className="mt-2">
                 See shipping &amp; returns for our full policy before getting in
                 touch about a return.

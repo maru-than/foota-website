@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Geist } from "next/font/google";
+import { Geist } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
@@ -9,15 +10,18 @@ import { CartProvider } from "@/components/cart/cart-provider";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { getCart } from "@/lib/shopify/cart";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const geist = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-const geist = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Gambarino — Foota display face, used for the logo and hero lockups only.
+const gambarino = localFont({
+  src: "./fonts/Gambarino-Regular.otf",
+  variable: "--font-gambarino",
+  weight: "400",
+  style: "normal",
   display: "swap",
 });
 
@@ -30,15 +34,15 @@ export const metadata: Metadata = {
     template: "%s | Foota Jerseys",
   },
   description:
-    "Shop authentic, retro and iconic football jerseys from clubs and national teams around the world.",
+    "Shop official 2026 FIFA World Cup home jerseys — all 48 nations, dispatched worldwide.",
   applicationName: "Foota Jerseys",
   keywords: [
-    "football jerseys",
-    "retro football shirts",
-    "authentic football kits",
-    "vintage football jerseys",
-    "club jerseys",
+    "World Cup 2026 jerseys",
+    "FIFA World Cup 2026 shirts",
     "national team jerseys",
+    "2026 home jerseys",
+    "football shirts",
+    "USA Canada Mexico 2026",
   ],
   authors: [{ name: "Foota Jerseys" }],
   openGraph: {
@@ -46,14 +50,14 @@ export const metadata: Metadata = {
     siteName: "Foota Jerseys",
     title: "Foota Jerseys | A home for jerseys",
     description:
-      "Discover authentic, retro and iconic football shirts from clubs and nations around the world.",
+      "Official 2026 FIFA World Cup home jerseys from all 48 nations. A home for jerseys.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Foota Jerseys | A home for jerseys",
     description:
-      "Discover authentic, retro and iconic football shirts from clubs and nations around the world.",
+      "Official 2026 FIFA World Cup home jerseys from all 48 nations. A home for jerseys.",
   },
   robots: {
     index: true,
@@ -62,8 +66,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F5F2EA",
-  colorScheme: "light",
+  themeColor: "#111111",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -79,7 +83,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geist.variable} ${fraunces.variable} h-full`}
+      className={`${geist.variable} ${gambarino.variable} h-full`}
     >
       <body className="flex min-h-full flex-col">
         {/* Enables CSS-only reveal animations; content stays visible without JS. */}
@@ -90,7 +94,7 @@ export default async function RootLayout({
         />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-bone"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-accent focus:px-4 focus:py-2 focus:text-bg-1"
         >
           Skip to content
         </a>

@@ -18,10 +18,12 @@ export default function Error({
 
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-5 py-24 text-center">
-      <span className="eyebrow text-burgundy">Something went wrong</span>
-      <h1 className="text-4xl sm:text-5xl">A momentary stoppage.</h1>
-      <p className="max-w-md text-pretty text-muted">
-        We hit an unexpected error loading this page. Please try again.
+      <span className="eyebrow text-danger">Something went wrong</span>
+      <h1 className="text-4xl font-bold tracking-[-0.03em] sm:text-5xl">
+        A momentary stoppage.
+      </h1>
+      <p className="max-w-md text-pretty text-fg-3">
+        We hit an unexpected error loading this page. Try again.
       </p>
       <Button onClick={() => reset()} className="mt-2">
         Try again

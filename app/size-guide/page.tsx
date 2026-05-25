@@ -23,14 +23,14 @@ export default function SizeGuidePage() {
       <PageHeader
         eyebrow="Help"
         title="Size Guide"
-        description="Football shirts vary by era and manufacturer — use these measurements as a guide before choosing your size."
+        description="Shirts vary by era and manufacturer — use these measurements as a guide before picking your size."
       />
       <Container className="py-12 lg:py-16">
         <div className="max-w-3xl space-y-10">
-          <div className="overflow-hidden border border-line">
+          <div className="overflow-hidden border border-line-accent">
             <table className="w-full text-sm">
-              <thead className="bg-paper text-left">
-                <tr className="[&_th]:px-5 [&_th]:py-3 [&_th]:font-medium">
+              <thead className="bg-bg-2 text-left">
+                <tr className="[&_th]:px-5 [&_th]:py-3 [&_th]:font-bold [&_th]:uppercase [&_th]:tracking-[0.08em] [&_th]:text-fg-1">
                   <th>Size</th>
                   <th>Chest — pit to pit (cm)</th>
                   <th>Length (cm)</th>
@@ -40,28 +40,29 @@ export default function SizeGuidePage() {
                 {ROWS.map((row) => (
                   <tr
                     key={row.size}
-                    className="border-t border-line [&_td]:px-5 [&_td]:py-3"
+                    className="border-t border-line-1 [&_td]:px-5 [&_td]:py-3"
                   >
-                    <td className="font-medium">{row.size}</td>
-                    <td className="text-muted">{row.chest}</td>
-                    <td className="text-muted">{row.length}</td>
+                    <td className="font-bold tabular-nums text-fg-1">{row.size}</td>
+                    <td className="tabular-nums text-fg-2">{row.chest}</td>
+                    <td className="tabular-nums text-fg-2">{row.length}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <div className="space-y-3 text-pretty leading-relaxed text-muted">
-            <h2 className="font-display text-2xl text-ink">How to measure</h2>
+          <div className="space-y-3 text-pretty leading-relaxed text-fg-2">
+            <h2 className="text-2xl font-bold tracking-[-0.03em] text-fg-1">
+              How to measure
+            </h2>
             <p>
               Lay a shirt that fits you well flat and measure across the chest
-              from armpit to armpit, then from the top of the shoulder to the
-              hem for length. Compare those numbers to the table above.
+              from armpit to armpit, then from the top of the shoulder to the hem
+              for length. Compare to the table above.
             </p>
             <p>
               Retro shirts often fit smaller and shorter than modern kits — if
-              you&apos;re between sizes on a vintage shirt, we&apos;d suggest
-              sizing up.
+              you&apos;re between sizes on a vintage shirt, size up.
             </p>
           </div>
         </div>

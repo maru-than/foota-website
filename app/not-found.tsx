@@ -6,9 +6,11 @@ import { Container } from "@/components/ui/container";
 export default function NotFound() {
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-5 py-24 text-center">
-      <span className="eyebrow text-grass">404</span>
-      <h1 className="text-4xl sm:text-5xl">Off the pitch.</h1>
-      <p className="max-w-md text-pretty text-muted">
+      <span className="eyebrow text-accent">404</span>
+      <h1 className="text-4xl font-bold tracking-[-0.03em] sm:text-5xl">
+        Off the pitch.
+      </h1>
+      <p className="max-w-md text-pretty text-fg-3">
         We couldn&apos;t find that page. The jersey you&apos;re after might be
         elsewhere in the archive.
       </p>
@@ -16,7 +18,7 @@ export default function NotFound() {
         <Button asChild>
           <Link href="/">Back home</Link>
         </Button>
-        <Button asChild variant="outline">
+        <Button asChild variant="secondary">
           <Link href="/shop">Shop jerseys</Link>
         </Button>
       </div>

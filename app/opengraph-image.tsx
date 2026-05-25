@@ -14,9 +14,9 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#F5F2EA",
+          backgroundColor: "#111111",
           padding: "80px",
-          fontFamily: "Georgia, serif",
+          fontFamily: "Geist, sans-serif",
         }}
       >
         <div
@@ -25,44 +25,32 @@ export default function OpengraphImage() {
             fontSize: 22,
             letterSpacing: 8,
             textTransform: "uppercase",
-            color: "#4F6F52",
-            fontFamily: "sans-serif",
+            color: "#C1FF56",
           }}
         >
-          Authentic · Retro · Iconic
+          FIFA World Cup 2026
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 120, color: "#121212", lineHeight: 1 }}>
-            A home for jerseys.
-          </div>
           <div
             style={{
               display: "flex",
-              marginTop: 28,
-              fontSize: 30,
-              color: "#6b6a63",
-              fontFamily: "sans-serif",
+              fontSize: 92,
+              color: "#FFFFFF",
+              lineHeight: 1,
+              letterSpacing: -3,
             }}
           >
-            Authentic, retro and iconic football shirts.
+            A home for jerseys<span style={{ color: "#C1FF56" }}>.</span>
+          </div>
+          <div style={{ display: "flex", marginTop: 28, fontSize: 28, color: "rgba(255,255,255,0.72)" }}>
+            Official home jerseys · all 48 nations.
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-          }}
-        >
-          <div style={{ fontSize: 40, color: "#12372A" }}>Foota Jerseys</div>
-          <div
-            style={{
-              display: "flex",
-              height: 14,
-              width: 160,
-              backgroundColor: "#6B1E2B",
-            }}
-          />
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+          <div style={{ fontSize: 40, color: "#C1FF56", textTransform: "uppercase", letterSpacing: 2 }}>
+            Foota Jerseys
+          </div>
+          <div style={{ display: "flex", height: 14, width: 160, backgroundColor: "#C1FF56" }} />
         </div>
       </div>
     ),

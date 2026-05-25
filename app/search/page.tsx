@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "Search the Foota archive by club, nation, season or shirt name.",
 };
 
-const SUGGESTIONS = ["Milan", "Brazil", "Retro", "1998", "Arsenal"];
+const SUGGESTIONS = ["Brazil", "Argentina", "Morocco", "Japan", "USA"];
 
 export default async function SearchPage({
   searchParams,
@@ -42,7 +42,6 @@ export default async function SearchPage({
             defaultValue={q}
             placeholder="Search jerseys…"
             aria-label="Search jerseys"
-            className="bg-bone"
           />
           <Button type="submit" className="shrink-0">
             Search
@@ -53,12 +52,12 @@ export default async function SearchPage({
       <Container className="py-12 lg:py-16">
         {!q ? (
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="text-muted">Try:</span>
+            <span className="text-fg-3">Try:</span>
             {SUGGESTIONS.map((term) => (
               <Link
                 key={term}
                 href={`/search?q=${encodeURIComponent(term)}`}
-                className="border border-line bg-paper px-3 py-1.5 transition-colors hover:border-ink"
+                className="border border-line-accent bg-bg-2 px-3 py-1.5 transition-colors hover:border-accent hover:text-accent"
               >
                 {term}
               </Link>
@@ -68,11 +67,13 @@ export default async function SearchPage({
           <ProductGrid products={results} priorityCount={4} />
         ) : (
           <div className="flex flex-col items-center gap-4 py-16 text-center">
-            <p className="font-display text-2xl">No jerseys match “{q}”.</p>
-            <p className="max-w-md text-sm text-muted">
+            <p className="text-2xl font-bold tracking-[-0.03em]">
+              No jerseys match “{q}”.
+            </p>
+            <p className="max-w-md text-sm text-fg-3">
               Try a club, a nation or a season — or browse the full archive.
             </p>
-            <Button asChild variant="outline">
+            <Button asChild variant="secondary">
               <Link href="/shop">Browse all jerseys</Link>
             </Button>
           </div>

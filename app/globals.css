@@ -1,31 +1,90 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ================================================================== */
+/*  ACCENT — single source of truth. Re-skin the whole site here.      */
+/*  Set the base accent as space-separated RGB channels; every accent  */
+/*  token (shades + alpha tints + textures) derives from it.           */
+/*  Default: Voltron lime #c1ff56.                                     */
+/* ================================================================== */
+:root {
+  --accent-rgb: 193 255 86;
+}
+
 /* ------------------------------------------------------------------ */
-/*  Foota Jerseys — premium football-heritage design system           */
-/*  Tailwind v4: tokens live here (no tailwind.config file).          */
+/*  FOOTA DESIGN SYSTEM                                                 */
+/*  Sport · energetic · modern · linear. Dark base, Voltron lime,      */
+/*  sharp corners (0px), 1px hairlines, no card shadows.               */
+/*  Tokens lifted from footer-design-system/colors_and_type.css.       */
 /* ------------------------------------------------------------------ */
 
 @theme {
-  /* Brand palette */
-  --color-bone: #f5f2ea; /* warm off-white background */
-  --color-paper: #fbf9f3; /* slightly lighter surface for cards */
-  --color-ink: #121212; /* primary near-black text */
-  --color-pine: #12372a; /* deep green accent */
-  --color-grass: #4f6f52; /* muted grass green */
-  --color-burgundy: #6b1e2b; /* burgundy accent */
-  --color-line: #ded8cb; /* soft border */
-  --color-muted: #6b6a63; /* muted text on bone */
+  /* Base surfaces — Tailwind neutral scale */
+  --color-bg-0: var(--color-neutral-950); /* pitch */
+  --color-bg-1: var(--color-neutral-900); /* primary surface / page */
+  --color-bg-2: var(--color-neutral-800); /* card */
+  --color-bg-3: var(--color-neutral-700); /* elevated card / chip */
+  --color-bg-4: var(--color-neutral-600); /* hover surface */
 
-  /* Typography */
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  /* Foreground — Tailwind neutral scale */
+  --color-fg-1: var(--color-white);
+  --color-fg-2: var(--color-neutral-300);
+  --color-fg-3: var(--color-neutral-500);
+  --color-fg-4: var(--color-neutral-600);
 
-  /* Accordion animation (Radix) */
-  --animate-accordion-down: accordion-down 0.25s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
+  /* Accent — all derived from --accent-rgb (see top of file) */
+  --color-accent: rgb(var(--accent-rgb));
+  --color-accent-hi: color-mix(in oklab, var(--color-accent), white 26%);
+  --color-accent-lo: color-mix(in oklab, var(--color-accent), black 16%);
+  --color-accent-12: rgb(var(--accent-rgb) / 0.12);
+  --color-accent-20: rgb(var(--accent-rgb) / 0.2);
+  --color-accent-40: rgb(var(--accent-rgb) / 0.4);
+
+  /* Alternate "Champion" gold/beige — documented, inactive */
+  --color-gold: #d4b26a;
+  --color-gold-hi: #e8c994;
+  --color-gold-lo: #b8924c;
+  --color-beige: #e8dcc4;
+
+  /* Lines — Tailwind neutral scale */
+  --color-line-1: var(--color-neutral-800);
+  --color-line-2: var(--color-neutral-700);
+  --color-line-3: var(--color-neutral-600);
+  --color-line-accent: rgb(var(--accent-rgb) / 0.2);
+
+  /* Semantic */
+  --color-success: #6fe38a;
+  --color-warn: #ffc555;
+  --color-danger: #ff5c5c;
+  --color-info: #6ec6ff;
+
+  /* Type families */
+  --font-display: var(--font-gambarino), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+
+  /* Motion */
+  --ease-foota: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Animations */
+  --animate-ticker: ticker 40s linear infinite;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-accordion-down: accordion-down 0.25s var(--ease-foota);
+  --animate-accordion-up: accordion-up 0.2s var(--ease-foota);
 }
 
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes pulse-dot {
+  50% {
+    opacity: 0.4;
+  }
+}
 @keyframes accordion-down {
   from {
     height: 0;
@@ -36,7 +95,6 @@
     opacity: 1;
   }
 }
-
 @keyframes accordion-up {
   from {
     height: var(--radix-accordion-content-height);
@@ -50,63 +108,105 @@
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
   }
 
   * {
-    border-color: var(--color-line);
+    border-color: var(--color-line-1);
   }
 
   body {
-    background-color: var(--color-bone);
-    color: var(--color-ink);
+    background-color: var(--color-bg-1);
+    color: var(--color-fg-1);
     font-family: var(--font-sans);
+    letter-spacing: -0.03em;
+    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
+  /* Headings use Geist (UI font) bold — Gambarino is reserved for logo/hero. */
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
   }
 
   ::selection {
-    background-color: var(--color-pine);
-    color: var(--color-bone);
+    background-color: var(--color-accent);
+    color: #111111;
+  }
+
+  ::placeholder {
+    color: var(--color-fg-4);
   }
 }
 
 @layer utilities {
-  /* Scroll-reveal: gated on data-revealed, toggled by <Reveal>. Scoped to
-     `.js` so content is fully visible if JavaScript never runs. */
-  .js .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition:
-      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
+  /* Uppercase micro label — the Foota "fk-label". */
+  .eyebrow {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.6875rem; /* 11px */
+    font-weight: 600;
+    line-height: 1;
   }
 
+  /* Gambarino display lockup — natural case, regular weight only (no other
+     weight exists, so pin 400 and disable faux-bold), 0 letter-spacing. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-synthesis: none;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  /* Scroll-reveal — gated on `.js` so content is visible without JS. */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s var(--ease-foota),
+      transform 0.6s var(--ease-foota);
+    will-change: opacity, transform;
+  }
   .js .reveal[data-revealed="true"] {
     opacity: 1;
     transform: none;
   }
 
-  /* Editorial small-caps label used across sections. */
-  .eyebrow {
-    font-family: var(--font-sans);
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-    font-size: 0.6875rem;
-    font-weight: 500;
+  /* Dark jersey image backplate + lime hairline textures. */
+  .jersey-frame {
+    background: radial-gradient(120% 80% at 50% 35%, #2c2c2c 0%, #161616 75%);
+  }
+  .grid-texture::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0 28px,
+      rgb(var(--accent-rgb) / 0.03) 28px 30px
+    );
+    pointer-events: none;
+  }
+  .hero-grid-texture::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0 calc(100% / 12 - 1px),
+      rgb(var(--accent-rgb) / 0.04) calc(100% / 12 - 1px) calc(100% / 12)
+    );
+    pointer-events: none;
   }
 
-  /* Hide scrollbars on horizontal carousels while keeping scroll. */
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -125,6 +225,7 @@
     *::before,
     *::after {
       animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
     }
   }

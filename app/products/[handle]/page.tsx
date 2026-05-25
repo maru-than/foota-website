@@ -8,7 +8,7 @@ import { ProductGallery } from "@/components/product/product-gallery";
 import { RelatedProducts } from "@/components/product/related-products";
 import { Badge, jerseyBadgeVariant } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
-import { Price } from "@/components/ui/price";
+import { formatPrice } from "@/lib/utils";
 import {
   getProduct,
   getProductRecommendations,
@@ -53,6 +53,9 @@ export default async function ProductPage({
 
   const related = await getProductRecommendations(product.id, 4);
   const price = product.priceRange.minVariantPrice;
+  const label = [product.meta.confederation, product.meta.season]
+    .filter(Boolean)
+    .join(" · ");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -80,17 +83,17 @@ export default async function ProductPage({
       <Container className="py-8 pb-28 lg:py-12 lg:pb-12">
         <nav
           aria-label="Breadcrumb"
-          className="mb-6 flex items-center gap-1.5 text-xs text-muted"
+          className="mb-6 flex items-center gap-1.5 text-xs text-fg-3"
         >
-          <Link href="/" className="transition-colors hover:text-ink">
+          <Link href="/" className="transition-colors hover:text-fg-1">
             Home
           </Link>
           <span aria-hidden>/</span>
-          <Link href="/shop" className="transition-colors hover:text-ink">
+          <Link href="/shop" className="transition-colors hover:text-fg-1">
             Shop
           </Link>
           <span aria-hidden>/</span>
-          <span className="text-ink">{product.title}</span>
+          <span className="text-fg-1">{product.title}</span>
         </nav>
 
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
@@ -101,10 +104,8 @@ export default async function ProductPage({
           />
 
           <div className="lg:py-2">
-            <div className="flex flex-wrap items-center gap-2">
-              {product.meta.teamName ? (
-                <span className="eyebrow text-grass">{product.meta.teamName}</span>
-              ) : null}
+            <div className="flex flex-wrap items-center gap-3">
+              {label ? <span className="eyebrow text-fg-3">{label}</span> : null}
               {product.meta.badge ? (
                 <Badge variant={jerseyBadgeVariant(product.meta.badge)}>
                   {product.meta.badge}
@@ -112,22 +113,15 @@ export default async function ProductPage({
               ) : null}
             </div>
 
-            <h1 className="mt-3 text-3xl leading-tight sm:text-4xl">
-              {product.title}
+            <h1 className="mt-3 text-3xl font-bold leading-none tracking-[-0.03em] text-accent sm:text-4xl">
+              {product.meta.teamName ?? product.title}
             </h1>
-
-            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
-              {product.meta.season ? <span>Season {product.meta.season}</span> : null}
-              {product.meta.type ? <span>· {product.meta.type}</span> : null}
-              {product.meta.era ? <span>· {product.meta.era}</span> : null}
-            </div>
+            <p className="mt-2 text-sm text-fg-3">{product.title}</p>
 
             <div className="mt-5">
-              <Price
-                amount={price.amount}
-                currencyCode={price.currencyCode}
-                className="font-display text-2xl"
-              />
+              <span className="text-2xl font-bold tabular-nums text-fg-1">
+                {formatPrice(price.amount, price.currencyCode)}
+              </span>
             </div>
 
             <div className="mt-8">
