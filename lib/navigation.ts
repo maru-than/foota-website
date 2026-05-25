@@ -5,9 +5,9 @@ export interface NavLink {
 
 export const MAIN_NAV: NavLink[] = [
   { label: "Shop", href: "/shop" },
-  { label: "Clubs", href: "/collections/club-jerseys" },
-  { label: "Nations", href: "/collections/national-teams" },
-  { label: "Retro", href: "/collections/retro-classics" },
+  { label: "Hosts", href: "/collections/hosts" },
+  { label: "Europe", href: "/collections/uefa" },
+  { label: "South America", href: "/collections/conmebol" },
   { label: "New Arrivals", href: "/collections/new-arrivals" },
 ];
 
@@ -15,27 +15,34 @@ export const FOOTER_NAV: { title: string; links: NavLink[] }[] = [
   {
     title: "Shop",
     links: [
-      { label: "All Jerseys", href: "/shop" },
-      { label: "Club Jerseys", href: "/collections/club-jerseys" },
-      { label: "National Teams", href: "/collections/national-teams" },
-      { label: "Retro Classics", href: "/collections/retro-classics" },
+      { label: "All Nations", href: "/shop" },
+      { label: "Hosts", href: "/collections/hosts" },
       { label: "New Arrivals", href: "/collections/new-arrivals" },
+      { label: "Search", href: "/search" },
     ],
   },
   {
-    title: "Support",
+    title: "Confederations",
     links: [
+      { label: "Europe", href: "/collections/uefa" },
+      { label: "South America", href: "/collections/conmebol" },
+      { label: "N. & C. America", href: "/collections/concacaf" },
+      { label: "Africa", href: "/collections/caf" },
+      { label: "Asia", href: "/collections/afc" },
+      { label: "Oceania", href: "/collections/ofc" },
+    ],
+  },
+  {
+    title: "Help",
+    links: [
+      { label: "Size Guide", href: "/size-guide" },
       { label: "Shipping & Returns", href: "/shipping-returns" },
       { label: "Authenticity", href: "/authenticity" },
-      { label: "Size Guide", href: "/size-guide" },
       { label: "Contact", href: "/contact" },
     ],
   },
   {
     title: "Foota",
-    links: [
-      { label: "About", href: "/about" },
-      { label: "Search", href: "/search" },
-    ],
+    links: [{ label: "About", href: "/about" }],
   },
 ];
