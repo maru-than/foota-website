@@ -1,6 +1,6 @@
 # Foota Jerseys
 
-A premium headless Shopify storefront for authentic, retro and iconic football jerseys — _"A home for jerseys."_
+A premium headless Shopify storefront for **2026 FIFA World Cup** home jerseys — every nation. _"A home for jerseys."_
 
 Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Tailwind CSS v4** and **shadcn/ui** style primitives. Shopify is the commerce backend (products, variants, inventory, collections, discounts, **checkout, payments and orders**); this app owns the entire storefront experience.
 
@@ -8,8 +8,8 @@ Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Tailwind
 
 ## Features
 
-- Editorial homepage (hero, featured collections, new arrivals, editorial banner, shop-by-club, newsletter)
-- Shop with sidebar/drawer filters (club, nation, season, size, type, era, price) and sorting
+- Homepage (hero, featured collections, new arrivals, editorial banner, shop-by-confederation, newsletter)
+- Shop with sidebar/drawer filters (confederation, nation, size, price) and sorting
 - Collection pages (`/collections/[handle]`) and product pages (`/products/[handle]`) with gallery, variant selector, details accordion, related products and a sticky mobile add-to-cart
 - Persistent cart (cookie-backed, survives reloads) with an optimistic slide-out drawer and a full cart page
 - Header search overlay + dedicated `/search` page
@@ -44,18 +44,20 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Jersey metadata (product tags)
 
-Club / nation / season / type / era / badge are derived from **product tags** so no metafield setup is required to start. Tag products like:
+Nation / confederation / season / type / era / badge are derived from **product tags** so no metafield setup is required to start. Tag products like:
 
 ```
-club:AC Milan        nation:Brazil        season:2006/07
-type:Home            era:Retro            badge:Rare Find
+nation:Brazil        confederation:CONMEBOL        season:2026
+type:Home            era:Current                   badge:New
 ```
 
+- `confederation`: `UEFA` · `CONMEBOL` · `CONCACAF` · `CAF` · `AFC` · `OFC`
 - `type`: `Home` · `Away` · `Third` · `Goalkeeper`
-- `era`: `Current` · `Retro`
-- `badge`: `New` · `Retro` · `Rare Find`
+- `badge`: `New` · `Host` (host nations) · `Retro` · `Rare Find`
 
-Collections used by the nav: `club-jerseys`, `national-teams`, `retro-classics`, `new-arrivals`.
+Collections used by the nav/footer: `hosts`, `uefa`, `conmebol`, `concacaf`, `caf`, `afc`, `ofc`, `new-arrivals`. `hosts` is driven by `badge:Host`; confederation collections by the `confederation:` tag.
+
+Product images live in `public/jerseys/<slug>.jpg` for mock mode; with Shopify connected, images come from the Storefront API.
 
 ### Cache revalidation (optional)
 
