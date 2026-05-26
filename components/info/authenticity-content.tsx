@@ -49,6 +49,26 @@ export function AuthenticityContent() {
         </p>
       </section>
 
+      <section className="space-y-3">
+        <h3 className="text-lg font-bold tracking-[-0.02em]">Customisation</h3>
+        <p>
+          Custom names and numbers are heat-pressed in-house with the same
+          equipment used on stadium kits. Letter sets match the official font
+          used by each confederation — UEFA, CONMEBOL, CONCACAF, CAF, AFC and
+          OFC each ship their own typeface.
+        </p>
+        <p>
+          Every custom is held for a final QC pass: alignment to the back
+          centre, print adhesion under a heat test, and a spell-check against
+          the order. Customs ship in 5–7 days and are non-returnable — read
+          more on{" "}
+          <a href="/shipping-returns" className="text-accent underline">
+            shipping &amp; returns
+          </a>
+          .
+        </p>
+      </section>
+
       {testimonials.length > 0 ? (
         <section className="space-y-4">
           <div>

@@ -24,6 +24,21 @@ export function ShippingReturnsContent() {
         </p>
       </section>
       <section className="space-y-3">
+        <h3 className="text-lg font-bold tracking-[-0.02em]">Customised items</h3>
+        <p>
+          Shirts with a custom name or number on the back are heat-pressed to
+          order and dispatched in 5–7 days. Because every custom is unique to
+          the buyer, customs are{" "}
+          <b className="text-fg-1">non-returnable and non-exchangeable</b>{" "}
+          — please double-check spelling and number before adding to the bag.
+        </p>
+        <p>
+          If a custom shirt arrives damaged or with a print error on our side,
+          we&apos;ll replace it. Contact us within 7 days of delivery with a
+          photo and the order number.
+        </p>
+      </section>
+      <section className="space-y-3">
         <h3 className="text-lg font-bold tracking-[-0.02em]">Order tracking</h3>
         <p>
           Once your order ships, you&apos;ll get a confirmation email with
