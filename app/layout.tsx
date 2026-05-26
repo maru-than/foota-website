@@ -7,6 +7,7 @@ import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { SiteAnalytics } from "@/components/layout/site-analytics";
 import { CartProvider } from "@/components/cart/cart-provider";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { getCart } from "@/lib/shopify/cart";
@@ -111,6 +112,7 @@ export default async function RootLayout({
           <Footer />
           <CartDrawer recommendations={bestSellers} />
           <CookieBanner />
+          <SiteAnalytics />
         </CartProvider>
       </body>
     </html>

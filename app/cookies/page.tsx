@@ -25,7 +25,7 @@ const CATEGORIES = [
     name: "Analytics",
     optional: true,
     purpose:
-      "Aggregated, anonymised stats about which pages are visited and how the site performs. Helps us improve the store.",
+      "Aggregated, anonymised stats about which pages are visited and how the site performs. We use Vercel Web Analytics and Speed Insights — both cookieless and PII-free — and only load them once you accept.",
   },
   {
     name: "Marketing",
