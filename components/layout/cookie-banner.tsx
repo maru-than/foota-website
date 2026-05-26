@@ -1,0 +1,66 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import {
+  onConsentChange,
+  readConsent,
+  writeConsent,
+} from "@/lib/cookie-consent";
+
+export function CookieBanner() {
+  // Start hidden — only flip after we read localStorage on the client.
+  // Prevents a hydration mismatch and the "banner-then-flash" on return
+  // visits where consent is already stored.
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (readConsent() === null) setVisible(true);
+    return onConsentChange((value) => setVisible(value === null));
+  }, []);
+
+  if (!visible) return null;
+
+  const decide = (value: "accepted" | "rejected") => {
+    writeConsent(value);
+    setVisible(false);
+  };
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="false"
+      aria-label="Cookie consent"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-line-accent bg-bg-1/95 backdrop-blur"
+    >
+      <Container className="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:gap-6 lg:py-5">
+        <div className="flex-1 text-sm leading-relaxed text-fg-2">
+          <p>
+            We use strictly necessary cookies to run the store, and — with
+            your permission — analytics cookies to understand how the site is
+            used. Read our{" "}
+            <Link href="/cookies" className="underline hover:text-accent">
+              Cookie Policy
+            </Link>
+            .
+          </p>
+        </div>
+        <div className="flex shrink-0 items-center gap-2">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => decide("rejected")}
+          >
+            Reject optional
+          </Button>
+          <Button size="sm" onClick={() => decide("accepted")}>
+            Accept all
+          </Button>
+        </div>
+      </Container>
+    </div>
+  );
+}

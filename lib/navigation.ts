@@ -44,7 +44,15 @@ export const FOOTER_NAV: { title: string; links: NavLink[] }[] = [
     ],
   },
   {
-    title: "Foota",
+    title: "Worldkit",
     links: [{ label: "About", href: "/about" }],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+      { label: "Cookie Policy", href: "/cookies" },
+    ],
   },
 ];

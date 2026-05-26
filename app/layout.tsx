@@ -4,11 +4,13 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
+import { CookieBanner } from "@/components/layout/cookie-banner";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { CartProvider } from "@/components/cart/cart-provider";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { getCart } from "@/lib/shopify/cart";
+import { getCollectionProducts } from "@/lib/shopify/collections";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +18,7 @@ const geist = Geist({
   display: "swap",
 });
 
-// Gambarino — Foota display face, used for the logo and hero lockups only.
+// Gambarino — Worldkit display face, used for hero lockups only.
 const gambarino = localFont({
   src: "./fonts/Gambarino-Regular.woff2",
   variable: "--font-gambarino",
@@ -30,12 +32,12 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Foota Jerseys | A home for jerseys",
-    template: "%s | Foota Jerseys",
+    default: "Worldkit Soccer | A home for jerseys",
+    template: "%s | Worldkit Soccer",
   },
   description:
     "Shop 2026 international home jerseys for every nation in the 48-team field — dispatched worldwide.",
-  applicationName: "Foota Jerseys",
+  applicationName: "Worldkit Soccer",
   keywords: [
     "2026 international football jerseys",
     "national team jerseys",
@@ -43,25 +45,22 @@ export const metadata: Metadata = {
     "football shirts",
     "USA Canada Mexico 2026",
   ],
-  authors: [{ name: "Foota Jerseys" }],
+  authors: [{ name: "Worldkit Soccer" }],
   openGraph: {
     type: "website",
-    siteName: "Foota Jerseys",
-    title: "Foota Jerseys | A home for jerseys",
+    siteName: "Worldkit Soccer",
+    title: "Worldkit Soccer | A home for jerseys",
     description:
       "2026 international home jerseys from all 48 nations. A home for jerseys.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Foota Jerseys | A home for jerseys",
+    title: "Worldkit Soccer | A home for jerseys",
     description:
       "2026 international home jerseys from all 48 nations. A home for jerseys.",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -69,14 +68,20 @@ export const viewport: Viewport = {
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
+  // Required for env(safe-area-inset-*) to resolve to non-zero values on iOS;
+  // unlocks the sticky-bar / sheet / announcement-bar insets below.
+  viewportFit: "cover",
 };
 
 export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const cart = await getCart();
+}: Readonly<{ children: React.ReactNode }>) {
+  const [cart, bestSellers] = await Promise.all([
+    getCart(),
+    // Loaded once at layout — drawer uses them as the empty-state discovery
+    // surface so an empty bag is a top-of-funnel, not a dead end.
+    getCollectionProducts("best-sellers").then((p) => p.slice(0, 4)),
+  ]);
 
   return (
     <html
@@ -104,7 +109,8 @@ export default async function RootLayout({
             {children}
           </main>
           <Footer />
-          <CartDrawer />
+          <CartDrawer recommendations={bestSellers} />
+          <CookieBanner />
         </CartProvider>
       </body>
     </html>
