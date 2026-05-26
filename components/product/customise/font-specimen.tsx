@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Alphabet + digits display of the confederation's print font — read-only showcase.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { fontFor } from "@/lib/customisation";
 
 const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

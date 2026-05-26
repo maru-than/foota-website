@@ -1,3 +1,11 @@
+/**
+ * @file Shop-route skeleton — mirrors filter sidebar + grid layout to smooth navigation in from elsewhere.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { PageHeader } from "@/components/layout/page-header";
 import { ProductGridSkeleton } from "@/components/product/product-grid-skeleton";
 import { Container } from "@/components/ui/container";

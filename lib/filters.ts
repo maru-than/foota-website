@@ -1,3 +1,11 @@
+/**
+ * @file Parse URL search params into typed filters + sort — confederation, nation, type, era, size, price.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { ProductFilters, SortKey } from "./shopify/types";
 
 export type SearchParamsRecord = Record<string, string | string[] | undefined>;

@@ -1,3 +1,11 @@
+/**
+ * @file Customisation constants — name & number printing on the back.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 /* ------------------------------------------------------------------ */
 /*  Customisation constants — name & number printing on the back.      */
 /*                                                                      */

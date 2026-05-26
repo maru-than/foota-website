@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Modal wrapper around the size-guide body — era / manufacturer variations and how-to-measure guidance.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import {
   InfoModal,
   InfoModalBody,

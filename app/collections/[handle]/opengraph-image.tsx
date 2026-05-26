@@ -1,3 +1,11 @@
+/**
+ * @file Dynamic OG image for /collections/[handle] — renders the collection name and lead image with the logo.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import path from "node:path";
 
 import { ImageResponse } from "next/og";

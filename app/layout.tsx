@@ -1,3 +1,11 @@
+/**
+ * @file Root layout — Geist + Gambarino fonts, header, footer, cart provider, cookie banner, analytics, viewport.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import localFont from "next/font/local";

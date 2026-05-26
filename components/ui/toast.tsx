@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Bottom toast on mobile / top-right on desktop — auto-dismiss, optional action, spring slide-in.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { useEffect } from "react";
 import { Check } from "lucide-react";
 

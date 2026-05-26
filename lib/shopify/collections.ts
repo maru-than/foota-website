@@ -1,3 +1,11 @@
+/**
+ * @file Fetch Shopify collections + their filtered products — getCollections, getCollection, getCollectionProducts.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import {
   MOCK_COLLECTIONS,
   getMockCollection,

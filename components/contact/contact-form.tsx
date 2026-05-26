@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Contact form — name / email / subject / message inputs with a client-side success state.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { useState } from "react";
 import { Check } from "lucide-react";
 

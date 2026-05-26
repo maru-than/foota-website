@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Sticky top nav — logo, desktop menu with active state, mobile-menu trigger, search / cart icons.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -37,15 +45,15 @@ export function Header() {
         <Link
           href="/"
           aria-label="Worldkit Soccer — home"
-          className="flex items-center"
+          className="relative z-10 flex items-center"
         >
           <Image
             src="/logo.png"
             alt="Worldkit Soccer"
-            width={160}
-            height={160}
+            width={224}
+            height={224}
             priority
-            className="h-10 w-auto lg:h-12"
+            className="h-10 w-auto transition-transform duration-200 ease-worldkit lg:h-28 lg:translate-y-5 lg:drop-shadow-[0_18px_22px_rgba(0,0,0,0.22)] lg:hover:-translate-y-[calc(1.25rem-2px)] lg:hover:drop-shadow-[0_22px_28px_rgba(0,0,0,0.28)]"
           />
         </Link>
 

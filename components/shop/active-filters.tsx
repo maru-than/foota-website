@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Pill-chip display of applied filters — remove individually or clear all; hides when empty.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { X } from "lucide-react";
 

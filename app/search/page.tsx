@@ -1,3 +1,11 @@
+/**
+ * @file Search results page — server-side Shopify product search with suggestion fallbacks.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { Metadata } from "next";
 import Link from "next/link";
 

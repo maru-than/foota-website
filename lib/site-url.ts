@@ -1,3 +1,11 @@
+/**
+ * @file Resolve the site base URL for SEO metadata, robots and the sitemap.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 /* ------------------------------------------------------------------ */
 /*  Resolve the site base URL for SEO metadata, robots and the sitemap. */
 /*                                                                      */

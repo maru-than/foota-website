@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Full-page search modal — real-time input, debounced server action, product cards, keyboard-aware.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";

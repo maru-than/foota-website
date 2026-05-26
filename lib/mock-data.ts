@@ -1,3 +1,11 @@
+/**
+ * @file Mock product catalogue for 48 World Cup 2026 national teams — home & away jerseys, variants, recommendations.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type {
   Collection,
   JerseyBadge,

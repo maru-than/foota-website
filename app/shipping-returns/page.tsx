@@ -1,3 +1,11 @@
+/**
+ * @file Shipping & returns policy — 48h dispatch, worldwide tracking, 30-day returns on unworn jerseys.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { Metadata } from "next";
 
 import { ShippingReturnsContent } from "@/components/info/shipping-returns-content";

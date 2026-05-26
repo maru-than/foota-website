@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Touch-snap gallery on mobile, thumbnails on desktop — optional back-preview slide injected last.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import Image from "next/image";

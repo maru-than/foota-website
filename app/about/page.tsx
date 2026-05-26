@@ -1,3 +1,11 @@
+/**
+ * @file About page — brand story, Worldkit's 2026 World Cup focus, product range and operational promise.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { Metadata } from "next";
 
 import { PageHeader } from "@/components/layout/page-header";

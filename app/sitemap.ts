@@ -1,3 +1,11 @@
+/**
+ * @file Sitemap generator — static pages plus dynamic product / collection routes with last-modified dates.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { MetadataRoute } from "next";
 
 import { getCollections } from "@/lib/shopify/collections";

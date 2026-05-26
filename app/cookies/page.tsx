@@ -1,3 +1,11 @@
+/**
+ * @file Cookie policy page — strictly-necessary / analytics / marketing categories plus a settings button.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import type { Metadata } from "next";
 
 import { CookieSettingsButton } from "@/components/layout/cookie-settings-button";

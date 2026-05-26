@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file PDP accordion — description, customise info, size guide, shipping and authenticity modals.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import * as React from "react";
 
 import { AuthenticityModal } from "@/components/info/authenticity-modal";

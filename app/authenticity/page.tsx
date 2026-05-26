@@ -1,3 +1,11 @@
+/**
+ * @file Authenticity page — pre-ship QC narrative (stitching, crest, font verification) plus social proof.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { Metadata } from "next";
 
 import { AuthenticityContent } from "@/components/info/authenticity-content";

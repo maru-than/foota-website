@@ -1,3 +1,11 @@
+/**
+ * @file All-jerseys browse page — fetches products, applies URL filters/sort, renders with facets sidebar.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { Metadata } from "next";
 
 import { PageHeader } from "@/components/layout/page-header";

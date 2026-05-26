@@ -1,3 +1,11 @@
+/**
+ * @file Terms of service — order agreement, pricing, payment processing, shipping policy, dispute terms.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import type { Metadata } from "next";
 import Link from "next/link";
 

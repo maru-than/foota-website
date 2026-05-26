@@ -1,3 +1,11 @@
+/**
+ * @file Worldkit Soccer bag icon — vector lifted from Figma (node 2001:264).
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 /* Worldkit Soccer bag icon — vector lifted from Figma (node 2001:264).
    Uses currentColor so it inherits the surrounding text color. */
 

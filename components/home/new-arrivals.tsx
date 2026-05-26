@@ -1,3 +1,11 @@
+/**
+ * @file New-arrivals section — heading, product grid, view-all link.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { ProductGrid } from "@/components/product/product-grid";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";

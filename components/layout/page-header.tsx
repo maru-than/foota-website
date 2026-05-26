@@ -1,3 +1,11 @@
+/**
+ * @file Full-width hero section — optional bg photo, gradient legibility scrim, eyebrow / title / description.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Image from "next/image";
 
 import { Container } from "@/components/ui/container";

@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file shadcn sheet (drawer) — Radix Dialog with top / bottom / left / right sides and slide-in animations.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";

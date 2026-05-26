@@ -1,3 +1,11 @@
+/**
+ * @file Two-colour SVG jersey silhouette — deterministic colours + number seeded from team name.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
@@ -23,16 +31,90 @@ const PALETTE: [string, string][] = [
 
 const NUMBERS = ["7", "9", "10", "11", "14", "23"];
 
+/**
+ * Home-kit colours for the 48 World Cup 2026 nations, keyed by lowercased
+ * nation name. `[shirt, print]` — `shirt` is the dominant body colour,
+ * `print` is what we use for the back name/number so it stays legible.
+ */
+const HOME_COLORS: Record<string, [string, string]> = {
+  // UEFA
+  england: ["#FFFFFF", "#0A1A4A"],
+  france: ["#1A2B6E", "#FFFFFF"],
+  spain: ["#C8102E", "#FFD100"],
+  portugal: ["#7A0019", "#0F8A5F"],
+  germany: ["#FFFFFF", "#101010"],
+  netherlands: ["#FF6600", "#101010"],
+  belgium: ["#B71C1C", "#FFD100"],
+  croatia: ["#C8102E", "#FFFFFF"],
+  switzerland: ["#D52B1E", "#FFFFFF"],
+  austria: ["#FFFFFF", "#C8102E"],
+  scotland: ["#0A2A66", "#FFFFFF"],
+  norway: ["#C8102E", "#FFFFFF"],
+  // CONMEBOL
+  argentina: ["#6CACE4", "#FFFFFF"],
+  brazil: ["#FEDF00", "#009C3B"],
+  uruguay: ["#5BA9E0", "#FFFFFF"],
+  colombia: ["#FCD116", "#003893"],
+  ecuador: ["#FFD100", "#0A2A66"],
+  paraguay: ["#C8102E", "#FFFFFF"],
+  venezuela: ["#7A1F1F", "#FFFFFF"],
+  bolivia: ["#0F8A5F", "#FFFFFF"],
+  // CONCACAF
+  usa: ["#FFFFFF", "#0A1A4A"],
+  mexico: ["#0F6E3D", "#FFFFFF"],
+  canada: ["#D52B1E", "#FFFFFF"],
+  "costa rica": ["#C8102E", "#FFFFFF"],
+  jamaica: ["#FCD116", "#0F6E3D"],
+  panama: ["#C8102E", "#FFFFFF"],
+  honduras: ["#FFFFFF", "#0073CF"],
+  haiti: ["#0A2A66", "#C8102E"],
+  "curaçao": ["#0A2A66", "#FFFFFF"],
+  curacao: ["#0A2A66", "#FFFFFF"],
+  "el salvador": ["#0073CF", "#FFFFFF"],
+  // CAF
+  morocco: ["#C8102E", "#0F8A5F"],
+  senegal: ["#FFFFFF", "#0F8A5F"],
+  "ivory coast": ["#FF6F1F", "#FFFFFF"],
+  egypt: ["#C8102E", "#FFFFFF"],
+  algeria: ["#FFFFFF", "#0F6E3D"],
+  ghana: ["#FFFFFF", "#101010"],
+  "cape verde": ["#0A47A9", "#FFFFFF"],
+  "south africa": ["#FCD116", "#0F6E3D"],
+  // AFC
+  japan: ["#0A1A4A", "#FFFFFF"],
+  "south korea": ["#C8102E", "#FFFFFF"],
+  australia: ["#FFD100", "#0F6E3D"],
+  "saudi arabia": ["#FFFFFF", "#0F6E3D"],
+  iran: ["#FFFFFF", "#C8102E"],
+  qatar: ["#7A0028", "#FFFFFF"],
+  iraq: ["#0F8A5F", "#FFFFFF"],
+  jordan: ["#C8102E", "#FFFFFF"],
+  "united arab emirates": ["#FFFFFF", "#C8102E"],
+  // OFC
+  "new zealand": ["#FFFFFF", "#101010"],
+};
+
 function hash(input: string): number {
   let h = 0;
   for (let i = 0; i < input.length; i++) h = (h * 31 + input.charCodeAt(i)) >>> 0;
   return h;
 }
 
-/** Deterministic kit colors + shirt number derived from a seed (team name). */
-export function teamColors(seed?: string | null) {
+/**
+ * Deterministic kit colors + shirt number derived from a seed (team name).
+ * For Home kits (or unspecified type) we look up the nation's real colours;
+ * away/third/goalkeeper fall back to the hashed palette since we don't track
+ * those per-nation.
+ */
+export function teamColors(
+  seed?: string | null,
+  type?: "Home" | "Away" | "Third" | "Goalkeeper" | null,
+) {
+  const key = seed ? seed.trim().toLowerCase() : "";
+  const mapped = (!type || type === "Home") ? HOME_COLORS[key] : undefined;
   const h = seed ? hash(seed) : 0;
-  const [color1, color2] = PALETTE[h % PALETTE.length];
+  const [paletteC1, paletteC2] = PALETTE[h % PALETTE.length];
+  const [color1, color2] = mapped ?? [paletteC1, paletteC2];
   return { color1, color2, number: NUMBERS[h % NUMBERS.length] };
 }
 

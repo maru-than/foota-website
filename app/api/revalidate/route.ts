@@ -1,3 +1,11 @@
+/**
+ * @file Shopify revalidation webhook — refreshes cached products/collections on demand, secret-gated.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 

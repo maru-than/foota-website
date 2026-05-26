@@ -1,3 +1,11 @@
+/**
+ * @file Top-level navigation + footer link definitions — main nav, confederation routes, shop categories, help / legal.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 export interface NavLink {
   label: string;
   href: string;
@@ -7,7 +15,6 @@ export const MAIN_NAV: NavLink[] = [
   { label: "Shop", href: "/shop" },
   { label: "Best Sellers", href: "/collections/best-sellers" },
   { label: "Hosts", href: "/collections/hosts" },
-  { label: "Customise", href: "/customise" },
   { label: "Europe", href: "/collections/uefa" },
   { label: "South America", href: "/collections/conmebol" },
   { label: "New Arrivals", href: "/collections/new-arrivals" },

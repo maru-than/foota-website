@@ -1,3 +1,11 @@
+/**
+ * @file Server component — reads geo cookie, shows country-specific shipping ETA and free-over threshold.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { cookies } from "next/headers";
 import { Truck } from "lucide-react";
 

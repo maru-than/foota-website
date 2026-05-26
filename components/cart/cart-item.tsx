@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Cart line entry — product image, size, customisation label, quantity controls, remove button.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { Minus, Plus, X } from "lucide-react";

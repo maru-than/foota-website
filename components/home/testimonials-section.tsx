@@ -1,3 +1,11 @@
+/**
+ * @file Verified-reviews homepage section — fetches six testimonials and renders as a 3-column grid.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";

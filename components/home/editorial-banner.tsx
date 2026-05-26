@@ -1,3 +1,11 @@
+/**
+ * @file Editorial hero strip — brand narrative about jerseys as cultural artifacts with a customise CTA.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 

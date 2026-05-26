@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Scroll-reveal wrapper — CSS animation on viewport entry, with a fallback for older browsers.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";

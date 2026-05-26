@@ -1,3 +1,11 @@
+/**
+ * @file Default OG image — "A home for jerseys" lockup with the logo.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { ImageResponse } from "next/og";
 
 import {

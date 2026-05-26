@@ -1,3 +1,11 @@
+/**
+ * @file Skeleton matching ProductCard layout — configurable count, aria-hidden.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 

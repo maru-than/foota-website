@@ -1,3 +1,11 @@
+/**
+ * @file Mock customer testimonials — social proof for homepage, PDPs and
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 /* ------------------------------------------------------------------ */
 /*  Mock customer testimonials — social proof for homepage, PDPs and   */
 /*  the authenticity page. Single pool, tagged by confederation /      */

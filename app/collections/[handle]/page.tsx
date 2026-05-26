@@ -1,3 +1,11 @@
+/**
+ * @file Collection PDL — filtered/sorted products by handle (e.g. by confederation) with facets + static generation.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 

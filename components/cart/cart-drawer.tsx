@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Slide-out shopping bag — line-item management, empty-state recommendations, and the checkout flow.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

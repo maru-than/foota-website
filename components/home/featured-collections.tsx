@@ -1,3 +1,11 @@
+/**
+ * @file Four-tile collection grid (hosts, UEFA, CONMEBOL, customs) with an SVG fallback for missing photos.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";

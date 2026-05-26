@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Modal wrapper around the shipping & returns body — delivery windows, return eligibility, logistics.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import {
   InfoModal,
   InfoModalBody,

@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Checkout CTA — routes to Shopify checkout or shows a disabled state when the store isn't connected.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";

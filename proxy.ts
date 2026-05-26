@@ -1,3 +1,11 @@
+/**
+ * @file Middleware — reads the Vercel geo header and refreshes the country cookie on each navigation for shipping zones.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { NextResponse, type NextRequest } from "next/server";
 
 import { COOKIE } from "@/lib/i18n/config";

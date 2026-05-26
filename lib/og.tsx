@@ -1,3 +1,11 @@
+/**
+ * @file Shared primitives for the per-route `opengraph-image.tsx` files.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 // Shared primitives for the per-route `opengraph-image.tsx` files.
 //
 // Centralises:

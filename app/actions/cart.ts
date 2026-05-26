@@ -1,5 +1,13 @@
 "use server";
 
+/**
+ * @file Server actions for cart mutations — add/update/remove lines and read the current cart, reconciled with Shopify.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import {
   addToCart,
   getCart,

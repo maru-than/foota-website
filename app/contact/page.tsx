@@ -1,3 +1,11 @@
+/**
+ * @file Contact page — form plus business details (email, hours, returns info).
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/contact/contact-form";

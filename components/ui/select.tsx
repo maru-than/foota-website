@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file shadcn select primitive — Radix-based dropdown with check marks and keyboard support.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";

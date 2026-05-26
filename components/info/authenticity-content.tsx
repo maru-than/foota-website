@@ -1,4 +1,10 @@
-/** Shared authenticity / quality-check body. Used by route page and modal. */
+/**
+ * @file Shared authenticity / quality-check body. Used by route page and modal.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
 
 import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
 import { getFeaturedTestimonials } from "@/lib/testimonials";

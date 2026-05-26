@@ -1,3 +1,11 @@
+/**
+ * @file Dynamic OG image for PDPs — jersey image, name, price and federation badge composited via sharp.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import path from "node:path";
 
 import { ImageResponse } from "next/og";

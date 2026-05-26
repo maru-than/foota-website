@@ -1,3 +1,11 @@
+/**
+ * @file Shopify Storefront API GraphQL client.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 /* ------------------------------------------------------------------ */
 /*  Shopify Storefront API GraphQL client.                             */
 /*  Reads env vars; when they are absent the data layer falls back to  */

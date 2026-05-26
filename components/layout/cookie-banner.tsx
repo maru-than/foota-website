@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Dismissible consent banner — accept / reject buttons, reads & writes localStorage, hydration-safe.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

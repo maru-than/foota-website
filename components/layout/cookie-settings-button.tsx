@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file "Change preferences" button plus current consent-status label — lets users reset the banner.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";

@@ -1,3 +1,11 @@
+/**
+ * @file Utility exports — cn (tailwind-merge), formatPrice (USD), titleCase, lineSubtotal, buildSearchParams.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 

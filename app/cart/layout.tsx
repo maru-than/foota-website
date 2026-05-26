@@ -1,3 +1,11 @@
+/**
+ * @file Cart route layout — sets metadata (title, description, noindex robots) for /cart.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

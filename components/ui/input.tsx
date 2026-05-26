@@ -1,3 +1,11 @@
+/**
+ * @file Base input field — text-base on mobile (prevents iOS zoom), accent border on focus.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import * as React from "react";
 
 import { cn } from "@/lib/utils";

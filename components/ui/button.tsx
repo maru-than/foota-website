@@ -1,3 +1,11 @@
+/**
+ * @file shadcn button primitive — primary / ghost / secondary / danger / link variants, Slot composition.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";

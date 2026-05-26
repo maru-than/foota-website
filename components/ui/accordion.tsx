@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Radix accordion wrapper — Plus / rotate icon, uppercase bold triggers, border-bottom items.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { Plus } from "lucide-react";

@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Slide-in mobile drawer nav — logo, primary links, search / bag quick-actions, locale selector.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

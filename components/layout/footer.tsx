@@ -1,3 +1,11 @@
+/**
+ * @file Site footer — logo, brand statement, social links, multi-column nav, year auto-update.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { Globe } from "lucide-react";

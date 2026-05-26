@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Vercel Analytics + Speed Insights gated on cookie-consent state — syncs via the external store.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { usePathname, useSearchParams } from "next/navigation";

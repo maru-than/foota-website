@@ -1,3 +1,11 @@
+/**
+ * @file Review card — star rating, quote, author with flag, product link, formatted date.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { CountryFlag } from "@/components/testimonials/country-flag";
 import { StarRating } from "@/components/ui/star-rating";
 import { getMockProduct } from "@/lib/mock-data";

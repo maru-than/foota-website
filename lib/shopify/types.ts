@@ -1,3 +1,11 @@
+/**
+ * @file Shopify Storefront API types (raw) + normalized app types.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 /* ------------------------------------------------------------------ */
 /*  Shopify Storefront API types (raw) + normalized app types.         */
 /*  Components consume the normalized `Product`, `Collection`, `Cart`. */

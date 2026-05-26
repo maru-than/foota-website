@@ -1,7 +1,9 @@
 /**
- * Shared size-guide body. Used by the /size-guide route page and the
- * in-product modal. The wrapping surface (page header vs. modal header) is
- * supplied by the caller.
+ * @file Shared size-guide body. Used by the /size-guide route page and the in-product modal. The wrapping…
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
  */
 
 const ROWS = [

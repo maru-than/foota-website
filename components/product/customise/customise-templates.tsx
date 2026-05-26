@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Quick-pick rail — Legends / Squad / Mine presets populate the form, or clear it for manual entry.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { useState } from "react";
 
 import { legendsFor, squadFor, type CustomTemplate } from "@/lib/custom-templates";

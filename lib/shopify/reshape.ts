@@ -1,3 +1,11 @@
+/**
+ * @file Normalize Shopify GraphQL responses into internal types — products, collections, carts, jersey tag parsing.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { customisationDelta } from "../customisation";
 import type {
   Cart,

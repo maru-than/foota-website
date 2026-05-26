@@ -1,3 +1,11 @@
+/**
+ * @file Formatted price display — optional strikethrough compare-at price, tabular nums.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { cn, formatPrice } from "@/lib/utils";
 
 import type { Money } from "@/lib/shopify/types";

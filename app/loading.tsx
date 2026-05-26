@@ -1,3 +1,11 @@
+/**
+ * @file Root skeleton — generic product-grid placeholder shown while the first server fetch resolves.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { Container } from "@/components/ui/container";
 import { Skeleton } from "@/components/ui/skeleton";
 

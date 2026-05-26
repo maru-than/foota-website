@@ -1,3 +1,11 @@
+/**
+ * @file Reusable section title block — eyebrow, heading, description, optional action link.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";

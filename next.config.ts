@@ -1,3 +1,11 @@
+/**
+ * @file Next.js config — Turbopack root, Shopify CDN image allowlist, 2MB Server Action body limit for cart payloads.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

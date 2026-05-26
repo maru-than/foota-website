@@ -1,3 +1,11 @@
+/**
+ * @file GraphQL cart mutations — cartCreate, cartLinesAdd, cartLinesUpdate, cartLinesRemove (shared cart fragment).
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { cartFragment } from "./queries";
 
 /* Cart mutations. Each returns the shared `...cart` fragment. */

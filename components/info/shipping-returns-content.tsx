@@ -1,4 +1,10 @@
-/** Shared shipping & returns body. Used by route page and in-product modal. */
+/**
+ * @file Shared shipping & returns body. Used by route page and in-product modal.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
 
 export function ShippingReturnsContent() {
   return (

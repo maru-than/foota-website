@@ -1,3 +1,11 @@
+/**
+ * @file shadcn badge with CVA variants — new / limited / sale / retro / outline plus jerseyBadgeVariant helper.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 

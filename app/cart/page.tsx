@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Cart page — line items, quantities, subtotal/order summary and the checkout CTA.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Link from "next/link";
 
 import { CartItem } from "@/components/cart/cart-item";

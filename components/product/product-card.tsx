@@ -1,3 +1,11 @@
+/**
+ * @file Product tile — front / back image swap on hover, size chips, badges, price, link to PDP.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,7 +27,7 @@ export function ProductCard({
   const secondary = product.images[1];
   const sizes =
     "(max-width: 640px) 45vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 22vw";
-  const kit = teamColors(meta.teamName ?? product.title);
+  const kit = teamColors(meta.teamName ?? product.title, meta.type);
   const chips = product.variants.slice(0, 4);
   const extra = product.variants.length - chips.length;
   const caption = [meta.confederation, meta.season].filter(Boolean).join(" · ");

@@ -1,3 +1,11 @@
+/**
+ * @file GraphQL fragments + queries for the Storefront API.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 /* GraphQL fragments + queries for the Storefront API. */
 
 export const productFragment = /* GraphQL */ `

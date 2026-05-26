@@ -1,3 +1,11 @@
+/**
+ * @file MVP shape — single locale (EN), single currency (USD). The country table
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 /* MVP shape — single locale (EN), single currency (USD). The country table
    is kept around because the per-country shipping promise still uses it. */
 

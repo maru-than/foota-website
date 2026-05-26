@@ -1,3 +1,11 @@
+/**
+ * @file Cart CRUD against Shopify with cookie-mock fallback — read / add / update / remove, syncs customisation deltas.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { cookies } from "next/headers";
 
 import { customisationDelta } from "../customisation";

@@ -1,3 +1,11 @@
+/**
+ * @file Lightweight client-side cookie consent. No SaaS dependency.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 /* Lightweight client-side cookie consent. No SaaS dependency.
  * Stored in localStorage so it survives reloads but doesn't leak across
  * browsers — typical for a v1 banner. Swap for Cookiebot / Iubenda when

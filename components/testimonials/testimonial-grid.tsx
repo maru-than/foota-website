@@ -1,3 +1,11 @@
+/**
+ * @file Responsive grid of testimonial cards — 2 or 3 columns, staggered reveal animation.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { Reveal } from "@/components/ui/reveal";
 import type { Testimonial } from "@/lib/testimonials";
 import { cn } from "@/lib/utils";

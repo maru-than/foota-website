@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Live back-of-shirt preview — SVG name + number or a photographed blank with overlaid text.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import Image from "next/image";
 import { useState } from "react";
 
@@ -74,7 +82,7 @@ function JerseyBackSvg({
 export function BackPreview({ meta }: { meta: JerseyMeta }) {
   const { name, number, enabled, fontSpec } = useCustomise();
   const [photoFailed, setPhotoFailed] = useState(false);
-  const colors = teamColors(meta.teamName);
+  const colors = teamColors(meta.teamName, meta.type);
 
   const showHint = !enabled || (!name && !number);
   const photoSrc = backImagePath(meta.type);

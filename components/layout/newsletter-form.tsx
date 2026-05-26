@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Email-input form with arrow-submit — client-side success state, no backend wired in MVP.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 

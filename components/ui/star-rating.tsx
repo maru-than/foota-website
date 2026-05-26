@@ -1,3 +1,11 @@
+/**
+ * @file Inline-SVG 5-star rating — filled = accent, empty = muted hairline, sr-only summary.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { cn } from "@/lib/utils";
 
 /**

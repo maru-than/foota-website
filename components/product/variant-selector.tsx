@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Size / type / colour option buttons — grays out unavailable combos, size-guide modal trigger.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { SizeGuideModal } from "@/components/info/size-guide-modal";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/shopify/types";

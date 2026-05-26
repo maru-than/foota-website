@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Segmented control — Blank vs Custom (+ * @file 5) with dynamic pricing display.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { CUSTOM_PRICE_DELTA } from "@/lib/customisation";
 import { cn } from "@/lib/utils";
 import { useCustomise } from "./customise-context";

@@ -1,3 +1,11 @@
+/**
+ * @file Max-width wrapper — 1440px center with responsive px padding.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { cn } from "@/lib/utils";
 
 export function Container({

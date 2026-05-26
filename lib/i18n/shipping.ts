@@ -1,3 +1,11 @@
+/**
+ * @file Shipping zones — one row per country group with the customer-facing ETA
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 /* Shipping zones — one row per country group with the customer-facing ETA
    window and a free-shipping threshold. MVP is USD-only, so the threshold is
    expressed as a flat USD figure across all zones. */

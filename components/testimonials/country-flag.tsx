@@ -1,3 +1,11 @@
+/**
+ * @file 3:2 country-flag icon from country-flag-icons — mapped to the 17 nations we surface.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import {
   AR,
   AU,

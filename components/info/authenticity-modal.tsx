@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Modal wrapper around the authenticity body — QC promise and stitching / crest / font verification.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import {
   InfoModal,
   InfoModalBody,

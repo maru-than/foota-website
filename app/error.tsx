@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Root error boundary — fallback UI on server/client errors with a reset button.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";

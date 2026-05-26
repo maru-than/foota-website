@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Name & number inputs with character counter — inherits the confederation font from the provider.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { useId } from "react";
 
 import { CUSTOM_MAX_NAME_CHARS } from "@/lib/customisation";

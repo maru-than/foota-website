@@ -1,3 +1,11 @@
+/**
+ * @file Fetch & search Shopify products — meta/price/size filters, sort, derived facets, related recommendations.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import {
   getMockProduct,
   getMockProducts,

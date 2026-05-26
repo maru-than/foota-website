@@ -1,3 +1,11 @@
+/**
+ * @file "More from the archive" section — related products grid with heading.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { ProductGrid } from "@/components/product/product-grid";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";

@@ -1,7 +1,9 @@
 /**
- * Shared prose styles for Privacy / Terms / Cookies pages.
- * Section + Paragraph give long-form copy a consistent rhythm — same
- * spacing primitives the authenticity / shipping content uses.
+ * @file Shared prose styles for Privacy / Terms / Cookies pages. Section + Paragraph give long-form copy a…
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
  */
 
 import { cn } from "@/lib/utils";

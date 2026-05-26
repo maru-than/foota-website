@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file shadcn dialog — Radix-based centered modal with close button, scrim overlay, animations.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";

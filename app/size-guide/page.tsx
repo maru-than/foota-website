@@ -1,3 +1,11 @@
+/**
+ * @file Size guide page — measurement charts and fit-picking guidance for international football shirts.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import type { Metadata } from "next";
 
 import { SizeGuideContent } from "@/components/info/size-guide-content";

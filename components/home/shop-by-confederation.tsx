@@ -1,3 +1,11 @@
+/**
+ * @file Six-confederation cell grid linking to regional filters, with abbreviation and full name.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";

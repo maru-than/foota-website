@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Filter drawer (mobile) / sidebar (desktop) — confederation, nation, type, era, size, price range.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Check, SlidersHorizontal } from "lucide-react";

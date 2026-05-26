@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Dropdown to switch sort (Featured / Newest / Price) — updates URL params without scrolling.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
+ */
+
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {

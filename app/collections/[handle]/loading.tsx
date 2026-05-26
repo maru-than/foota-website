@@ -1,3 +1,11 @@
+/**
+ * @file Collection-route skeleton — matches the page header + grid shape to avoid layout jump on navigation.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import { ProductGridSkeleton } from "@/components/product/product-grid-skeleton";
 import { Container } from "@/components/ui/container";
 import { Skeleton } from "@/components/ui/skeleton";

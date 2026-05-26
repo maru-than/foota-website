@@ -1,3 +1,11 @@
+/**
+ * @file Customisation templates — quick-pick name + number combos.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 /* ------------------------------------------------------------------ */
 /*  Customisation templates — quick-pick name + number combos.          */
 /*                                                                      */

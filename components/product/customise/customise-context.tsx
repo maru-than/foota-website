@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file Customise state — name & number store, font lookup, price delta, gallery sync.
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-26
+ */
+
 import {
   createContext,
   useCallback,

@@ -1,11 +1,11 @@
 "use client";
 
 /**
- * Responsive info modal. Bottom sheet on mobile, centered dialog on md+.
- * Built on @radix-ui/react-dialog with tw-animate-css. Token-aligned with
- * dialog.tsx and sheet.tsx but tuned for reference content (size guide,
- * shipping & returns, authenticity) — sticky header, scrollable body, no
- * forced max-width on mobile.
+ * @file Responsive info modal. Bottom sheet on mobile, centered dialog on md+. Built on…
+ * @author Maruthan
+ * @copyright 2026 Maruthan
+ * @license MIT
+ * @since 2026-05-25
  */
 
 import * as React from "react";
