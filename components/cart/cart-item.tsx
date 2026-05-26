@@ -53,7 +53,7 @@ export function CartItem({
             type="button"
             onClick={() => removeItem(line.id)}
             aria-label={`Remove ${product.title}`}
-            className="-mt-1 h-fit text-fg-3 transition-colors hover:text-danger"
+            className="-mr-2 -mt-2 flex h-9 w-9 shrink-0 items-center justify-center text-fg-3 transition-colors hover:text-danger"
           >
             <X className="size-4" strokeWidth={1.5} />
           </button>
@@ -66,18 +66,18 @@ export function CartItem({
               type="button"
               onClick={() => updateItem(line.id, line.quantity - 1)}
               aria-label="Decrease quantity"
-              className="flex size-8 items-center justify-center text-fg-1 transition-colors hover:text-accent"
+              className="flex size-11 items-center justify-center text-fg-1 transition-colors hover:text-accent"
             >
               <Minus className="size-3.5" strokeWidth={1.5} />
             </button>
-            <span className="w-8 text-center text-sm font-bold tabular-nums">
+            <span className="w-9 text-center text-sm font-bold tabular-nums">
               {line.quantity}
             </span>
             <button
               type="button"
               onClick={() => updateItem(line.id, line.quantity + 1)}
               aria-label="Increase quantity"
-              className="flex size-8 items-center justify-center text-fg-1 transition-colors hover:text-accent"
+              className="flex size-11 items-center justify-center text-fg-1 transition-colors hover:text-accent"
             >
               <Plus className="size-3.5" strokeWidth={1.5} />
             </button>

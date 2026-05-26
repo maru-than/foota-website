@@ -44,7 +44,7 @@ const InfoModalContent = React.forwardRef<
       ref={ref}
       className={cn(
         // base
-        "fixed z-50 flex flex-col bg-bg-1 border-line-accent ease-foota",
+        "fixed z-50 flex flex-col bg-bg-1 border-line-accent ease-worldkit",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         // mobile: bottom sheet
         "inset-x-0 bottom-0 max-h-[88dvh] border-t",
@@ -59,7 +59,7 @@ const InfoModalContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 z-10 flex size-9 items-center justify-center text-fg-2 transition-colors hover:bg-bg-3 hover:text-fg-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+      <DialogPrimitive.Close className="absolute right-2.5 top-[max(0.625rem,calc(env(safe-area-inset-top)+0.25rem))] z-10 flex size-11 items-center justify-center text-fg-2 transition-colors hover:bg-bg-3 hover:text-fg-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent md:top-2.5">
         <X className="size-5" strokeWidth={1.5} />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -75,7 +75,9 @@ function InfoModalHeader({
   return (
     <div
       className={cn(
-        "sticky top-0 z-[1] flex flex-col gap-1 border-b border-line-accent bg-bg-1 px-6 py-5 pr-14",
+        // pt grows with the iOS notch in the bottom-sheet variant; harmless on
+        // the centered desktop dialog where the inset is 0.
+        "sticky top-0 z-[1] flex flex-col gap-1 border-b border-line-accent bg-bg-1 px-6 pb-5 pr-14 pt-[max(1.25rem,calc(env(safe-area-inset-top)+0.5rem))] md:pt-5",
         className,
       )}
       {...props}
@@ -128,7 +130,12 @@ function InfoModalBody({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("flex-1 overflow-y-auto px-6 py-6", className)}
+      className={cn(
+        // pb clears the iOS home indicator when the modal opens as a bottom
+        // sheet; centered desktop dialog gets the standard 1.5rem.
+        "flex-1 overflow-y-auto px-6 pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] md:pb-6",
+        className,
+      )}
       {...props}
     />
   );

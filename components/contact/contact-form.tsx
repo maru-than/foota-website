@@ -48,7 +48,7 @@ export function ContactForm() {
           required
           name="message"
           rows={6}
-          className="flex w-full rounded-none border border-line-2 bg-bg-2 px-4 py-3 text-sm tracking-[-0.03em] text-fg-1 transition-colors duration-150 ease-foota placeholder:text-fg-4 focus-visible:border-accent focus-visible:outline-none"
+          className="flex w-full rounded-none border border-line-2 bg-bg-2 px-4 py-3 text-base tracking-[-0.03em] text-fg-1 transition-colors duration-150 ease-worldkit placeholder:text-fg-4 focus-visible:border-accent focus-visible:outline-none sm:text-sm"
         />
       </label>
       <Button type="submit">Send message</Button>

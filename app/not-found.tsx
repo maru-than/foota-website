@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-5 py-24 text-center">
       <span className="eyebrow text-accent">404</span>
-      <h1 className="text-4xl font-bold tracking-[-0.03em] sm:text-5xl">
+      <h1 className="display text-4xl sm:text-5xl">
         Off the pitch.
       </h1>
       <p className="max-w-md text-pretty text-fg-3">

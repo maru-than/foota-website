@@ -46,7 +46,7 @@ export function FeaturedCollections({
               <Reveal key={collection.id} delay={i * 70}>
                 <Link
                   href={`/collections/${collection.handle}`}
-                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden border border-line-accent bg-bg-2 p-6 transition-transform duration-300 ease-foota hover:-translate-y-1"
+                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden border border-line-accent bg-bg-2 p-6 transition-transform duration-300 ease-worldkit hover:-translate-y-1"
                 >
                   {image ? (
                     <>
@@ -55,7 +55,7 @@ export function FeaturedCollections({
                         alt=""
                         fill
                         sizes="(max-width: 768px) 50vw, 25vw"
-                        className="object-cover transition-transform duration-700 ease-foota group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 ease-worldkit group-hover:scale-105"
                       />
                       {/* Dark fade for text legibility (motive image stays clean). */}
                       <div
@@ -66,7 +66,7 @@ export function FeaturedCollections({
                   ) : (
                     <div
                       aria-hidden
-                      className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full border border-line-accent transition-transform duration-500 ease-foota group-hover:scale-110"
+                      className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full border border-line-accent transition-transform duration-500 ease-worldkit group-hover:scale-110"
                     />
                   )}
                   <div className="relative">
@@ -77,7 +77,7 @@ export function FeaturedCollections({
                     <span className="mt-3 inline-flex items-center gap-1.5 text-sm text-fg-2 transition-colors group-hover:text-accent">
                       Explore
                       <ArrowRight
-                        className="size-3.5 transition-transform duration-300 ease-foota group-hover:translate-x-1"
+                        className="size-3.5 transition-transform duration-300 ease-worldkit group-hover:translate-x-1"
                         strokeWidth={1.5}
                       />
                     </span>

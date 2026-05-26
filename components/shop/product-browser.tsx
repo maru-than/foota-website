@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import type { Facets } from "@/lib/shopify/products";
 import type { Product } from "@/lib/shopify/types";
+import { ActiveFilters } from "./active-filters";
 import { FilterPanel, FiltersDrawer } from "./filters";
 import { SortSelect } from "./sort-select";
 
@@ -28,6 +29,12 @@ export function ProductBrowser({
         </aside>
 
         <div>
+          {/* Active filter chips — visible only when filters are applied.
+              Lets the user remove without opening the drawer. */}
+          <Suspense fallback={null}>
+            <ActiveFilters />
+          </Suspense>
+
           <div className="mb-8 flex items-center justify-between gap-4 border-b border-line-1 pb-4">
             <div className="flex items-center gap-4">
               <div className="md:hidden">
@@ -35,7 +42,7 @@ export function ProductBrowser({
                   <FiltersDrawer facets={facets} resultCount={products.length} />
                 </Suspense>
               </div>
-              <p className="text-sm text-fg-3">
+              <p className="whitespace-nowrap text-sm text-fg-3">
                 <b className="font-bold tabular-nums text-fg-1">{products.length}</b>{" "}
                 {products.length === 1 ? "jersey" : "jerseys"}
               </p>

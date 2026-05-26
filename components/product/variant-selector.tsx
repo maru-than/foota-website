@@ -68,7 +68,7 @@ export function VariantSelector({
                   aria-pressed={isSelected}
                   onClick={() => onChange(option.name, value)}
                   className={cn(
-                    "flex size-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-foota",
+                    "flex size-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
                     isSelected
                       ? "border-accent bg-accent text-bg-1"
                       : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",

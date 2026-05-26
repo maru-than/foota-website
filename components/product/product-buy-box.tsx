@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, ShieldCheck, Sparkles, Truck } from "lucide-react";
 
 import { useCart } from "@/components/cart/cart-provider";
@@ -45,6 +45,38 @@ export function ProductBuyBox({ product }: { product: Product }) {
   const available = variant?.availableForSale ?? false;
   const price = variant?.price ?? product.priceRange.minVariantPrice;
 
+  // Sticky bar visibility — two independent signals:
+  //  • inlineVisible: true while the inline Add-to-bag is on screen (no point
+  //    showing a second CTA).
+  //  • footerVisible: true once the page footer enters the viewport (free the
+  //    footer's copyright / locale switcher from permanent occlusion).
+  // Bar shows only when both are false.
+  const inlineButtonRef = useRef<HTMLDivElement>(null);
+  const [inlineVisible, setInlineVisible] = useState(true);
+  const [footerVisible, setFooterVisible] = useState(false);
+  useEffect(() => {
+    const el = inlineButtonRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setInlineVisible(entry.isIntersecting),
+      { threshold: 0 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return;
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setFooterVisible(entry.isIntersecting),
+      { threshold: 0 },
+    );
+    obs.observe(footer);
+    return () => obs.disconnect();
+  }, []);
+  const showSticky = !inlineVisible && !footerVisible;
+
   function onChange(optionName: string, value: string) {
     setSelected((prev) => ({ ...prev, [optionName]: value }));
   }
@@ -69,14 +101,18 @@ export function ProductBuyBox({ product }: { product: Product }) {
         </span>
       </div>
 
-      <Button onClick={add} disabled={!available || isPending} className="w-full">
-        {available
-          ? `Add to bag — ${formatPrice(price.amount, price.currencyCode)}`
-          : "Sold out"}
-        {available ? <ArrowRight className="size-4" strokeWidth={1.5} /> : null}
-      </Button>
+      <div ref={inlineButtonRef}>
+        <Button onClick={add} disabled={!available || isPending} className="w-full">
+          {available
+            ? `Add to bag — ${formatPrice(price.amount, price.currencyCode)}`
+            : "Sold out"}
+          {available ? <ArrowRight className="size-4" strokeWidth={1.5} /> : null}
+        </Button>
+      </div>
 
-      <div className="grid grid-cols-3 gap-3 border-t border-line-1 pt-5">
+      {/* Single column on phones — at 375px the 3-col version wraps every
+          title to 3 lines. From sm: up the original row layout is fine. */}
+      <div className="grid grid-cols-1 gap-4 border-t border-line-1 pt-5 sm:grid-cols-3 sm:gap-3">
         {TRUST.map(({ Icon, title, note }) => (
           <div key={title} className="flex gap-2.5">
             <Icon className="size-[18px] shrink-0 text-accent" strokeWidth={1.5} />
@@ -88,15 +124,22 @@ export function ProductBuyBox({ product }: { product: Product }) {
         ))}
       </div>
 
-      {/* Sticky add-to-bag bar — mobile only. */}
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-between gap-3 border-t border-line-accent bg-bg-1/95 px-4 py-3 backdrop-blur lg:hidden">
-        <div className="flex min-w-0 flex-col">
-          {product.meta.teamName ? (
-            <span className="truncate text-xs text-fg-3">
-              {product.meta.teamName}
-              {selected.Size ? (
-                <span className="text-fg-2"> · Size {selected.Size}</span>
-              ) : null}
+      {/* Sticky add-to-bag bar — mobile only. Visible only while the inline
+          CTA is scrolled past, so the footer is reachable at page bottom. */}
+      <div
+        aria-hidden={!showSticky}
+        className={cn(
+          // Apple's "slide & spring" curve — feels native vs. a linear ease.
+          "fixed inset-x-0 bottom-0 z-30 flex items-center justify-between gap-3 border-t border-line-accent bg-bg-1/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none lg:hidden",
+          showSticky
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-full opacity-0",
+        )}
+      >
+        <div className="flex min-w-0 flex-col leading-tight">
+          {selected.Size ? (
+            <span className="text-[11px] uppercase tracking-[0.1em] text-fg-3">
+              Size {selected.Size}
             </span>
           ) : null}
           <Price
@@ -106,7 +149,11 @@ export function ProductBuyBox({ product }: { product: Product }) {
             className="text-sm font-bold text-accent"
           />
         </div>
-        <Button onClick={add} disabled={!available || isPending} className="shrink-0">
+        <Button
+          onClick={add}
+          disabled={!available || isPending}
+          className="max-w-[180px] shrink-0"
+        >
           {available ? "Add to bag" : "Sold out"}
         </Button>
       </div>

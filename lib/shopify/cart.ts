@@ -62,7 +62,7 @@ function buildMockCart(lines: MockLine[]): Cart {
   const cartLines: CartLine[] = [];
   let subtotal = 0;
   let totalQuantity = 0;
-  let currency = "CHF";
+  let currency = "USD";
 
   for (const raw of lines) {
     const found = findMockVariant(raw.merchandiseId);

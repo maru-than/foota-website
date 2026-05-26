@@ -8,7 +8,7 @@ export function Newsletter() {
       <Container>
         <Reveal className="mx-auto flex max-w-xl flex-col items-center text-center">
           <span className="eyebrow text-accent">Newsletter</span>
-          <h2 className="mt-4 text-4xl font-bold leading-tight tracking-[-0.03em] sm:text-5xl">
+          <h2 className="display mt-4 text-4xl leading-tight sm:text-5xl">
             Join the dressing room
           </h2>
           <p className="mt-4 text-pretty leading-relaxed text-fg-2">

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
-/*  Two-color jersey SVG placeholder — ported from the Foota design    */
+/*  Two-color jersey SVG placeholder — ported from the Worldkit design */
 /*  system (ui_kits/storefront/Jersey.jsx). Used in place of product   */
 /*  photography until real Shopify images connect.                     */
 /* ------------------------------------------------------------------ */

@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
+import { BagIcon } from "@/components/ui/icons/bag";
 import { Price } from "@/components/ui/price";
 import {
   Sheet,
@@ -12,17 +12,27 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { cn, formatPrice } from "@/lib/utils";
+import type { Product } from "@/lib/shopify/types";
 import { CartItem } from "./cart-item";
 import { CheckoutButton } from "./checkout-button";
 import { useCart } from "./cart-provider";
 
-export function CartDrawer() {
+export function CartDrawer({
+  /** Best-sellers shown when the bag is empty — turns the empty state into
+   *  a discovery surface instead of a dead end. */
+  recommendations = [],
+}: {
+  recommendations?: Product[];
+}) {
   const { cart, isOpen, setOpen, closeCart, totalQuantity } = useCart();
   const lines = cart?.lines ?? [];
 
   return (
     <Sheet open={isOpen} onOpenChange={setOpen}>
-      <SheetContent side="right" className="p-0">
+      {/* aria-describedby={undefined} silences Radix's "Missing Description"
+          warning — the bag has no narrative to describe beyond its title. */}
+      <SheetContent side="right" className="p-0" aria-describedby={undefined}>
         <SheetHeader>
           <SheetTitle>
             Your bag{" "}
@@ -33,15 +43,64 @@ export function CartDrawer() {
         </SheetHeader>
 
         {lines.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
-            <ShoppingBag className="size-9 text-fg-4" strokeWidth={1.25} />
-            <p className="text-2xl font-bold tracking-[-0.03em]">Your locker is empty.</p>
-            <p className="max-w-xs text-sm text-fg-3">
-              Add a jersey to get started — the archive is waiting.
-            </p>
-            <Button asChild onClick={closeCart} className="mt-2">
-              <Link href="/shop">Find a jersey</Link>
-            </Button>
+          <div className="flex flex-1 flex-col overflow-y-auto px-6 pb-6">
+            <div className="flex flex-col items-center gap-4 pt-10 text-center">
+              <BagIcon className="size-9 text-fg-4" strokeWidth={1.25} />
+              <p className="text-2xl font-bold tracking-[-0.03em]">
+                Your locker is empty.
+              </p>
+              <p className="max-w-xs text-sm text-fg-3">
+                Add a jersey to get started — the archive is waiting.
+              </p>
+              <Button asChild onClick={closeCart} className="mt-2">
+                <Link href="/shop">Find a jersey</Link>
+              </Button>
+            </div>
+
+            {recommendations.length > 0 ? (
+              <div className="mt-10 border-t border-line-1 pt-6">
+                <p className="eyebrow text-fg-3">Most wanted</p>
+                <ul className="mt-4 grid grid-cols-2 gap-3">
+                  {recommendations.map((p) => (
+                    <li key={p.id}>
+                      <Link
+                        href={`/products/${p.handle}`}
+                        onClick={closeCart}
+                        className="group flex flex-col gap-2"
+                      >
+                        <div
+                          className={cn(
+                            "relative aspect-[4/5] overflow-hidden border border-line-1 transition-colors group-hover:border-line-accent",
+                            p.featuredImage ? "bg-white" : "jersey-frame",
+                          )}
+                        >
+                          {p.featuredImage ? (
+                            <Image
+                              src={p.featuredImage.url}
+                              alt={p.featuredImage.altText}
+                              fill
+                              sizes="(max-width: 640px) 45vw, 200px"
+                              className="object-contain p-2"
+                            />
+                          ) : null}
+                        </div>
+                        <div className="flex flex-col gap-0.5">
+                          <span className="text-sm font-bold leading-tight text-accent">
+                            {p.meta.teamName ?? p.title}
+                          </span>
+                          <span className="text-xs tabular-nums text-fg-3">
+                            {formatPrice(
+                              p.priceRange.minVariantPrice.amount,
+                              p.priceRange.minVariantPrice.currencyCode,
+                            )}
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
         ) : (
           <>

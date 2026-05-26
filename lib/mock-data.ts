@@ -6,7 +6,7 @@ import type {
 } from "./shopify/types";
 
 /* ------------------------------------------------------------------ */
-/*  Foota catalogue — summer 2026.                                     */
+/*  Worldkit catalogue — summer 2026.                                  */
 /*  The shop sells 2026 home jerseys for the 48 nations of             */
 /*  the first 48-team summer, co-hosted by the USA, Canada & Mexico.   */
 /*  Images live in /public/jerseys/home-transparent/<slug>.webp (and away-transparent/). */
@@ -14,7 +14,7 @@ import type {
 /*  fallback; shaped exactly like the normalized Shopify types.        */
 /* ------------------------------------------------------------------ */
 
-const CURRENCY = "CHF";
+const CURRENCY = "USD";
 const SIZES = ["S", "M", "L", "XL", "XXL"] as const;
 
 const REGION: Record<string, string> = {
@@ -285,7 +285,10 @@ const COLLECTION_RULES: CollectionRule[] = [
     handle: "new-arrivals",
     title: "New Arrivals",
     description: "The latest shirts to land in the archive.",
-    match: (p) => p.meta.badge === "New",
+    // Home only — Worldkit's brand promise is "home shirt for every side"
+    // (see /about). Including Away here surfaces both kits of the same nation
+    // as visually-identical tiles (same teamName, same caption).
+    match: (p) => p.meta.badge === "New" && p.meta.type === "Home",
   },
 ];
 

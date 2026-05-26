@@ -14,12 +14,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { getFilterValues as getValues, toggleFilterValue } from "@/lib/filters";
 import type { Facets } from "@/lib/shopify/products";
 import { cn } from "@/lib/utils";
-
-function getValues(params: URLSearchParams, key: string): string[] {
-  return params.get(key)?.split(",").filter(Boolean) ?? [];
-}
 
 function FilterGroup({
   title,
@@ -33,7 +30,12 @@ function FilterGroup({
   return (
     <div className="border-t border-line-1 py-5 first:border-t-0 first:pt-0">
       <h3 className="eyebrow mb-3 text-fg-3">{title}</h3>
-      <div className={cn(scroll && "no-scrollbar max-h-44 overflow-y-auto")}>{children}</div>
+      {/* On mobile the drawer scrolls already; nesting a scroll region inside
+          it traps touch. Only constrain height from md: up where the panel is
+          a desktop sidebar. */}
+      <div className={cn(scroll && "md:no-scrollbar md:max-h-44 md:overflow-y-auto")}>
+        {children}
+      </div>
     </div>
   );
 }
@@ -48,7 +50,7 @@ function CheckRow({
   onToggle: () => void;
 }) {
   return (
-    <label className="flex cursor-pointer items-center gap-2.5 py-1 text-sm">
+    <label className="flex min-h-11 cursor-pointer items-center gap-2.5 py-2 text-sm">
       <span
         className={cn(
           "flex size-4 shrink-0 items-center justify-center border transition-colors",
@@ -63,7 +65,16 @@ function CheckRow({
   );
 }
 
-export function FilterPanel({ facets }: { facets: Facets }) {
+export function FilterPanel({
+  facets,
+  /** When true (desktop sidebar), the panel renders its own "Filters /
+   *  Clear all" header. The drawer hides it because the Sheet title already
+   *  says "Filters" — avoids the duplicate label on mobile. */
+  showHeader = true,
+}: {
+  facets: Facets;
+  showHeader?: boolean;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -74,14 +85,7 @@ export function FilterPanel({ facets }: { facets: Facets }) {
   };
 
   const toggle = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    const current = getValues(params, key);
-    const next = current.includes(value)
-      ? current.filter((v) => v !== value)
-      : [...current, value];
-    if (next.length) params.set(key, next.join(","));
-    else params.delete(key);
-    push(params);
+    push(toggleFilterValue(searchParams, key, value));
   };
 
   const groups: { key: string; title: string; values: string[]; scroll?: boolean }[] = [
@@ -98,12 +102,27 @@ export function FilterPanel({ facets }: { facets: Facets }) {
   );
   const hasPrice =
     Boolean(searchParams.get("minPrice")) || Boolean(searchParams.get("maxPrice"));
+  const showClear = activeCount > 0 || hasPrice;
 
   return (
     <div>
-      <div className="flex items-center justify-between pb-4">
-        <span className="text-sm font-bold uppercase tracking-[0.12em]">Filters</span>
-        {activeCount > 0 || hasPrice ? (
+      {showHeader ? (
+        <div className="flex items-center justify-between pb-4">
+          <span className="text-sm font-bold uppercase tracking-[0.12em]">Filters</span>
+          {showClear ? (
+            <button
+              type="button"
+              onClick={() => router.push(pathname, { scroll: false })}
+              className="text-xs uppercase tracking-[0.1em] text-fg-3 transition-colors hover:text-accent"
+            >
+              Clear all
+            </button>
+          ) : null}
+        </div>
+      ) : showClear ? (
+        // Drawer: keep "Clear all" reachable without the duplicate "Filters"
+        // label — anchored right-aligned above the first group.
+        <div className="flex justify-end pb-2">
           <button
             type="button"
             onClick={() => router.push(pathname, { scroll: false })}
@@ -111,8 +130,8 @@ export function FilterPanel({ facets }: { facets: Facets }) {
           >
             Clear all
           </button>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
 
       {groups
         .filter((g) => g.values.length > 1)
@@ -170,7 +189,7 @@ function PriceFilter({ min, max }: { min: number; max: number }) {
           placeholder={String(min)}
           value={minVal}
           onChange={(e) => setMinVal(e.target.value)}
-          className="h-9 px-3"
+          className="h-11 px-3"
         />
         <span className="text-fg-3">–</span>
         <Input
@@ -180,7 +199,7 @@ function PriceFilter({ min, max }: { min: number; max: number }) {
           placeholder={String(max)}
           value={maxVal}
           onChange={(e) => setMaxVal(e.target.value)}
-          className="h-9 px-3"
+          className="h-11 px-3"
         />
       </div>
       <Button variant="secondary" size="sm" onClick={apply} className="w-full">
@@ -217,7 +236,7 @@ export function FiltersDrawer({
           <SheetTitle>Filters</SheetTitle>
         </SheetHeader>
         <div className="flex-1 overflow-y-auto px-6 py-4">
-          <FilterPanel facets={facets} />
+          <FilterPanel facets={facets} showHeader={false} />
         </div>
         <SheetFooter>
           <Button onClick={() => setOpen(false)} className="w-full">

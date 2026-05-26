@@ -59,3 +59,29 @@ export function activeFilterCount(f: ProductFilters): number {
     (f.maxPrice != null ? 1 : 0)
   );
 }
+
+/* ----------------- URL helpers shared by filter UIs ------------------- */
+
+/** Read a CSV-list filter param ("?nation=Brazil,France") back to an array. */
+export function getFilterValues(
+  params: URLSearchParams,
+  key: string,
+): string[] {
+  return params.get(key)?.split(",").filter(Boolean) ?? [];
+}
+
+/** Return a new URLSearchParams with `value` toggled on `key`. */
+export function toggleFilterValue(
+  params: URLSearchParams,
+  key: string,
+  value: string,
+): URLSearchParams {
+  const next = new URLSearchParams(params.toString());
+  const current = getFilterValues(next, key);
+  const updated = current.includes(value)
+    ? current.filter((v) => v !== value)
+    : [...current, value];
+  if (updated.length) next.set(key, updated.join(","));
+  else next.delete(key);
+  return next;
+}

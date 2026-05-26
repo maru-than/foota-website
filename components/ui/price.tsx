@@ -4,7 +4,7 @@ import type { Money } from "@/lib/shopify/types";
 
 export function Price({
   amount,
-  currencyCode = "CHF",
+  currencyCode = "USD",
   compareAt,
   className,
 }: {

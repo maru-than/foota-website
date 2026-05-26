@@ -15,7 +15,7 @@ export default function CartPage() {
 
   return (
     <Container className="py-12 lg:py-16">
-      <h1 className="text-4xl font-bold leading-none tracking-[-0.03em] sm:text-5xl">
+      <h1 className="display text-4xl leading-none sm:text-5xl">
         Your bag
       </h1>
 

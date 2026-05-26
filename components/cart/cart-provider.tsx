@@ -14,6 +14,7 @@ import {
   removeItemAction,
   updateItemAction,
 } from "@/app/actions/cart";
+import { Toast, type ToastSpec } from "@/components/ui/toast";
 import type { Cart, CartLine, Product, ProductVariant } from "@/lib/shopify/types";
 
 interface CartContextValue {
@@ -24,6 +25,12 @@ interface CartContextValue {
   openCart: () => void;
   closeCart: () => void;
   setOpen: (open: boolean) => void;
+  // Search overlay — lifted here so the mobile menu can open it without
+  // prop-drilling through Header.
+  isSearchOpen: boolean;
+  openSearch: () => void;
+  closeSearch: () => void;
+  setSearchOpen: (open: boolean) => void;
   addItem: (product: Product, variant: ProductVariant, quantity?: number) => void;
   updateItem: (lineId: string, quantity: number) => void;
   removeItem: (lineId: string) => void;
@@ -37,7 +44,7 @@ type OptimisticAction =
   | { type: "remove"; lineId: string };
 
 function emptyCart(): Cart {
-  const zero = { amount: "0.00", currencyCode: "CHF" };
+  const zero = { amount: "0.00", currencyCode: "USD" };
   return {
     id: "",
     checkoutUrl: "",
@@ -50,7 +57,7 @@ function emptyCart(): Cart {
 function recompute(cart: Cart): Cart {
   let quantity = 0;
   let subtotal = 0;
-  let currency = cart.cost.subtotalAmount.currencyCode || "CHF";
+  let currency = cart.cost.subtotalAmount.currencyCode || "USD";
   for (const line of cart.lines) {
     quantity += line.quantity;
     subtotal += Number.parseFloat(line.merchandise.price.amount) * line.quantity;
@@ -139,13 +146,24 @@ export function CartProvider({
   const [optimisticCart, applyOptimistic] = useOptimistic(cart, cartReducer);
   const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [toast, setToast] = useState<ToastSpec | null>(null);
 
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
+  const openSearch = useCallback(() => setIsSearchOpen(true), []);
+  const closeSearch = useCallback(() => setIsSearchOpen(false), []);
 
   const addItem = useCallback(
     (product: Product, variant: ProductVariant, quantity = 1) => {
-      setIsOpen(true);
+      // Premium pattern — toast confirms the add without interrupting browsing;
+      // the user opens the bag explicitly via the toast action or the header.
+      const name = product.meta.teamName ?? product.title;
+      setToast({
+        id: Date.now(),
+        title: `${name} added to bag`,
+        action: { label: "View bag", onClick: () => setIsOpen(true) },
+      });
       startTransition(async () => {
         applyOptimistic({
           type: "add",
@@ -200,12 +218,21 @@ export function CartProvider({
     openCart,
     closeCart,
     setOpen: setIsOpen,
+    isSearchOpen,
+    openSearch,
+    closeSearch,
+    setSearchOpen: setIsSearchOpen,
     addItem,
     updateItem,
     removeItem,
   };
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider value={value}>
+      {children}
+      <Toast toast={toast} onDismiss={() => setToast(null)} />
+    </CartContext.Provider>
+  );
 }
 
 export function useCart(): CartContextValue {

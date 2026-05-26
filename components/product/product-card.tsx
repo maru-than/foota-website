@@ -29,7 +29,7 @@ export function ProductCard({
     <Link
       href={`/products/${product.handle}`}
       aria-label={product.title}
-      className="group flex flex-col bg-bg-3 transition-transform duration-300 ease-foota hover:-translate-y-1"
+      className="group flex flex-col bg-bg-3 transition-transform duration-300 ease-worldkit hover:-translate-y-1"
     >
       <div
         className={cn(

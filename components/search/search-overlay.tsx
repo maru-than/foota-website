@@ -82,7 +82,7 @@ export function SearchOverlay({
 
         <form
           onSubmit={goToResults}
-          className="flex items-center gap-3 border-b border-line-accent px-5"
+          className="flex items-center gap-3 border-b border-line-accent pl-5 pr-2"
         >
           <SearchIcon className="size-5 shrink-0 text-fg-3" strokeWidth={1.5} />
           <input
@@ -92,6 +92,13 @@ export function SearchOverlay({
             placeholder="Search clubs, nations, seasons…"
             className="h-14 flex-1 bg-transparent text-base tracking-[-0.02em] text-fg-1 outline-none placeholder:text-fg-4"
           />
+          <button
+            type="button"
+            onClick={() => handleOpenChange(false)}
+            className="shrink-0 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-fg-3 transition-colors hover:text-accent focus:outline-none focus-visible:text-accent"
+          >
+            Cancel
+          </button>
         </form>
 
         <div className="max-h-[52vh] overflow-y-auto">

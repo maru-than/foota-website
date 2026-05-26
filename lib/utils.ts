@@ -7,20 +7,20 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Format a money amount as e.g. "CHF 119.00".
- * Currency code comes from Shopify (or "CHF" for mock data) and is shown
- * as a prefix so any ISO currency renders predictably.
+ * Format a money amount as e.g. "$119.00". MVP is USD-only; the second
+ * argument is accepted for compatibility with the Shopify Money shape but
+ * ignored — every price renders with a US dollar prefix.
  */
 export function formatPrice(
   amount: number | string,
-  currencyCode = "CHF",
+  _currencyCode = "USD",
 ): string {
   const value = typeof amount === "string" ? Number.parseFloat(amount) : amount;
   const formatted = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(Number.isFinite(value) ? value : 0);
-  return `${currencyCode} ${formatted}`;
+  return `$${formatted}`;
 }
 
 /** Title-case a single token (used for derived metadata labels). */

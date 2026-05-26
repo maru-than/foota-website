@@ -58,7 +58,7 @@ export function PageHeader({
         )}
       >
         {eyebrow ? <span className="eyebrow text-accent">{eyebrow}</span> : null}
-        <h1 className="mt-3 text-balance text-4xl font-bold leading-[1.02] tracking-[-0.03em] sm:text-5xl">
+        <h1 className="display mt-3 text-balance text-4xl leading-[1.02] sm:text-5xl">
           {title}
         </h1>
         {description ? (

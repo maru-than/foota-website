@@ -9,9 +9,9 @@ const ITEMS = [
 // Lime marquee ticker — the brand's most distinctive motion.
 export function AnnouncementBar() {
   return (
-    <div className="sticky top-0 z-50 overflow-hidden bg-accent text-bg-1">
+    <div className="sticky top-0 z-50 overflow-hidden bg-accent pt-[env(safe-area-inset-top)] text-bg-1">
       <div className="flex h-7 items-center">
-        <div className="flex w-max shrink-0 animate-ticker items-center gap-8 pl-8">
+        <div className="flex w-max shrink-0 animate-ticker items-center gap-8 pl-8 motion-reduce:animate-none">
           {[...ITEMS, ...ITEMS].map((item, i) => (
             <span
               key={i}

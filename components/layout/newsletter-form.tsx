@@ -40,12 +40,12 @@ export function NewsletterForm({ className }: { className?: string }) {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@inbox.com"
         aria-label="Email address"
-        className="min-w-0 flex-1 bg-transparent px-4 text-sm tracking-[-0.03em] text-fg-1 outline-none placeholder:text-fg-4"
+        className="min-w-0 flex-1 bg-transparent px-4 text-base tracking-[-0.03em] text-fg-1 outline-none placeholder:text-fg-4 sm:text-sm"
       />
       <button
         type="submit"
         aria-label="Subscribe"
-        className="flex shrink-0 items-center justify-center bg-accent px-4 text-bg-1 transition-colors duration-150 ease-foota hover:bg-accent-hi"
+        className="flex min-h-11 shrink-0 items-center justify-center bg-accent px-4 text-bg-1 transition-colors duration-150 ease-worldkit hover:bg-accent-hi"
       >
         <ArrowRight className="size-4" strokeWidth={1.5} />
       </button>

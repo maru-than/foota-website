@@ -23,7 +23,9 @@ export function ShopByConfederation() {
               <li key={c.handle}>
                 <Link
                   href={`/collections/${c.handle}`}
-                  className="group flex flex-col items-center gap-2 border border-line-accent bg-bg-2 p-5 text-center transition-[transform,background-color] duration-300 ease-foota hover:-translate-y-1 hover:bg-bg-3"
+                  /* min-h keeps the 2-col mobile rows even when one label
+                     wraps to 2 lines ("N. & C. America") and others don't. */
+                  className="group flex min-h-[96px] flex-col items-center justify-center gap-2 border border-line-accent bg-bg-2 p-5 text-center transition-[transform,background-color] duration-300 ease-worldkit hover:-translate-y-1 hover:bg-bg-3"
                 >
                   <span
                     aria-hidden

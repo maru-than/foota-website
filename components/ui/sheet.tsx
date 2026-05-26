@@ -28,7 +28,7 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-  "fixed z-50 flex flex-col bg-bg-1 transition ease-foota data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-300",
+  "fixed z-50 flex flex-col bg-bg-1 transition ease-worldkit data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-300",
   {
     variants: {
       side: {
@@ -63,7 +63,7 @@ const SheetContent = React.forwardRef<
     >
       {children}
       {!hideClose ? (
-        <SheetPrimitive.Close className="absolute right-5 top-5 flex size-9 items-center justify-center text-fg-2 transition-colors hover:bg-bg-3 hover:text-fg-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+        <SheetPrimitive.Close className="absolute right-3 top-[max(0.75rem,calc(env(safe-area-inset-top)+0.25rem))] flex size-11 items-center justify-center text-fg-2 transition-colors hover:bg-bg-3 hover:text-fg-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
           <X className="size-5" strokeWidth={1.5} />
           <span className="sr-only">Close</span>
         </SheetPrimitive.Close>
@@ -77,7 +77,9 @@ function SheetHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
   return (
     <div
       className={cn(
-        "flex flex-col gap-1 border-b border-line-accent px-6 py-5",
+        // pt grows with the iOS notch so the title and the floating close X
+        // both clear the system UI.
+        "flex flex-col gap-1 border-b border-line-accent px-6 pb-5 pt-[max(1.25rem,calc(env(safe-area-inset-top)+0.5rem))]",
         className,
       )}
       {...props}
@@ -88,7 +90,11 @@ function SheetHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
 function SheetFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("mt-auto border-t border-line-accent px-6 py-5", className)}
+      className={cn(
+        // pb clears the iOS home indicator on the bottom sheet edge.
+        "mt-auto border-t border-line-accent px-6 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]",
+        className,
+      )}
       {...props}
     />
   );

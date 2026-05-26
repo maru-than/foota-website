@@ -32,7 +32,7 @@ export function SectionHeading({
           align === "center" && "justify-center",
         )}
       >
-        <h2 className="text-balance text-3xl font-bold leading-[1.02] tracking-[-0.03em] sm:text-4xl">
+        <h2 className="display text-balance text-4xl leading-[1.02] sm:text-5xl">
           {title}
         </h2>
         {action ? (

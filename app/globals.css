@@ -26,10 +26,13 @@
   --color-bg-3: var(--color-neutral-700); /* elevated card / chip */
   --color-bg-4: var(--color-neutral-600); /* hover surface */
 
-  /* Foreground — Tailwind neutral scale */
+  /* Foreground — Tailwind neutral scale.
+     fg-3 was neutral-500 (~3.6:1 against bg-1, below WCAG AA 4.5:1 for body
+     text). Bumped to neutral-400 (~6.4:1). Use fg-4 for genuinely tertiary
+     ornaments where contrast matters less. */
   --color-fg-1: var(--color-white);
   --color-fg-2: var(--color-neutral-300);
-  --color-fg-3: var(--color-neutral-500);
+  --color-fg-3: var(--color-neutral-400);
   --color-fg-4: var(--color-neutral-600);
 
   /* Accent — all derived from --accent-rgb (see top of file) */
@@ -63,13 +66,19 @@
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
 
   /* Motion */
-  --ease-foota: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-worldkit: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Animations */
   --animate-ticker: ticker 40s linear infinite;
   --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
-  --animate-accordion-down: accordion-down 0.25s var(--ease-foota);
-  --animate-accordion-up: accordion-up 0.2s var(--ease-foota);
+  --animate-accordion-down: accordion-down 0.25s var(--ease-worldkit);
+  --animate-accordion-up: accordion-up 0.2s var(--ease-worldkit);
+}
+
+@keyframes bagPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  100% { transform: scale(1); }
 }
 
 @keyframes ticker {
@@ -146,7 +155,7 @@
 }
 
 @layer utilities {
-  /* Uppercase micro label — the Foota "fk-label". */
+  /* Uppercase micro label — the Worldkit "wk-label". */
   .eyebrow {
     font-family: var(--font-sans);
     text-transform: uppercase;
@@ -157,12 +166,13 @@
   }
 
   /* Gambarino display lockup — natural case, regular weight only (no other
-     weight exists, so pin 400 and disable faux-bold), 0 letter-spacing. */
+     weight exists, so pin 400 and disable faux-bold), -5% tracking for the
+     tight editorial feel. */
   .display {
     font-family: var(--font-display);
     font-weight: 400;
     font-synthesis: none;
-    letter-spacing: 0;
+    letter-spacing: -0.05em;
     line-height: 1;
   }
 
@@ -171,8 +181,8 @@
     opacity: 0;
     transform: translateY(16px);
     transition:
-      opacity 0.6s var(--ease-foota),
-      transform 0.6s var(--ease-foota);
+      opacity 0.6s var(--ease-worldkit),
+      transform 0.6s var(--ease-worldkit);
     will-change: opacity, transform;
   }
   .js .reveal[data-revealed="true"] {
