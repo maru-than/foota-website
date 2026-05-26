@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { CustomiseProvider } from "@/components/product/customise/customise-context";
 import { ProductBuyBox } from "@/components/product/product-buy-box";
 import { ProductDetails } from "@/components/product/product-details";
 import { ProductGallery } from "@/components/product/product-gallery";
@@ -107,50 +108,52 @@ export default async function ProductPage({
           <span className="text-fg-1">{product.title}</span>
         </nav>
 
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
-          <ProductGallery
-            images={product.images}
-            title={product.title}
-            meta={product.meta}
-          />
+        <CustomiseProvider product={product}>
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
+            <ProductGallery
+              images={product.images}
+              title={product.title}
+              meta={product.meta}
+            />
 
-          <div className="lg:py-2">
-            <div className="flex flex-wrap items-center gap-3">
-              {label ? <span className="eyebrow text-fg-3">{label}</span> : null}
-              {product.meta.badge ? (
-                <Badge variant={jerseyBadgeVariant(product.meta.badge)}>
-                  {product.meta.badge}
-                </Badge>
-              ) : null}
-            </div>
+            <div className="lg:py-2">
+              <div className="flex flex-wrap items-center gap-3">
+                {label ? <span className="eyebrow text-fg-3">{label}</span> : null}
+                {product.meta.badge ? (
+                  <Badge variant={jerseyBadgeVariant(product.meta.badge)}>
+                    {product.meta.badge}
+                  </Badge>
+                ) : null}
+              </div>
 
-            <h1 className="mt-3 text-3xl font-bold leading-none tracking-[-0.03em] text-accent sm:text-4xl">
-              {product.meta.teamName ?? product.title}
-            </h1>
-            <p className="mt-2 text-sm text-fg-3">{product.title}</p>
+              <h1 className="mt-3 text-3xl font-bold leading-none tracking-[-0.03em] text-accent sm:text-4xl">
+                {product.meta.teamName ?? product.title}
+              </h1>
+              <p className="mt-2 text-sm text-fg-3">{product.title}</p>
 
-            <div className="mt-5">
-              <Price
-                amount={price.amount}
-                currencyCode={price.currencyCode}
-                compareAt={product.compareAtPrice}
-                className="text-2xl font-bold text-fg-1"
-              />
-            </div>
+              <div className="mt-5">
+                <Price
+                  amount={price.amount}
+                  currencyCode={price.currencyCode}
+                  compareAt={product.compareAtPrice}
+                  className="text-2xl font-bold text-fg-1"
+                />
+              </div>
 
-            <div className="mt-8">
-              <ProductBuyBox product={product} />
-            </div>
+              <div className="mt-8">
+                <ProductBuyBox product={product} />
+              </div>
 
-            <div className="mt-5">
-              <ShippingPromise />
-            </div>
+              <div className="mt-5">
+                <ShippingPromise />
+              </div>
 
-            <div className="mt-10">
-              <ProductDetails product={product} />
+              <div className="mt-10">
+                <ProductDetails product={product} />
+              </div>
             </div>
           </div>
-        </div>
+        </CustomiseProvider>
       </Container>
 
       {reviews.length > 0 ? (

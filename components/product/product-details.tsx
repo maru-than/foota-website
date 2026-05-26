@@ -5,12 +5,14 @@ import * as React from "react";
 import { AuthenticityModal } from "@/components/info/authenticity-modal";
 import { ShippingReturnsModal } from "@/components/info/shipping-returns-modal";
 import { SizeGuideModal } from "@/components/info/size-guide-modal";
+import { FontSpecimen } from "@/components/product/customise/font-specimen";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { CUSTOM_MAX_NAME_CHARS, CUSTOM_PRICE_DELTA } from "@/lib/customisation";
 import type { Product } from "@/lib/shopify/types";
 
 /**
@@ -95,6 +97,29 @@ export function ProductDetails({ product }: { product: Product }) {
           </p>
         </AccordionContent>
       </AccordionItem>
+
+      {product.meta.customisable !== false ? (
+        <AccordionItem value="customisation">
+          <AccordionTrigger>Name &amp; number printing</AccordionTrigger>
+          <AccordionContent>
+            <p className="mb-3">
+              Add any name (up to {CUSTOM_MAX_NAME_CHARS} characters) and a
+              number from 0–99 to the back. Heat-pressed with the official{" "}
+              {product.meta.confederation ?? "confederation"} letter set.
+              Add-on price: ${CUSTOM_PRICE_DELTA.toFixed(0)}.
+            </p>
+            <p className="mb-4">
+              Customised shirts ship in 5–7 days and are{" "}
+              <b className="text-fg-1">non-returnable</b> — please double-check
+              spelling before adding to the bag.
+            </p>
+            <FontSpecimen
+              confederation={product.meta.confederation}
+              className="border-t border-line-1 pt-4"
+            />
+          </AccordionContent>
+        </AccordionItem>
+      ) : null}
     </Accordion>
   );
 }

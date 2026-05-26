@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, ShieldCheck, Sparkles, Truck } from "lucide-react";
+import { ArrowRight, Flame, ShieldCheck, Sparkles, Truck } from "lucide-react";
 
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
 import { Price } from "@/components/ui/price";
+import { formatCustomLabel } from "@/lib/customisation";
 import { cn, formatPrice } from "@/lib/utils";
 import type { Product, ProductVariant } from "@/lib/shopify/types";
+import { CustomiseForm } from "./customise/customise-form";
+import { CustomiseTemplates } from "./customise/customise-templates";
+import { CustomiseToggle } from "./customise/customise-toggle";
+import { useCustomise } from "./customise/customise-context";
 import { VariantSelector } from "./variant-selector";
 
 function defaultOptions(product: Product): Record<string, string> {
@@ -29,10 +34,16 @@ function findVariant(
   );
 }
 
-const TRUST = [
+const TRUST_BLANK = [
   { Icon: Truck, title: "Worldwide shipping", note: "Tracked · dispatched in 48h" },
   { Icon: ShieldCheck, title: "Inspected on arrival", note: "Stitching, crest & fonts" },
   { Icon: Sparkles, title: "New condition", note: "Photographed & condition-checked" },
+];
+
+const TRUST_CUSTOM = [
+  { Icon: Truck, title: "Worldwide shipping", note: "Tracked · dispatched in 5–7 days" },
+  { Icon: ShieldCheck, title: "Inspected on arrival", note: "Stitching, crest & fonts" },
+  { Icon: Flame, title: "Officially heat-pressed", note: "Confederation-accurate font" },
 ];
 
 export function ProductBuyBox({ product }: { product: Product }) {
@@ -40,10 +51,19 @@ export function ProductBuyBox({ product }: { product: Product }) {
   const [selected, setSelected] = useState<Record<string, string>>(() =>
     defaultOptions(product),
   );
+  const { enabled: customEnabled, priceDelta, customisation } = useCustomise();
 
   const variant = useMemo(() => findVariant(product, selected), [product, selected]);
   const available = variant?.availableForSale ?? false;
-  const price = variant?.price ?? product.priceRange.minVariantPrice;
+  const basePrice = variant?.price ?? product.priceRange.minVariantPrice;
+  const effectiveAmount =
+    Number.parseFloat(basePrice.amount) + (customEnabled ? priceDelta : 0);
+  const price = {
+    amount: effectiveAmount.toFixed(2),
+    currencyCode: basePrice.currencyCode,
+  };
+  const customLabel = formatCustomLabel(customisation);
+  const trust = customEnabled ? TRUST_CUSTOM : TRUST_BLANK;
 
   // Sticky bar visibility — two independent signals:
   //  • inlineVisible: true while the inline Add-to-bag is on screen (no point
@@ -82,12 +102,16 @@ export function ProductBuyBox({ product }: { product: Product }) {
   }
 
   function add() {
-    if (variant && available) addItem(product, variant);
+    if (variant && available) addItem(product, variant, 1, customisation);
   }
 
   return (
     <div className="space-y-6">
       <VariantSelector product={product} selected={selected} onChange={onChange} />
+
+      <CustomiseToggle />
+      <CustomiseForm />
+      <CustomiseTemplates product={product} />
 
       <div className="flex items-center gap-2 text-sm">
         <span
@@ -97,7 +121,11 @@ export function ProductBuyBox({ product }: { product: Product }) {
           )}
         />
         <span className="text-fg-3">
-          {available ? "In stock · ready to ship" : "Currently sold out"}
+          {available
+            ? customEnabled
+              ? "Heat-press lead time · 5–7 days"
+              : "In stock · ready to ship"
+            : "Currently sold out"}
         </span>
       </div>
 
@@ -113,7 +141,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
       {/* Single column on phones — at 375px the 3-col version wraps every
           title to 3 lines. From sm: up the original row layout is fine. */}
       <div className="grid grid-cols-1 gap-4 border-t border-line-1 pt-5 sm:grid-cols-3 sm:gap-3">
-        {TRUST.map(({ Icon, title, note }) => (
+        {trust.map(({ Icon, title, note }) => (
           <div key={title} className="flex gap-2.5">
             <Icon className="size-[18px] shrink-0 text-accent" strokeWidth={1.5} />
             <div className="flex flex-col gap-0.5">
@@ -138,8 +166,9 @@ export function ProductBuyBox({ product }: { product: Product }) {
       >
         <div className="flex min-w-0 flex-col leading-tight">
           {selected.Size ? (
-            <span className="text-[11px] uppercase tracking-[0.1em] text-fg-3">
+            <span className="truncate text-[11px] uppercase tracking-[0.1em] text-fg-3">
               Size {selected.Size}
+              {customLabel ? ` · ${customLabel}` : null}
             </span>
           ) : null}
           <Price
