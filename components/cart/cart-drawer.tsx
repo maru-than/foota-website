@@ -58,7 +58,7 @@ export function CartDrawer({
                 Your locker is empty.
               </p>
               <p className="max-w-xs text-sm text-fg-3">
-                Add a jersey to get started — the archive is waiting.
+                Add a jersey to get started — all 48 nations are in.
               </p>
               <Button asChild onClick={closeCart} className="mt-2">
                 <Link href="/shop">Find a jersey</Link>
@@ -135,7 +135,7 @@ export function CartDrawer({
               <button
                 type="button"
                 onClick={closeCart}
-                className="w-full text-center text-xs uppercase tracking-[0.12em] text-fg-3 transition-colors hover:text-accent"
+                className="w-full text-center text-xs uppercase text-fg-3 transition-colors hover:text-accent"
               >
                 Continue shopping
               </button>

@@ -60,7 +60,7 @@ export function Toast({
               toast.action?.onClick();
               onDismiss();
             }}
-            className="shrink-0 text-xs font-bold uppercase tracking-[0.1em] text-accent transition-colors hover:text-accent-hi"
+            className="shrink-0 text-xs font-bold uppercase text-accent transition-colors hover:text-accent-hi"
           >
             {toast.action.label}
           </button>

@@ -31,7 +31,7 @@ export default function CartPage() {
         <div className="flex flex-col items-center gap-4 py-24 text-center">
           <p className="text-3xl font-bold tracking-[-0.03em]">Your locker is empty.</p>
           <p className="max-w-md text-sm text-fg-3">
-            Add a jersey to get started — the archive is waiting.
+            Add a jersey to get started — all 48 nations are in.
           </p>
           <Button asChild className="mt-2">
             <Link href="/shop">Find a jersey</Link>
@@ -47,7 +47,7 @@ export default function CartPage() {
 
           <aside className="lg:sticky lg:top-32 lg:h-fit">
             <div className="border border-line-accent bg-bg-2 p-6">
-              <h2 className="text-sm font-bold uppercase tracking-[0.12em]">
+              <h2 className="text-sm font-bold uppercase">
                 Order summary
               </h2>
               <div className="mt-5 flex items-center justify-between border-t border-line-1 pt-4 text-sm">

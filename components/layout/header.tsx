@@ -65,7 +65,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative py-1 text-xs font-semibold uppercase tracking-[0.14em] transition-colors duration-150 ease-worldkit",
+                  "relative py-1 text-xs font-semibold uppercase transition-colors duration-150 ease-worldkit",
                   active ? "text-accent" : "text-fg-2 hover:text-fg-1",
                 )}
               >

@@ -6,21 +6,26 @@
  * @since 2026-05-25
  */
 
+import { CheckCircle2, Globe, Layers, type LucideIcon } from "lucide-react";
+
 import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
 import { getFeaturedTestimonials } from "@/lib/testimonials";
 
-const POINTS = [
+const POINTS: { name: string; text: string; Icon: LucideIcon }[] = [
   {
     name: "Inspected on arrival",
     text: "Every shirt is checked against reference photos before it leaves the warehouse.",
+    Icon: CheckCircle2,
   },
   {
     name: "Stitching & finish",
     text: "Each piece is examined for print, badge alignment and seam quality.",
+    Icon: Layers,
   },
   {
     name: "Dispatched worldwide",
     text: "Tracked shipping to every nation, dispatched within 48 hours.",
+    Icon: Globe,
   },
 ];
 
@@ -31,17 +36,20 @@ export function AuthenticityContent() {
       <section className="space-y-3">
         <h3 className="text-lg font-bold tracking-[-0.02em]">What you get</h3>
         <p>
-          Worldkit Soccer stocks 2026 home jerseys for all 48 nations in the field. Every
+          Worldkit Soccer stocks 2026 home and away jerseys for all 48 nations in the field. Every
           jersey is inspected on arrival — stitching, crest, fonts and finish
           are checked against reference photos before it ships.
         </p>
       </section>
 
       <section className="grid gap-3 sm:grid-cols-3">
-        {POINTS.map((point) => (
-          <div key={point.name} className="border border-line-accent bg-bg-2 p-4">
-            <h4 className="eyebrow text-accent">{point.name}</h4>
-            <p className="mt-2 text-sm">{point.text}</p>
+        {POINTS.map(({ name, text, Icon }) => (
+          <div key={name} className="border border-line-accent bg-bg-2 p-4">
+            <h4 className="eyebrow flex items-center gap-1.5 text-accent">
+              <Icon className="size-3.5" strokeWidth={1.5} aria-hidden />
+              {name}
+            </h4>
+            <p className="mt-2 text-sm">{text}</p>
           </div>
         ))}
       </section>

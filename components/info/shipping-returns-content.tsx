@@ -6,11 +6,16 @@
  * @since 2026-05-25
  */
 
+import { AlertTriangle, Mail, Truck, Undo2 } from "lucide-react";
+
 export function ShippingReturnsContent() {
   return (
     <div className="space-y-8 text-pretty leading-relaxed text-fg-2 [&_h3]:text-fg-1">
       <section className="space-y-3">
-        <h3 className="text-lg font-bold tracking-[-0.02em]">Shipping</h3>
+        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
+          <Truck className="size-5 text-fg-3" strokeWidth={1.5} aria-hidden />
+          Shipping
+        </h3>
         <p>
           Worldwide shipping with tracking on every order. Costs and delivery
           estimates are calculated at checkout by destination. Most orders are
@@ -18,11 +23,13 @@ export function ShippingReturnsContent() {
         </p>
       </section>
       <section className="space-y-3">
-        <h3 className="text-lg font-bold tracking-[-0.02em]">Returns</h3>
+        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
+          <Undo2 className="size-5 text-fg-3" strokeWidth={1.5} aria-hidden />
+          Returns
+        </h3>
         <p>
           Returns within 30 days of delivery on unworn shirts with original
-          tags. Retro and rare shirts are eligible unless noted on the product
-          page.
+          tags. All blank stock jerseys are eligible.
         </p>
         <p>
           To start a return, contact us with your order number and we&apos;ll
@@ -30,7 +37,10 @@ export function ShippingReturnsContent() {
         </p>
       </section>
       <section className="space-y-3">
-        <h3 className="text-lg font-bold tracking-[-0.02em]">Customised items</h3>
+        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
+          <AlertTriangle className="size-5 text-danger" strokeWidth={1.5} aria-hidden />
+          Customised items
+        </h3>
         <p>
           Shirts with a custom name or number on the back are heat-pressed to
           order and dispatched in 5–7 days. Because every custom is unique to
@@ -45,7 +55,10 @@ export function ShippingReturnsContent() {
         </p>
       </section>
       <section className="space-y-3">
-        <h3 className="text-lg font-bold tracking-[-0.02em]">Order tracking</h3>
+        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
+          <Mail className="size-5 text-fg-3" strokeWidth={1.5} aria-hidden />
+          Order tracking
+        </h3>
         <p>
           Once your order ships, you&apos;ll get a confirmation email with
           tracking from our Shopify-powered checkout.

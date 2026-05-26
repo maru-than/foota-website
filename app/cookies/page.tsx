@@ -70,7 +70,7 @@ export default function CookiesPage() {
                 >
                   <h3 className="eyebrow text-accent">{c.name}</h3>
                   <p className="mt-2 text-sm">{c.purpose}</p>
-                  <p className="mt-3 text-xs uppercase tracking-[0.1em] text-fg-3">
+                  <p className="mt-3 text-xs uppercase text-fg-3">
                     {c.optional ? "Optional" : "Always on"}
                   </p>
                 </div>

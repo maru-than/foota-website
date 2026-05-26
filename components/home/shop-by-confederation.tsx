@@ -37,7 +37,7 @@ export function ShopByConfederation() {
                 >
                   <span
                     aria-hidden
-                    className="text-base font-bold tracking-[0.02em] text-accent"
+                    className="text-base font-bold text-accent"
                   >
                     {c.abbr}
                   </span>

@@ -91,7 +91,7 @@ export function MobileMenu({
           <button
             type="button"
             onClick={handle(openSearch)}
-            className="flex items-center gap-2.5 border border-line-accent px-4 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-fg-1 transition-colors hover:border-accent hover:bg-accent-12"
+            className="flex items-center gap-2.5 border border-line-accent px-4 py-3 text-sm font-semibold uppercase text-fg-1 transition-colors hover:border-accent hover:bg-accent-12"
           >
             <SearchIcon className="size-4" strokeWidth={1.5} />
             Search
@@ -99,7 +99,7 @@ export function MobileMenu({
           <button
             type="button"
             onClick={handle(openCart)}
-            className="flex items-center justify-between gap-2.5 border border-line-accent px-4 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-fg-1 transition-colors hover:border-accent hover:bg-accent-12"
+            className="flex items-center justify-between gap-2.5 border border-line-accent px-4 py-3 text-sm font-semibold uppercase text-fg-1 transition-colors hover:border-accent hover:bg-accent-12"
           >
             <span className="inline-flex items-center gap-2.5">
               <BagIcon className="size-4" strokeWidth={1.5} />
@@ -110,7 +110,7 @@ export function MobileMenu({
         </div>
 
         <div className="mt-auto border-t border-line-accent">
-          <div className="flex items-center gap-2 px-6 py-4 text-xs uppercase tracking-[0.12em] text-fg-2">
+          <div className="flex items-center gap-2 px-6 py-4 text-xs uppercase text-fg-2">
             <Globe className="size-3.5" strokeWidth={1.5} />
             EN · USD
           </div>

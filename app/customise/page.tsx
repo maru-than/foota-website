@@ -22,7 +22,7 @@ import {
 export const metadata: Metadata = {
   title: "Customise — name & number printing",
   description:
-    "Add any name and any number (0–99) to the back of any 2026 home jersey. Heat-pressed in the official confederation font, dispatched in 5–7 days.",
+    "Add any name and any number (0–99) to the back of any 2026 World Cup jersey. Heat-pressed in the official confederation font, dispatched in 5–7 days.",
   alternates: { canonical: "/customise" },
 };
 
@@ -55,7 +55,7 @@ export default function CustomisePage() {
             <SectionHeading
               eyebrow="Personalise"
               title="The name on the back is yours."
-              description={`Add any name (up to ${CUSTOM_MAX_NAME_CHARS} characters) and any number from 0 to 99 to any 2026 home jersey. Flat $${CUSTOM_PRICE_DELTA} add-on per shirt.`}
+              description={`Add any name (up to ${CUSTOM_MAX_NAME_CHARS} characters) and any number from 0 to 99 to any 2026 World Cup jersey. Flat $${CUSTOM_PRICE_DELTA} add-on per shirt.`}
             />
           </Reveal>
           <Reveal delay={120}>

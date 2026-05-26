@@ -19,7 +19,7 @@ import { searchProducts } from "@/lib/shopify/products";
 
 export const metadata: Metadata = {
   title: "Search",
-  description: "Search the Worldkit Soccer archive by club, nation, season or shirt name.",
+  description: "Search World Cup 2026 jerseys by nation or confederation.",
   alternates: { canonical: "/search" },
 };
 
@@ -38,11 +38,11 @@ export default async function SearchPage({
     <>
       <PageHeader
         eyebrow="Search"
-        title={q ? `Results for “${q}”` : "Search the archive"}
+        title={q ? `Results for “${q}”` : "Search jerseys"}
         description={
           q
             ? `${results.length} ${results.length === 1 ? "jersey" : "jerseys"} found.`
-            : "Find jerseys by club, nation, season or shirt name."
+            : "Find a 2026 jersey by nation or confederation."
         }
       >
         <form action="/search" className="mt-6 flex max-w-md gap-2">
@@ -80,7 +80,7 @@ export default async function SearchPage({
               No jerseys match “{q}”.
             </p>
             <p className="max-w-md text-sm text-fg-3">
-              Try a club, a nation or a season — or browse the full archive.
+              Try a nation or confederation — or browse all 48.
             </p>
             <Button asChild variant="secondary">
               <Link href="/shop">Browse all jerseys</Link>

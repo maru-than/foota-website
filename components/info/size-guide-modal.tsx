@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Modal wrapper around the size-guide body — era / manufacturer variations and how-to-measure guidance.
+ * @file Modal wrapper around the size-guide body — measurements and how-to-measure guidance.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -29,8 +29,7 @@ export function SizeGuideModal({ children }: { children: React.ReactNode }) {
           <InfoModalTitle>Help</InfoModalTitle>
           <InfoModalHeadline>Size guide</InfoModalHeadline>
           <InfoModalDescription>
-            Shirts vary by era and manufacturer — use these measurements as a
-            guide before picking your size.
+            Use these measurements as a guide before picking your size.
           </InfoModalDescription>
         </InfoModalHeader>
         <InfoModalBody>

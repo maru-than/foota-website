@@ -36,7 +36,7 @@ export function Footer() {
             />
           </Link>
           <p className="mt-4 text-sm leading-relaxed text-fg-2">
-            A home for jerseys. 2026 international home shirts — every nation,
+            A home for jerseys. 2026 World Cup home & away kits — every nation,
             dispatched worldwide.
           </p>
 
@@ -48,7 +48,7 @@ export function Footer() {
               <a
                 key={label}
                 href={href}
-                className="block py-3.5 text-xs uppercase tracking-[0.12em] text-fg-3 transition-colors hover:text-accent"
+                className="block py-3.5 text-xs uppercase text-fg-3 transition-colors hover:text-accent"
               >
                 {label}
               </a>
@@ -81,7 +81,7 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-line-1">
-        <Container className="flex flex-col items-center justify-between gap-3 py-5 text-[11px] uppercase tracking-[0.12em] text-fg-3 sm:flex-row">
+        <Container className="flex flex-col items-center justify-between gap-3 py-5 text-[11px] uppercase text-fg-3 sm:flex-row">
           <span>© {year} Worldkit Soccer</span>
           <span className="hidden sm:block">A home for jerseys · Dispatched worldwide</span>
           <span className="inline-flex items-center gap-2 text-fg-1">

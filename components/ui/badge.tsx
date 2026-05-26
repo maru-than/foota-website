@@ -1,5 +1,5 @@
 /**
- * @file shadcn badge with CVA variants — new / limited / sale / retro / outline plus jerseyBadgeVariant helper.
+ * @file shadcn badge with CVA variants — new / limited / sale / outline plus jerseyBadgeVariant helper.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -14,14 +14,13 @@ import type { JerseyBadge } from "@/lib/shopify/types";
 
 // Solid backings so badges stay legible overlaid on white product tiles.
 const badgeVariants = cva(
-  "inline-flex items-center rounded-none px-2 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.14em]",
+  "inline-flex items-center rounded-none px-2 py-1.5 text-[10px] font-bold uppercase leading-none",
   {
     variants: {
       variant: {
         new: "bg-accent text-bg-1",
         limited: "border border-accent bg-bg-1 text-accent",
         sale: "bg-danger text-bg-1",
-        retro: "border border-line-2 bg-bg-1 text-fg-2",
         outline: "border border-line-2 bg-bg-1 text-fg-2",
       },
     },
@@ -48,10 +47,6 @@ export function jerseyBadgeVariant(
       return "new"; // lime fill — marquee host nations
     case "New":
       return "limited"; // lime outline — new drops
-    case "Rare Find":
-      return "limited";
-    case "Retro":
-      return "retro";
     default:
       return "outline";
   }

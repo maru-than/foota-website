@@ -85,7 +85,7 @@ export function SearchOverlay({
       >
         <DialogTitle className="sr-only">Search jerseys</DialogTitle>
         <DialogDescription className="sr-only">
-          Search the archive by club, nation, season or shirt name.
+          Search World Cup 2026 jerseys by nation or confederation.
         </DialogDescription>
 
         <form
@@ -97,13 +97,13 @@ export function SearchOverlay({
             ref={inputRef}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search clubs, nations, seasons…"
+            placeholder="Search nations, confederations…"
             className="h-14 flex-1 bg-transparent text-base tracking-[-0.02em] text-fg-1 outline-none placeholder:text-fg-4"
           />
           <button
             type="button"
             onClick={() => handleOpenChange(false)}
-            className="shrink-0 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-fg-3 transition-colors hover:text-accent focus:outline-none focus-visible:text-accent"
+            className="shrink-0 px-3 py-2 text-xs font-semibold uppercase text-fg-3 transition-colors hover:text-accent focus:outline-none focus-visible:text-accent"
           >
             Cancel
           </button>
@@ -146,7 +146,7 @@ export function SearchOverlay({
                       </div>
                       <div className="flex-1">
                         {p.meta.teamName ? (
-                          <span className="text-[11px] uppercase tracking-[0.1em] text-accent">
+                          <span className="text-[11px] uppercase text-accent">
                             {p.meta.teamName}
                           </span>
                         ) : null}
@@ -165,7 +165,7 @@ export function SearchOverlay({
               <button
                 type="button"
                 onClick={goToResults}
-                className="block w-full border-t border-line-1 px-5 py-3 text-left text-xs uppercase tracking-[0.12em] text-accent transition-colors hover:bg-bg-3"
+                className="block w-full border-t border-line-1 px-5 py-3 text-left text-xs uppercase text-accent transition-colors hover:bg-bg-3"
               >
                 View all results
               </button>
@@ -174,8 +174,8 @@ export function SearchOverlay({
 
           {query.trim().length < 2 ? (
             <p className="px-5 py-8 text-center text-sm text-fg-3">
-              Try a club, a nation or a season — &ldquo;Milan&rdquo;,
-              &ldquo;Brazil&rdquo;, &ldquo;1998&rdquo;.
+              Try a nation or confederation — &ldquo;Brazil&rdquo;,
+              &ldquo;Morocco&rdquo;, &ldquo;UEFA&rdquo;.
             </p>
           ) : null}
         </div>

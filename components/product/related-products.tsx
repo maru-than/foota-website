@@ -1,5 +1,5 @@
 /**
- * @file "More from the archive" section — related products grid with heading.
+ * @file "More from the catalogue" section — related products grid with heading.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -17,7 +17,7 @@ export function RelatedProducts({ products }: { products: Product[] }) {
   return (
     <section className="border-t border-line-accent py-16 lg:py-20">
       <Container>
-        <SectionHeading eyebrow="You might also like" title="More from the archive" />
+        <SectionHeading eyebrow="You might also like" title="More nations" />
         <div className="mt-8">
           <ProductGrid products={products} />
         </div>

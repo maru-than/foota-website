@@ -207,7 +207,7 @@ export function ProductGallery({
                 )}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-fg-3">
+                  <span className="text-[9px] font-semibold uppercase text-fg-3">
                     Back
                   </span>
                 </div>

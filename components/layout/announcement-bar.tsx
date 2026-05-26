@@ -8,9 +8,8 @@
 
 const ITEMS = [
   "Worldwide shipping available",
-  "New shirts added weekly",
   "Summer 2026 · all 48 nations",
-  "Home shirts for every side",
+  "Home & away kits in stock",
   "Add your name & number · +$15",
   "Dispatched in 48h",
 ];
@@ -24,7 +23,7 @@ export function AnnouncementBar() {
           {[...ITEMS, ...ITEMS].map((item, i) => (
             <span
               key={i}
-              className="inline-flex items-center gap-8 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.18em]"
+              className="inline-flex items-center gap-8 whitespace-nowrap text-[11px] font-bold uppercase"
             >
               {item}
               <span className="size-1 rounded-full bg-bg-1" aria-hidden />

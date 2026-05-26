@@ -22,7 +22,7 @@ export function NewArrivals({ products }: { products: Product[] }) {
           <SectionHeading
             eyebrow="Just landed"
             title="New arrivals"
-            description="The latest shirts to enter the archive — current-season kits and fresh rare finds."
+            description="The latest 2026 kits to land — fresh drops from across the confederations."
             action={{ label: "View all", href: "/collections/new-arrivals" }}
           />
         </Reveal>

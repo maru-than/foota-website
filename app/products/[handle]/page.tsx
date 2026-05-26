@@ -16,9 +16,7 @@ import { ProductBuyBox } from "@/components/product/product-buy-box";
 import { ProductDetails } from "@/components/product/product-details";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { RelatedProducts } from "@/components/product/related-products";
-import { ShippingPromise } from "@/components/product/shipping-promise";
 import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
-import { Badge, jerseyBadgeVariant } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
 import { Price } from "@/components/ui/price";
 import { Reveal } from "@/components/ui/reveal";
@@ -74,9 +72,6 @@ export default async function ProductPage({
   const related = await getProductRecommendations(product.id, 4);
   const reviews = getTestimonialsForProduct(handle, 4);
   const price = product.priceRange.minVariantPrice;
-  const label = [product.meta.confederation, product.meta.season]
-    .filter(Boolean)
-    .join(" · ");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -131,16 +126,7 @@ export default async function ProductPage({
             />
 
             <div className="lg:py-2">
-              <div className="flex flex-wrap items-center gap-3">
-                {label ? <span className="eyebrow text-fg-3">{label}</span> : null}
-                {product.meta.badge ? (
-                  <Badge variant={jerseyBadgeVariant(product.meta.badge)}>
-                    {product.meta.badge}
-                  </Badge>
-                ) : null}
-              </div>
-
-              <h1 className="mt-3 text-3xl font-bold leading-none tracking-[-0.03em] text-accent sm:text-4xl">
+              <h1 className="text-3xl font-bold leading-none tracking-[-0.03em] text-accent sm:text-4xl">
                 {product.meta.teamName ?? product.title}
               </h1>
               <p className="mt-2 text-sm text-fg-3">{product.title}</p>
@@ -156,10 +142,6 @@ export default async function ProductPage({
 
               <div className="mt-8">
                 <ProductBuyBox product={product} />
-              </div>
-
-              <div className="mt-5">
-                <ShippingPromise />
               </div>
 
               <div className="mt-10">

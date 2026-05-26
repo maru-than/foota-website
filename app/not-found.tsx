@@ -20,7 +20,7 @@ export default function NotFound() {
       </h1>
       <p className="max-w-md text-pretty text-fg-3">
         We couldn&apos;t find that page. The jersey you&apos;re after might be
-        elsewhere in the archive.
+        with one of the other 47 nations.
       </p>
       <div className="mt-2 flex flex-wrap justify-center gap-3">
         <Button asChild>

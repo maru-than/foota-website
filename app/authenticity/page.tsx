@@ -15,7 +15,7 @@ import { Container } from "@/components/ui/container";
 export const metadata: Metadata = {
   title: "Quality check",
   description:
-    "Every 2026 home jersey at Worldkit Soccer is inspected on arrival — stitching, crest, fonts and finish are checked before it ships.",
+    "Every 2026 World Cup jersey at Worldkit Soccer is inspected on arrival — stitching, crest, fonts and finish are checked before it ships.",
   alternates: { canonical: "/authenticity" },
 };
 

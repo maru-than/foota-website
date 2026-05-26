@@ -8,6 +8,8 @@
  * @since 2026-05-25
  */
 
+import { Ruler } from "lucide-react";
+
 import { SizeGuideModal } from "@/components/info/size-guide-modal";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/shopify/types";
@@ -47,19 +49,15 @@ export function VariantSelector({
       {product.options.map((option) => (
         <div key={option.id}>
           <div className="mb-2.5 flex items-center justify-between">
-            <span className="eyebrow text-fg-3">
-              {option.name}
-              {selected[option.name] ? (
-                <span className="ml-2 text-fg-1">{selected[option.name]}</span>
-              ) : null}
-            </span>
+            <span className="eyebrow text-fg-3">{option.name}</span>
             {option.name.toLowerCase() === "size" ? (
               <SizeGuideModal>
                 <button
                   type="button"
-                  className="text-xs font-semibold text-accent transition-colors hover:text-accent-hi focus:outline-none focus-visible:text-accent-hi"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-accent transition-colors hover:text-accent-hi focus:outline-none focus-visible:text-accent-hi"
                 >
-                  Size guide →
+                  <Ruler className="size-3.5" strokeWidth={1.5} aria-hidden />
+                  Size guide
                 </button>
               </SizeGuideModal>
             ) : null}

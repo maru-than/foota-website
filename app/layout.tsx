@@ -46,12 +46,12 @@ export const metadata: Metadata = {
     template: "%s | Worldkit Soccer",
   },
   description:
-    "Shop 2026 international home jerseys for every nation in the 48-team field — dispatched worldwide.",
+    "Shop 2026 FIFA World Cup home and away jerseys for every nation in the 48-team field — dispatched worldwide.",
   applicationName: "Worldkit Soccer",
   keywords: [
-    "2026 international football jerseys",
+    "2026 World Cup jerseys",
     "national team jerseys",
-    "2026 home jerseys",
+    "2026 home and away kits",
     "football shirts",
     "USA Canada Mexico 2026",
   ],
@@ -61,14 +61,14 @@ export const metadata: Metadata = {
     siteName: "Worldkit Soccer",
     title: "Worldkit Soccer | A home for jerseys",
     description:
-      "2026 international home jerseys from all 48 nations. A home for jerseys.",
+      "2026 World Cup home and away jerseys from all 48 nations. A home for jerseys.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Worldkit Soccer | A home for jerseys",
     description:
-      "2026 international home jerseys from all 48 nations. A home for jerseys.",
+      "2026 World Cup home and away jerseys from all 48 nations. A home for jerseys.",
   },
   robots: { index: true, follow: true },
 };
