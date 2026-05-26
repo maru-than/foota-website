@@ -15,7 +15,13 @@ import {
   updateItemAction,
 } from "@/app/actions/cart";
 import { Toast, type ToastSpec } from "@/components/ui/toast";
-import type { Cart, CartLine, Product, ProductVariant } from "@/lib/shopify/types";
+import type {
+  Cart,
+  CartLine,
+  CartLineCustomisation,
+  Product,
+  ProductVariant,
+} from "@/lib/shopify/types";
 
 interface CartContextValue {
   cart: Cart | undefined;
@@ -31,7 +37,12 @@ interface CartContextValue {
   openSearch: () => void;
   closeSearch: () => void;
   setSearchOpen: (open: boolean) => void;
-  addItem: (product: Product, variant: ProductVariant, quantity?: number) => void;
+  addItem: (
+    product: Product,
+    variant: ProductVariant,
+    quantity?: number,
+    customisation?: CartLineCustomisation,
+  ) => void;
   updateItem: (lineId: string, quantity: number) => void;
   removeItem: (lineId: string) => void;
 }
@@ -60,7 +71,11 @@ function recompute(cart: Cart): Cart {
   let currency = cart.cost.subtotalAmount.currencyCode || "USD";
   for (const line of cart.lines) {
     quantity += line.quantity;
-    subtotal += Number.parseFloat(line.merchandise.price.amount) * line.quantity;
+    const unit = Number.parseFloat(line.merchandise.price.amount);
+    const delta = line.customisation
+      ? Number.parseFloat(line.customisation.priceDelta.amount)
+      : 0;
+    subtotal += (unit + delta) * line.quantity;
     currency = line.merchandise.price.currencyCode;
   }
   const money = { amount: subtotal.toFixed(2), currencyCode: currency };
@@ -75,14 +90,22 @@ function makeOptimisticLine(
   product: Product,
   variant: ProductVariant,
   quantity: number,
+  customisation: CartLineCustomisation | undefined,
 ): CartLine {
   const unit = Number.parseFloat(variant.price.amount);
+  const delta = customisation
+    ? Number.parseFloat(customisation.priceDelta.amount)
+    : 0;
+  const fingerprint = customisation
+    ? `${customisation.name ?? ""}|${customisation.number ?? ""}`
+    : "";
   return {
-    id: `optimistic-${variant.id}`,
+    id: `optimistic-${variant.id}${fingerprint ? `#${fingerprint}` : ""}`,
     quantity,
+    customisation,
     cost: {
       totalAmount: {
-        amount: (unit * quantity).toFixed(2),
+        amount: ((unit + delta) * quantity).toFixed(2),
         currencyCode: variant.price.currencyCode,
       },
     },
@@ -102,13 +125,22 @@ function makeOptimisticLine(
   };
 }
 
+function customisationFingerprint(line: CartLine): string {
+  const c = line.customisation;
+  if (!c) return "";
+  return `${c.name ?? ""}|${c.number ?? ""}`;
+}
+
 function cartReducer(state: Cart | undefined, action: OptimisticAction): Cart {
   const base = state ?? emptyCart();
   switch (action.type) {
     case "add": {
       const lines = [...base.lines];
+      const incomingFp = customisationFingerprint(action.line);
       const idx = lines.findIndex(
-        (l) => l.merchandise.id === action.line.merchandise.id,
+        (l) =>
+          l.merchandise.id === action.line.merchandise.id &&
+          customisationFingerprint(l) === incomingFp,
       );
       if (idx >= 0) {
         lines[idx] = {
@@ -155,7 +187,12 @@ export function CartProvider({
   const closeSearch = useCallback(() => setIsSearchOpen(false), []);
 
   const addItem = useCallback(
-    (product: Product, variant: ProductVariant, quantity = 1) => {
+    (
+      product: Product,
+      variant: ProductVariant,
+      quantity = 1,
+      customisation?: CartLineCustomisation,
+    ) => {
       // Premium pattern — toast confirms the add without interrupting browsing;
       // the user opens the bag explicitly via the toast action or the header.
       const name = product.meta.teamName ?? product.title;
@@ -167,10 +204,10 @@ export function CartProvider({
       startTransition(async () => {
         applyOptimistic({
           type: "add",
-          line: makeOptimisticLine(product, variant, quantity),
+          line: makeOptimisticLine(product, variant, quantity, customisation),
         });
         try {
-          const updated = await addItemAction(variant.id, quantity);
+          const updated = await addItemAction(variant.id, quantity, customisation);
           setCart(updated);
         } catch {
           // Optimistic state reverts automatically when the transition ends.

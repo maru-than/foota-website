@@ -6,7 +6,7 @@ import {
   removeFromCart,
   updateCartLine,
 } from "@/lib/shopify/cart";
-import type { Cart } from "@/lib/shopify/types";
+import type { Cart, CartLineCustomisation } from "@/lib/shopify/types";
 
 /**
  * Server actions for cart mutations. Each returns the fresh, normalized cart
@@ -18,8 +18,9 @@ import type { Cart } from "@/lib/shopify/types";
 export async function addItemAction(
   merchandiseId: string,
   quantity = 1,
+  customisation?: CartLineCustomisation,
 ): Promise<Cart> {
-  return addToCart(merchandiseId, quantity);
+  return addToCart(merchandiseId, quantity, customisation);
 }
 
 export async function updateItemAction(

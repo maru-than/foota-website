@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 
+import { customisationDelta } from "../customisation";
 import { findMockVariant } from "../mock-data";
 import { isShopifyConfigured, shopifyFetch } from "./client";
 import {
@@ -10,7 +11,14 @@ import {
 } from "./mutations";
 import { getCartQuery } from "./queries";
 import { reshapeCart } from "./reshape";
-import type { Cart, CartLine, Money, ShopifyCart } from "./types";
+import type {
+  Cart,
+  CartLine,
+  CartLineCustomisation,
+  Money,
+  ShopifyAttribute,
+  ShopifyCart,
+} from "./types";
 
 type CookieStore = Awaited<ReturnType<typeof cookies>>;
 
@@ -33,6 +41,7 @@ function cookieOptions() {
 interface MockLine {
   merchandiseId: string;
   quantity: number;
+  customisation?: CartLineCustomisation;
 }
 
 function readMockLines(store: CookieStore): MockLine[] {
@@ -58,6 +67,37 @@ function writeMockLines(store: CookieStore, lines: MockLine[]): void {
   store.set(MOCK_CART_COOKIE, JSON.stringify(lines), cookieOptions());
 }
 
+/** Two mock lines collapse to one when same variant + matching customisation. */
+function sameCustomisation(
+  a: CartLineCustomisation | undefined,
+  b: CartLineCustomisation | undefined,
+): boolean {
+  if (!a && !b) return true;
+  if (!a || !b) return false;
+  return a.name === b.name && a.number === b.number;
+}
+
+/** Build a Shopify cart-line `attributes` payload from a customisation. */
+function attributesFor(
+  customisation: CartLineCustomisation | undefined,
+): ShopifyAttribute[] | undefined {
+  if (!customisation) return undefined;
+  const out: ShopifyAttribute[] = [];
+  if (customisation.name) out.push({ key: "name", value: customisation.name });
+  if (customisation.number) out.push({ key: "number", value: customisation.number });
+  out.push({ key: "priceDelta", value: customisation.priceDelta.amount });
+  return out.length > 0 ? out : undefined;
+}
+
+/** Stable line key for the mock cart. Lets two custom lines of the same
+ *  variant coexist as separate rows (different names → different line ids). */
+function mockLineKey(line: MockLine): string {
+  const c = line.customisation;
+  if (!c) return line.merchandiseId;
+  const fingerprint = `${c.name ?? ""}|${c.number ?? ""}`;
+  return `${line.merchandiseId}#${fingerprint}`;
+}
+
 function buildMockCart(lines: MockLine[]): Cart {
   const cartLines: CartLine[] = [];
   let subtotal = 0;
@@ -69,13 +109,17 @@ function buildMockCart(lines: MockLine[]): Cart {
     if (!found) continue;
     const { product, variant } = found;
     const unit = Number.parseFloat(variant.price.amount);
-    const lineTotal = unit * raw.quantity;
+    const delta = raw.customisation
+      ? Number.parseFloat(raw.customisation.priceDelta.amount)
+      : 0;
+    const lineTotal = (unit + delta) * raw.quantity;
     subtotal += lineTotal;
     totalQuantity += raw.quantity;
     currency = variant.price.currencyCode;
     cartLines.push({
-      id: raw.merchandiseId, // mock line id === variant id
+      id: mockLineKey(raw),
       quantity: raw.quantity,
+      customisation: raw.customisation,
       cost: {
         totalAmount: { amount: lineTotal.toFixed(2), currencyCode: currency },
       },
@@ -124,14 +168,19 @@ async function realAddToCart(
   store: CookieStore,
   merchandiseId: string,
   quantity: number,
+  customisation: CartLineCustomisation | undefined,
 ): Promise<Cart> {
   const existing = store.get(CART_COOKIE)?.value;
+  const attributes = attributesFor(customisation);
+  const lineInput = attributes
+    ? { merchandiseId, quantity, attributes }
+    : { merchandiseId, quantity };
 
   if (existing) {
     try {
       const data = await shopifyFetch<{ cartLinesAdd: CartMutationResult }>({
         query: addToCartMutation,
-        variables: { cartId: existing, lines: [{ merchandiseId, quantity }] },
+        variables: { cartId: existing, lines: [lineInput] },
         cache: "no-store",
       });
       if (data.cartLinesAdd.cart) return reshapeCart(data.cartLinesAdd.cart);
@@ -142,7 +191,7 @@ async function realAddToCart(
 
   const data = await shopifyFetch<{ cartCreate: CartMutationResult }>({
     query: createCartMutation,
-    variables: { lines: [{ merchandiseId, quantity }] },
+    variables: { lines: [lineInput] },
     cache: "no-store",
   });
   const cart = data.cartCreate.cart;
@@ -212,17 +261,37 @@ export async function getCart(): Promise<Cart | undefined> {
 export async function addToCart(
   merchandiseId: string,
   quantity = 1,
+  customisation?: CartLineCustomisation,
 ): Promise<Cart> {
   const store = await cookies();
+  // Default the delta currency to USD if the caller didn't set it.
+  const normalised: CartLineCustomisation | undefined = customisation
+    ? {
+        ...customisation,
+        priceDelta:
+          customisation.priceDelta ?? customisationDelta("USD"),
+      }
+    : undefined;
+
   if (!isShopifyConfigured) {
     const lines = readMockLines(store);
-    const idx = lines.findIndex((l) => l.merchandiseId === merchandiseId);
+    const incoming: MockLine = {
+      merchandiseId,
+      quantity,
+      customisation: normalised,
+    };
+    // Collapse onto an existing row only when the customisation matches.
+    const idx = lines.findIndex(
+      (l) =>
+        l.merchandiseId === merchandiseId &&
+        sameCustomisation(l.customisation, normalised),
+    );
     if (idx >= 0) lines[idx].quantity += quantity;
-    else lines.push({ merchandiseId, quantity });
+    else lines.push(incoming);
     writeMockLines(store, lines);
     return buildMockCart(lines);
   }
-  return realAddToCart(store, merchandiseId, quantity);
+  return realAddToCart(store, merchandiseId, quantity, normalised);
 }
 
 export async function updateCartLine(
@@ -235,7 +304,7 @@ export async function updateCartLine(
   }
   if (!isShopifyConfigured) {
     const lines = readMockLines(store);
-    const idx = lines.findIndex((l) => l.merchandiseId === lineId);
+    const idx = lines.findIndex((l) => mockLineKey(l) === lineId);
     if (idx >= 0) lines[idx].quantity = quantity;
     writeMockLines(store, lines);
     return buildMockCart(lines);
@@ -253,7 +322,7 @@ async function removeFromCartWithStore(
   lineId: string,
 ): Promise<Cart> {
   if (!isShopifyConfigured) {
-    const lines = readMockLines(store).filter((l) => l.merchandiseId !== lineId);
+    const lines = readMockLines(store).filter((l) => mockLineKey(l) !== lineId);
     writeMockLines(store, lines);
     return buildMockCart(lines);
   }

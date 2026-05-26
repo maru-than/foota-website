@@ -67,10 +67,17 @@ export interface ShopifyCollection {
   updatedAt: string;
 }
 
+export interface ShopifyAttribute {
+  key: string;
+  value: string;
+}
+
 export interface ShopifyCartLine {
   id: string;
   quantity: number;
   cost: { totalAmount: Money };
+  /** Cart-line attributes — used for personalisation (name, number). */
+  attributes: ShopifyAttribute[];
   merchandise: {
     id: string;
     title: string;
@@ -136,6 +143,8 @@ export interface JerseyMeta {
   badge: JerseyBadge;
   /** club ?? nation — the small muted label on cards/pages. */
   teamName: string | null;
+  /** Whether name + number printing is offered for this product. */
+  customisable: boolean;
 }
 
 export interface Product {
@@ -167,10 +176,24 @@ export interface Collection {
   seo: { title: string; description: string };
 }
 
+/**
+ * Customisation captured at add-to-cart time. Persisted as cart-line
+ * attributes on the Shopify side; the price delta is applied client-side
+ * in lineSubtotal() (Shopify can't compute it without per-name variants).
+ */
+export interface CartLineCustomisation {
+  name?: string;
+  number?: string;
+  /** Per-unit add-on price for the customisation. */
+  priceDelta: Money;
+}
+
 export interface CartLine {
   id: string; // line id
   quantity: number;
   cost: { totalAmount: Money };
+  /** Set when the buyer added a printed name / number on the back. */
+  customisation?: CartLineCustomisation;
   merchandise: {
     id: string; // variant id
     title: string; // size label

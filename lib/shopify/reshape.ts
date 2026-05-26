@@ -1,6 +1,8 @@
+import { customisationDelta } from "../customisation";
 import type {
   Cart,
   CartLine,
+  CartLineCustomisation,
   Collection,
   Connection,
   Image,
@@ -9,6 +11,7 @@ import type {
   JerseyMeta,
   JerseyType,
   Product,
+  ShopifyAttribute,
   ShopifyCart,
   ShopifyCollection,
   ShopifyImage,
@@ -95,6 +98,10 @@ export function parseJerseyMeta(
           ? "Retro"
           : "Current";
 
+  // Customs default on; products opt out with a `custom:off` tag. Retro
+  // reissues, for instance, ship blank only.
+  const customisable = get("custom")?.toLowerCase() !== "off";
+
   return {
     club,
     nation,
@@ -104,6 +111,7 @@ export function parseJerseyMeta(
     era,
     badge,
     teamName: club ?? nation ?? opts?.vendor ?? null,
+    customisable,
   };
 }
 
@@ -169,11 +177,34 @@ export function reshapeCollection(collection: ShopifyCollection): Collection {
   };
 }
 
+function parseCustomisationAttributes(
+  attributes: ShopifyAttribute[] | undefined,
+  fallbackCurrency: string,
+): CartLineCustomisation | undefined {
+  if (!attributes || attributes.length === 0) return undefined;
+  const byKey = new Map(attributes.map((a) => [a.key.toLowerCase(), a.value]));
+  const name = byKey.get("name");
+  const number = byKey.get("number");
+  if (!name && !number) return undefined;
+  const deltaAmount = byKey.get("pricedelta");
+  return {
+    name: name || undefined,
+    number: number || undefined,
+    priceDelta: deltaAmount
+      ? { amount: deltaAmount, currencyCode: fallbackCurrency }
+      : customisationDelta(fallbackCurrency),
+  };
+}
+
 export function reshapeCart(cart: ShopifyCart): Cart {
   const lines: CartLine[] = removeEdges(cart.lines).map((line) => ({
     id: line.id,
     quantity: line.quantity,
     cost: line.cost,
+    customisation: parseCustomisationAttributes(
+      line.attributes,
+      line.merchandise.price.currencyCode,
+    ),
     merchandise: {
       id: line.merchandise.id,
       title: line.merchandise.title,

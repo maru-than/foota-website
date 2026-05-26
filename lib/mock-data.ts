@@ -36,6 +36,8 @@ interface Spec {
   host?: boolean;
   isNew?: boolean;
   soldOut?: string[];
+  /** Defaults true. Set false to disable name + number printing (e.g. retro reissues). */
+  customisable?: false;
 }
 
 // Ordered so marquee / new drops surface first in "New arrivals".
@@ -154,6 +156,7 @@ function makeProduct(spec: Spec, kit: Kit, index: number): Product {
   const created = new Date(2026, 4, 20);
   created.setDate(created.getDate() - index * 2);
 
+  const customisable = spec.customisable !== false;
   const tags = [
     `nation:${spec.nation}`,
     `confederation:${spec.conf}`,
@@ -161,6 +164,7 @@ function makeProduct(spec: Spec, kit: Kit, index: number): Product {
     `type:${kit}`,
     "era:Current",
     badge ? `badge:${badge}` : null,
+    customisable ? null : "custom:off",
   ].filter((t): t is string => Boolean(t));
 
   return {
@@ -186,6 +190,7 @@ function makeProduct(spec: Spec, kit: Kit, index: number): Product {
       era: "Current",
       badge,
       teamName: spec.nation,
+      customisable,
     },
     seo: { title, description: lead },
     createdAt: created.toISOString(),
