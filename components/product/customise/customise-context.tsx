@@ -7,6 +7,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { useSearchParams } from "next/navigation";
 
 import {
   CUSTOM_PRICE_DELTA,
@@ -63,7 +64,12 @@ export function CustomiseProvider({
     [product.meta.confederation],
   );
 
-  const [enabled, setEnabledRaw] = useState(false);
+  // Allow deep links (?customise=open) from marketing surfaces to drop the
+  // buyer straight into the personalisation flow. Read once at mount.
+  const searchParams = useSearchParams();
+  const [enabled, setEnabledRaw] = useState(
+    () => available && searchParams?.get("customise") === "open",
+  );
   const [name, setNameRaw] = useState("");
   const [number, setNumberRaw] = useState("");
 

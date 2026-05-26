@@ -64,7 +64,7 @@ export const TESTIMONIALS: Testimonial[] = [
     country: "US",
     rating: 5,
     quote:
-      "Worldkit is the only shop where the listing photo is the shirt that ships. Bought four for our watch party, every one was clean.",
+      "Got my daughter's name on the back for her birthday — the font is exactly the one UEFA uses. She hasn't taken it off since.",
     confederation: "CONCACAF",
     featured: true,
     date: "2026-04-02",
@@ -125,10 +125,10 @@ export const TESTIMONIALS: Testimonial[] = [
     country: "MX",
     rating: 5,
     quote:
-      "Hosting a watch party at home next summer. Six shirts, six countries, all here in a week. Friends are jealous.",
-    productHandle: "mexico-home",
-    confederation: "CONCACAF",
-    nation: "Mexico",
+      "Ordered MESSI 10 on the Argentina shirt. Heat-press is dead-straight, no fraying after three washes — exactly like the stadium version.",
+    productHandle: "argentina-home",
+    confederation: "CONMEBOL",
+    nation: "Argentina",
     featured: true,
     date: "2026-04-22",
   },

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -14,8 +14,76 @@ import {
   PT,
 } from "country-flag-icons/react/3x2";
 
+import { teamColors } from "@/components/ui/jersey-placeholder";
 import { Reveal } from "@/components/ui/reveal";
+import { fontFor } from "@/lib/customisation";
 import { cn } from "@/lib/utils";
+
+/** Famous back-views injected between nation cycles to advertise customs. */
+const BACK_FRAMES = [
+  { slug: "argentina", name: "MESSI", number: "10" },
+  { slug: "portugal", name: "RONALDO", number: "7" },
+  { slug: "france", name: "MBAPPÉ", number: "10" },
+  { slug: "custom", name: "YOUR NAME", number: "26" },
+];
+
+/** SVG-rendered back-of-shirt frame for the hero rotation. */
+function HeroBackFrame({
+  show,
+  slug,
+  printedName,
+  printedNumber,
+}: {
+  show: boolean;
+  slug: string;
+  printedName: string;
+  printedNumber: string;
+}) {
+  const colors = teamColors(slug);
+  const font = fontFor("UEFA");
+  return (
+    <svg
+      viewBox="0 0 200 240"
+      role="img"
+      aria-label={show ? `${printedName} ${printedNumber} — customise your shirt` : undefined}
+      aria-hidden={!show}
+      className={cn(
+        "absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ease-out",
+        show ? "opacity-100" : "opacity-0",
+      )}
+    >
+      <path
+        d="M40 40 L70 30 L85 36 L115 36 L130 30 L160 40 L175 70 L155 80 L155 200 Q155 210 145 210 L55 210 Q45 210 45 200 L45 80 L25 70 Z"
+        fill={colors.color1}
+      />
+      <rect x="85" y="30" width="30" height="12" fill={colors.color2} opacity="0.85" />
+      <text
+        x="100"
+        y="92"
+        textAnchor="middle"
+        fontFamily={font.family}
+        fontWeight={font.weight}
+        fontSize="14"
+        letterSpacing="3"
+        fill={colors.color2}
+      >
+        {printedName}
+      </text>
+      <text
+        x="100"
+        y="172"
+        textAnchor="middle"
+        fontFamily={font.family}
+        fontWeight={900}
+        fontSize="78"
+        letterSpacing="-2"
+        fill={colors.color2}
+      >
+        {printedNumber}
+      </text>
+    </svg>
+  );
+}
 
 type Nation = {
   slug: string;
@@ -45,9 +113,17 @@ const MANUAL_HOLD_MS = 6000;
 export function Hero() {
   const [activeSlug, setActiveSlug] = useState(NATIONS[0].slug);
   const [mode, setMode] = useState<"auto" | "manual">("auto");
+  /** Tick counter inside the auto loop — every 4th tick we cross-fade to a
+   *  back-view frame teasing the customs feature. */
+  const [tick, setTick] = useState(0);
   const active = NATIONS.find((n) => n.slug === activeSlug) ?? NATIONS[0];
+  const showBack = mode === "auto" && tick > 0 && tick % 4 === 0;
+  const backFrame = useMemo(
+    () => BACK_FRAMES[Math.floor(tick / 4) % BACK_FRAMES.length],
+    [tick],
+  );
 
-  /* Auto-advance one flag per second while in auto mode. Honors
+  /* Auto-advance one frame per AUTO_MS while in auto mode. Honors
      prefers-reduced-motion — page reload handles preference changes, so we
      read the matchMedia once and bail if reduced. */
   useEffect(() => {
@@ -55,6 +131,7 @@ export function Hero() {
     if (typeof window !== "undefined" &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = window.setInterval(() => {
+      setTick((t) => t + 1);
       setActiveSlug((slug) => {
         const i = NATIONS.findIndex((n) => n.slug === slug);
         return NATIONS[(i + 1) % NATIONS.length].slug;
@@ -106,10 +183,16 @@ export function Hero() {
                 sizes="(max-width: 640px) 176px, (max-width: 1024px) 208px, 240px"
                 className={cn(
                   "object-contain transition-opacity duration-300 ease-out",
-                  slug === active.slug ? "opacity-100" : "opacity-0",
+                  slug === active.slug && !showBack ? "opacity-100" : "opacity-0",
                 )}
               />
             ))}
+            <HeroBackFrame
+              show={showBack}
+              slug={backFrame.slug}
+              printedName={backFrame.name}
+              printedNumber={backFrame.number}
+            />
           </div>
 
           <h1

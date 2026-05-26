@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -16,12 +19,22 @@ export function EditorialBanner() {
             <p>
               A jersey is a summer you can wear. The nation you back for a month,
               the shirt you pull on for every kickoff, the badge you defend in
-              the group of death.
+              the group of death — and the name on the back is yours.
             </p>
             <p>
               Forty-eight nations. Sixteen cities. One tournament across the USA,
               Canada and Mexico — and a shirt for every side of it.
             </p>
+            <Link
+              href="/customise"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-hi"
+            >
+              Create your own
+              <ArrowRight
+                className="size-3.5 transition-transform duration-300 ease-worldkit group-hover:translate-x-1"
+                strokeWidth={1.5}
+              />
+            </Link>
           </div>
         </Reveal>
       </Container>

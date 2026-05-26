@@ -3,6 +3,7 @@ const ITEMS = [
   "New shirts added weekly",
   "Summer 2026 · all 48 nations",
   "Home shirts for every side",
+  "Add your name & number · +$15",
   "Dispatched in 48h",
 ];
 
