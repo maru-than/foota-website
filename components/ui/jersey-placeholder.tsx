@@ -103,12 +103,12 @@ function hash(input: string): number {
 /**
  * Deterministic kit colors + shirt number derived from a seed (team name).
  * For Home kits (or unspecified type) we look up the nation's real colours;
- * away/third/goalkeeper fall back to the hashed palette since we don't track
- * those per-nation.
+ * away kits fall back to the hashed palette since we don't track those
+ * per-nation.
  */
 export function teamColors(
   seed?: string | null,
-  type?: "Home" | "Away" | "Third" | "Goalkeeper" | null,
+  type?: "Home" | "Away" | null,
 ) {
   const key = seed ? seed.trim().toLowerCase() : "";
   const mapped = (!type || type === "Home") ? HOME_COLORS[key] : undefined;

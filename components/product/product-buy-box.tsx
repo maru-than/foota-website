@@ -9,7 +9,17 @@
  */
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, Flame, ShieldCheck, Sparkles, Truck } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  Flame,
+  PackageCheck,
+  ShieldCheck,
+  ShoppingBag,
+  Tag,
+  Truck,
+  XCircle,
+} from "lucide-react";
 
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
@@ -45,7 +55,7 @@ function findVariant(
 const TRUST_BLANK = [
   { Icon: Truck, title: "Worldwide shipping", note: "Tracked · dispatched in 48h" },
   { Icon: ShieldCheck, title: "Inspected on arrival", note: "Stitching, crest & fonts" },
-  { Icon: Sparkles, title: "New condition", note: "Photographed & condition-checked" },
+  { Icon: PackageCheck, title: "New condition", note: "Photographed & condition-checked" },
 ];
 
 const TRUST_CUSTOM = [
@@ -122,17 +132,20 @@ export function ProductBuyBox({ product }: { product: Product }) {
       <CustomiseTemplates product={product} />
 
       <div className="flex items-center gap-2 text-sm">
-        <span
-          className={cn(
-            "inline-block size-2 rounded-full",
-            available ? "bg-accent" : "bg-danger",
-          )}
-        />
+        {available ? (
+          customEnabled ? (
+            <Clock className="size-4 text-accent" strokeWidth={1.5} aria-hidden />
+          ) : (
+            <PackageCheck className="size-4 text-accent" strokeWidth={1.5} aria-hidden />
+          )
+        ) : (
+          <XCircle className="size-4 text-danger" strokeWidth={1.5} aria-hidden />
+        )}
         <span className="text-fg-3">
           {available
             ? customEnabled
               ? "Heat-press lead time · 5–7 days"
-              : "In stock · ready to ship"
+              : "In stock"
             : "Currently sold out"}
         </span>
       </div>
@@ -174,9 +187,12 @@ export function ProductBuyBox({ product }: { product: Product }) {
       >
         <div className="flex min-w-0 flex-col leading-tight">
           {selected.Size ? (
-            <span className="truncate text-[11px] uppercase tracking-[0.1em] text-fg-3">
-              Size {selected.Size}
-              {customLabel ? ` · ${customLabel}` : null}
+            <span className="flex items-center gap-1 truncate text-[11px] uppercase text-fg-3">
+              <Tag className="size-3 shrink-0" strokeWidth={1.5} aria-hidden />
+              <span className="truncate">
+                Size {selected.Size}
+                {customLabel ? ` · ${customLabel}` : null}
+              </span>
             </span>
           ) : null}
           <Price
@@ -192,6 +208,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
           className="max-w-[180px] shrink-0"
         >
           {available ? "Add to bag" : "Sold out"}
+          {available ? <ShoppingBag className="size-4" strokeWidth={1.5} /> : null}
         </Button>
       </div>
     </div>

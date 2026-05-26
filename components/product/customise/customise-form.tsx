@@ -9,6 +9,7 @@
  */
 
 import { useId } from "react";
+import { AlertCircle, Hash, Type } from "lucide-react";
 
 import { CUSTOM_MAX_NAME_CHARS } from "@/lib/customisation";
 import { cn } from "@/lib/utils";
@@ -35,8 +36,9 @@ export function CustomiseForm() {
         <div>
           <label
             htmlFor={nameId}
-            className="eyebrow mb-2 block text-fg-3"
+            className="eyebrow mb-2 flex items-center gap-1.5 text-fg-3"
           >
+            <Type className="size-3.5" strokeWidth={1.5} aria-hidden />
             Name on back
           </label>
           <input
@@ -50,7 +52,7 @@ export function CustomiseForm() {
             placeholder="YOUR NAME"
             maxLength={CUSTOM_MAX_NAME_CHARS}
             className={cn(
-              "block h-12 w-full border border-line-accent bg-transparent px-3 text-sm font-bold uppercase tracking-[0.14em] text-fg-1 placeholder:text-fg-4",
+              "block h-12 w-full border border-line-accent bg-transparent px-3 text-sm font-bold uppercase text-fg-1 placeholder:text-fg-4",
               "focus:border-accent focus:outline-none focus-visible:border-accent",
             )}
             style={{
@@ -60,16 +62,29 @@ export function CustomiseForm() {
             }}
             aria-describedby={`${nameId}-help`}
           />
-          <p id={`${nameId}-help`} className="mt-1.5 text-[11px] text-fg-3">
-            {remaining} of {CUSTOM_MAX_NAME_CHARS} characters left · A–Z, spaces, hyphens, dots.
+          <p
+            id={`${nameId}-help`}
+            className="mt-1.5 flex items-center gap-1 text-[11px] text-fg-3"
+          >
+            {remaining <= 3 ? (
+              <AlertCircle
+                className="size-3 shrink-0 text-accent"
+                strokeWidth={1.5}
+                aria-hidden
+              />
+            ) : null}
+            <span>
+              {remaining} of {CUSTOM_MAX_NAME_CHARS} characters left · A–Z, spaces, hyphens, dots.
+            </span>
           </p>
         </div>
 
         <div>
           <label
             htmlFor={numberId}
-            className="eyebrow mb-2 block text-fg-3"
+            className="eyebrow mb-2 flex items-center gap-1.5 text-fg-3"
           >
+            <Hash className="size-3.5" strokeWidth={1.5} aria-hidden />
             Number
           </label>
           <input
@@ -95,7 +110,7 @@ export function CustomiseForm() {
       </div>
 
       <div className="flex items-center justify-between gap-3 border-t border-line-1 pt-3">
-        <span className="text-[11px] uppercase tracking-[0.14em] text-fg-3">
+        <span className="text-[11px] uppercase text-fg-3">
           Font
         </span>
         <span className="text-xs text-fg-1">{fontSpec.label}</span>

@@ -8,7 +8,6 @@
  * @since 2026-05-26
  */
 
-import { CUSTOM_PRICE_DELTA } from "@/lib/customisation";
 import { cn } from "@/lib/utils";
 import { useCustomise } from "./customise-context";
 
@@ -24,15 +23,7 @@ export function CustomiseToggle() {
   return (
     <div>
       <div className="mb-2.5 flex items-center justify-between">
-        <span className="eyebrow text-fg-3">
-          Personalise
-          <span className="ml-2 text-fg-1">
-            {enabled ? "Custom" : "Blank"}
-          </span>
-        </span>
-        <span className="text-xs text-fg-3">
-          +${CUSTOM_PRICE_DELTA.toFixed(0)} when custom
-        </span>
+        <span className="eyebrow text-fg-3">Personalise</span>
       </div>
       <div
         role="group"

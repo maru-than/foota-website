@@ -9,6 +9,14 @@
  */
 
 import * as React from "react";
+import {
+  AlertTriangle,
+  FileText,
+  PencilLine,
+  Ruler,
+  ShieldCheck,
+  Truck,
+} from "lucide-react";
 
 import { AuthenticityModal } from "@/components/info/authenticity-modal";
 import { ShippingReturnsModal } from "@/components/info/shipping-returns-modal";
@@ -53,7 +61,12 @@ export function ProductDetails({ product }: { product: Product }) {
       className="border-t border-line-1"
     >
       <AccordionItem value="description">
-        <AccordionTrigger>Description</AccordionTrigger>
+        <AccordionTrigger>
+          <span className="flex items-center gap-2">
+            <FileText className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+            Description
+          </span>
+        </AccordionTrigger>
         <AccordionContent>
           <div
             className="[&_a]:text-accent [&_a]:underline [&_p]:mb-3 [&_p:last-child]:mb-0"
@@ -65,10 +78,15 @@ export function ProductDetails({ product }: { product: Product }) {
       </AccordionItem>
 
       <AccordionItem value="authenticity">
-        <AccordionTrigger>Condition &amp; Quality Check</AccordionTrigger>
+        <AccordionTrigger>
+          <span className="flex items-center gap-2">
+            <ShieldCheck className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+            Condition &amp; Quality Check
+          </span>
+        </AccordionTrigger>
         <AccordionContent>
           <p>
-            Every shirt is inspected and graded before it joins the archive.
+            Every shirt is inspected before it ships.
             Each piece is checked against reference photos for stitching, badge
             alignment, fonts and finish. Inspected before dispatch.{" "}
             <AuthenticityModal>
@@ -80,10 +98,15 @@ export function ProductDetails({ product }: { product: Product }) {
       </AccordionItem>
 
       <AccordionItem value="size">
-        <AccordionTrigger>Size Guide</AccordionTrigger>
+        <AccordionTrigger>
+          <span className="flex items-center gap-2">
+            <Ruler className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+            Size Guide
+          </span>
+        </AccordionTrigger>
         <AccordionContent>
           <p>
-            Retro shirts often fit smaller than modern kits. Open the{" "}
+            2026 jerseys are cut to modern fit. Open the{" "}
             <SizeGuideModal>
               <InlineTrigger>full size guide</InlineTrigger>
             </SizeGuideModal>{" "}
@@ -93,7 +116,12 @@ export function ProductDetails({ product }: { product: Product }) {
       </AccordionItem>
 
       <AccordionItem value="shipping">
-        <AccordionTrigger>Shipping &amp; Returns</AccordionTrigger>
+        <AccordionTrigger>
+          <span className="flex items-center gap-2">
+            <Truck className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+            Shipping &amp; Returns
+          </span>
+        </AccordionTrigger>
         <AccordionContent>
           <p>
             Worldwide shipping with tracking, dispatched in 48h. Returns within
@@ -108,7 +136,12 @@ export function ProductDetails({ product }: { product: Product }) {
 
       {product.meta.customisable !== false ? (
         <AccordionItem value="customisation">
-          <AccordionTrigger>Name &amp; number printing</AccordionTrigger>
+          <AccordionTrigger>
+            <span className="flex items-center gap-2">
+              <PencilLine className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+              Name &amp; number printing
+            </span>
+          </AccordionTrigger>
           <AccordionContent>
             <p className="mb-3">
               Add any name (up to {CUSTOM_MAX_NAME_CHARS} characters) and a
@@ -116,11 +149,18 @@ export function ProductDetails({ product }: { product: Product }) {
               {product.meta.confederation ?? "confederation"} letter set.
               Add-on price: ${CUSTOM_PRICE_DELTA.toFixed(0)}.
             </p>
-            <p className="mb-4">
-              Customised shirts ship in 5–7 days and are{" "}
-              <b className="text-fg-1">non-returnable</b> — please double-check
-              spelling before adding to the bag.
-            </p>
+            <div className="mb-4 flex items-start gap-2 border border-danger/40 bg-danger/5 p-3">
+              <AlertTriangle
+                className="mt-0.5 size-4 shrink-0 text-danger"
+                strokeWidth={1.5}
+                aria-hidden
+              />
+              <p>
+                Customised shirts ship in 5–7 days and are{" "}
+                <b className="text-fg-1">non-returnable</b> — please
+                double-check spelling before adding to the bag.
+              </p>
+            </div>
             <FontSpecimen
               confederation={product.meta.confederation}
               className="border-t border-line-1 pt-4"

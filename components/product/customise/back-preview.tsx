@@ -9,12 +9,45 @@
  */
 
 import Image from "next/image";
-import { useState } from "react";
+import { useId, useState } from "react";
 
 import { teamColors } from "@/components/ui/jersey-placeholder";
 import { cn } from "@/lib/utils";
 import type { JerseyMeta } from "@/lib/shopify/types";
 import { useCustomise } from "./customise-context";
+
+/* ------------------------------------------------------------------ */
+/*  Arc-typography fit                                                 */
+/*                                                                     */
+/*  The printed name follows a gentle rainbow arc above the number,    */
+/*  mirroring real World Cup back-prints. Names are capped at 12       */
+/*  characters by the form (CUSTOM_MAX_NAME_CHARS) but the SVG also    */
+/*  rescales font-size + letter-spacing so even the longest input      */
+/*  fits inside the chord width (~115 SVG units) without clipping the  */
+/*  collar or the number below.                                        */
+/* ------------------------------------------------------------------ */
+
+/** Usable chord width along the arc in SVG units. Slightly narrower than
+ *  the literal chord (~120u) to leave a 2-3u margin at each end. */
+const NAME_ARC_USABLE_WIDTH = 115;
+
+/** Rough glyph advance per em — uppercase sans/serif jersey fonts average
+ *  about 0.62 of the font-size in width. Used to back out a font-size
+ *  from a target chord width. */
+const GLYPH_ADVANCE_RATIO = 0.62;
+
+/** Solves font-size + letter-spacing so `n` glyphs sit inside the arc.
+ *  - 1-6 chars: clamps to the upper bound (chunky, jersey-style).
+ *  - 12 chars:  collapses to ~13.5/1.06 — still legible, no overflow.
+ *  Returns SVG-unit values; caller stringifies as needed. */
+function fitNameStyle(n: number): { fontSize: number; letterSpacing: number } {
+  if (n <= 0) return { fontSize: 12, letterSpacing: 2 };
+  const letterSpacing = Math.max(0.6, 2.5 - n * 0.12);
+  const raw =
+    (NAME_ARC_USABLE_WIDTH - n * letterSpacing) / (n * GLYPH_ADVANCE_RATIO);
+  const fontSize = Math.min(14, Math.max(7, raw));
+  return { fontSize, letterSpacing };
+}
 
 /* ------------------------------------------------------------------ */
 /*  Back-of-shirt preview — second slide in the PDP gallery.            */
@@ -36,10 +69,6 @@ function backImagePath(type: JerseyMeta["type"]): string {
   switch (type) {
     case "Away":
       return "/jerseys/back-blank/away.webp";
-    case "Third":
-      return "/jerseys/back-blank/third.webp";
-    case "Goalkeeper":
-      return "/jerseys/back-blank/goalkeeper.webp";
     case "Home":
     default:
       return "/jerseys/back-blank/home.webp";
@@ -83,6 +112,12 @@ export function BackPreview({ meta }: { meta: JerseyMeta }) {
   const { name, number, enabled, fontSpec } = useCustomise();
   const [photoFailed, setPhotoFailed] = useState(false);
   const colors = teamColors(meta.teamName, meta.type);
+  /* Unique path id so multiple BackPreviews on one page (e.g. listing
+     previews + PDP) never collide on the textPath href. */
+  const reactId = useId();
+  const arcId = `name-arc-${reactId.replace(/[^a-z0-9]/gi, "")}`;
+  const { fontSize: nameFontSize, letterSpacing: nameLetterSpacing } =
+    fitNameStyle(name.length);
 
   const showHint = !enabled || (!name && !number);
   const photoSrc = backImagePath(meta.type);
@@ -112,19 +147,31 @@ export function BackPreview({ meta }: { meta: JerseyMeta }) {
         className="absolute inset-0 h-full w-full"
         aria-hidden
       >
-        {/* Name across the upper back. */}
+        {/* Arc path the name rides on — rainbow shape (middle high,
+            edges low) mirroring real back-prints. Endpoints at x=42/158
+            keep the name clear of the collar; control point at y=78
+            sets the rise. */}
+        <defs>
+          <path
+            id={arcId}
+            d="M 42 100 Q 100 78 158 100"
+            fill="none"
+          />
+        </defs>
+        {/* Curved name across the upper back. fitNameStyle() guarantees
+            the rendered width stays within NAME_ARC_USABLE_WIDTH even at
+            the 12-char input cap. */}
         {name ? (
           <text
-            x="100"
-            y="92"
-            textAnchor="middle"
             fontFamily={fontSpec.family}
             fontWeight={fontSpec.weight}
-            fontSize="12"
-            letterSpacing="2"
+            fontSize={nameFontSize}
+            letterSpacing={nameLetterSpacing}
             fill={photoFailed ? colors.color2 : "rgba(0,0,0,0.85)"}
           >
-            {name}
+            <textPath href={`#${arcId}`} startOffset="50%" textAnchor="middle">
+              {name}
+            </textPath>
           </text>
         ) : null}
         {/* Big centred number. */}
@@ -146,7 +193,7 @@ export function BackPreview({ meta }: { meta: JerseyMeta }) {
 
       {showHint ? (
         <div className="pointer-events-none absolute inset-x-0 bottom-4 text-center">
-          <p className="inline-block bg-bg-0/70 px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-fg-2 backdrop-blur">
+          <p className="inline-block bg-bg-0/70 px-3 py-1.5 text-[11px] uppercase text-fg-2 backdrop-blur">
             Add your name on the back →
           </p>
         </div>

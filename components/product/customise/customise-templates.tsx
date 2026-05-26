@@ -9,6 +9,7 @@
  */
 
 import { useState } from "react";
+import { PencilLine, Trophy, Users } from "lucide-react";
 
 import { legendsFor, squadFor, type CustomTemplate } from "@/lib/custom-templates";
 import { cn } from "@/lib/utils";
@@ -38,28 +39,32 @@ export function CustomiseTemplates({ product }: { product: Product }) {
       <div className="mb-2.5 flex items-center justify-between">
         <span className="eyebrow text-fg-3">Quick picks</span>
         <div role="tablist" aria-label="Quick picks" className="flex gap-3">
-          {(["legends", "squad", "mine"] as Track[]).map((t) => (
-            <button
-              key={t}
-              role="tab"
-              type="button"
-              aria-selected={track === t}
-              onClick={() => {
-                setTrack(t);
-                if (t === "mine") {
-                  clear();
-                  // Re-enable customs so the form stays visible.
-                  applyTemplate("", "");
-                }
-              }}
-              className={cn(
-                "text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors",
-                track === t ? "text-accent" : "text-fg-3 hover:text-fg-1",
-              )}
-            >
-              {t === "legends" ? "Legends" : t === "squad" ? "Squad" : "Mine"}
-            </button>
-          ))}
+          {(["legends", "squad", "mine"] as Track[]).map((t) => {
+            const Icon = t === "legends" ? Trophy : t === "squad" ? Users : PencilLine;
+            return (
+              <button
+                key={t}
+                role="tab"
+                type="button"
+                aria-selected={track === t}
+                onClick={() => {
+                  setTrack(t);
+                  if (t === "mine") {
+                    clear();
+                    // Re-enable customs so the form stays visible.
+                    applyTemplate("", "");
+                  }
+                }}
+                className={cn(
+                  "inline-flex items-center gap-1 text-[11px] font-semibold uppercase transition-colors",
+                  track === t ? "text-accent" : "text-fg-3 hover:text-fg-1",
+                )}
+              >
+                <Icon className="size-3.5" strokeWidth={1.5} aria-hidden />
+                {t === "legends" ? "Legends" : t === "squad" ? "Squad" : "Mine"}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -78,7 +83,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
                 onClick={() => applyTemplate(item.name, item.number)}
                 aria-pressed={active}
                 className={cn(
-                  "flex h-9 items-center gap-2 border px-2.5 text-xs font-bold uppercase tracking-[0.08em] transition-colors duration-150 ease-worldkit",
+                  "flex h-9 items-center gap-2 border px-2.5 text-xs font-bold uppercase transition-colors duration-150 ease-worldkit",
                   active
                     ? "border-accent bg-accent text-bg-1"
                     : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",
