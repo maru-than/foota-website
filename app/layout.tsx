@@ -12,6 +12,7 @@ import { CartProvider } from "@/components/cart/cart-provider";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { getCart } from "@/lib/shopify/cart";
 import { getCollectionProducts } from "@/lib/shopify/collections";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,7 @@ const gambarino = localFont({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = resolveSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { getCollections } from "@/lib/shopify/collections";
 import { getProducts } from "@/lib/shopify/products";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 const STATIC_PATHS = [
   "",
@@ -15,7 +16,7 @@ const STATIC_PATHS = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const base = resolveSiteUrl();
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
