@@ -13,7 +13,8 @@ import {
 export const metadata: Metadata = {
   title: "Shop All Jerseys",
   description:
-    "Browse every jersey in the Foota archive — filter by club, nation, season, size, type and era.",
+    "Browse every jersey in the Worldkit Soccer archive — filter by club, nation, season, size, type and era.",
+  alternates: { canonical: "/shop" },
 };
 
 export default async function ShopPage({

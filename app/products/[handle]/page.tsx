@@ -6,9 +6,14 @@ import { ProductBuyBox } from "@/components/product/product-buy-box";
 import { ProductDetails } from "@/components/product/product-details";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { RelatedProducts } from "@/components/product/related-products";
+import { ShippingPromise } from "@/components/product/shipping-promise";
+import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
 import { Badge, jerseyBadgeVariant } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
 import { Price } from "@/components/ui/price";
+import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { getTestimonialsForProduct } from "@/lib/testimonials";
 import {
   getProduct,
   getProductRecommendations,
@@ -29,15 +34,20 @@ export async function generateMetadata({
   const product = await getProduct(handle);
   if (!product) return { title: "Product not found" };
 
-  const image = product.featuredImage?.url;
   return {
     title: product.seo.title,
     description: product.seo.description,
+    alternates: { canonical: `/products/${handle}` },
     openGraph: {
       title: product.seo.title,
       description: product.seo.description,
       type: "website",
-      ...(image ? { images: [{ url: image }] } : {}),
+      // Image is auto-discovered from app/products/[handle]/opengraph-image.tsx
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.seo.title,
+      description: product.seo.description,
     },
   };
 }
@@ -52,6 +62,7 @@ export default async function ProductPage({
   if (!product) notFound();
 
   const related = await getProductRecommendations(product.id, 4);
+  const reviews = getTestimonialsForProduct(handle, 4);
   const price = product.priceRange.minVariantPrice;
   const label = [product.meta.confederation, product.meta.season]
     .filter(Boolean)
@@ -63,7 +74,7 @@ export default async function ProductPage({
     name: product.title,
     description: product.description,
     sku: product.id,
-    brand: { "@type": "Brand", name: product.meta.teamName ?? "Foota Jerseys" },
+    brand: { "@type": "Brand", name: product.meta.teamName ?? "Worldkit Soccer" },
     offers: {
       "@type": "Offer",
       priceCurrency: price.currencyCode,
@@ -80,7 +91,7 @@ export default async function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Container className="py-8 pb-28 lg:py-12 lg:pb-12">
+      <Container className="py-8 lg:py-12">
         <nav
           aria-label="Breadcrumb"
           className="mb-6 flex items-center gap-1.5 text-xs text-fg-3"
@@ -131,12 +142,33 @@ export default async function ProductPage({
               <ProductBuyBox product={product} />
             </div>
 
+            <div className="mt-5">
+              <ShippingPromise />
+            </div>
+
             <div className="mt-10">
               <ProductDetails product={product} />
             </div>
           </div>
         </div>
       </Container>
+
+      {reviews.length > 0 ? (
+        <section className="border-t border-line-accent py-16 lg:py-20">
+          <Container>
+            <Reveal>
+              <SectionHeading
+                eyebrow="Reviews"
+                title="From the locker room"
+                description="What other buyers said about this shirt and its confederation."
+              />
+            </Reveal>
+            <div className="mt-10">
+              <TestimonialGrid items={reviews} columns={2} />
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       <RelatedProducts products={related} />
     </>

@@ -27,7 +27,13 @@ export async function generateMetadata({
   return {
     title: collection.seo.title,
     description: collection.seo.description,
+    alternates: { canonical: `/collections/${handle}` },
     openGraph: {
+      title: collection.seo.title,
+      description: collection.seo.description,
+    },
+    twitter: {
+      card: "summary_large_image",
       title: collection.seo.title,
       description: collection.seo.description,
     },

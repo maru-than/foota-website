@@ -11,7 +11,8 @@ import { searchProducts } from "@/lib/shopify/products";
 
 export const metadata: Metadata = {
   title: "Search",
-  description: "Search the Foota archive by club, nation, season or shirt name.",
+  description: "Search the Worldkit Soccer archive by club, nation, season or shirt name.",
+  alternates: { canonical: "/search" },
 };
 
 const SUGGESTIONS = ["Brazil", "Argentina", "Morocco", "Japan", "USA"];

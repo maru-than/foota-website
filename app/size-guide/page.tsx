@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Size Guide",
   description:
     "Measurements for football shirts by size, plus how to measure and choose your fit.",
+  alternates: { canonical: "/size-guide" },
 };
 
 export default function SizeGuidePage() {

@@ -6,7 +6,8 @@ import { Container } from "@/components/ui/container";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with the Foota Jerseys team.",
+  description: "Get in touch with the Worldkit Soccer team.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
@@ -26,7 +27,7 @@ export default function ContactPage() {
           <aside className="space-y-8 text-sm text-fg-3">
             <div>
               <h2 className="eyebrow text-fg-1">Email</h2>
-              <p className="mt-2">hello@footajerseys.com</p>
+              <p className="mt-2">hello@worldkitsoccer.com</p>
             </div>
             <div>
               <h2 className="eyebrow text-fg-1">Support hours</h2>

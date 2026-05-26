@@ -6,7 +6,8 @@ import { Container } from "@/components/ui/container";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Foota Jerseys is the home for the World cup 2026 — every nation's home shirt in one place.",
+    "Worldkit Soccer is the home for the World cup 2026 — every nation's home shirt in one place.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
@@ -26,9 +27,9 @@ export default function AboutPage() {
             </h2>
             <p>
               The World cup 2026 is the biggest ever — 48 nations,
-              16 cities, one summer across the USA, Canada and Mexico. Foota is
-              built for it: one place to find the home shirt of every side in the
-              draw.
+              16 cities, one summer across the USA, Canada and Mexico. Worldkit
+              Soccer is built for it: one place to find the home shirt of every
+              side in the draw.
             </p>
           </section>
           <section className="space-y-3">

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Shipping & Returns",
   description:
     "Worldwide shipping with tracking, dispatched in 48h, and a 30-day returns policy on unworn shirts.",
+  alternates: { canonical: "/shipping-returns" },
 };
 
 export default function ShippingReturnsPage() {
