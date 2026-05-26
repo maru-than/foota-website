@@ -15,7 +15,7 @@ import type {
 
 /* ------------------------------------------------------------------ */
 /*  Worldkit catalogue — summer 2026.                                  */
-/*  The shop sells 2026 home jerseys for the 48 nations of             */
+/*  The shop sells 2026 home + away jerseys for the 48 nations of      */
 /*  the first 48-team summer, co-hosted by the USA, Canada & Mexico.   */
 /*  Images live in /public/jerseys/home-transparent/<slug>.webp (and away-transparent/). */
 /*  Handle format: `<slug>-home` and `<slug>-away`.                    */
@@ -44,7 +44,7 @@ interface Spec {
   host?: boolean;
   isNew?: boolean;
   soldOut?: string[];
-  /** Defaults true. Set false to disable name + number printing (e.g. retro reissues). */
+  /** Defaults true. Set false to disable name + number printing. */
   customisable?: false;
 }
 
@@ -170,7 +170,6 @@ function makeProduct(spec: Spec, kit: Kit, index: number): Product {
     `confederation:${spec.conf}`,
     "season:2026",
     `type:${kit}`,
-    "era:Current",
     badge ? `badge:${badge}` : null,
     customisable ? null : "custom:off",
   ].filter((t): t is string => Boolean(t));
@@ -190,12 +189,10 @@ function makeProduct(spec: Spec, kit: Kit, index: number): Product {
     images: [image],
     variants,
     meta: {
-      club: null,
       nation: spec.nation,
       confederation: spec.conf,
       season: "2026",
       type: kit,
-      era: "Current",
       badge,
       teamName: spec.nation,
       customisable,
@@ -245,7 +242,7 @@ const COLLECTION_RULES: CollectionRule[] = [
   {
     handle: "best-sellers",
     title: "Best Sellers",
-    description: "The shirts moving fastest from the archive.",
+    description: "The nations moving fastest this season.",
     match: (p) =>
       !!p.meta.nation &&
       BEST_SELLER_NATIONS.has(p.meta.nation.toLowerCase()) &&
@@ -297,8 +294,8 @@ const COLLECTION_RULES: CollectionRule[] = [
   {
     handle: "new-arrivals",
     title: "New Arrivals",
-    description: "The latest shirts to land in the archive.",
-    // Home only — Worldkit's brand promise is "home shirt for every side"
+    description: "The latest 2026 kits to land.",
+    // Home only — keeping "New Arrivals" to one tile per nation; including Away
     // (see /about). Including Away here surfaces both kits of the same nation
     // as visually-identical tiles (same teamName, same caption).
     match: (p) => p.meta.badge === "New" && p.meta.type === "Home",

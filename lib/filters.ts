@@ -1,5 +1,5 @@
 /**
- * @file Parse URL search params into typed filters + sort — confederation, nation, type, era, size, price.
+ * @file Parse URL search params into typed filters + sort — confederation, nation, type, size, price.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -41,13 +41,10 @@ export function parseFilterParams(sp: SearchParamsRecord): {
   return {
     sort,
     filters: {
-      club: toArray(sp.club),
       nation: toArray(sp.nation),
       confederation: toArray(sp.confederation),
-      season: toArray(sp.season),
       size: toArray(sp.size),
       type: toArray(sp.type),
-      era: toArray(sp.era),
       minPrice: toNumber(sp.minPrice),
       maxPrice: toNumber(sp.maxPrice),
     },
@@ -56,13 +53,10 @@ export function parseFilterParams(sp: SearchParamsRecord): {
 
 export function activeFilterCount(f: ProductFilters): number {
   return (
-    (f.club?.length ?? 0) +
     (f.nation?.length ?? 0) +
     (f.confederation?.length ?? 0) +
-    (f.season?.length ?? 0) +
     (f.size?.length ?? 0) +
     (f.type?.length ?? 0) +
-    (f.era?.length ?? 0) +
     (f.minPrice != null ? 1 : 0) +
     (f.maxPrice != null ? 1 : 0)
   );

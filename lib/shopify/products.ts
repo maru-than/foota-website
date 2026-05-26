@@ -58,8 +58,6 @@ export function applyFilters(
   filters: ProductFilters,
 ): Product[] {
   return products.filter((p) => {
-    if (filters.club?.length && !(p.meta.club && filters.club.includes(p.meta.club)))
-      return false;
     if (
       filters.nation?.length &&
       !(p.meta.nation && filters.nation.includes(p.meta.nation))
@@ -73,14 +71,8 @@ export function applyFilters(
       )
     )
       return false;
-    if (
-      filters.season?.length &&
-      !(p.meta.season && filters.season.includes(p.meta.season))
-    )
-      return false;
     if (filters.type?.length && !(p.meta.type && filters.type.includes(p.meta.type)))
       return false;
-    if (filters.era?.length && !filters.era.includes(p.meta.era)) return false;
     if (
       filters.size?.length &&
       !p.variants.some((v) => filters.size!.includes(v.title))
@@ -93,13 +85,12 @@ export function applyFilters(
   });
 }
 
-/** Rank for "New Arrivals": current-season / "New" shirts first, then recency.
+/** Rank for "New Arrivals": "New"-badged shirts first, then recency.
  *  Once ranked, walks confederations round-robin so the visible row spans
  *  regions instead of clustering on whichever confederation has the most
  *  "New"-tagged items (today: UEFA). */
 export function pickNewArrivals(products: Product[], limit = 8): Product[] {
-  const score = (p: Product) =>
-    (p.meta.badge === "New" ? 2 : 0) + (p.meta.era === "Current" ? 1 : 0);
+  const score = (p: Product) => (p.meta.badge === "New" ? 2 : 0);
 
   const ranked = [...products].sort((a, b) => {
     const diff = score(b) - score(a);
@@ -140,34 +131,25 @@ export function applySort(products: Product[], sort: SortKey): Product[] {
 }
 
 export interface Facets {
-  clubs: string[];
   nations: string[];
   confederations: string[];
-  seasons: string[];
   sizes: string[];
   types: string[];
-  eras: string[];
   priceRange: { min: number; max: number };
 }
 
 export function deriveFacets(products: Product[]): Facets {
-  const clubs = new Set<string>();
   const nations = new Set<string>();
   const confederations = new Set<string>();
-  const seasons = new Set<string>();
   const sizes = new Set<string>();
   const types = new Set<string>();
-  const eras = new Set<string>();
   let min = Infinity;
   let max = 0;
 
   for (const p of products) {
-    if (p.meta.club) clubs.add(p.meta.club);
     if (p.meta.nation) nations.add(p.meta.nation);
     if (p.meta.confederation) confederations.add(p.meta.confederation);
-    if (p.meta.season) seasons.add(p.meta.season);
     if (p.meta.type) types.add(p.meta.type);
-    eras.add(p.meta.era);
     for (const v of p.variants) sizes.add(v.title);
     const price = priceOf(p);
     if (price < min) min = price;
@@ -175,17 +157,14 @@ export function deriveFacets(products: Product[]): Facets {
   }
 
   return {
-    clubs: [...clubs].sort(),
     nations: [...nations].sort(),
     confederations: [...confederations].sort(
       (a, b) => CONFEDERATION_ORDER.indexOf(a) - CONFEDERATION_ORDER.indexOf(b),
     ),
-    seasons: [...seasons].sort().reverse(),
     sizes: [...sizes].sort(
       (a, b) => SIZE_ORDER.indexOf(a) - SIZE_ORDER.indexOf(b),
     ),
-    types: ["Home", "Away", "Third", "Goalkeeper"].filter((t) => types.has(t)),
-    eras: ["Current", "Retro"].filter((e) => eras.has(e)),
+    types: ["Home", "Away"].filter((t) => types.has(t)),
     priceRange: {
       min: Number.isFinite(min) ? Math.floor(min) : 0,
       max: Math.ceil(max) || 0,

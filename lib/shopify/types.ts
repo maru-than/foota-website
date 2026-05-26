@@ -136,20 +136,18 @@ export interface ProductOption {
   values: string[];
 }
 
-export type JerseyBadge = "Retro" | "New" | "Rare Find" | "Host" | null;
-export type JerseyType = "Home" | "Away" | "Third" | "Goalkeeper" | null;
-export type JerseyEra = "Current" | "Retro";
+export type JerseyBadge = "New" | "Host" | null;
+export type JerseyType = "Home" | "Away" | null;
 
 export interface JerseyMeta {
-  club: string | null;
   nation: string | null;
   /** Confederation: UEFA, CONMEBOL, CONCACAF, CAF, AFC, OFC. */
   confederation: string | null;
-  season: string | null; // "2026"
+  /** Always "2026" for this catalogue — kept on the model so PDP / OG can label it. */
+  season: string | null;
   type: JerseyType;
-  era: JerseyEra;
   badge: JerseyBadge;
-  /** club ?? nation — the small muted label on cards/pages. */
+  /** nation — the small muted label on cards/pages. */
   teamName: string | null;
   /** Whether name + number printing is offered for this product. */
   customisable: boolean;
@@ -235,13 +233,10 @@ export interface Cart {
 export type SortKey = "featured" | "newest" | "price-asc" | "price-desc";
 
 export interface ProductFilters {
-  club?: string[];
   nation?: string[];
   confederation?: string[];
-  season?: string[];
   size?: string[];
-  type?: string[]; // Home / Away / Third / Goalkeeper
-  era?: string[]; // Current / Retro
+  type?: string[]; // Home / Away
   minPrice?: number;
   maxPrice?: number;
 }

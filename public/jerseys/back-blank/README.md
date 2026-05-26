@@ -1,7 +1,7 @@
 # Back-of-shirt blanks
 
 These photographs back the live preview on the PDP — the typed name and
-number are overlaid via SVG. **Five files** cover the entire catalogue.
+number are overlaid via SVG. **Three files** cover the entire catalogue.
 
 ## Expected files
 
@@ -9,8 +9,6 @@ number are overlaid via SVG. **Five files** cover the entire catalogue.
 |---|---|---|
 | `home.webp` | Home | `meta.type === "Home"` (default) |
 | `away.webp` | Away | `meta.type === "Away"` |
-| `third.webp` | Third | `meta.type === "Third"` |
-| `goalkeeper.webp` | Goalkeeper | `meta.type === "Goalkeeper"` |
 | `default.webp` | Fallback | anything else / `null` |
 
 ## Shooting spec

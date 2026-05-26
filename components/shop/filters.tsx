@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Filter drawer (mobile) / sidebar (desktop) — confederation, nation, type, era, size, price range.
+ * @file Filter drawer (mobile) / sidebar (desktop) — confederation, nation, type, size, price range.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -100,7 +100,6 @@ export function FilterPanel({
     { key: "confederation", title: "Confederation", values: facets.confederations },
     { key: "nation", title: "Nation", values: facets.nations, scroll: true },
     { key: "type", title: "Type", values: facets.types },
-    { key: "era", title: "Era", values: facets.eras },
     { key: "size", title: "Size", values: facets.sizes },
   ];
 
@@ -116,12 +115,12 @@ export function FilterPanel({
     <div>
       {showHeader ? (
         <div className="flex items-center justify-between pb-4">
-          <span className="text-sm font-bold uppercase tracking-[0.12em]">Filters</span>
+          <span className="text-sm font-bold uppercase">Filters</span>
           {showClear ? (
             <button
               type="button"
               onClick={() => router.push(pathname, { scroll: false })}
-              className="text-xs uppercase tracking-[0.1em] text-fg-3 transition-colors hover:text-accent"
+              className="text-xs uppercase text-fg-3 transition-colors hover:text-accent"
             >
               Clear all
             </button>
@@ -134,7 +133,7 @@ export function FilterPanel({
           <button
             type="button"
             onClick={() => router.push(pathname, { scroll: false })}
-            className="text-xs uppercase tracking-[0.1em] text-fg-3 transition-colors hover:text-accent"
+            className="text-xs uppercase text-fg-3 transition-colors hover:text-accent"
           >
             Clear all
           </button>
@@ -226,7 +225,7 @@ export function FiltersDrawer({
 }) {
   const [open, setOpen] = useState(false);
   const searchParams = useSearchParams();
-  const keys = ["confederation", "nation", "type", "era", "size"];
+  const keys = ["confederation", "nation", "type", "size"];
   const active =
     keys.reduce((sum, k) => sum + getValues(searchParams, k).length, 0) +
     (searchParams.get("minPrice") || searchParams.get("maxPrice") ? 1 : 0);

@@ -1,6 +1,6 @@
 # Foota Jerseys
 
-A premium headless Shopify storefront for **2026 FIFA World Cup** home jerseys — every nation. _"A home for jerseys."_
+A premium headless Shopify storefront for **2026 FIFA World Cup** home and away jerseys — every qualified nation. _"A home for jerseys."_
 
 Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Tailwind CSS v4** and **shadcn/ui** style primitives. Shopify is the commerce backend (products, variants, inventory, collections, discounts, **checkout, payments and orders**); this app owns the entire storefront experience.
 
@@ -44,16 +44,16 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Jersey metadata (product tags)
 
-Nation / confederation / season / type / era / badge are derived from **product tags** so no metafield setup is required to start. Tag products like:
+Nation / confederation / season / type / badge are derived from **product tags** so no metafield setup is required to start. Tag products like:
 
 ```
 nation:Brazil        confederation:CONMEBOL        season:2026
-type:Home            era:Current                   badge:New
+type:Home            badge:New
 ```
 
 - `confederation`: `UEFA` · `CONMEBOL` · `CONCACAF` · `CAF` · `AFC` · `OFC`
-- `type`: `Home` · `Away` · `Third` · `Goalkeeper`
-- `badge`: `New` · `Host` (host nations) · `Retro` · `Rare Find`
+- `type`: `Home` · `Away`
+- `badge`: `New` · `Host` (host nations)
 
 Collections used by the nav/footer: `hosts`, `uefa`, `conmebol`, `concacaf`, `caf`, `afc`, `ofc`, `new-arrivals`. `hosts` is driven by `badge:Host`; confederation collections by the `confederation:` tag.
 

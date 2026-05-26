@@ -15,7 +15,6 @@ import type {
   Connection,
   Image,
   JerseyBadge,
-  JerseyEra,
   JerseyMeta,
   JerseyType,
   Product,
@@ -45,13 +44,6 @@ function normalizeType(value: string | null): JerseyType {
       return "Home";
     case "away":
       return "Away";
-    case "third":
-    case "3rd":
-      return "Third";
-    case "goalkeeper":
-    case "gk":
-    case "keeper":
-      return "Goalkeeper";
     default:
       return null;
   }
@@ -59,13 +51,8 @@ function normalizeType(value: string | null): JerseyType {
 
 function normalizeBadge(value: string | null): JerseyBadge {
   switch (value?.toLowerCase()) {
-    case "retro":
-      return "Retro";
     case "new":
       return "New";
-    case "rare find":
-    case "rare":
-      return "Rare Find";
     case "host":
       return "Host";
     default:
@@ -75,8 +62,8 @@ function normalizeBadge(value: string | null): JerseyBadge {
 
 /**
  * Derive jersey metadata from Shopify product tags.
- * Convention: `club:AC Milan`, `nation:Brazil`, `season:2006/07`,
- * `type:Home`, `era:Retro`, `badge:Rare Find`.
+ * Convention: `nation:Brazil`, `confederation:CONMEBOL`, `season:2026`,
+ * `type:Home`, `badge:Host`.
  */
 export function parseJerseyMeta(
   tags: string[],
@@ -89,36 +76,22 @@ export function parseJerseyMeta(
     return match ? match.slice(prefix.length + 1).trim() : null;
   };
 
-  const club = get("club");
   const nation = get("nation");
   const confederation = get("confederation");
   const season = get("season");
   const type = normalizeType(get("type"));
   const badge = normalizeBadge(get("badge"));
 
-  const eraRaw = get("era")?.toLowerCase();
-  const era: JerseyEra =
-    eraRaw === "retro"
-      ? "Retro"
-      : eraRaw === "current"
-        ? "Current"
-        : badge === "Retro"
-          ? "Retro"
-          : "Current";
-
-  // Customs default on; products opt out with a `custom:off` tag. Retro
-  // reissues, for instance, ship blank only.
+  // Customs default on; products opt out with a `custom:off` tag.
   const customisable = get("custom")?.toLowerCase() !== "off";
 
   return {
-    club,
     nation,
     confederation,
     season,
     type,
-    era,
     badge,
-    teamName: club ?? nation ?? opts?.vendor ?? null,
+    teamName: nation ?? opts?.vendor ?? null,
     customisable,
   };
 }

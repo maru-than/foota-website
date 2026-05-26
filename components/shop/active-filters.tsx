@@ -24,7 +24,7 @@ import {
  * open the filter drawer just to see what they applied.
  */
 
-const FACET_KEYS = ["confederation", "nation", "type", "era", "size"] as const;
+const FACET_KEYS = ["confederation", "nation", "type", "size"] as const;
 
 export function ActiveFilters() {
   const router = useRouter();
@@ -71,7 +71,7 @@ export function ActiveFilters() {
           type="button"
           onClick={c.remove}
           aria-label={`Remove filter ${c.label}`}
-          className="inline-flex min-h-9 items-center gap-1.5 border border-accent-40 bg-accent-12 pl-3 pr-2 text-xs font-semibold uppercase tracking-[0.06em] text-fg-1 transition-colors hover:border-accent hover:bg-accent-20 focus:outline-none focus-visible:border-accent"
+          className="inline-flex min-h-9 items-center gap-1.5 border border-accent-40 bg-accent-12 pl-3 pr-2 text-xs font-semibold uppercase text-fg-1 transition-colors hover:border-accent hover:bg-accent-20 focus:outline-none focus-visible:border-accent"
         >
           <span>{c.label}</span>
           <X className="size-3.5 text-fg-2" strokeWidth={1.75} />
@@ -80,7 +80,7 @@ export function ActiveFilters() {
       <button
         type="button"
         onClick={() => router.push(pathname, { scroll: false })}
-        className="ml-1 min-h-9 px-2 text-xs uppercase tracking-[0.1em] text-fg-3 transition-colors hover:text-accent focus:outline-none focus-visible:text-accent"
+        className="ml-1 min-h-9 px-2 text-xs uppercase text-fg-3 transition-colors hover:text-accent focus:outline-none focus-visible:text-accent"
       >
         Clear all
       </button>
