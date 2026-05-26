@@ -1,5 +1,8 @@
 /** Shared authenticity / quality-check body. Used by route page and modal. */
 
+import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
+import { getFeaturedTestimonials } from "@/lib/testimonials";
+
 const POINTS = [
   {
     name: "Inspected on arrival",
@@ -16,12 +19,13 @@ const POINTS = [
 ];
 
 export function AuthenticityContent() {
+  const testimonials = getFeaturedTestimonials(3);
   return (
     <div className="space-y-8 text-pretty leading-relaxed text-fg-2 [&_h3]:text-fg-1">
       <section className="space-y-3">
         <h3 className="text-lg font-bold tracking-[-0.02em]">What you get</h3>
         <p>
-          Foota stocks 2026 home jerseys for all 48 nations in the field. Every
+          Worldkit Soccer stocks 2026 home jerseys for all 48 nations in the field. Every
           jersey is inspected on arrival — stitching, crest, fonts and finish
           are checked against reference photos before it ships.
         </p>
@@ -44,6 +48,18 @@ export function AuthenticityContent() {
           your jersey arrives.
         </p>
       </section>
+
+      {testimonials.length > 0 ? (
+        <section className="space-y-4">
+          <div>
+            <span className="eyebrow text-accent">In their words</span>
+            <h3 className="mt-1 text-lg font-bold tracking-[-0.02em]">
+              From recent buyers
+            </h3>
+          </div>
+          <TestimonialGrid items={testimonials} columns={3} />
+        </section>
+      ) : null}
     </div>
   );
 }

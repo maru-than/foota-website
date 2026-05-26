@@ -1,11 +1,17 @@
+import type { Metadata } from "next";
+
 import { EditorialBanner } from "@/components/home/editorial-banner";
 import { FeaturedCollections } from "@/components/home/featured-collections";
 import { Hero } from "@/components/home/hero";
-import { Newsletter } from "@/components/home/newsletter";
 import { NewArrivals } from "@/components/home/new-arrivals";
 import { ShopByConfederation } from "@/components/home/shop-by-confederation";
+import { TestimonialsSection } from "@/components/home/testimonials-section";
 import { getCollections } from "@/lib/shopify/collections";
 import { getProducts, pickNewArrivals } from "@/lib/shopify/products";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default async function HomePage() {
   const [collections, products] = await Promise.all([
@@ -21,8 +27,8 @@ export default async function HomePage() {
       <FeaturedCollections collections={collections} />
       <NewArrivals products={arrivals} />
       <EditorialBanner />
+      <TestimonialsSection />
       <ShopByConfederation />
-      <Newsletter />
     </>
   );
 }
