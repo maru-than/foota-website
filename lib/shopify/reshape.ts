@@ -225,13 +225,28 @@ export function reshapeCart(cart: ShopifyCart): Cart {
     },
   }));
 
+  // Shopify can't compute the customisation delta server-side — re-apply it
+  // here so consumers see a consistent subtotal regardless of mock vs real.
+  let extraDelta = 0;
+  const currency = cart.cost.subtotalAmount.currencyCode;
+  for (const line of lines) {
+    if (line.customisation) {
+      extraDelta +=
+        Number.parseFloat(line.customisation.priceDelta.amount) * line.quantity;
+    }
+  }
+  const subtotal =
+    Number.parseFloat(cart.cost.subtotalAmount.amount) + extraDelta;
+  const total =
+    Number.parseFloat(cart.cost.totalAmount.amount) + extraDelta;
+
   return {
     id: cart.id,
     checkoutUrl: cart.checkoutUrl,
     totalQuantity: cart.totalQuantity,
     cost: {
-      subtotalAmount: cart.cost.subtotalAmount,
-      totalAmount: cart.cost.totalAmount,
+      subtotalAmount: { amount: subtotal.toFixed(2), currencyCode: currency },
+      totalAmount: { amount: total.toFixed(2), currencyCode: currency },
       totalTaxAmount: cart.cost.totalTaxAmount ?? null,
     },
     lines,

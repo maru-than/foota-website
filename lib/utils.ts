@@ -1,6 +1,8 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+import type { CartLine } from "@/lib/shopify/types";
+
 /** Tailwind-aware className combiner (shadcn convention). */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -30,6 +32,19 @@ export function titleCase(input: string): string {
     .split(/[\s-]+/)
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
+}
+
+/**
+ * Per-line subtotal in cart currency, accounting for any customisation
+ * delta. Shopify can't compute the delta server-side (we don't explode
+ * variants), so the client reconciles `unit + delta` × quantity.
+ */
+export function lineSubtotal(line: CartLine): number {
+  const unit = Number.parseFloat(line.merchandise.price.amount);
+  const delta = line.customisation
+    ? Number.parseFloat(line.customisation.priceDelta.amount)
+    : 0;
+  return (unit + delta) * line.quantity;
 }
 
 /** Build a query string from a partial record, dropping empty values. */

@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Minus, Plus, X } from "lucide-react";
 
 import { JerseyPlaceholder } from "@/components/ui/jersey-placeholder";
-import { cn, formatPrice } from "@/lib/utils";
+import { formatCustomLabel } from "@/lib/customisation";
+import { cn, formatPrice, lineSubtotal } from "@/lib/utils";
 import { useCart } from "./cart-provider";
 import type { CartLine } from "@/lib/shopify/types";
 
@@ -22,6 +23,9 @@ export function CartItem({
   const size =
     line.merchandise.selectedOptions.find((o) => o.name.toLowerCase() === "size")
       ?.value ?? line.merchandise.title;
+  const customLabel = formatCustomLabel(line.customisation);
+  const subtotal = lineSubtotal(line);
+  const currency = line.merchandise.price.currencyCode;
 
   return (
     <div className="relative flex gap-4 py-5">
@@ -59,6 +63,14 @@ export function CartItem({
           </button>
         </div>
         <span className="mt-1 text-xs text-fg-3">Size {size}</span>
+        {customLabel ? (
+          <span className="mt-0.5 text-xs uppercase tracking-[0.08em] text-fg-2">
+            {customLabel}
+            <span className="ml-2 text-fg-3 normal-case tracking-normal">
+              · +{formatPrice(line.customisation?.priceDelta.amount ?? "0", currency)}
+            </span>
+          </span>
+        ) : null}
 
         <div className="mt-auto flex items-center justify-between pt-3">
           <div className="flex items-center border border-line-2">
@@ -83,7 +95,7 @@ export function CartItem({
             </button>
           </div>
           <span className={cn("text-sm font-bold tabular-nums text-accent")}>
-            {formatPrice(line.cost.totalAmount.amount, line.cost.totalAmount.currencyCode)}
+            {formatPrice(subtotal, currency)}
           </span>
         </div>
       </div>
