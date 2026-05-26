@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BackPreview } from "@/components/product/customise/back-preview";
 import { CustomiseProvider } from "@/components/product/customise/customise-context";
 import { ProductBuyBox } from "@/components/product/product-buy-box";
 import { ProductDetails } from "@/components/product/product-details";
@@ -114,6 +115,11 @@ export default async function ProductPage({
               images={product.images}
               title={product.title}
               meta={product.meta}
+              backSlot={
+                product.meta.customisable !== false ? (
+                  <BackPreview meta={product.meta} />
+                ) : undefined
+              }
             />
 
             <div className="lg:py-2">

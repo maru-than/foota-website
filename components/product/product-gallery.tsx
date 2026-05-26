@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import Image from "next/image";
 
 import { JerseyPlaceholder } from "@/components/ui/jersey-placeholder";
@@ -11,16 +12,23 @@ import type { Image as ProductImage, JerseyMeta } from "@/lib/shopify/types";
  * Touch-native gallery on mobile — horizontal snap track. Thumbnails act as
  * a paginator and scroll-to-image control. Desktop keeps the single-image
  * + thumbnail-strip layout via the `md:` overrides.
+ *
+ * Optional `backSlot` — a ReactNode (e.g. the live back-of-shirt preview)
+ * that joins the slide deck as the last tile and gets its own thumbnail.
  */
 export function ProductGallery({
   images,
   title,
   meta,
+  backSlot,
 }: {
   images: ProductImage[];
   title: string;
   meta: JerseyMeta;
+  backSlot?: ReactNode;
 }) {
+  const slideCount = images.length + (backSlot ? 1 : 0);
+  const backIndex = backSlot ? images.length : -1;
   const [active, setActive] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
@@ -28,7 +36,7 @@ export function ProductGallery({
 
   // Keep `active` in sync as the user swipes on mobile.
   useEffect(() => {
-    if (images.length <= 1) return;
+    if (slideCount <= 1) return;
     const track = trackRef.current;
     if (!track || typeof IntersectionObserver === "undefined") return;
     const obs = new IntersectionObserver(
@@ -51,7 +59,7 @@ export function ProductGallery({
       if (el) obs.observe(el);
     }
     return () => obs.disconnect();
-  }, [images.length]);
+  }, [slideCount]);
 
   const scrollTo = useCallback((i: number) => {
     const target = slideRefs.current[i];
@@ -65,7 +73,7 @@ export function ProductGallery({
     }, 500);
   }, []);
 
-  if (images.length === 0) {
+  if (images.length === 0 && !backSlot) {
     return (
       <div className="jersey-frame grid-texture relative aspect-[4/5] w-full overflow-hidden border border-line-accent">
         <JerseyPlaceholder
@@ -105,30 +113,50 @@ export function ProductGallery({
             />
           </div>
         ))}
+        {backSlot ? (
+          <div
+            key="back-slot-mobile"
+            ref={(el) => {
+              slideRefs.current[backIndex] = el;
+            }}
+            data-index={backIndex}
+            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden border border-line-accent bg-bg-1"
+          >
+            {backSlot}
+          </div>
+        ) : null}
       </div>
 
-      {/* Desktop single image */}
-      <div className="relative hidden aspect-[4/5] w-full overflow-hidden border border-line-accent bg-white md:block">
-        <Image
-          src={(images[active] ?? images[0]).url}
-          alt={(images[active] ?? images[0]).altText || title}
-          fill
-          priority
-          sizes="50vw"
-          className="object-contain p-6"
-        />
-      </div>
+      {/* Desktop active tile — either an image or the back slot. */}
+      {active === backIndex && backSlot ? (
+        <div className="relative hidden aspect-[4/5] w-full overflow-hidden border border-line-accent bg-bg-1 md:block">
+          {backSlot}
+        </div>
+      ) : (
+        <div className="relative hidden aspect-[4/5] w-full overflow-hidden border border-line-accent bg-white md:block">
+          <Image
+            src={(images[active] ?? images[0]).url}
+            alt={(images[active] ?? images[0]).altText || title}
+            fill
+            priority
+            sizes="50vw"
+            className="object-contain p-6"
+          />
+        </div>
+      )}
 
-      {images.length > 1 ? (
+      {slideCount > 1 ? (
         <>
           {/* Mobile dots paginator — bigger tap targets than thumbnails on a phone. */}
           <div className="flex justify-center gap-2 md:hidden" aria-hidden>
-            {images.map((_, i) => (
+            {Array.from({ length: slideCount }).map((_, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => scrollTo(i)}
-                aria-label={`Go to image ${i + 1}`}
+                aria-label={
+                  i === backIndex ? "View back preview" : `Go to image ${i + 1}`
+                }
                 className="flex h-6 w-6 items-center justify-center"
               >
                 <span
@@ -157,6 +185,26 @@ export function ProductGallery({
                 <Image src={img.url} alt="" fill sizes="120px" className="object-contain p-1.5" />
               </button>
             ))}
+            {backSlot ? (
+              <button
+                key="back-slot-thumb"
+                type="button"
+                onClick={() => setActive(backIndex)}
+                aria-label="View back preview"
+                className={cn(
+                  "relative aspect-[4/5] overflow-hidden border bg-bg-1 transition-colors",
+                  active === backIndex
+                    ? "border-accent"
+                    : "border-line-1 hover:border-line-accent",
+                )}
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-fg-3">
+                    Back
+                  </span>
+                </div>
+              </button>
+            ) : null}
           </div>
         </>
       ) : null}
