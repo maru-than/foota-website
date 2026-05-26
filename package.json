@@ -2,11 +2,14 @@
   "name": "foota-website",
   "version": "0.1.0",
   "private": true,
+  "author": "Maruthan",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "headers": "node scripts/add-file-headers.mjs",
     "convert:jerseys": "node scripts/convert-jerseys.mjs"
   },
   "dependencies": {
@@ -33,6 +36,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "eslint-plugin-jsdoc": "^63.0.0",
     "shadcn": "^4.8.0",
     "sharp": "^0.33.5",
     "tailwindcss": "^4",
