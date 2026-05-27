@@ -54,7 +54,7 @@ export function CartDrawer({
           <div className="flex flex-1 flex-col overflow-y-auto px-6 pb-6">
             <div className="flex flex-col items-center gap-4 pt-10 text-center">
               <BagIcon className="size-9 text-muted-foreground/60" strokeWidth={1.25} />
-              <p className="font-display text-3xl text-foreground">
+              <p className="font-display text-balance text-2xl leading-tight text-foreground sm:text-3xl">
                 Your locker is empty.
               </p>
               <p className="max-w-xs text-sm text-muted-foreground">

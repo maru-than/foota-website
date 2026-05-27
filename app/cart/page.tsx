@@ -29,7 +29,7 @@ export default function CartPage() {
 
       {lines.length === 0 ? (
         <div className="flex flex-col items-center gap-4 py-24 text-center">
-          <p className="font-display text-3xl text-foreground">Your locker is empty.</p>
+          <p className="font-display text-balance text-2xl leading-tight text-foreground sm:text-3xl">Your locker is empty.</p>
           <p className="max-w-md text-sm text-muted-foreground">
             Add a jersey to get started — all 48 nations are in.
           </p>

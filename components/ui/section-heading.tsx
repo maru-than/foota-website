@@ -59,6 +59,14 @@ export function SectionHeading({
           {description}
         </p>
       ) : null}
+      {action ? (
+        <Link
+          href={action.href}
+          className="inline-flex w-fit items-center gap-1.5 border-b border-border pb-1 text-sm text-foreground transition-colors hover:border-primary hover:text-primary sm:hidden"
+        >
+          {action.label} →
+        </Link>
+      ) : null}
     </div>
   );
 }

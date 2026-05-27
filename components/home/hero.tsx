@@ -79,22 +79,24 @@ export function Hero() {
         </div>
 
         {/* RIGHT — jersey layered over lime grid.
-            Scale: container 440×515, lime block & grid 396×396 (= 18×22px),
-            jersey 396×515. About 30% larger than the Figma reference but
-            keeps the same proportions so it carries the column on desktop. */}
+            Proportions: lime block & grid are 90%×77% of the container;
+            jersey fills 90%×100%. The container scales from ~300px wide on
+            phones up to 440px on desktop via `aspect-[440/515]` + max-w,
+            so every layer scales together — no breakpoint-specific math. */}
         <div className="flex items-center justify-center">
-          <div className="relative h-[515px] w-[440px]">
+          <div className="relative aspect-[440/515] w-full max-w-[280px] sm:max-w-[380px] lg:max-w-[440px]">
             {/* Lime fill block, offset back-left */}
             <div
-              className="absolute left-0 top-[80px] size-[396px] bg-lime-200"
+              className="absolute left-0 top-[15.5%] aspect-square w-[90%] bg-lime-200"
               aria-hidden
             />
 
-            {/* White grid square — 18×18 of 22px cells via background pattern,
-                so every row + column is perfectly drawn without overflow.
-                Hidden on the smallest screens to keep the layered card legible. */}
+            {/* White grid square — 22px CSS-gradient pattern. The cell size
+                is absolute so the grid stays crisp at every breakpoint
+                (count varies, density reads the same). Hidden on the very
+                smallest viewports where the layered card gets too dense. */}
             <div
-              className="absolute left-[44px] top-[120px] hidden size-[396px] bg-white sm:block"
+              className="absolute left-[10%] top-[23.3%] hidden aspect-square w-[90%] bg-white sm:block"
               aria-hidden
               style={{
                 backgroundImage: GRID_BG_IMAGE,
@@ -103,15 +105,15 @@ export function Hero() {
               }}
             />
 
-            {/* Jersey — front of stack, top-aligned with grid */}
+            {/* Jersey — front of stack, fills the full container so it can
+                read through grid + lime via its transparent margins. */}
             <Image
               src={`/jerseys/away-transparent/${active.slug}.webp`}
               alt={`${active.name} 2026 away jersey`}
-              width={396}
-              height={515}
+              fill
               priority
-              sizes="(max-width: 640px) 320px, 440px"
-              className="absolute left-[44px] top-0 h-[515px] w-[396px] object-contain"
+              sizes="(max-width: 640px) 252px, (max-width: 1024px) 342px, 396px"
+              className="absolute left-[10%] top-0 h-full w-[90%] object-contain"
             />
           </div>
         </div>

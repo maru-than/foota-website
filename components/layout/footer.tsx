@@ -41,7 +41,7 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-3 sm:gap-x-8">
           {FOOTER_NAV.map((column) => (
             <nav key={column.title} aria-label={column.title}>
               <h3 className="text-xs text-muted-foreground">{column.title}</h3>
@@ -50,7 +50,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="block py-3 text-sm text-foreground/80 transition-colors hover:text-foreground"
+                      className="block py-2.5 text-sm text-foreground/80 transition-colors hover:text-foreground"
                     >
                       {link.label}
                     </Link>
