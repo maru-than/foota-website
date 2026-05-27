@@ -118,7 +118,7 @@ export function FeaturedCollections({
               <Reveal key={collection.id} delay={i * 70}>
                 <Link
                   href={href}
-                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden border border-line-accent bg-bg-2 p-6 transition-transform duration-300 ease-worldkit hover:-translate-y-1"
+                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden border border-lime-400/20 bg-card p-6 transition-transform duration-300 ease-worldkit hover:-translate-y-1"
                 >
                   {isCustoms ? (
                     <>
@@ -146,17 +146,17 @@ export function FeaturedCollections({
                   ) : (
                     <div
                       aria-hidden
-                      className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full border border-line-accent transition-transform duration-500 ease-worldkit group-hover:scale-110"
+                      className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full border border-lime-400/20 transition-transform duration-500 ease-worldkit group-hover:scale-110"
                     />
                   )}
                   <div className="relative">
-                    <span className="eyebrow text-accent">
+                    <span className="eyebrow text-lime-400">
                       {isCustoms ? "Personalise" : "Collection"}
                     </span>
                     <h3 className="mt-1 text-2xl font-bold leading-tight tracking-[-0.03em]">
                       {collection.title}
                     </h3>
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm text-fg-2 transition-colors group-hover:text-accent">
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm text-foreground/80 transition-colors group-hover:text-lime-400">
                       {isCustoms ? "Build yours" : "Explore"}
                       <ArrowRight
                         className="size-3.5 transition-transform duration-300 ease-worldkit group-hover:translate-x-1"

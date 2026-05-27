@@ -16,7 +16,7 @@ export function NewArrivals({ products }: { products: Product[] }) {
   if (products.length === 0) return null;
 
   return (
-    <section className="border-t border-line-1 py-16 lg:py-20">
+    <section className="border-t border-border py-16 lg:py-20">
       <Container>
         <Reveal>
           <SectionHeading

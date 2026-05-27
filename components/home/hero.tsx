@@ -87,7 +87,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-bg-0">
+    <section className="relative overflow-hidden bg-background">
       {/* 8-column grid — the spine of the Worldkit mark. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 flex">
         {Array.from({ length: 8 }).map((_, i) => (
@@ -121,10 +121,10 @@ export function Hero() {
           </div>
 
           <h1
-            className="display text-center text-fg-1"
+            className="display text-center text-foreground"
             style={{ fontSize: "clamp(28px, 9vw, 64px)" }}
           >
-            A home for jerseys<span className="text-accent">.</span>
+            A home for jerseys<span className="text-lime-400">.</span>
           </h1>
 
           {/* CTAs fill the row on small phones (no wrapping at 280/320px),
@@ -134,13 +134,13 @@ export function Hero() {
           <div className="flex w-full max-w-[336px] items-center justify-center gap-3 sm:max-w-none">
             <Link
               href={`/products/${active.slug}-home`}
-              className="inline-flex flex-1 items-center justify-center whitespace-nowrap bg-accent px-3 py-3 text-[20px] font-semibold lowercase text-bg-0 transition-colors hover:bg-accent-hi sm:w-[160px] sm:flex-none sm:px-5"
+              className="inline-flex flex-1 items-center justify-center whitespace-nowrap bg-lime-400 px-3 py-3 text-[20px] font-semibold lowercase text-background transition-colors hover:bg-lime-300 sm:w-[160px] sm:flex-none sm:px-5"
             >
               buy now
             </Link>
             <Link
               href="/shop"
-              className="inline-flex flex-1 items-center justify-center whitespace-nowrap border border-white/25 px-3 py-3 text-[20px] font-semibold lowercase text-fg-1 transition-colors hover:border-white/60 hover:bg-white/5 sm:w-[160px] sm:flex-none sm:px-5"
+              className="inline-flex flex-1 items-center justify-center whitespace-nowrap border border-white/25 px-3 py-3 text-[20px] font-semibold lowercase text-foreground transition-colors hover:border-white/60 hover:bg-white/5 sm:w-[160px] sm:flex-none sm:px-5"
             >
               see all
             </Link>
