@@ -133,11 +133,11 @@ export function Hero() {
               tablets/desktop. whitespace-nowrap defends against subpixel
               wrap on the lowercase 20px labels. */}
           <div className="flex w-full max-w-[336px] items-center justify-center gap-3 sm:max-w-none">
-            <Button asChild size="lg" className="flex-1 lowercase sm:w-[160px] sm:flex-none">
-              <Link href={`/products/${active.slug}-home`}>buy now</Link>
+            <Button asChild size="lg">
+              <Link href={`/products/${active.slug}-home`}>Buy now</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="flex-1 lowercase sm:w-[160px] sm:flex-none">
-              <Link href="/shop">see all</Link>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/shop">See all</Link>
             </Button>
           </div>
         </Reveal>

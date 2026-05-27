@@ -53,12 +53,7 @@ export function VariantSelector({
             <span className="eyebrow text-muted-foreground">{option.name}</span>
             {option.name.toLowerCase() === "size" ? (
               <SizeGuideModal>
-                <Button
-                  type="button"
-                  variant="link"
-                  size="xs"
-                  className="text-lime-400 hover:text-lime-300"
-                >
+                <Button type="button" variant="link" size="sm">
                   <Ruler className="size-3.5" strokeWidth={1.5} aria-hidden />
                   Size guide
                 </Button>
@@ -74,14 +69,10 @@ export function VariantSelector({
                   key={value}
                   type="button"
                   variant={isSelected ? "default" : "outline"}
-                  size="icon"
                   disabled={!available}
                   aria-pressed={isSelected}
                   onClick={() => onChange(option.name, value)}
-                  className={cn(
-                    !isSelected && available && "border-lime-400/20",
-                    !available && "line-through opacity-50",
-                  )}
+                  className={cn(!available && "line-through opacity-50")}
                 >
                   {value}
                 </Button>

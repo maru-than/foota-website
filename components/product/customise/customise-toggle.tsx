@@ -35,7 +35,6 @@ export function CustomiseToggle() {
           variant={!enabled ? "default" : "outline"}
           aria-pressed={!enabled}
           onClick={() => setEnabled(false)}
-          className={!enabled ? undefined : "border-lime-400/20"}
         >
           Blank
         </Button>
@@ -44,7 +43,6 @@ export function CustomiseToggle() {
           variant={enabled ? "default" : "outline"}
           aria-pressed={enabled}
           onClick={() => setEnabled(true)}
-          className={enabled ? undefined : "border-lime-400/20"}
         >
           Name &amp; number
         </Button>

@@ -203,9 +203,10 @@ export function ProductBuyBox({ product }: { product: Product }) {
           />
         </div>
         <Button
+          size="lg"
           onClick={add}
           disabled={!available || isPending}
-          className="max-w-[180px] shrink-0"
+          className="shrink-0"
         >
           {available ? "Add to bag" : "Sold out"}
           {available ? <ShoppingBag className="size-4" strokeWidth={1.5} /> : null}
