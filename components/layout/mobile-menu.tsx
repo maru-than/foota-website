@@ -105,7 +105,7 @@ export function MobileMenu({
               <BagIcon className="size-4" strokeWidth={1.5} />
               Bag
             </span>
-            <b className="tabular-nums text-primary">{totalQuantity}</b>
+            <span className="tabular-nums text-muted-foreground">{totalQuantity}</span>
           </button>
         </div>
 

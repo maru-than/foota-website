@@ -83,7 +83,7 @@ export default function CustomisePage() {
             {HOW.map(({ Icon, title, note }) => (
               <div key={title}>
                 <div className="flex flex-col gap-3 rounded-xl border border-border p-6">
-                  <Icon className="size-5 text-primary" strokeWidth={1.5} />
+                  <Icon className="size-5 text-muted-foreground" strokeWidth={1.5} />
                   <h3 className="text-lg leading-tight text-foreground">
                     {title}
                   </h3>

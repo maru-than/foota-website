@@ -54,7 +54,7 @@ export function CartDrawer({
           <div className="flex flex-1 flex-col overflow-y-auto px-6 pb-6">
             <div className="flex flex-col items-center gap-4 pt-10 text-center">
               <BagIcon className="size-9 text-muted-foreground/60" strokeWidth={1.25} />
-              <p className="text-2xl font-bold">
+              <p className="font-display text-3xl text-foreground">
                 Your locker is empty.
               </p>
               <p className="max-w-xs text-sm text-muted-foreground">
@@ -93,7 +93,7 @@ export function CartDrawer({
                           ) : null}
                         </div>
                         <div className="flex flex-col gap-0.5">
-                          <span className="text-sm font-bold leading-tight text-primary">
+                          <span className="text-sm leading-tight text-foreground">
                             {p.meta.teamName ?? p.title}
                           </span>
                           <span className="text-xs tabular-nums text-muted-foreground">
@@ -124,7 +124,7 @@ export function CartDrawer({
                   <Price
                     amount={cart.cost.subtotalAmount.amount}
                     currencyCode={cart.cost.subtotalAmount.currencyCode}
-                    className="text-base font-bold text-foreground"
+                    className="text-base text-foreground"
                   />
                 ) : null}
               </div>

@@ -77,13 +77,13 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative py-1 text-xs font-semibold uppercase transition-colors duration-150 ease-out",
-                  active ? "text-primary" : "text-foreground/80 hover:text-foreground",
+                  "relative py-1 text-xs font-medium uppercase tracking-[0.18em] transition-colors duration-150 ease-out",
+                  active ? "text-foreground" : "text-foreground/70 hover:text-foreground",
                 )}
               >
                 {link.label}
                 {active ? (
-                  <span className="absolute inset-x-0 -bottom-1 h-px bg-primary" />
+                  <span className="absolute inset-x-0 -bottom-1 h-px bg-foreground" />
                 ) : null}
               </Link>
             );
@@ -106,15 +106,15 @@ export function Header() {
             size="icon"
             onClick={openCart}
             aria-label={`Open bag, ${totalQuantity} item${totalQuantity === 1 ? "" : "s"}`}
-            className="relative"
+            className="relative w-auto gap-1 px-2"
           >
             <BagIcon className="size-5" strokeWidth={1.5} />
             {totalQuantity > 0 ? (
               <span
                 aria-hidden
-                className="absolute -right-0.5 -top-0.5 inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold leading-none text-primary-foreground tabular-nums"
+                className="text-xs tabular-nums text-muted-foreground"
               >
-                {totalQuantity}
+                ({totalQuantity})
               </span>
             ) : null}
           </Button>

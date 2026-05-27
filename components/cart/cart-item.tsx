@@ -102,7 +102,7 @@ export function CartItem({
               <Plus className="size-3.5" strokeWidth={1.5} />
             </button>
           </div>
-          <span className={cn("text-sm font-bold tabular-nums text-primary")}>
+          <span className={cn("text-sm tabular-nums text-foreground")}>
             {formatPrice(subtotal, currency)}
           </span>
         </div>

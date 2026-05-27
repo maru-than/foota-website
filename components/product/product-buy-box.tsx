@@ -134,9 +134,9 @@ export function ProductBuyBox({ product }: { product: Product }) {
       <div className="flex items-center gap-2 text-sm">
         {available ? (
           customEnabled ? (
-            <Clock className="size-4 text-primary" strokeWidth={1.5} aria-hidden />
+            <Clock className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           ) : (
-            <PackageCheck className="size-4 text-primary" strokeWidth={1.5} aria-hidden />
+            <PackageCheck className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           )
         ) : (
           <XCircle className="size-4 text-destructive" strokeWidth={1.5} aria-hidden />
@@ -164,7 +164,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
       <div className="grid grid-cols-1 gap-4 border-t border-border pt-5 sm:grid-cols-3 sm:gap-3">
         {trust.map(({ Icon, title, note }) => (
           <div key={title} className="flex gap-2.5">
-            <Icon className="size-[18px] shrink-0 text-primary" strokeWidth={1.5} />
+            <Icon className="size-[18px] shrink-0 text-muted-foreground" strokeWidth={1.5} />
             <div className="flex flex-col gap-0.5">
               <b className="text-xs font-bold text-foreground">{title}</b>
               <span className="text-[11px] leading-snug text-muted-foreground">{note}</span>
@@ -199,7 +199,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
             amount={price.amount}
             currencyCode={price.currencyCode}
             compareAt={product.compareAtPrice}
-            className="text-sm font-bold text-primary"
+            className="text-sm text-foreground"
           />
         </div>
         <Button

@@ -36,7 +36,7 @@ export function EditorialBanner() {
             </p>
             <Link
               href="/customise"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary"
+              className="group inline-flex items-center gap-1.5 text-sm text-foreground underline underline-offset-4 transition-colors hover:text-foreground/80"
             >
               Create your own
               <ArrowRight
