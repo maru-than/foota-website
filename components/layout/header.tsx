@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Menu, Search } from "lucide-react";
 
 import { useCart } from "@/components/cart/cart-provider";
+import { Button } from "@/components/ui/button";
 import { BagIcon } from "@/components/ui/icons/bag";
 import { SearchOverlay } from "@/components/search/search-overlay";
 import { MAIN_NAV } from "@/lib/navigation";
@@ -33,14 +34,16 @@ export function Header() {
   return (
     <header className="sticky top-[calc(env(safe-area-inset-top)+1.75rem)] z-40 border-b border-border bg-background">
       <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-[72px] lg:px-8">
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           onClick={() => setMenuOpen(true)}
           aria-label="Open menu"
-          className="-ml-2 flex size-11 items-center justify-center text-foreground transition-colors hover:bg-muted lg:hidden"
+          className="-ml-2 lg:hidden"
         >
           <Menu className="size-5" strokeWidth={1.5} />
-        </button>
+        </Button>
 
         <Link
           href="/"
@@ -79,34 +82,33 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
-          <button
+          <Button
             type="button"
+            variant="ghost"
+            size="icon"
             onClick={openSearch}
             aria-label="Search"
-            className="flex size-11 items-center justify-center text-foreground transition-colors hover:bg-muted"
           >
             <Search className="size-5" strokeWidth={1.5} />
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="ghost"
+            size="icon"
             onClick={openCart}
             aria-label={`Open bag, ${totalQuantity} item${totalQuantity === 1 ? "" : "s"}`}
-            className="relative flex size-11 items-center justify-center text-foreground transition-colors hover:text-primary"
+            className="relative"
           >
-            <BagIcon className="size-6" strokeWidth={1.5} />
+            <BagIcon className="size-5" strokeWidth={1.5} />
             {totalQuantity > 0 ? (
-              /* key re-mounts the badge on every quantity change → CSS-only
-                 bounce confirms the add succeeded. */
               <span
-                key={totalQuantity}
                 aria-hidden
-                className="absolute -right-0.5 -top-0.5 inline-flex min-w-[18px] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold leading-none text-background tabular-nums motion-safe:animate-[bagPop_280ms_ease-out]"
-                style={{ height: 18 }}
+                className="absolute -right-0.5 -top-0.5 inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold leading-none text-primary-foreground tabular-nums"
               >
                 {totalQuantity}
               </span>
             ) : null}
-          </button>
+          </Button>
         </div>
       </div>
 
