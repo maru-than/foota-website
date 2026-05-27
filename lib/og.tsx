@@ -35,8 +35,8 @@ const COLORS = {
   fg: "#FFFFFF",
   fgMuted: "rgba(255,255,255,0.72)",
   fgDim: "rgba(255,255,255,0.55)",
-  accent: "#C1FF56",
-  accentDim: "rgba(193,255,86,0.18)",
+  accent: "#a3e635", // Tailwind lime-400
+  accentDim: "rgba(163,230,53,0.18)",
 } as const;
 
 let _gambarino: Buffer | null = null;

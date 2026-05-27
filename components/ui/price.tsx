@@ -35,7 +35,7 @@ export function Price({
 
   return (
     <span className="inline-flex items-baseline gap-2 tabular-nums">
-      <span className="text-[0.82em] font-normal text-fg-3 line-through decoration-fg-3/60">
+      <span className="text-[0.82em] font-normal text-muted-foreground line-through decoration-fg-3/60">
         {formatPrice(compareAt.amount, compareAt.currencyCode)}
       </span>
       <span className={className}>{formatPrice(amount, currencyCode)}</span>

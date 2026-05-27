@@ -37,7 +37,7 @@ export function StarRating({
             height={px}
             viewBox="0 0 14 14"
             aria-hidden
-            className={filled ? "text-accent" : "text-fg-4"}
+            className={filled ? "text-lime-400" : "text-muted-foreground/60"}
           >
             <path
               d="M7 1.2l1.79 3.63 4.01.58-2.9 2.83.69 3.99L7 10.36l-3.59 1.87.69-3.99L1.2 5.41l4.01-.58L7 1.2z"

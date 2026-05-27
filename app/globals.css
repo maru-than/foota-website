@@ -90,47 +90,14 @@
 }
 
 /* ------------------------------------------------------------------ */
-/*  BRIDGE — foota legacy token names mapped to shadcn semantics       */
-/*  + lime palette. Deleted in commit 8 once every call-site is        */
-/*  migrated. Lets commits 1–7 leave a green build.                    */
+/*  Project tokens — fonts + motion only. All color tokens are either  */
+/*  shadcn semantics (above) or Tailwind's stock lime palette.         */
 /* ------------------------------------------------------------------ */
 
 @theme {
-  /* Surfaces → shadcn semantics */
-  --color-bg-0: var(--background);
-  --color-bg-1: var(--background);
-  --color-bg-2: var(--card);
-  --color-bg-3: var(--muted);
-  --color-bg-4: var(--muted);
-
-  /* Foregrounds → shadcn semantics */
-  --color-fg-1: var(--foreground);
-  --color-fg-2: var(--foreground);
-  --color-fg-3: var(--muted-foreground);
-  --color-fg-4: var(--muted-foreground);
-
-  /* Lines → shadcn semantics */
-  --color-line-1: var(--border);
-  --color-line-2: var(--input);
-  --color-line-3: var(--border);
-
-  /* Accent → Tailwind lime palette (the only "color" foota owns) */
-  --color-accent: var(--color-lime-400);
-  --color-accent-hi: var(--color-lime-300);
-  --color-accent-lo: var(--color-lime-500);
-  --color-accent-12: color-mix(in oklab, var(--color-lime-400) 12%, transparent);
-  --color-accent-20: color-mix(in oklab, var(--color-lime-400) 20%, transparent);
-  --color-accent-40: color-mix(in oklab, var(--color-lime-400) 40%, transparent);
-  --color-line-accent: color-mix(in oklab, var(--color-lime-400) 20%, transparent);
-
-  /* Semantic — danger → shadcn destructive */
-  --color-danger: var(--destructive);
-
-  /* Type families — preserved */
   --font-display: var(--font-gambarino), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
 
-  /* Motion — preserved */
   --ease-worldkit: cubic-bezier(0.22, 1, 0.36, 1);
   --animate-ticker: ticker 40s linear infinite;
   --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
