@@ -69,7 +69,7 @@ export function Header() {
           />
         </Link>
 
-        <nav className="ml-6 hidden flex-1 items-center gap-7 lg:flex">
+        <nav className="ml-6 hidden items-center gap-7 lg:flex">
           {MAIN_NAV.map((link) => {
             const active = isActive(link.href);
             return (
@@ -90,7 +90,15 @@ export function Header() {
           })}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1">
+        {/* Desktop separator + breathing room between the link cluster and
+            the icon cluster. Mobile hides the divider since the icons sit
+            edge-aligned anyway. */}
+        <span
+          aria-hidden
+          className="ml-auto hidden h-5 w-px bg-border lg:ml-8 lg:block"
+        />
+
+        <div className="ml-auto flex items-center gap-1 lg:ml-2">
           <Button
             type="button"
             variant="ghost"
