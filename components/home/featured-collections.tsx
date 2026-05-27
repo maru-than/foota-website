@@ -1,5 +1,5 @@
 /**
- * @file Four-tile collection grid (hosts, UEFA, CONMEBOL, customs) with an SVG fallback for missing photos.
+ * @file Four-tile collection grid (hosts, Europe, South America, Customise) backed by real photos.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -10,10 +10,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { teamColors } from "@/components/ui/jersey-placeholder";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { fontFor } from "@/lib/customisation";
 import type { Collection } from "@/lib/shopify/types";
 
 const FEATURED_ORDER = ["hosts", "uefa", "conmebol", "customs"];
@@ -22,9 +20,9 @@ const COLLECTION_IMAGES: Record<string, string> = {
   hosts: "/collections/hosts.png",
   uefa: "/collections/uefa.png",
   conmebol: "/collections/conmebol.png",
+  customs: "/content/0-image.png",
   "new-arrivals": "/collections/new-arrivals.png",
   "best-sellers": "/collections/best-sellers.png",
-  // "customs": photo lands in commit 7. Until then, CustomsTileFallback is used.
 };
 
 /**
@@ -39,49 +37,6 @@ const CUSTOMS_TILE: Collection = {
   image: null,
   seo: { title: "Customise", description: "" },
 };
-
-/** Inline SVG-rendered back tile shown until /collections/customs.webp lands. */
-function CustomsTileFallback() {
-  const colors = teamColors("customs");
-  const font = fontFor("UEFA");
-  return (
-    <svg
-      viewBox="0 0 200 240"
-      aria-hidden
-      className="absolute inset-0 h-full w-full object-cover p-6"
-    >
-      <path
-        d="M40 40 L70 30 L85 36 L115 36 L130 30 L160 40 L175 70 L155 80 L155 200 Q155 210 145 210 L55 210 Q45 210 45 200 L45 80 L25 70 Z"
-        fill={colors.color1}
-      />
-      <rect x="85" y="30" width="30" height="12" fill={colors.color2} opacity="0.85" />
-      <text
-        x="100"
-        y="92"
-        textAnchor="middle"
-        fontFamily={font.family}
-        fontWeight={font.weight}
-        fontSize="13"
-        letterSpacing="3"
-        fill={colors.color2}
-      >
-        YOUR NAME
-      </text>
-      <text
-        x="100"
-        y="170"
-        textAnchor="middle"
-        fontFamily={font.family}
-        fontWeight={900}
-        fontSize="76"
-        letterSpacing="-2"
-        fill={colors.color2}
-      >
-        26
-      </text>
-    </svg>
-  );
-}
 
 export function FeaturedCollections({
   collections,
@@ -119,15 +74,7 @@ export function FeaturedCollections({
                   href={href}
                   className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden border border-border bg-card p-6 transition-transform duration-300 ease-out hover:-translate-y-1"
                 >
-                  {isCustoms ? (
-                    <>
-                      <CustomsTileFallback />
-                      <div
-                        aria-hidden
-                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-0 via-bg-0/60 to-transparent"
-                      />
-                    </>
-                  ) : image ? (
+                  {image ? (
                     <>
                       <Image
                         src={image}
@@ -139,7 +86,7 @@ export function FeaturedCollections({
                       {/* Dark fade for text legibility (motive image stays clean). */}
                       <div
                         aria-hidden
-                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-0 via-bg-0/60 to-transparent"
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"
                       />
                     </>
                   ) : (
