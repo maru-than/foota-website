@@ -61,7 +61,7 @@ export default function TermsPage() {
             <p>
               We dispatch worldwide within 48 hours of payment, tracking
               included. Delivery windows vary by destination — see{" "}
-              <Link href="/shipping-returns" className="underline hover:text-accent">
+              <Link href="/shipping-returns" className="underline hover:text-lime-400">
                 Shipping & Returns
               </Link>
               . Risk transfers to you on delivery.
@@ -82,7 +82,7 @@ export default function TermsPage() {
               We sell only what we inspect. If you receive an item that doesn’t
               match its listing, contact us within 7 days and we’ll make it
               right. See{" "}
-              <Link href="/authenticity" className="underline hover:text-accent">
+              <Link href="/authenticity" className="underline hover:text-lime-400">
                 Authenticity
               </Link>{" "}
               for the inspection process.
@@ -126,7 +126,7 @@ export default function TermsPage() {
           <LegalSection title="Contact">
             <p>
               Questions about these terms? Email{" "}
-              <a className="underline hover:text-accent" href="mailto:hello@worldkit.example">
+              <a className="underline hover:text-lime-400" href="mailto:hello@worldkit.example">
                 hello@worldkit.example
               </a>
               .

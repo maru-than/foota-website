@@ -16,10 +16,10 @@ export function LegalDoc({
   children: React.ReactNode;
 }) {
   return (
-    <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-fg-2">
-      <p className="eyebrow text-fg-3">Last updated · {updated}</p>
+    <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-foreground/80">
+      <p className="eyebrow text-muted-foreground">Last updated · {updated}</p>
       {children}
-      <p className="rounded-none border-l-2 border-line-accent bg-bg-2 p-4 text-sm text-fg-3">
+      <p className="rounded-none border-l-2 border-lime-400/20 bg-card p-4 text-sm text-muted-foreground">
         This document is a template provided for transparency about how the
         store operates. It is not legal advice — have a qualified lawyer in
         your jurisdiction review it before relying on it in production.
@@ -39,7 +39,7 @@ export function LegalSection({
 }) {
   return (
     <section className={cn("space-y-3", className)}>
-      <h2 className="text-lg font-bold tracking-[-0.02em] text-fg-1">{title}</h2>
+      <h2 className="text-lg font-bold tracking-[-0.02em] text-foreground">{title}</h2>
       {children}
     </section>
   );

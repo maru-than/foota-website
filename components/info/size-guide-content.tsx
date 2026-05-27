@@ -19,10 +19,10 @@ const ROWS = [
 export function SizeGuideContent() {
   return (
     <div className="space-y-8">
-      <div className="overflow-hidden border border-line-accent">
+      <div className="overflow-hidden border border-lime-400/20">
         <table className="w-full text-sm">
-          <thead className="bg-bg-2 text-left">
-            <tr className="[&_th]:px-4 [&_th]:py-3 [&_th]:font-bold [&_th]:uppercase [&_th]:[&_th]:text-fg-1 sm:[&_th]:px-5">
+          <thead className="bg-card text-left">
+            <tr className="[&_th]:px-4 [&_th]:py-3 [&_th]:font-bold [&_th]:uppercase [&_th]:[&_th]:text-foreground sm:[&_th]:px-5">
               <th>Size</th>
               <th>Chest (cm)</th>
               <th>Length (cm)</th>
@@ -32,20 +32,20 @@ export function SizeGuideContent() {
             {ROWS.map((row) => (
               <tr
                 key={row.size}
-                className="border-t border-line-1 [&_td]:px-4 [&_td]:py-3 sm:[&_td]:px-5"
+                className="border-t border-border [&_td]:px-4 [&_td]:py-3 sm:[&_td]:px-5"
               >
-                <td className="font-bold tabular-nums text-fg-1">{row.size}</td>
-                <td className="tabular-nums text-fg-2">{row.chest}</td>
-                <td className="tabular-nums text-fg-2">{row.length}</td>
+                <td className="font-bold tabular-nums text-foreground">{row.size}</td>
+                <td className="tabular-nums text-foreground/80">{row.chest}</td>
+                <td className="tabular-nums text-foreground/80">{row.length}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      <div className="space-y-3 text-pretty leading-relaxed text-fg-2">
-        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em] text-fg-1">
-          <Ruler className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+      <div className="space-y-3 text-pretty leading-relaxed text-foreground/80">
+        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em] text-foreground">
+          <Ruler className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           How to measure
         </h3>
         <p>
@@ -55,7 +55,7 @@ export function SizeGuideContent() {
         </p>
         <p className="flex items-start gap-2">
           <AlertTriangle
-            className="mt-0.5 size-4 shrink-0 text-accent"
+            className="mt-0.5 size-4 shrink-0 text-lime-400"
             strokeWidth={1.5}
             aria-hidden
           />

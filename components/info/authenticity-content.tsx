@@ -32,7 +32,7 @@ const POINTS: { name: string; text: string; Icon: LucideIcon }[] = [
 export function AuthenticityContent() {
   const testimonials = getFeaturedTestimonials(3);
   return (
-    <div className="space-y-8 text-pretty leading-relaxed text-fg-2 [&_h3]:text-fg-1">
+    <div className="space-y-8 text-pretty leading-relaxed text-foreground/80 [&_h3]:text-foreground">
       <section className="space-y-3">
         <h3 className="text-lg font-bold tracking-[-0.02em]">What you get</h3>
         <p>
@@ -44,8 +44,8 @@ export function AuthenticityContent() {
 
       <section className="grid gap-3 sm:grid-cols-3">
         {POINTS.map(({ name, text, Icon }) => (
-          <div key={name} className="border border-line-accent bg-bg-2 p-4">
-            <h4 className="eyebrow flex items-center gap-1.5 text-accent">
+          <div key={name} className="border border-lime-400/20 bg-card p-4">
+            <h4 className="eyebrow flex items-center gap-1.5 text-lime-400">
               <Icon className="size-3.5" strokeWidth={1.5} aria-hidden />
               {name}
             </h4>
@@ -76,7 +76,7 @@ export function AuthenticityContent() {
           centre, print adhesion under a heat test, and a spell-check against
           the order. Customs ship in 5–7 days and are non-returnable — read
           more on{" "}
-          <a href="/shipping-returns" className="text-accent underline">
+          <a href="/shipping-returns" className="text-lime-400 underline">
             shipping &amp; returns
           </a>
           .
@@ -86,7 +86,7 @@ export function AuthenticityContent() {
       {testimonials.length > 0 ? (
         <section className="space-y-4">
           <div>
-            <span className="eyebrow text-accent">In their words</span>
+            <span className="eyebrow text-lime-400">In their words</span>
             <h3 className="mt-1 text-lg font-bold tracking-[-0.02em]">
               From recent buyers
             </h3>

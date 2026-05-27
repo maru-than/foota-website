@@ -28,7 +28,7 @@ export default function AboutPage() {
         image="/pages/about.png"
       />
       <Container className="py-12 lg:py-16">
-        <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-fg-2 [&_h2]:text-fg-1">
+        <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-foreground/80 [&_h2]:text-foreground">
           <section className="space-y-3">
             <h2 className="text-2xl font-bold tracking-[-0.03em]">
               Built for the summer of 2026

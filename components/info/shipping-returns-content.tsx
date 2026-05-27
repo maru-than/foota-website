@@ -10,10 +10,10 @@ import { AlertTriangle, Mail, Truck, Undo2 } from "lucide-react";
 
 export function ShippingReturnsContent() {
   return (
-    <div className="space-y-8 text-pretty leading-relaxed text-fg-2 [&_h3]:text-fg-1">
+    <div className="space-y-8 text-pretty leading-relaxed text-foreground/80 [&_h3]:text-foreground">
       <section className="space-y-3">
         <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
-          <Truck className="size-5 text-fg-3" strokeWidth={1.5} aria-hidden />
+          <Truck className="size-5 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           Shipping
         </h3>
         <p>
@@ -24,7 +24,7 @@ export function ShippingReturnsContent() {
       </section>
       <section className="space-y-3">
         <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
-          <Undo2 className="size-5 text-fg-3" strokeWidth={1.5} aria-hidden />
+          <Undo2 className="size-5 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           Returns
         </h3>
         <p>
@@ -38,14 +38,14 @@ export function ShippingReturnsContent() {
       </section>
       <section className="space-y-3">
         <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
-          <AlertTriangle className="size-5 text-danger" strokeWidth={1.5} aria-hidden />
+          <AlertTriangle className="size-5 text-destructive" strokeWidth={1.5} aria-hidden />
           Customised items
         </h3>
         <p>
           Shirts with a custom name or number on the back are heat-pressed to
           order and dispatched in 5–7 days. Because every custom is unique to
           the buyer, customs are{" "}
-          <b className="text-fg-1">non-returnable and non-exchangeable</b>{" "}
+          <b className="text-foreground">non-returnable and non-exchangeable</b>{" "}
           — please double-check spelling and number before adding to the bag.
         </p>
         <p>
@@ -56,7 +56,7 @@ export function ShippingReturnsContent() {
       </section>
       <section className="space-y-3">
         <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
-          <Mail className="size-5 text-fg-3" strokeWidth={1.5} aria-hidden />
+          <Mail className="size-5 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           Order tracking
         </h3>
         <p>

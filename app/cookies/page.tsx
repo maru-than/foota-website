@@ -66,11 +66,11 @@ export default function CookiesPage() {
               {CATEGORIES.map((c) => (
                 <div
                   key={c.name}
-                  className="border border-line-accent bg-bg-2 p-4"
+                  className="border border-lime-400/20 bg-card p-4"
                 >
-                  <h3 className="eyebrow text-accent">{c.name}</h3>
+                  <h3 className="eyebrow text-lime-400">{c.name}</h3>
                   <p className="mt-2 text-sm">{c.purpose}</p>
-                  <p className="mt-3 text-xs uppercase text-fg-3">
+                  <p className="mt-3 text-xs uppercase text-muted-foreground">
                     {c.optional ? "Optional" : "Always on"}
                   </p>
                 </div>
