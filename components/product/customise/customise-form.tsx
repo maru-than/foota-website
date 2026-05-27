@@ -36,7 +36,7 @@ export function CustomiseForm() {
         <div>
           <label
             htmlFor={nameId}
-            className="mb-2 flex items-center gap-1.5 text-xs uppercase text-muted-foreground"
+            className="mb-2 flex items-center gap-1.5 text-xs text-muted-foreground"
           >
             <Type className="size-3.5" strokeWidth={1.5} aria-hidden />
             Name on back
@@ -82,7 +82,7 @@ export function CustomiseForm() {
         <div>
           <label
             htmlFor={numberId}
-            className="mb-2 flex items-center gap-1.5 text-xs uppercase text-muted-foreground"
+            className="mb-2 flex items-center gap-1.5 text-xs text-muted-foreground"
           >
             <Hash className="size-3.5" strokeWidth={1.5} aria-hidden />
             Number
@@ -110,9 +110,7 @@ export function CustomiseForm() {
       </div>
 
       <div className="flex items-center justify-between gap-3 border-t border-border pt-3">
-        <span className="text-[11px] uppercase text-muted-foreground">
-          Font
-        </span>
+        <span className="text-[11px] text-muted-foreground">Font</span>
         <span className="text-xs text-foreground">{fontSpec.label}</span>
       </div>
     </div>

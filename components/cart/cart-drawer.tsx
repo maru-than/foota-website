@@ -67,7 +67,7 @@ export function CartDrawer({
 
             {recommendations.length > 0 ? (
               <div className="mt-10 border-t border-border pt-6">
-                <p className="text-xs uppercase text-muted-foreground">Most wanted</p>
+                <p className="text-xs text-muted-foreground">Most wanted</p>
                 <ul className="mt-4 grid grid-cols-2 gap-3">
                   {recommendations.map((p) => (
                     <li key={p.id}>
@@ -135,7 +135,7 @@ export function CartDrawer({
               <button
                 type="button"
                 onClick={closeCart}
-                className="w-full text-center text-xs uppercase text-muted-foreground transition-colors hover:text-primary"
+                className="w-full text-center text-xs text-muted-foreground transition-colors hover:text-primary"
               >
                 Continue shopping
               </button>

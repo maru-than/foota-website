@@ -44,7 +44,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
           {FOOTER_NAV.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <h3 className="text-xs uppercase text-muted-foreground">{column.title}</h3>
+              <h3 className="text-xs text-muted-foreground">{column.title}</h3>
               <ul className="mt-2">
                 {column.links.map((link) => (
                   <li key={link.href}>
@@ -63,7 +63,7 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-border">
-        <Container className="flex flex-col items-center justify-between gap-3 py-5 text-[11px] uppercase text-muted-foreground sm:flex-row">
+        <Container className="flex flex-col items-center justify-between gap-3 py-5 text-[11px] text-muted-foreground sm:flex-row">
           <span>© {year} Worldkit Soccer</span>
           <div className="flex flex-wrap items-center gap-x-5">
             {SOCIALS.map(({ label, href }) => (

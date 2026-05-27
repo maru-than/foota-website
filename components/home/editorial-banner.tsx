@@ -16,7 +16,7 @@ export function EditorialBanner() {
     <section className="border-y border-border bg-card">
       <Container className="grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-20">
         <div>
-          <span className="text-xs uppercase text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             The Worldkit view
           </span>
           <h2 className="font-display mt-4 text-4xl leading-[1.02] text-foreground sm:text-5xl lg:text-6xl">

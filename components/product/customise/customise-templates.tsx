@@ -37,7 +37,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
   return (
     <div>
       <div className="mb-2.5 flex items-center justify-between">
-        <span className="text-xs uppercase text-muted-foreground">Quick picks</span>
+        <span className="text-xs text-muted-foreground">Quick picks</span>
         <div role="tablist" aria-label="Quick picks" className="flex gap-3">
           {(["legends", "squad", "mine"] as Track[]).map((t) => {
             const Icon = t === "legends" ? Trophy : t === "squad" ? Users : PencilLine;
@@ -56,7 +56,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
                   }
                 }}
                 className={cn(
-                  "inline-flex items-center gap-1 text-[11px] font-semibold uppercase transition-colors",
+                  "inline-flex items-center gap-1 text-[11px] font-medium transition-colors",
                   track === t ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
               >
@@ -83,7 +83,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
                 onClick={() => applyTemplate(item.name, item.number)}
                 aria-pressed={active}
                 className={cn(
-                  "flex h-9 items-center gap-2 rounded-full border px-3 text-xs font-bold uppercase transition-colors duration-150 ease-out",
+                  "flex h-9 items-center gap-2 rounded-full border px-3 text-xs font-medium transition-colors duration-150 ease-out",
                   active
                     ? "border-primary bg-primary text-background"
                     : "border-border text-foreground hover:border-primary hover:bg-accent",

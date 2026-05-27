@@ -34,9 +34,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <span className="text-xs uppercase text-muted-foreground">
-          {eyebrow}
-        </span>
+        <span className="text-xs text-muted-foreground">{eyebrow}</span>
       ) : null}
       <div
         className={cn(

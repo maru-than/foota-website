@@ -69,7 +69,7 @@ export function MobileMenu({
                 onClick={close}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative border-b border-border px-4 py-4 text-lg font-bold uppercase transition-colors duration-150 ease-out",
+                  "relative border-b border-border px-4 py-4 text-lg font-medium transition-colors duration-150 ease-out",
                   active ? "text-primary" : "text-foreground hover:text-primary",
                 )}
               >
@@ -91,7 +91,7 @@ export function MobileMenu({
           <button
             type="button"
             onClick={handle(openSearch)}
-            className="flex items-center gap-2.5 border border-border px-4 py-3 text-sm font-semibold uppercase text-foreground transition-colors hover:border-primary hover:bg-accent"
+            className="flex items-center gap-2.5 border border-border px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:bg-accent"
           >
             <SearchIcon className="size-4" strokeWidth={1.5} />
             Search
@@ -99,7 +99,7 @@ export function MobileMenu({
           <button
             type="button"
             onClick={handle(openCart)}
-            className="flex items-center justify-between gap-2.5 border border-border px-4 py-3 text-sm font-semibold uppercase text-foreground transition-colors hover:border-primary hover:bg-accent"
+            className="flex items-center justify-between gap-2.5 border border-border px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:bg-accent"
           >
             <span className="inline-flex items-center gap-2.5">
               <BagIcon className="size-4" strokeWidth={1.5} />
@@ -110,7 +110,7 @@ export function MobileMenu({
         </div>
 
         <div className="mt-auto border-t border-border">
-          <div className="flex items-center gap-2 px-6 py-4 text-xs uppercase text-foreground/80">
+          <div className="flex items-center gap-2 px-6 py-4 text-xs text-foreground/80">
             <Globe className="size-3.5" strokeWidth={1.5} />
             EN · USD
           </div>

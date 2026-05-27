@@ -97,7 +97,7 @@ export function FeaturedCollections({
                     />
                   )}
                   <div className="relative">
-                    <span className="text-xs uppercase text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       {isCustoms ? "Personalise" : "Collection"}
                     </span>
                     <h3 className="mt-2 font-display text-3xl leading-tight text-foreground lg:text-4xl">

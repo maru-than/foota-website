@@ -23,7 +23,7 @@ export function CustomiseToggle() {
   return (
     <div>
       <div className="mb-2.5 flex items-center justify-between">
-        <span className="text-xs uppercase text-muted-foreground">Personalise</span>
+        <span className="text-xs text-muted-foreground">Personalise</span>
       </div>
       <div
         role="group"

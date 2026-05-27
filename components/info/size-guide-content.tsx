@@ -22,7 +22,7 @@ export function SizeGuideContent() {
       <div className="overflow-hidden rounded-lg border border-border">
         <table className="w-full text-sm">
           <thead className="bg-card text-left">
-            <tr className="[&_th]:px-4 [&_th]:py-3 [&_th]:font-bold [&_th]:uppercase [&_th]:[&_th]:text-foreground sm:[&_th]:px-5">
+            <tr className="[&_th]:px-4 [&_th]:py-3 [&_th]:font-medium [&_th]:text-foreground sm:[&_th]:px-5">
               <th>Size</th>
               <th>Chest (cm)</th>
               <th>Length (cm)</th>

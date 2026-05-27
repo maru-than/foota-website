@@ -72,7 +72,7 @@ export function CartItem({
         </div>
         <span className="mt-1 text-xs text-muted-foreground">Size {size}</span>
         {customLabel ? (
-          <span className="mt-0.5 text-xs uppercase text-foreground/80">
+          <span className="mt-0.5 text-xs text-foreground/80">
             {customLabel}
             <span className="ml-2 text-muted-foreground normal-case tracking-normal">
               · +{formatPrice(line.customisation?.priceDelta.amount ?? "0", currency)}

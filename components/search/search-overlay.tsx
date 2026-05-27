@@ -103,7 +103,7 @@ export function SearchOverlay({
           <button
             type="button"
             onClick={() => handleOpenChange(false)}
-            className="shrink-0 px-3 py-2 text-xs font-semibold uppercase text-muted-foreground transition-colors hover:text-primary focus:outline-none focus-visible:text-primary"
+            className="shrink-0 px-3 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-primary focus:outline-none focus-visible:text-primary"
           >
             Cancel
           </button>
@@ -146,7 +146,7 @@ export function SearchOverlay({
                       </div>
                       <div className="flex-1">
                         {p.meta.teamName ? (
-                          <span className="text-[11px] uppercase text-primary">
+                          <span className="text-[11px] text-primary">
                             {p.meta.teamName}
                           </span>
                         ) : null}
@@ -165,7 +165,7 @@ export function SearchOverlay({
               <button
                 type="button"
                 onClick={goToResults}
-                className="block w-full border-t border-border px-5 py-3 text-left text-xs uppercase text-primary transition-colors hover:bg-muted"
+                className="block w-full border-t border-border px-5 py-3 text-left text-xs text-primary transition-colors hover:bg-muted"
               >
                 View all results
               </button>

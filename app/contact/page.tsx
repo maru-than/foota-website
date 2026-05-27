@@ -34,15 +34,15 @@ export default function ContactPage() {
           </div>
           <aside className="space-y-8 text-sm text-muted-foreground">
             <div>
-              <h2 className="text-xs uppercase text-foreground">Email</h2>
+              <h2 className="text-xs text-foreground">Email</h2>
               <p className="mt-2">hello@worldkitsoccer.com</p>
             </div>
             <div>
-              <h2 className="text-xs uppercase text-foreground">Support hours</h2>
+              <h2 className="text-xs text-foreground">Support hours</h2>
               <p className="mt-2">Monday – Friday, 9:00 – 17:00 CET</p>
             </div>
             <div>
-              <h2 className="text-xs uppercase text-foreground">Returns</h2>
+              <h2 className="text-xs text-foreground">Returns</h2>
               <p className="mt-2">
                 See shipping &amp; returns for our full policy before getting in
                 touch about a return.

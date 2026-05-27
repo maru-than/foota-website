@@ -66,7 +66,7 @@ export function PageHeader({
         )}
       >
         {eyebrow ? (
-          <span className="text-xs uppercase text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             {eyebrow}
           </span>
         ) : null}
