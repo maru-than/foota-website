@@ -44,8 +44,8 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold">What we stock</h2>
             <p>
               All 48 qualified nations, from the co-hosts to the debutants —
-              grouped by confederation so you can shop your continent, your
-              rivals or your second team. 2026 home and away jerseys, sizes S–XXL.
+              shop your continent, your rivals or your second team.
+              2026 home and away jerseys, sizes S–XXL.
             </p>
           </section>
           <section className="space-y-3">

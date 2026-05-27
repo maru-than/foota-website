@@ -158,7 +158,7 @@ export default async function ProductPage({
               <SectionHeading
                 eyebrow="Reviews"
                 title="From the locker room"
-                description="What other buyers said about this shirt and its confederation."
+                description="What other buyers said about this shirt."
               />
             </div>
             <div className="mt-10">

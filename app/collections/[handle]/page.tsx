@@ -1,5 +1,5 @@
 /**
- * @file Collection PDL — filtered/sorted products by handle (e.g. by confederation) with facets + static generation.
+ * @file Collection PDL — filtered/sorted products by handle, with facets + static generation.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -18,6 +18,7 @@ import {
 } from "@/lib/shopify/collections";
 import { applyFilters, applySort, deriveFacets } from "@/lib/shopify/products";
 import { parseFilterParams, type SearchParamsRecord } from "@/lib/filters";
+import { stripConfederation } from "@/lib/utils";
 
 export async function generateStaticParams() {
   const collections = await getCollections();
@@ -32,18 +33,17 @@ export async function generateMetadata({
   const { handle } = await params;
   const collection = await getCollection(handle);
   if (!collection) return { title: "Collection not found" };
+  const cleanTitle = stripConfederation(collection.seo.title);
+  const cleanDesc = stripConfederation(collection.seo.description);
   return {
-    title: collection.seo.title,
-    description: collection.seo.description,
+    title: cleanTitle,
+    description: cleanDesc,
     alternates: { canonical: `/collections/${handle}` },
-    openGraph: {
-      title: collection.seo.title,
-      description: collection.seo.description,
-    },
+    openGraph: { title: cleanTitle, description: cleanDesc },
     twitter: {
       card: "summary_large_image",
-      title: collection.seo.title,
-      description: collection.seo.description,
+      title: cleanTitle,
+      description: cleanDesc,
     },
   };
 }
@@ -70,8 +70,8 @@ export default async function CollectionPage({
     <>
       <PageHeader
         eyebrow="Collection"
-        title={collection.title}
-        description={collection.description || undefined}
+        title={stripConfederation(collection.title)}
+        description={stripConfederation(collection.description) || undefined}
       />
       <ProductBrowser
         products={products}

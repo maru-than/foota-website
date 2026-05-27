@@ -145,8 +145,7 @@ export function ProductDetails({ product }: { product: Product }) {
           <AccordionContent>
             <p className="mb-3">
               Add any name (up to {CUSTOM_MAX_NAME_CHARS} characters) and a
-              number from 0–99 to the back. Heat-pressed with the official{" "}
-              {product.meta.confederation ?? "confederation"} letter set.
+              number from 0–99 to the back. Officially heat-pressed lettering.
               Add-on price: ${CUSTOM_PRICE_DELTA.toFixed(0)}.
             </p>
             <div className="mb-4 flex items-start gap-2 border border-danger/40 bg-destructive/5 p-3">

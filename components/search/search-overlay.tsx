@@ -85,7 +85,7 @@ export function SearchOverlay({
       >
         <DialogTitle className="sr-only">Search jerseys</DialogTitle>
         <DialogDescription className="sr-only">
-          Search World Cup 2026 jerseys by nation or confederation.
+          Search World Cup 2026 jerseys by nation.
         </DialogDescription>
 
         <form
@@ -97,7 +97,7 @@ export function SearchOverlay({
             ref={inputRef}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search nations, confederations…"
+            placeholder="Search nations…"
             className="h-14 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground/60"
           />
           <button
@@ -174,8 +174,8 @@ export function SearchOverlay({
 
           {query.trim().length < 2 ? (
             <p className="px-5 py-8 text-center text-sm text-muted-foreground">
-              Try a nation or confederation — &ldquo;Brazil&rdquo;,
-              &ldquo;Morocco&rdquo;, &ldquo;UEFA&rdquo;.
+              Try a nation — &ldquo;Brazil&rdquo;, &ldquo;Morocco&rdquo;,
+              &ldquo;Argentina&rdquo;.
             </p>
           ) : null}
         </div>

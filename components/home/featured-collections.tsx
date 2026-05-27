@@ -12,6 +12,7 @@ import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { stripConfederation } from "@/lib/utils";
 import type { Collection } from "@/lib/shopify/types";
 
 const FEATURED_ORDER = ["hosts", "uefa", "conmebol", "customs"];
@@ -58,7 +59,7 @@ export function FeaturedCollections({
           <SectionHeading
             eyebrow="Collections"
             title="Find your nation"
-            description="Start with the hosts, a confederation, or the latest drops."
+            description="Hosts, regions, and the latest drops — every 2026 World Cup kit."
           />
         </div>
         <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -100,7 +101,7 @@ export function FeaturedCollections({
                       {isCustoms ? "Personalise" : "Collection"}
                     </span>
                     <h3 className="mt-1 text-2xl font-bold leading-tight">
-                      {collection.title}
+                      {stripConfederation(collection.title)}
                     </h3>
                     <span className="mt-3 inline-flex items-center gap-1.5 text-sm text-foreground/80 transition-colors group-hover:text-primary">
                       {isCustoms ? "Build yours" : "Explore"}

@@ -311,16 +311,6 @@ export const MOCK_COLLECTIONS: Collection[] = COLLECTION_RULES.map((rule, i) => 
   seo: { title: rule.title, description: rule.description },
 }));
 
-/** Confederations for the homepage "Shop by confederation" section. */
-export const MOCK_CONFEDERATIONS = [
-  { name: "Europe", abbr: "UEFA", handle: "uefa" },
-  { name: "South America", abbr: "CONMEBOL", handle: "conmebol" },
-  { name: "N. & C. America", abbr: "CONCACAF", handle: "concacaf" },
-  { name: "Africa", abbr: "CAF", handle: "caf" },
-  { name: "Asia", abbr: "AFC", handle: "afc" },
-  { name: "Oceania", abbr: "OFC", handle: "ofc" },
-];
-
 /* ------------------------------- Lookups -------------------------------- */
 
 export function getMockProducts(): Product[] {

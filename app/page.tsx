@@ -1,5 +1,5 @@
 /**
- * @file Homepage — hero, featured collections, new arrivals, editorial banner, testimonials, shop-by-confederation.
+ * @file Homepage — hero, featured collections, new arrivals, editorial banner, testimonials.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -12,7 +12,6 @@ import { EditorialBanner } from "@/components/home/editorial-banner";
 import { FeaturedCollections } from "@/components/home/featured-collections";
 import { Hero } from "@/components/home/hero";
 import { NewArrivals } from "@/components/home/new-arrivals";
-import { ShopByConfederation } from "@/components/home/shop-by-confederation";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
 import { getCollections } from "@/lib/shopify/collections";
 import { getProducts, pickNewArrivals } from "@/lib/shopify/products";
@@ -36,7 +35,6 @@ export default async function HomePage() {
       <NewArrivals products={arrivals} />
       <EditorialBanner />
       <TestimonialsSection />
-      <ShopByConfederation />
     </>
   );
 }

@@ -68,8 +68,7 @@ export function AuthenticityContent() {
         <p>
           Custom names and numbers are heat-pressed in-house with the same
           equipment used on stadium kits. Letter sets match the official font
-          used by each confederation — UEFA, CONMEBOL, CONCACAF, CAF, AFC and
-          OFC each ship their own typeface.
+          used on the matchday shirt.
         </p>
         <p>
           Every custom is held for a final QC pass: alignment to the back

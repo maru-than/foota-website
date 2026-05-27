@@ -21,7 +21,7 @@ export function NewArrivals({ products }: { products: Product[] }) {
           <SectionHeading
             eyebrow="Just landed"
             title="New arrivals"
-            description="The latest 2026 kits to land — fresh drops from across the confederations."
+            description="The latest 2026 kits to land — fresh drops every week."
             action={{ label: "View all", href: "/collections/new-arrivals" }}
           />
         </div>

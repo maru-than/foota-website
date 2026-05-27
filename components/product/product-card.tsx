@@ -30,7 +30,7 @@ export function ProductCard({
   const kit = teamColors(meta.teamName ?? product.title, meta.type);
   const chips = product.variants.slice(0, 4);
   const extra = product.variants.length - chips.length;
-  const caption = [meta.confederation, meta.season].filter(Boolean).join(" · ");
+  const caption = [meta.type, meta.season].filter(Boolean).join(" · ");
   const money = product.priceRange.minVariantPrice;
 
   return (

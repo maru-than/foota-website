@@ -1,5 +1,5 @@
 /**
- * @file Dynamic OG image for PDPs — jersey image, name, price and federation badge composited via sharp.
+ * @file Dynamic OG image for PDPs — jersey image, name, price and kit type composited via sharp.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -89,7 +89,7 @@ export default async function Image({
     product.priceRange.minVariantPrice.amount,
     product.priceRange.minVariantPrice.currencyCode,
   );
-  const eyebrow = [product.meta.confederation, product.meta.season]
+  const eyebrow = [product.meta.type, product.meta.season]
     .filter(Boolean)
     .join(" · ");
   const teamName = product.meta.teamName ?? product.title;
@@ -120,7 +120,7 @@ export default async function Image({
           ) : null}
 
           {/* Title + price. Subtitle dropped — eyebrow already names the
-              confederation and season. */}
+              kit type and season. */}
           <div
             style={{
               flex: 1,

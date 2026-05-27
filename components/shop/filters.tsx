@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Filter drawer (mobile) / sidebar (desktop) — confederation, nation, type, size, price range.
+ * @file Filter drawer (mobile) / sidebar (desktop) — nation, type, size, price range.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -97,7 +97,6 @@ export function FilterPanel({
   };
 
   const groups: { key: string; title: string; values: string[]; scroll?: boolean }[] = [
-    { key: "confederation", title: "Confederation", values: facets.confederations },
     { key: "nation", title: "Nation", values: facets.nations, scroll: true },
     { key: "type", title: "Type", values: facets.types },
     { key: "size", title: "Size", values: facets.sizes },
@@ -225,7 +224,7 @@ export function FiltersDrawer({
 }) {
   const [open, setOpen] = useState(false);
   const searchParams = useSearchParams();
-  const keys = ["confederation", "nation", "type", "size"];
+  const keys = ["nation", "type", "size"];
   const active =
     keys.reduce((sum, k) => sum + getValues(searchParams, k).length, 0) +
     (searchParams.get("minPrice") || searchParams.get("maxPrice") ? 1 : 0);

@@ -22,7 +22,7 @@ export function TestimonialsSection() {
           <SectionHeading
             eyebrow="Worn worldwide"
             title="What collectors are saying"
-            description="Verified reviews from buyers across all six confederations."
+            description="Verified reviews from buyers worldwide."
           />
         </div>
         <div className="mt-10">
