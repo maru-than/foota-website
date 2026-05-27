@@ -72,7 +72,12 @@ export function VariantSelector({
                   disabled={!available}
                   aria-pressed={isSelected}
                   onClick={() => onChange(option.name, value)}
-                  className={cn(!available && "line-through opacity-50")}
+                  className={cn(
+                    // Fixed width so "S" and "XXL" render at the same pixel
+                    // width — uniform chip grid regardless of label length.
+                    "w-12 px-0",
+                    !available && "line-through opacity-50",
+                  )}
                 >
                   {value}
                 </Button>

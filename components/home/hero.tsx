@@ -127,15 +127,11 @@ export function Hero() {
             A home for jerseys<span className="text-primary">.</span>
           </h1>
 
-          {/* CTAs fill the row on small phones (no wrapping at 280/320px),
-              lock to 160px from sm: up so the design intent is preserved on
-              tablets/desktop. whitespace-nowrap defends against subpixel
-              wrap on the lowercase 20px labels. */}
-          <div className="flex w-full max-w-[336px] items-center justify-center gap-3 sm:max-w-none">
-            <Button asChild size="lg">
+          <div className="flex w-full items-center justify-center gap-3">
+            <Button asChild size="xl">
               <Link href={`/products/${active.slug}-home`}>Buy now</Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="xl">
               <Link href="/shop">See all</Link>
             </Button>
           </div>
