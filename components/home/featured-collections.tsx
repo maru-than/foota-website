@@ -63,7 +63,7 @@ export function FeaturedCollections({
           />
         </div>
         <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {list.map((collection, i) => {
+          {list.map((collection) => {
             const isCustoms = collection.handle === "customs";
             const image = COLLECTION_IMAGES[collection.handle];
             const href = isCustoms

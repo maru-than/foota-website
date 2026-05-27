@@ -24,7 +24,7 @@ import {
  * open the filter drawer just to see what they applied.
  */
 
-const FACET_KEYS = ["confederation", "nation", "type", "size"] as const;
+const FACET_KEYS = ["nation", "type", "size"] as const;
 
 export function ActiveFilters() {
   const router = useRouter();

@@ -163,6 +163,7 @@ export function ProductDetails({ product }: { product: Product }) {
             <FontSpecimen
               confederation={product.meta.confederation}
               className="border-t border-border pt-4"
+              showLabel={false}
             />
           </AccordionContent>
         </AccordionItem>

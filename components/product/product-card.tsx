@@ -28,8 +28,6 @@ export function ProductCard({
   const sizes =
     "(max-width: 640px) 45vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 22vw";
   const kit = teamColors(meta.teamName ?? product.title, meta.type);
-  const chips = product.variants.slice(0, 4);
-  const extra = product.variants.length - chips.length;
   const caption = [meta.type, meta.season].filter(Boolean).join(" · ");
   const money = product.priceRange.minVariantPrice;
 

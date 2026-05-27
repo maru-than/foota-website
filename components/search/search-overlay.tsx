@@ -81,7 +81,7 @@ export function SearchOverlay({
           e.preventDefault();
           inputRef.current?.focus();
         }}
-        hideClose
+        showCloseButton={false}
       >
         <DialogTitle className="sr-only">Search jerseys</DialogTitle>
         <DialogDescription className="sr-only">

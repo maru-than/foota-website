@@ -28,7 +28,7 @@ export function TestimonialGrid({
           : "sm:grid-cols-2",
       )}
     >
-      {items.map((t, i) => (
+      {items.map((t) => (
         <div key={t.id}>
           <TestimonialCard testimonial={t} />
         </div>

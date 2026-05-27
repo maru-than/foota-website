@@ -61,7 +61,7 @@ const TRUST_BLANK = [
 const TRUST_CUSTOM = [
   { Icon: Truck, title: "Worldwide shipping", note: "Tracked · dispatched in 5–7 days" },
   { Icon: ShieldCheck, title: "Inspected on arrival", note: "Stitching, crest & fonts" },
-  { Icon: Flame, title: "Officially heat-pressed", note: "Confederation-accurate font" },
+  { Icon: Flame, title: "Officially heat-pressed", note: "Authentic matchday lettering" },
 ];
 
 export function ProductBuyBox({ product }: { product: Product }) {

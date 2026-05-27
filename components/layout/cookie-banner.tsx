@@ -9,31 +9,29 @@
  */
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
-  onConsentChange,
   readConsent,
+  subscribeToConsent,
   writeConsent,
 } from "@/lib/cookie-consent";
 
 export function CookieBanner() {
-  // Start hidden — only flip after we read localStorage on the client.
-  // Prevents a hydration mismatch and the "banner-then-flash" on return
-  // visits where consent is already stored.
-  const [visible, setVisible] = useState(false);
+  // useSyncExternalStore handles the SSR / client mismatch cleanly — server
+  // renders the `null` snapshot, client subscribes to localStorage events.
+  // Banner shows when no decision has been made yet.
+  const consent = useSyncExternalStore(
+    subscribeToConsent,
+    readConsent,
+    () => null,
+  );
 
-  useEffect(() => {
-    if (readConsent() === null) setVisible(true);
-    return onConsentChange((value) => setVisible(value === null));
-  }, []);
-
-  if (!visible) return null;
+  if (consent !== null) return null;
 
   const decide = (value: "accepted" | "rejected") => {
     writeConsent(value);
-    setVisible(false);
   };
 
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Name & number inputs with character counter — inherits the confederation font from the provider.
+ * @file Name & number inputs with character counter — inherits the matchday print font from the provider.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
