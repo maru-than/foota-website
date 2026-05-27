@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file PDP buy box — variant selector, customise toggle / form / templates, trust badges, pending state.
+ * @file PDP buy box — variant selector, customise toggle / form / templates, in-stock status, pending state.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -12,12 +12,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   Clock,
-  Flame,
   PackageCheck,
-  ShieldCheck,
   ShoppingBag,
   Tag,
-  Truck,
   XCircle,
 } from "lucide-react";
 
@@ -52,18 +49,6 @@ function findVariant(
   );
 }
 
-const TRUST_BLANK = [
-  { Icon: Truck, title: "Worldwide shipping", note: "Tracked · dispatched in 48h" },
-  { Icon: ShieldCheck, title: "Inspected on arrival", note: "Stitching, crest & fonts" },
-  { Icon: PackageCheck, title: "New condition", note: "Photographed & condition-checked" },
-];
-
-const TRUST_CUSTOM = [
-  { Icon: Truck, title: "Worldwide shipping", note: "Tracked · dispatched in 5–7 days" },
-  { Icon: ShieldCheck, title: "Inspected on arrival", note: "Stitching, crest & fonts" },
-  { Icon: Flame, title: "Officially heat-pressed", note: "Authentic matchday lettering" },
-];
-
 export function ProductBuyBox({ product }: { product: Product }) {
   const { addItem, isPending } = useCart();
   const [selected, setSelected] = useState<Record<string, string>>(() =>
@@ -81,7 +66,6 @@ export function ProductBuyBox({ product }: { product: Product }) {
     currencyCode: basePrice.currencyCode,
   };
   const customLabel = formatCustomLabel(customisation);
-  const trust = customEnabled ? TRUST_CUSTOM : TRUST_BLANK;
 
   // Sticky bar visibility — two independent signals:
   //  • inlineVisible: true while the inline Add-to-bag is on screen (no point
@@ -159,21 +143,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
         </Button>
       </div>
 
-      {/* Single column on phones — at 375px the 3-col version wraps every
-          title to 3 lines. From sm: up the original row layout is fine. */}
-      <div className="grid grid-cols-1 gap-4 border-t border-border pt-5 sm:grid-cols-3 sm:gap-3">
-        {trust.map(({ Icon, title, note }) => (
-          <div key={title} className="flex gap-2.5">
-            <Icon className="size-[18px] shrink-0 text-muted-foreground" strokeWidth={1.5} />
-            <div className="flex flex-col gap-0.5">
-              <b className="text-xs font-bold text-foreground">{title}</b>
-              <span className="text-[11px] leading-snug text-muted-foreground">{note}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Sticky add-to-bag bar — mobile only. Visible only while the inline
+{/* Sticky add-to-bag bar — mobile only. Visible only while the inline
           CTA is scrolled past, so the footer is reachable at page bottom. */}
       <div
         aria-hidden={!showSticky}

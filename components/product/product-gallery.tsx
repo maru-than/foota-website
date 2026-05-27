@@ -154,67 +154,26 @@ export function ProductGallery({
       )}
 
       {slideCount > 1 ? (
-        <>
-          {/* Mobile dots paginator — bigger tap targets than thumbnails on a phone. */}
-          <div className="flex justify-center gap-2 md:hidden" aria-hidden>
-            {Array.from({ length: slideCount }).map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => scrollTo(i)}
-                aria-label={
-                  i === backIndex ? "View back preview" : `Go to image ${i + 1}`
-                }
-                className="flex h-6 w-6 items-center justify-center"
-              >
-                <span
-                  className={cn(
-                    "block size-1.5 rounded-full transition-colors",
-                    i === active ? "bg-primary" : "bg-border",
-                  )}
-                />
-              </button>
-            ))}
-          </div>
-
-          {/* Desktop thumbnail strip */}
-          <div className="hidden grid-cols-5 gap-2 md:grid">
-            {images.map((img, i) => (
-              <button
-                key={`${img.url}-${i}-thumb`}
-                type="button"
-                onClick={() => setActive(i)}
-                aria-label={`View image ${i + 1}`}
+        <div className="flex justify-center gap-2 md:hidden" aria-hidden>
+          {Array.from({ length: slideCount }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => scrollTo(i)}
+              aria-label={
+                i === backIndex ? "View back preview" : `Go to image ${i + 1}`
+              }
+              className="flex h-6 w-6 items-center justify-center"
+            >
+              <span
                 className={cn(
-                  "relative aspect-[4/5] overflow-hidden rounded-md border bg-white transition-colors",
-                  i === active ? "border-primary" : "border-border hover:border-border",
+                  "block size-1.5 rounded-full transition-colors",
+                  i === active ? "bg-primary" : "bg-border",
                 )}
-              >
-                <Image src={img.url} alt="" fill sizes="120px" className="object-contain p-1.5" />
-              </button>
-            ))}
-            {backSlot ? (
-              <button
-                key="back-slot-thumb"
-                type="button"
-                onClick={() => setActive(backIndex)}
-                aria-label="View back preview"
-                className={cn(
-                  "relative aspect-[4/5] overflow-hidden rounded-md border bg-background transition-colors",
-                  active === backIndex
-                    ? "border-primary"
-                    : "border-border hover:border-border",
-                )}
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-[9px] font-semibold uppercase text-muted-foreground">
-                    Back
-                  </span>
-                </div>
-              </button>
-            ) : null}
-          </div>
-        </>
+              />
+            </button>
+          ))}
+        </div>
       ) : null}
     </div>
   );

@@ -40,12 +40,9 @@ export const FOOTER_NAV: { title: string; links: NavLink[] }[] = [
       { label: "Size Guide", href: "/size-guide" },
       { label: "Shipping & Returns", href: "/shipping-returns" },
       { label: "Authenticity", href: "/authenticity" },
+      { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],
-  },
-  {
-    title: "Worldkit",
-    links: [{ label: "About", href: "/about" }],
   },
   {
     title: "Legal",

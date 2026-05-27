@@ -112,7 +112,7 @@ export default async function ProductPage({
         </nav>
 
         <CustomiseProvider product={product}>
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
+          <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:gap-14">
             <ProductGallery
               images={product.images}
               title={product.title}
@@ -135,7 +135,7 @@ export default async function ProductPage({
                   amount={price.amount}
                   currencyCode={price.currencyCode}
                   compareAt={product.compareAtPrice}
-                  className="text-2xl font-bold text-foreground"
+                  className="text-2xl text-foreground"
                 />
               </div>
 

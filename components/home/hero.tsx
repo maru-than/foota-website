@@ -13,9 +13,9 @@ import { Button } from "@/components/ui/button";
 
 type Nation = { slug: string; name: string };
 
-/* The eight most famous footballing nations. One renders per request — the
- * Math.random() runs at module load on the server, so different visitors get
- * different shirts but the SSR/CSR for a single request stays consistent. */
+/* The eight most famous footballing nations. The active hero shirt rotates
+ * by UTC day — each day shows a different nation, deterministic per server
+ * render so SSR/CSR stay consistent and the lint purity rule is satisfied. */
 const NATIONS: Nation[] = [
   { slug: "brazil", name: "Brazil" },
   { slug: "argentina", name: "Argentina" },
@@ -27,8 +27,13 @@ const NATIONS: Nation[] = [
   { slug: "netherlands", name: "Netherlands" },
 ];
 
+function pickNationOfTheDay(): Nation {
+  const dayIndex = Math.floor(Date.now() / 86_400_000) % NATIONS.length;
+  return NATIONS[dayIndex];
+}
+
 export function Hero() {
-  const active = NATIONS[Math.floor(Math.random() * NATIONS.length)];
+  const active = pickNationOfTheDay();
 
   return (
     <section className="relative overflow-hidden bg-background">
