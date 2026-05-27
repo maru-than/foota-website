@@ -22,6 +22,7 @@ import {
   PT,
 } from "country-flag-icons/react/3x2";
 
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
 
@@ -132,18 +133,12 @@ export function Hero() {
               tablets/desktop. whitespace-nowrap defends against subpixel
               wrap on the lowercase 20px labels. */}
           <div className="flex w-full max-w-[336px] items-center justify-center gap-3 sm:max-w-none">
-            <Link
-              href={`/products/${active.slug}-home`}
-              className="inline-flex flex-1 items-center justify-center whitespace-nowrap bg-lime-400 px-3 py-3 text-[20px] font-semibold lowercase text-background transition-colors hover:bg-lime-300 sm:w-[160px] sm:flex-none sm:px-5"
-            >
-              buy now
-            </Link>
-            <Link
-              href="/shop"
-              className="inline-flex flex-1 items-center justify-center whitespace-nowrap border border-white/25 px-3 py-3 text-[20px] font-semibold lowercase text-foreground transition-colors hover:border-white/60 hover:bg-white/5 sm:w-[160px] sm:flex-none sm:px-5"
-            >
-              see all
-            </Link>
+            <Button asChild size="lg" className="flex-1 lowercase sm:w-[160px] sm:flex-none">
+              <Link href={`/products/${active.slug}-home`}>buy now</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="flex-1 lowercase sm:w-[160px] sm:flex-none">
+              <Link href="/shop">see all</Link>
+            </Button>
           </div>
         </Reveal>
       </div>

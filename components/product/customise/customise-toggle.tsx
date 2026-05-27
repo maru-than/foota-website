@@ -8,7 +8,7 @@
  * @since 2026-05-26
  */
 
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { useCustomise } from "./customise-context";
 
 /**
@@ -30,32 +30,24 @@ export function CustomiseToggle() {
         aria-label="Personalise"
         className="grid grid-cols-2 gap-1.5"
       >
-        <button
+        <Button
           type="button"
+          variant={!enabled ? "default" : "outline"}
           aria-pressed={!enabled}
           onClick={() => setEnabled(false)}
-          className={cn(
-            "flex h-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
-            !enabled
-              ? "border-lime-400 bg-lime-400 text-background"
-              : "border-lime-400/20 text-foreground hover:border-lime-400 hover:bg-lime-400/12",
-          )}
+          className={!enabled ? undefined : "border-lime-400/20"}
         >
           Blank
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant={enabled ? "default" : "outline"}
           aria-pressed={enabled}
           onClick={() => setEnabled(true)}
-          className={cn(
-            "flex h-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
-            enabled
-              ? "border-lime-400 bg-lime-400 text-background"
-              : "border-lime-400/20 text-foreground hover:border-lime-400 hover:bg-lime-400/12",
-          )}
+          className={enabled ? undefined : "border-lime-400/20"}
         >
           Name &amp; number
-        </button>
+        </Button>
       </div>
     </div>
   );

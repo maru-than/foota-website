@@ -11,6 +11,7 @@
 import { Ruler } from "lucide-react";
 
 import { SizeGuideModal } from "@/components/info/size-guide-modal";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/shopify/types";
 
@@ -52,13 +53,15 @@ export function VariantSelector({
             <span className="eyebrow text-muted-foreground">{option.name}</span>
             {option.name.toLowerCase() === "size" ? (
               <SizeGuideModal>
-                <button
+                <Button
                   type="button"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-lime-400 transition-colors hover:text-lime-300 focus:outline-none focus-visible:text-lime-300"
+                  variant="link"
+                  size="xs"
+                  className="text-lime-400 hover:text-lime-300"
                 >
                   <Ruler className="size-3.5" strokeWidth={1.5} aria-hidden />
                   Size guide
-                </button>
+                </Button>
               </SizeGuideModal>
             ) : null}
           </div>
@@ -67,23 +70,21 @@ export function VariantSelector({
               const isSelected = selected[option.name] === value;
               const available = isValueAvailable(product, selected, option.name, value);
               return (
-                <button
+                <Button
                   key={value}
                   type="button"
+                  variant={isSelected ? "default" : "outline"}
+                  size="icon"
                   disabled={!available}
                   aria-pressed={isSelected}
                   onClick={() => onChange(option.name, value)}
                   className={cn(
-                    "flex size-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
-                    isSelected
-                      ? "border-lime-400 bg-lime-400 text-background"
-                      : "border-lime-400/20 text-foreground hover:border-lime-400 hover:bg-lime-400/12",
-                    !available &&
-                      "cursor-not-allowed border-border text-muted-foreground/60 line-through hover:border-border hover:bg-transparent",
+                    !isSelected && available && "border-lime-400/20",
+                    !available && "line-through opacity-50",
                   )}
                 >
                   {value}
-                </button>
+                </Button>
               );
             })}
           </div>

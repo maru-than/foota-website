@@ -31,7 +31,7 @@
   --border: oklch(0.925 0.005 214.3);
   --input: oklch(0.925 0.005 214.3);
   --ring: oklch(0.852 0.199 126.665); /* lime-400 */
-  --radius: 0.45rem;
+  --radius: 0rem;
 }
 
 .dark {
