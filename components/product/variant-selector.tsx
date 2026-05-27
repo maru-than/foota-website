@@ -68,7 +68,7 @@ export function VariantSelector({
                 <Button
                   key={value}
                   type="button"
-                  variant={isSelected ? "default" : "outline"}
+                  variant="outline"
                   disabled={!available}
                   aria-pressed={isSelected}
                   onClick={() => onChange(option.name, value)}
@@ -76,6 +76,10 @@ export function VariantSelector({
                     // Fixed width so "S" and "XXL" render at the same pixel
                     // width — uniform chip grid regardless of label length.
                     "w-12 px-0",
+                    // Selected: white fill, 2px primary border (outline-style
+                    // selection — see Figma node 2014:721).
+                    isSelected &&
+                      "border-2 border-primary bg-background text-foreground hover:bg-background hover:text-foreground",
                     !available && "line-through opacity-50",
                   )}
                 >
