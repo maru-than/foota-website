@@ -1,5 +1,5 @@
 /**
- * @file Single-shot editorial hero — one jersey, one headline, one CTA. Active nation randomized per request.
+ * @file Editorial split-screen hero — Worldkit copy + daily nation jersey on a lime grid.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -8,8 +8,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 type Nation = { slug: string; name: string };
 
@@ -32,42 +31,89 @@ function pickNationOfTheDay(): Nation {
   return NATIONS[dayIndex];
 }
 
+/* 18×18 of 22px cells = 396px. The grid is rendered as a CSS background
+ * pattern so the lines stay pixel-perfect regardless of container math —
+ * 196 wrapped flex children were one row off on a 280px frame because the
+ * 1px outer border ate into the inner area. */
+const GRID_LINE_COLOR = "rgba(163, 230, 53, 0.55)"; // lime-400 / 55%
+const GRID_BG_IMAGE = `linear-gradient(to right, ${GRID_LINE_COLOR} 1px, transparent 1px), linear-gradient(to bottom, ${GRID_LINE_COLOR} 1px, transparent 1px)`;
+
 export function Hero() {
   const active = pickNationOfTheDay();
 
   return (
-    <section className="relative overflow-hidden bg-background">
-      <div className="relative flex min-h-[640px] flex-col items-center justify-center gap-8 px-6 py-20 sm:gap-10 lg:min-h-[80svh] lg:py-32">
-        <div className="relative h-[260px] w-[208px] shrink-0 sm:h-[320px] sm:w-[256px] lg:h-[400px] lg:w-[320px]">
-          <Image
-            src={`/jerseys/home-transparent/${active.slug}.webp`}
-            alt={`${active.name} 2026 home jersey`}
-            fill
-            priority
-            sizes="(max-width: 640px) 208px, (max-width: 1024px) 256px, 320px"
-            className="object-contain"
-          />
+    <section className="bg-background">
+      <div className="grid min-h-[80svh] grid-cols-1 items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-0 lg:py-32">
+        {/* LEFT — copy + CTAs */}
+        <div className="flex flex-col items-start gap-6 lg:items-center">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col">
+              <h1
+                className="font-display leading-none tracking-tight whitespace-nowrap text-foreground"
+                style={{ fontSize: "clamp(36px, 4.2vw, 56px)" }}
+              >
+                <span className="block">Worldkit,</span>
+                <span className="block">A home for jerseys.</span>
+              </h1>
+              <p className="mt-2 text-base tracking-[-0.02em] text-foreground/30">
+                2026 World Cup. 48 nations. Dispatched worldwide.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-start gap-1">
+              <Link
+                href={`/products/${active.slug}-away`}
+                className="inline-flex items-center gap-3 rounded-full bg-lime-400 px-4 py-[11px] text-[15px] tracking-[-0.04em] text-gray-950 shadow-[inset_0_0_4px_0_rgba(255,255,255,1)] transition-colors hover:bg-lime-500"
+              >
+                Explore the {active.name.toLowerCase()} kit
+                <ArrowRight className="size-3" strokeWidth={2} />
+              </Link>
+              <Link
+                href="/shop"
+                className="inline-flex items-center rounded-full bg-neutral-950 px-4 py-[11px] text-[15px] tracking-[-0.04em] text-white shadow-[inset_0_0_4px_0_rgba(255,255,255,0.2),0_0_1px_0_rgba(0,0,0,0.25)] transition-colors hover:bg-neutral-900"
+              >
+                See all
+              </Link>
+            </div>
+          </div>
         </div>
 
-        <h1
-          className="font-display text-center leading-none text-foreground"
-          style={{ fontSize: "clamp(48px, 11vw, 120px)" }}
-        >
-          A home for jerseys<span className="text-primary">.</span>
-        </h1>
+        {/* RIGHT — jersey layered over lime grid.
+            Scale: container 440×515, lime block & grid 396×396 (= 18×22px),
+            jersey 396×515. About 30% larger than the Figma reference but
+            keeps the same proportions so it carries the column on desktop. */}
+        <div className="flex items-center justify-center">
+          <div className="relative h-[515px] w-[440px]">
+            {/* Lime fill block, offset back-left */}
+            <div
+              className="absolute left-0 top-[80px] size-[396px] bg-lime-200"
+              aria-hidden
+            />
 
-        <div className="flex flex-col items-center gap-4">
-          <Button asChild size="xl">
-            <Link href={`/products/${active.slug}-home`}>
-              Shop the {active.name} kit →
-            </Link>
-          </Button>
-          <Link
-            href="/shop"
-            className="text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
-          >
-            or browse all 48
-          </Link>
+            {/* White grid square — 18×18 of 22px cells via background pattern,
+                so every row + column is perfectly drawn without overflow.
+                Hidden on the smallest screens to keep the layered card legible. */}
+            <div
+              className="absolute left-[44px] top-[120px] hidden size-[396px] bg-white sm:block"
+              aria-hidden
+              style={{
+                backgroundImage: GRID_BG_IMAGE,
+                backgroundSize: "22px 22px",
+                boxShadow: "inset 0 0 0 1px rgba(163, 230, 53, 0.55)",
+              }}
+            />
+
+            {/* Jersey — front of stack, top-aligned with grid */}
+            <Image
+              src={`/jerseys/away-transparent/${active.slug}.webp`}
+              alt={`${active.name} 2026 away jersey`}
+              width={396}
+              height={515}
+              priority
+              sizes="(max-width: 640px) 320px, 440px"
+              className="absolute left-[44px] top-0 h-[515px] w-[396px] object-contain"
+            />
+          </div>
         </div>
       </div>
     </section>
