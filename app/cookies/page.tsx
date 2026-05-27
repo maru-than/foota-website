@@ -68,7 +68,7 @@ export default function CookiesPage() {
                   key={c.name}
                   className="border border-border bg-card p-4"
                 >
-                  <h3 className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{c.name}</h3>
+                  <h3 className="text-xs uppercase text-muted-foreground">{c.name}</h3>
                   <p className="mt-2 text-sm">{c.purpose}</p>
                   <p className="mt-3 text-xs uppercase text-muted-foreground">
                     {c.optional ? "Optional" : "Always on"}

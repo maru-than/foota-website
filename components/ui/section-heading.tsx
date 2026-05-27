@@ -34,7 +34,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">
+        <span className="text-xs uppercase text-muted-foreground">
           {eyebrow}
         </span>
       ) : null}

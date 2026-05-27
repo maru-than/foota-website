@@ -77,7 +77,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative py-1 text-xs font-medium uppercase tracking-[0.18em] transition-colors duration-150 ease-out",
+                  "relative py-1 text-xs font-medium uppercase transition-colors duration-150 ease-out",
                   active ? "text-foreground" : "text-foreground/70 hover:text-foreground",
                 )}
               >

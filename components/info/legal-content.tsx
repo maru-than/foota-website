@@ -17,7 +17,7 @@ export function LegalDoc({
 }) {
   return (
     <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-foreground/80">
-      <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Last updated · {updated}</p>
+      <p className="text-xs uppercase text-muted-foreground">Last updated · {updated}</p>
       {children}
       <p className="rounded-none border-l-2 border-border bg-card p-4 text-sm text-muted-foreground">
         This document is a template provided for transparency about how the

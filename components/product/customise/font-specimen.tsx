@@ -38,7 +38,7 @@ export function FontSpecimen({
   return (
     <div className={className}>
       {showLabel ? (
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
           Print font
         </p>
       ) : null}

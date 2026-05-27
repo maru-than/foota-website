@@ -50,7 +50,7 @@ export function VariantSelector({
       {product.options.map((option) => (
         <div key={option.id}>
           <div className="mb-2.5 flex items-center justify-between">
-            <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{option.name}</span>
+            <span className="text-xs uppercase text-muted-foreground">{option.name}</span>
             {option.name.toLowerCase() === "size" ? (
               <SizeGuideModal>
                 <Button type="button" variant="link" size="sm">

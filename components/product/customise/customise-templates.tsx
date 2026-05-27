@@ -37,7 +37,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
   return (
     <div>
       <div className="mb-2.5 flex items-center justify-between">
-        <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Quick picks</span>
+        <span className="text-xs uppercase text-muted-foreground">Quick picks</span>
         <div role="tablist" aria-label="Quick picks" className="flex gap-3">
           {(["legends", "squad", "mine"] as Track[]).map((t) => {
             const Icon = t === "legends" ? Trophy : t === "squad" ? Users : PencilLine;

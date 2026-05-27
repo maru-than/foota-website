@@ -47,7 +47,7 @@ export default function CartPage() {
 
           <aside className="lg:sticky lg:top-32 lg:h-fit">
             <div className="border border-border bg-card p-6">
-              <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              <h2 className="text-xs font-medium uppercase text-muted-foreground">
                 Order summary
               </h2>
               <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-sm">

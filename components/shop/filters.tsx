@@ -37,7 +37,7 @@ function FilterGroup({
 }) {
   return (
     <div className="border-t border-border py-5 first:border-t-0 first:pt-0">
-      <h3 className="mb-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">{title}</h3>
+      <h3 className="mb-3 text-xs uppercase text-muted-foreground">{title}</h3>
       {/* On mobile the drawer scrolls already; nesting a scroll region inside
           it traps touch. Only constrain height from md: up where the panel is
           a desktop sidebar. */}
@@ -114,7 +114,7 @@ export function FilterPanel({
     <div>
       {showHeader ? (
         <div className="flex items-center justify-between pb-4">
-          <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">Filters</span>
+          <span className="text-xs font-medium uppercase text-muted-foreground">Filters</span>
           {showClear ? (
             <button
               type="button"

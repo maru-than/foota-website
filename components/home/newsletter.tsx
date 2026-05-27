@@ -14,7 +14,7 @@ export function Newsletter() {
     <section className="border-t border-border bg-card py-24 lg:py-40">
       <Container>
         <div className="mx-auto flex max-w-xl flex-col items-center text-center">
-          <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">
+          <span className="text-xs uppercase text-muted-foreground">
             Newsletter
           </span>
           <h2 className="font-display mt-4 text-4xl leading-tight text-foreground sm:text-5xl lg:text-6xl">

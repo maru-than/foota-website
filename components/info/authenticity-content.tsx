@@ -45,7 +45,7 @@ export function AuthenticityContent() {
       <section className="grid gap-3 sm:grid-cols-3">
         {POINTS.map(({ name, text, Icon }) => (
           <div key={name} className="rounded-lg border border-border bg-card p-4">
-            <h4 className="flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            <h4 className="flex items-center gap-1.5 text-xs uppercase text-muted-foreground">
               <Icon className="size-3.5" strokeWidth={1.5} aria-hidden />
               {name}
             </h4>
@@ -85,7 +85,7 @@ export function AuthenticityContent() {
       {testimonials.length > 0 ? (
         <section className="space-y-4">
           <div>
-            <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">
+            <span className="text-xs uppercase text-muted-foreground">
               In their words
             </span>
             <h3 className="mt-1 text-lg">From recent buyers</h3>

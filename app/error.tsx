@@ -26,7 +26,7 @@ export default function Error({
 
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-5 py-24 text-center">
-      <span className="text-xs uppercase tracking-[0.18em] text-destructive">Something went wrong</span>
+      <span className="text-xs uppercase text-destructive">Something went wrong</span>
       <h1 className="font-display text-4xl sm:text-5xl">
         A momentary stoppage.
       </h1>
