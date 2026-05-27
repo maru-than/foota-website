@@ -135,20 +135,41 @@ export function ProductGallery({
         ) : null}
       </div>
 
-      {/* Desktop active tile — either an image or the back slot. */}
+      {/* Desktop active tile — either an image on the hero-style layered
+          lime backdrop, or the back slot (no backdrop — the back preview
+          composes its own scene). */}
       {active === backIndex && backSlot ? (
         <div className="relative hidden aspect-[4/5] w-full overflow-hidden rounded-xl border border-border bg-background md:block">
           {backSlot}
         </div>
       ) : (
-        <div className="relative hidden aspect-[4/5] w-full overflow-hidden rounded-xl border border-border bg-white md:block">
+        <div className="relative hidden aspect-[4/5] w-full md:block">
+          {/* Lime fill block, offset back-left — mirrors the hero composition. */}
+          <div
+            aria-hidden
+            className="absolute left-0 top-[7%] h-[78%] w-[78%] bg-lime-200"
+          />
+          {/* Grid square — CSS gradient, no overflow math.
+              Inset shadow stands in for the outer border without eating space. */}
+          <div
+            aria-hidden
+            className="absolute left-[8%] top-[15%] h-[78%] w-[78%] bg-white"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, rgba(163, 230, 53, 0.55) 1px, transparent 1px), linear-gradient(to bottom, rgba(163, 230, 53, 0.55) 1px, transparent 1px)",
+              backgroundSize: "5% 5%",
+              boxShadow: "inset 0 0 0 1px rgba(163, 230, 53, 0.55)",
+            }}
+          />
+          {/* Jersey — front of stack, fills the full tile so it can read
+              through the grid via its transparent margins. */}
           <Image
             src={(images[active] ?? images[0]).url}
             alt={(images[active] ?? images[0]).altText || title}
             fill
             priority
             sizes="50vw"
-            className="object-contain p-6"
+            className="relative object-contain p-6"
           />
         </div>
       )}

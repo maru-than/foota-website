@@ -125,17 +125,27 @@ export default async function ProductPage({
             />
 
             <div className="lg:py-2">
-              <h1 className="font-display text-4xl leading-none text-foreground sm:text-5xl lg:text-6xl">
+              {(() => {
+                const eyebrow = [product.meta.type, product.meta.season]
+                  .filter(Boolean)
+                  .join(" · ");
+                return eyebrow ? (
+                  <p className="mb-3 text-xs tracking-[-0.02em] text-foreground/40">
+                    {eyebrow}
+                  </p>
+                ) : null;
+              })()}
+              <h1 className="font-display text-4xl leading-none tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                 {product.meta.teamName ?? product.title}
+                <span className="text-lime-500">.</span>
               </h1>
-              <p className="mt-2 text-sm text-muted-foreground">{product.title}</p>
 
               <div className="mt-5">
                 <Price
                   amount={price.amount}
                   currencyCode={price.currencyCode}
                   compareAt={product.compareAtPrice}
-                  className="text-2xl text-foreground"
+                  className="text-3xl text-foreground"
                 />
               </div>
 

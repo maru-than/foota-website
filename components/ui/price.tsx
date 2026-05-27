@@ -27,14 +27,14 @@ export function Price({
 
   if (!hasCompare) {
     return (
-      <span className={cn("tabular-nums", className)}>
+      <span className={cn("font-display tabular-nums", className)}>
         {formatPrice(amount, currencyCode)}
       </span>
     );
   }
 
   return (
-    <span className="inline-flex items-baseline gap-2 tabular-nums">
+    <span className="inline-flex items-baseline gap-2 font-display tabular-nums">
       <span className="text-[0.82em] font-normal text-muted-foreground line-through decoration-fg-3/60">
         {formatPrice(compareAt.amount, compareAt.currencyCode)}
       </span>

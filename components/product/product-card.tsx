@@ -35,7 +35,7 @@ export function ProductCard({
     <Link
       href={`/products/${product.handle}`}
       aria-label={product.title}
-      className="group flex flex-col overflow-hidden rounded-md bg-muted transition-opacity duration-300 ease-out hover:opacity-90"
+      className="group flex flex-col overflow-hidden rounded-md bg-muted shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_-2px_rgba(0,0,0,0.06)] transition-shadow duration-300 ease-out hover:shadow-[0_2px_4px_rgba(0,0,0,0.06),0_12px_24px_-4px_rgba(0,0,0,0.10)]"
     >
       <div
         className={cn(

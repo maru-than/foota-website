@@ -135,7 +135,12 @@ export function ProductBuyBox({ product }: { product: Product }) {
       </div>
 
       <div ref={inlineButtonRef}>
-        <Button onClick={add} disabled={!available || isPending} className="w-full">
+        <Button
+          onClick={add}
+          disabled={!available || isPending}
+          size="lg"
+          className="w-full rounded-full bg-lime-400 text-gray-950 shadow-[inset_0_0_4px_0_rgba(255,255,255,1)] hover:bg-lime-500 disabled:bg-neutral-950 disabled:text-white disabled:opacity-100 disabled:shadow-[inset_0_0_4px_0_rgba(255,255,255,0.2),0_0_1px_0_rgba(0,0,0,0.25)]"
+        >
           {available
             ? `Add to bag — ${formatPrice(price.amount, price.currencyCode)}`
             : "Sold out"}
@@ -157,7 +162,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
       >
         <div className="flex min-w-0 flex-col leading-tight">
           {selected.Size ? (
-            <span className="flex items-center gap-1 truncate text-[11px] uppercase text-muted-foreground">
+            <span className="flex items-center gap-1 truncate text-[11px] text-muted-foreground">
               <Tag className="size-3 shrink-0" strokeWidth={1.5} aria-hidden />
               <span className="truncate">
                 Size {selected.Size}
@@ -176,7 +181,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
           size="lg"
           onClick={add}
           disabled={!available || isPending}
-          className="shrink-0"
+          className="shrink-0 rounded-full bg-lime-400 text-gray-950 shadow-[inset_0_0_4px_0_rgba(255,255,255,1)] hover:bg-lime-500 disabled:bg-neutral-950 disabled:text-white disabled:opacity-100"
         >
           {available ? "Add to bag" : "Sold out"}
           {available ? <ShoppingBag className="size-4" strokeWidth={1.5} /> : null}
