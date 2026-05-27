@@ -32,7 +32,7 @@ export function CustomiseToggle() {
       >
         <Button
           type="button"
-          variant={!enabled ? "default" : "outline"}
+          variant="outline"
           aria-pressed={!enabled}
           onClick={() => setEnabled(false)}
         >
@@ -40,7 +40,7 @@ export function CustomiseToggle() {
         </Button>
         <Button
           type="button"
-          variant={enabled ? "default" : "outline"}
+          variant="outline"
           aria-pressed={enabled}
           onClick={() => setEnabled(true)}
         >

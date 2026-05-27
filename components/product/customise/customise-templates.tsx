@@ -83,14 +83,14 @@ export function CustomiseTemplates({ product }: { product: Product }) {
                 onClick={() => applyTemplate(item.name, item.number)}
                 aria-pressed={active}
                 className={cn(
-                  "flex h-9 items-center gap-2 rounded-full border px-3 text-xs font-medium transition-colors duration-150 ease-out",
+                  "group flex h-9 items-center gap-2 rounded-full border bg-background px-3 text-xs font-medium text-foreground transition-colors duration-150 ease-out",
                   active
-                    ? "border-primary bg-primary text-background"
-                    : "border-border text-foreground hover:border-primary hover:bg-accent",
+                    ? "border-2 border-primary px-[11px]"
+                    : "border-border hover:border-primary hover:bg-accent",
                 )}
               >
                 <span>{item.name}</span>
-                <span className="tabular-nums text-muted-foreground group-aria-pressed:text-background">
+                <span className="tabular-nums text-muted-foreground">
                   {item.number}
                 </span>
               </button>
