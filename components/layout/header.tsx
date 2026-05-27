@@ -69,7 +69,7 @@ export function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-2 lg:ml-3 lg:flex">
+        <nav className="hidden items-center gap-8 lg:ml-3 lg:flex">
           {MAIN_NAV.map((link) => {
             const active = isActive(link.href);
             return (
@@ -78,13 +78,10 @@ export function Header() {
                 href={link.href}
                 className={cn(
                   "relative py-1 text-sm transition-colors duration-150 ease-out",
-                  active ? "text-foreground" : "text-foreground/70 hover:text-foreground",
+                  active ? "text-foreground" : "text-foreground/20 hover:text-foreground",
                 )}
               >
                 {link.label}
-                {active ? (
-                  <span className="absolute inset-x-0 -bottom-1 h-px bg-foreground" />
-                ) : null}
               </Link>
             );
           })}
