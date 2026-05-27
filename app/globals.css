@@ -1,74 +1,137 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 /* ================================================================== */
-/*  ACCENT — single source of truth. Re-skin the whole site here.      */
-/*  Set the base accent as space-separated RGB channels; every accent  */
-/*  token (shades + alpha tints + textures) derives from it.           */
-/*  Default: Voltron lime #c1ff56.                                     */
+/*  FOOTA — shadcn integration                                          */
+/*  Base palette: `mist` (preset b7BFd4aoa). Accent: Tailwind lime-400. */
+/*  Site is dark-only; <html class="dark"> is set in app/layout.tsx.    */
 /* ================================================================== */
+
 :root {
-  --accent-rgb: 193 255 86;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.148 0.004 228.8);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.148 0.004 228.8);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.148 0.004 228.8);
+  /* --primary / --ring overridden to lime-400 so stock shadcn primitives
+     (Button default, focus rings) are on-brand without per-call className. */
+  --primary: oklch(0.852 0.199 126.665); /* lime-400 #a3e635 */
+  --primary-foreground: oklch(0.274 0.072 132.109); /* lime-950 */
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.963 0.002 197.1);
+  --muted-foreground: oklch(0.56 0.021 213.5);
+  --accent: oklch(0.963 0.002 197.1);
+  --accent-foreground: oklch(0.218 0.008 223.9);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.925 0.005 214.3);
+  --input: oklch(0.925 0.005 214.3);
+  --ring: oklch(0.852 0.199 126.665); /* lime-400 */
+  --radius: 0.45rem;
+}
+
+.dark {
+  --background: oklch(0.148 0.004 228.8);
+  --foreground: oklch(0.987 0.002 197.1);
+  --card: oklch(0.218 0.008 223.9);
+  --card-foreground: oklch(0.987 0.002 197.1);
+  --popover: oklch(0.218 0.008 223.9);
+  --popover-foreground: oklch(0.987 0.002 197.1);
+  --primary: oklch(0.852 0.199 126.665); /* lime-400 */
+  --primary-foreground: oklch(0.274 0.072 132.109); /* lime-950 */
+  --secondary: oklch(0.274 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.275 0.011 216.9);
+  --muted-foreground: oklch(0.723 0.014 214.4);
+  --accent: oklch(0.275 0.011 216.9);
+  --accent-foreground: oklch(0.987 0.002 197.1);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.852 0.199 126.665); /* lime-400 */
 }
 
 /* ------------------------------------------------------------------ */
-/*  FOOTA DESIGN SYSTEM                                                 */
-/*  Sport · energetic · modern · linear. Dark base, Voltron lime,      */
-/*  sharp corners (0px), 1px hairlines, no card shadows.               */
-/*  Tokens lifted from footer-design-system/colors_and_type.css.       */
+/*  Shadcn @theme inline — preset b7BFd4aoa's semantic mapping.        */
+/*  --color-accent intentionally omitted so foota's @theme bridge      */
+/*  below wins and `bg-accent` resolves to lime-400 during migration.  */
+/* ------------------------------------------------------------------ */
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ------------------------------------------------------------------ */
+/*  BRIDGE — foota legacy token names mapped to shadcn semantics       */
+/*  + lime palette. Deleted in commit 8 once every call-site is        */
+/*  migrated. Lets commits 1–7 leave a green build.                    */
 /* ------------------------------------------------------------------ */
 
 @theme {
-  /* Base surfaces — Tailwind neutral scale */
-  --color-bg-0: var(--color-neutral-950); /* pitch */
-  --color-bg-1: var(--color-neutral-900); /* primary surface / page */
-  --color-bg-2: var(--color-neutral-800); /* card */
-  --color-bg-3: var(--color-neutral-700); /* elevated card / chip */
-  --color-bg-4: var(--color-neutral-600); /* hover surface */
+  /* Surfaces → shadcn semantics */
+  --color-bg-0: var(--background);
+  --color-bg-1: var(--background);
+  --color-bg-2: var(--card);
+  --color-bg-3: var(--muted);
+  --color-bg-4: var(--muted);
 
-  /* Foreground — Tailwind neutral scale.
-     fg-3 was neutral-500 (~3.6:1 against bg-1, below WCAG AA 4.5:1 for body
-     text). Bumped to neutral-400 (~6.4:1). Use fg-4 for genuinely tertiary
-     ornaments where contrast matters less. */
-  --color-fg-1: var(--color-white);
-  --color-fg-2: var(--color-neutral-300);
-  --color-fg-3: var(--color-neutral-400);
-  --color-fg-4: var(--color-neutral-600);
+  /* Foregrounds → shadcn semantics */
+  --color-fg-1: var(--foreground);
+  --color-fg-2: var(--foreground);
+  --color-fg-3: var(--muted-foreground);
+  --color-fg-4: var(--muted-foreground);
 
-  /* Accent — all derived from --accent-rgb (see top of file) */
-  --color-accent: rgb(var(--accent-rgb));
-  --color-accent-hi: color-mix(in oklab, var(--color-accent), white 26%);
-  --color-accent-lo: color-mix(in oklab, var(--color-accent), black 16%);
-  --color-accent-12: rgb(var(--accent-rgb) / 0.12);
-  --color-accent-20: rgb(var(--accent-rgb) / 0.2);
-  --color-accent-40: rgb(var(--accent-rgb) / 0.4);
+  /* Lines → shadcn semantics */
+  --color-line-1: var(--border);
+  --color-line-2: var(--input);
+  --color-line-3: var(--border);
 
-  /* Alternate "Champion" gold/beige — documented, inactive */
-  --color-gold: #d4b26a;
-  --color-gold-hi: #e8c994;
-  --color-gold-lo: #b8924c;
-  --color-beige: #e8dcc4;
+  /* Accent → Tailwind lime palette (the only "color" foota owns) */
+  --color-accent: var(--color-lime-400);
+  --color-accent-hi: var(--color-lime-300);
+  --color-accent-lo: var(--color-lime-500);
+  --color-accent-12: color-mix(in oklab, var(--color-lime-400) 12%, transparent);
+  --color-accent-20: color-mix(in oklab, var(--color-lime-400) 20%, transparent);
+  --color-accent-40: color-mix(in oklab, var(--color-lime-400) 40%, transparent);
+  --color-line-accent: color-mix(in oklab, var(--color-lime-400) 20%, transparent);
 
-  /* Lines — Tailwind neutral scale */
-  --color-line-1: var(--color-neutral-800);
-  --color-line-2: var(--color-neutral-700);
-  --color-line-3: var(--color-neutral-600);
-  --color-line-accent: rgb(var(--accent-rgb) / 0.2);
+  /* Semantic — danger → shadcn destructive */
+  --color-danger: var(--destructive);
 
-  /* Semantic */
-  --color-success: #6fe38a;
-  --color-warn: #ffc555;
-  --color-danger: #ff5c5c;
-  --color-info: #6ec6ff;
-
-  /* Type families */
+  /* Type families — preserved */
   --font-display: var(--font-gambarino), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
 
-  /* Motion */
+  /* Motion — preserved */
   --ease-worldkit: cubic-bezier(0.22, 1, 0.36, 1);
-
-  /* Animations */
   --animate-ticker: ticker 40s linear infinite;
   --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
   --animate-accordion-down: accordion-down 0.25s var(--ease-worldkit);
@@ -82,80 +145,61 @@
 }
 
 @keyframes ticker {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
+
 @keyframes pulse-dot {
-  50% {
-    opacity: 0.4;
-  }
+  50% { opacity: 0.4; }
 }
+
 @keyframes accordion-down {
-  from {
-    height: 0;
-    opacity: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-    opacity: 1;
-  }
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
 }
+
 @keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-    opacity: 1;
-  }
-  to {
-    height: 0;
-    opacity: 0;
-  }
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
 }
 
 @layer base {
-  :root {
-    color-scheme: dark;
-  }
-
   * {
-    border-color: var(--color-line-1);
+    @apply border-border outline-ring/50;
   }
 
   body {
-    background-color: var(--color-bg-1);
-    color: var(--color-fg-1);
     font-family: var(--font-sans);
     letter-spacing: -0.03em;
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    @apply bg-background text-foreground;
   }
 
   /* Headings use Geist (UI font) bold — Gambarino is reserved for logo/hero. */
-  h1,
-  h2,
-  h3,
-  h4 {
+  h1, h2, h3, h4 {
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.02;
   }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: #111111;
+    background-color: var(--color-lime-400);
+    color: var(--color-lime-950);
   }
 
   ::placeholder {
-    color: var(--color-fg-4);
+    color: var(--muted-foreground);
+  }
+
+  html {
+    @apply font-sans;
   }
 }
 
 @layer utilities {
-  /* Uppercase micro label — the Worldkit "wk-label". */
+  /* Uppercase micro label. */
   .eyebrow {
     font-family: var(--font-sans);
     text-transform: uppercase;
@@ -200,7 +244,7 @@
     background: repeating-linear-gradient(
       90deg,
       transparent 0 28px,
-      rgb(var(--accent-rgb) / 0.03) 28px 30px
+      color-mix(in oklab, var(--color-lime-400) 3%, transparent) 28px 30px
     );
     pointer-events: none;
   }
@@ -211,7 +255,7 @@
     background: repeating-linear-gradient(
       90deg,
       transparent 0 calc(100% / 12 - 1px),
-      rgb(var(--accent-rgb) / 0.04) calc(100% / 12 - 1px) calc(100% / 12)
+      color-mix(in oklab, var(--color-lime-400) 4%, transparent) calc(100% / 12 - 1px) calc(100% / 12)
     );
     pointer-events: none;
   }

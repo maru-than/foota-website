@@ -97,7 +97,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geist.variable} ${gambarino.variable} h-full`}
+      className={`dark ${geist.variable} ${gambarino.variable} h-full`}
     >
       <body className="flex min-h-full flex-col">
         {/* Enables CSS-only reveal animations; content stays visible without JS. */}
