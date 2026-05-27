@@ -1,22 +1,18 @@
 /**
- * @file Shared primitives for the per-route `opengraph-image.tsx` files.
+ * @file Shared primitives for the per-route `opengraph-image.tsx` files — light palette + EB Garamond, matches the live site.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
  * @since 2026-05-26
  */
 
-// Shared primitives for the per-route `opengraph-image.tsx` files.
-//
 // Centralises:
 //   - canonical 1200x630 dimensions
-//   - Gambarino (OTF) loader — the live site's display face, used here for
-//     headlines and the brand wordmark so social cards read as editorial,
-//     not template
-//   - <OgFrame> visual envelope (black bg, accent rail, wordmark)
+//   - EB Garamond loader (the live site's display face)
+//   - <OgFrame> visual envelope: white bg, lime block accent, footer wordmark
 //
-// All consumers stay on the default Node.js runtime — `fs.readFileSync`
-// is the standard pattern for self-hosted fonts in `ImageResponse`.
+// All consumers stay on the default Node.js runtime — `fs.readFileSync` is
+// the standard pattern for self-hosted fonts in `ImageResponse`.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -29,21 +25,25 @@ type OgImageOptions = ConstructorParameters<typeof ImageResponse>[1];
 export const OG_SIZE = { width: 1200, height: 630 } as const;
 export const OG_CONTENT_TYPE = "image/png";
 
+/* Light palette mirrors the site's `:root` tokens. Hex equivalents of the
+ * OKLCH values in globals.css; OG's Satori renderer doesn't understand
+ * OKLCH so the colours are pinned here. */
 const COLORS = {
-  bg: "#111111",
-  bg2: "#1A1A1A",
-  fg: "#FFFFFF",
-  fgMuted: "rgba(255,255,255,0.72)",
-  fgDim: "rgba(255,255,255,0.55)",
-  accent: "#a3e635", // Tailwind lime-400
-  accentDim: "rgba(163,230,53,0.18)",
+  bg: "#FFFFFF",
+  fg: "#0B1216", // ≈ oklch(0.148 0.004 228.8) — near-black with a hint of blue
+  fgMuted: "rgba(11,18,22,0.55)",
+  fgDim: "rgba(11,18,22,0.35)",
+  border: "rgba(11,18,22,0.10)",
+  limeBlock: "#D9F99D", // lime-200 — the hero's lime fill block
+  lime: "#A3E635", // lime-400 — accent / grid lines / chip fill
+  limeText: "#3F6212", // lime-800 — readable lime on white when used as type
 } as const;
 
-let _gambarino: Buffer | null = null;
+let _ebGaramond: Buffer | null = null;
 let _geist: Buffer | null = null;
 let _logo: string | null = null;
 
-const LOGO_SIZE = 120;
+const LOGO_SIZE = 96;
 
 /** Inline `public/logo.png` as a base64 data URL, downsampled once.
  *  Sharp is already a dep (used for jersey conversion). */
@@ -57,12 +57,14 @@ export async function logoDataUrl(): Promise<string> {
   return _logo;
 }
 
-function loadGambarino(): Buffer {
-  if (_gambarino) return _gambarino;
-  _gambarino = fs.readFileSync(
-    path.join(process.cwd(), "app", "fonts", "Gambarino-Regular.otf"),
+function loadEbGaramond(): Buffer {
+  if (_ebGaramond) return _ebGaramond;
+  // Static (non-variable) instance — satori chokes on variable-font axis tables
+  // with a `Cannot read properties of undefined (reading '256')`.
+  _ebGaramond = fs.readFileSync(
+    path.join(process.cwd(), "app", "fonts", "EBGaramond-Regular.ttf"),
   );
-  return _gambarino;
+  return _ebGaramond;
 }
 
 function loadGeist(): Buffer {
@@ -89,8 +91,8 @@ export function ogImageOptions(): OgImageOptions {
     ...OG_SIZE,
     fonts: [
       {
-        name: "Gambarino",
-        data: loadGambarino(),
+        name: "EB Garamond",
+        data: loadEbGaramond(),
         style: "normal",
         weight: 400,
       },
@@ -134,16 +136,17 @@ export function OgFrame({
         fontFamily: "Geist, sans-serif",
       }}
     >
-      {/* Single accent rule along the top — quieter than the original
-          right-corner block, doesn't compete with the headline. */}
+      {/* Top-left corner: lime-200 block — the same accent that sits behind
+          the hero jersey on the live site. Just visible enough to anchor the
+          frame, doesn't crowd the title. */}
       <div
         style={{
           position: "absolute",
           top: 0,
           left: 0,
-          right: 0,
-          height: 6,
-          backgroundColor: COLORS.accent,
+          width: 220,
+          height: 220,
+          backgroundColor: COLORS.limeBlock,
         }}
       />
 
@@ -153,6 +156,7 @@ export function OgFrame({
             display: "flex",
             fontSize: 22,
             color: COLORS.fgMuted,
+            zIndex: 1,
           }}
         >
           {eyebrow}
@@ -167,17 +171,26 @@ export function OgFrame({
           display: "flex",
           marginTop: 32,
           marginBottom: 32,
+          zIndex: 1,
         }}
       >
         {children}
       </div>
 
-      {/* Brand mark — logo when supplied, falls back to the Gambarino
-          wordmark so the helper still works without an awaited data URL. */}
-      {logo ? (
-        <div style={{ display: "flex", alignItems: "center" }}>
-          {/* next/og only supports raw <img>, not next/image. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+      {/* Footer row: brand mark left, hairline divider above. */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
+          paddingTop: 24,
+          borderTop: `1px solid ${COLORS.border}`,
+          zIndex: 1,
+        }}
+      >
+        {logo ? (
+          /* next/og only supports raw <img>, not next/image. */
+          /* eslint-disable-next-line @next/next/no-img-element */
           <img
             src={logo}
             alt=""
@@ -185,27 +198,36 @@ export function OgFrame({
             height={LOGO_SIZE}
             style={{ objectFit: "contain" }}
           />
-        </div>
-      ) : (
+        ) : null}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            fontSize: 30,
-            fontFamily: "Gambarino, serif",
+            fontSize: 28,
+            fontFamily: "EB Garamond, serif",
             color: COLORS.fg,
             letterSpacing: -0.5,
           }}
         >
           Worldkit Soccer
-          <span style={{ color: COLORS.accent }}>.</span>
+          <span style={{ color: COLORS.lime }}>.</span>
         </div>
-      )}
+        <div
+          style={{
+            marginLeft: "auto",
+            display: "flex",
+            fontSize: 20,
+            color: COLORS.fgMuted,
+          }}
+        >
+          worldkitsoccer.com
+        </div>
+      </div>
     </div>
   );
 }
 
-/** Display title in Gambarino — matches `.display` on the live site. */
+/** Display title in EB Garamond — matches the live site H1. */
 export function OgTitle({
   children,
   size = 96,
@@ -220,7 +242,7 @@ export function OgTitle({
         fontSize: size,
         lineHeight: 1.02,
         letterSpacing: -2,
-        fontFamily: "Gambarino, serif",
+        fontFamily: "EB Garamond, serif",
         color: COLORS.fg,
       }}
     >
@@ -263,9 +285,10 @@ export function OgChip({
         paddingLeft: 16,
         paddingRight: 16,
         fontSize: 20,
-        color: solid ? COLORS.bg : COLORS.accent,
-        backgroundColor: solid ? COLORS.accent : "transparent",
-        border: solid ? "none" : `1px solid ${COLORS.accent}`,
+        borderRadius: 999,
+        color: solid ? COLORS.fg : COLORS.limeText,
+        backgroundColor: solid ? COLORS.lime : "transparent",
+        border: solid ? "none" : `1px solid ${COLORS.lime}`,
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 /**
- * @file Dynamic OG image for /collections/[handle] — renders the collection name and lead image with the logo.
+ * @file Dynamic OG image for /collections/[handle] — light editorial card with collection title.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -16,6 +16,7 @@ import {
   OG_CONTENT_TYPE,
   OG_SIZE,
   OgFrame,
+  OgMeta,
   OgTitle,
   logoDataUrl,
   ogImageOptions,
@@ -32,13 +33,26 @@ export const alt = "Worldkit Soccer collection";
  *  self-contained. Module-scope cache amortises sharp work across requests. */
 const _bg = new Map<string, string>();
 
-async function bgDataUrl(publicPath: string): Promise<string | null> {
-  if (_bg.has(publicPath)) return _bg.get(publicPath)!;
+async function bgDataUrl(source: string): Promise<string | null> {
+  if (_bg.has(source)) return _bg.get(source)!;
   try {
-    const file = path.join(process.cwd(), "public", publicPath.replace(/^\//, ""));
-    const png = await sharp(file).resize(1200, 630, { fit: "cover" }).png().toBuffer();
+    let input: Buffer | string;
+    if (/^https?:\/\//i.test(source)) {
+      const r = await fetch(source);
+      if (!r.ok) return null;
+      input = Buffer.from(await r.arrayBuffer());
+    } else {
+      input = path.join(process.cwd(), "public", source.replace(/^\//, ""));
+    }
+    const png = await sharp(input)
+      .resize(560, 560, {
+        fit: "cover",
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
+      })
+      .png()
+      .toBuffer();
     const url = `data:image/png;base64,${png.toString("base64")}`;
-    _bg.set(publicPath, url);
+    _bg.set(source, url);
     return url;
   } catch {
     return null;
@@ -77,53 +91,64 @@ export default async function Image({
         <div
           style={{
             display: "flex",
-            position: "relative",
             width: "100%",
-            height: "100%",
             alignItems: "center",
+            gap: 48,
           }}
         >
+          {/* LEFT — title + supporting line. */}
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              gap: 24,
+            }}
+          >
+            <OgTitle size={112}>
+              {collection.title}
+              <span style={{ color: OG_COLORS.lime }}>.</span>
+            </OgTitle>
+            <OgMeta size={26}>2026 World Cup · Dispatched worldwide.</OgMeta>
+          </div>
+
+          {/* RIGHT — collection lead image on a lime block, mirroring the
+              hero composition on PDPs and the home card. */}
           {bg ? (
-            <>
-              <img
-                src={bg}
-                alt=""
-                width={1200}
-                height={500}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  opacity: 0.35,
-                }}
-              />
+            <div
+              style={{
+                position: "relative",
+                width: 380,
+                height: 380,
+                display: "flex",
+              }}
+            >
               <div
                 style={{
                   position: "absolute",
-                  inset: 0,
-                  background:
-                    "linear-gradient(90deg, rgba(17,17,17,0.95) 30%, rgba(17,17,17,0.45) 100%)",
+                  left: 0,
+                  top: 30,
+                  width: 320,
+                  height: 320,
+                  backgroundColor: OG_COLORS.limeBlock,
                   display: "flex",
                 }}
               />
-            </>
+              <img
+                src={bg}
+                alt=""
+                width={320}
+                height={320}
+                style={{
+                  position: "absolute",
+                  left: 30,
+                  top: 0,
+                  objectFit: "cover",
+                  border: `1px solid ${OG_COLORS.border}`,
+                }}
+              />
+            </div>
           ) : null}
-
-          <div
-            style={{
-              position: "relative",
-              display: "flex",
-              alignItems: "center",
-              maxWidth: 980,
-            }}
-          >
-            <OgTitle size={140}>
-              {collection.title}
-              <span style={{ color: OG_COLORS.accent }}>.</span>
-            </OgTitle>
-          </div>
         </div>
       </OgFrame>
     ),
