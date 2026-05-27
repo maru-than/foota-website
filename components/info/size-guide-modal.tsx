@@ -9,33 +9,28 @@
  */
 
 import {
-  InfoModal,
-  InfoModalBody,
-  InfoModalContent,
-  InfoModalDescription,
-  InfoModalHeader,
-  InfoModalHeadline,
-  InfoModalTitle,
-  InfoModalTrigger,
-} from "@/components/ui/info-modal";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { SizeGuideContent } from "./size-guide-content";
 
 export function SizeGuideModal({ children }: { children: React.ReactNode }) {
   return (
-    <InfoModal>
-      <InfoModalTrigger asChild>{children}</InfoModalTrigger>
-      <InfoModalContent aria-describedby={undefined}>
-        <InfoModalHeader>
-          <InfoModalTitle>Help</InfoModalTitle>
-          <InfoModalHeadline>Size guide</InfoModalHeadline>
-          <InfoModalDescription>
+    <Dialog>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="max-h-[85dvh] max-w-2xl overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Size guide</DialogTitle>
+          <DialogDescription>
             Use these measurements as a guide before picking your size.
-          </InfoModalDescription>
-        </InfoModalHeader>
-        <InfoModalBody>
-          <SizeGuideContent />
-        </InfoModalBody>
-      </InfoModalContent>
-    </InfoModal>
+          </DialogDescription>
+        </DialogHeader>
+        <SizeGuideContent />
+      </DialogContent>
+    </Dialog>
   );
 }
