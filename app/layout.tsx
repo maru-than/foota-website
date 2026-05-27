@@ -18,6 +18,7 @@ import { Footer } from "@/components/layout/footer";
 import { SiteAnalytics } from "@/components/layout/site-analytics";
 import { CartProvider } from "@/components/cart/cart-provider";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { Toaster } from "@/components/ui/sonner";
 import { getCart } from "@/lib/shopify/cart";
 import { getCollectionProducts } from "@/lib/shopify/collections";
 import { resolveSiteUrl } from "@/lib/site-url";
@@ -122,6 +123,7 @@ export default async function RootLayout({
           <CartDrawer recommendations={bestSellers} />
           <CookieBanner />
           <SiteAnalytics />
+          <Toaster />
         </CartProvider>
       </body>
     </html>

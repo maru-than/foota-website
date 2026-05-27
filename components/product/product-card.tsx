@@ -9,7 +9,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Badge, jerseyBadgeVariant } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { Jersey, teamColors } from "@/components/ui/jersey-placeholder";
 import { Price } from "@/components/ui/price";
 import { cn } from "@/lib/utils";
@@ -79,7 +79,17 @@ export function ProductCard({
 
         {meta.badge ? (
           <span className="absolute left-3 top-3 z-[3]">
-            <Badge variant={jerseyBadgeVariant(meta.badge)}>{meta.badge}</Badge>
+            <Badge
+              // Host marquee → lime fill; everything else → lime outline.
+              variant={meta.badge === "Host" ? "default" : "outline"}
+              className={
+                meta.badge === "Host"
+                  ? undefined
+                  : "border-lime-400 text-lime-400"
+              }
+            >
+              {meta.badge}
+            </Badge>
           </span>
         ) : null}
         {!product.availableForSale ? (
