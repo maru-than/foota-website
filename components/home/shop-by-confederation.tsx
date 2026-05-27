@@ -32,11 +32,11 @@ export function ShopByConfederation() {
                   href={`/collections/${c.handle}`}
                   /* min-h keeps the 2-col mobile rows even when one label
                      wraps to 2 lines ("N. & C. America") and others don't. */
-                  className="group flex min-h-[96px] flex-col items-center justify-center gap-2 border border-lime-400/20 bg-card p-5 text-center transition-[transform,background-color] duration-300 ease-worldkit hover:-translate-y-1 hover:bg-muted"
+                  className="group flex min-h-[96px] flex-col items-center justify-center gap-2 border border-border bg-card p-5 text-center transition-[transform,background-color] duration-300 ease-out hover:-translate-y-1 hover:bg-muted"
                 >
                   <span
                     aria-hidden
-                    className="text-base font-bold text-lime-400"
+                    className="text-base font-bold text-primary"
                   >
                     {c.abbr}
                   </span>

@@ -17,7 +17,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function CollectionLoading() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-lime-400/20 bg-card">
+      <section className="relative overflow-hidden border-b border-border bg-card">
         <Container className="relative py-16 lg:py-24">
           <Skeleton className="h-3 w-20" />
           <Skeleton className="mt-3 h-12 w-72 max-w-full" />

@@ -34,7 +34,7 @@ export function AuthenticityContent() {
   return (
     <div className="space-y-8 text-pretty leading-relaxed text-foreground/80 [&_h3]:text-foreground">
       <section className="space-y-3">
-        <h3 className="text-lg font-bold tracking-[-0.02em]">What you get</h3>
+        <h3 className="text-lg font-bold">What you get</h3>
         <p>
           Worldkit Soccer stocks 2026 home and away jerseys for all 48 nations in the field. Every
           jersey is inspected on arrival — stitching, crest, fonts and finish
@@ -44,8 +44,8 @@ export function AuthenticityContent() {
 
       <section className="grid gap-3 sm:grid-cols-3">
         {POINTS.map(({ name, text, Icon }) => (
-          <div key={name} className="border border-lime-400/20 bg-card p-4">
-            <h4 className="eyebrow flex items-center gap-1.5 text-lime-400">
+          <div key={name} className="border border-border bg-card p-4">
+            <h4 className="eyebrow flex items-center gap-1.5 text-primary">
               <Icon className="size-3.5" strokeWidth={1.5} aria-hidden />
               {name}
             </h4>
@@ -55,7 +55,7 @@ export function AuthenticityContent() {
       </section>
 
       <section className="space-y-3">
-        <h3 className="text-lg font-bold tracking-[-0.02em]">Inspection</h3>
+        <h3 className="text-lg font-bold">Inspection</h3>
         <p>
           Each shirt is photographed, measured and condition-checked. Any
           notable details are described on the product page — no surprises when
@@ -64,7 +64,7 @@ export function AuthenticityContent() {
       </section>
 
       <section className="space-y-3">
-        <h3 className="text-lg font-bold tracking-[-0.02em]">Customisation</h3>
+        <h3 className="text-lg font-bold">Customisation</h3>
         <p>
           Custom names and numbers are heat-pressed in-house with the same
           equipment used on stadium kits. Letter sets match the official font
@@ -76,7 +76,7 @@ export function AuthenticityContent() {
           centre, print adhesion under a heat test, and a spell-check against
           the order. Customs ship in 5–7 days and are non-returnable — read
           more on{" "}
-          <a href="/shipping-returns" className="text-lime-400 underline">
+          <a href="/shipping-returns" className="text-primary underline">
             shipping &amp; returns
           </a>
           .
@@ -86,8 +86,8 @@ export function AuthenticityContent() {
       {testimonials.length > 0 ? (
         <section className="space-y-4">
           <div>
-            <span className="eyebrow text-lime-400">In their words</span>
-            <h3 className="mt-1 text-lg font-bold tracking-[-0.02em]">
+            <span className="eyebrow text-primary">In their words</span>
+            <h3 className="mt-1 text-lg font-bold">
               From recent buyers
             </h3>
           </div>

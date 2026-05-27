@@ -23,14 +23,14 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   const verifiedDate = DATE_FMT.format(new Date(testimonial.date));
 
   return (
-    <figure className="flex h-full flex-col border border-lime-400/20 bg-card p-6">
+    <figure className="flex h-full flex-col border border-border bg-card p-6">
       <StarRating rating={testimonial.rating} />
 
       <blockquote className="mt-5 text-pretty leading-relaxed text-foreground">
         “{testimonial.quote}”
       </blockquote>
 
-      <figcaption className="mt-6 flex flex-col gap-1 border-t border-lime-400/20 pt-4 text-sm">
+      <figcaption className="mt-6 flex flex-col gap-1 border-t border-border pt-4 text-sm">
         <span className="inline-flex items-center gap-2 font-medium text-foreground">
           <CountryFlag code={testimonial.country} />
           {testimonial.author}

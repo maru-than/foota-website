@@ -29,7 +29,7 @@ export default function CartPage() {
 
       {lines.length === 0 ? (
         <div className="flex flex-col items-center gap-4 py-24 text-center">
-          <p className="text-3xl font-bold tracking-[-0.03em]">Your locker is empty.</p>
+          <p className="text-3xl font-bold">Your locker is empty.</p>
           <p className="max-w-md text-sm text-muted-foreground">
             Add a jersey to get started — all 48 nations are in.
           </p>
@@ -46,7 +46,7 @@ export default function CartPage() {
           </div>
 
           <aside className="lg:sticky lg:top-32 lg:h-fit">
-            <div className="border border-lime-400/20 bg-card p-6">
+            <div className="border border-border bg-card p-6">
               <h2 className="text-sm font-bold uppercase">
                 Order summary
               </h2>

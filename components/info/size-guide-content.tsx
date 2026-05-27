@@ -19,7 +19,7 @@ const ROWS = [
 export function SizeGuideContent() {
   return (
     <div className="space-y-8">
-      <div className="overflow-hidden border border-lime-400/20">
+      <div className="overflow-hidden border border-border">
         <table className="w-full text-sm">
           <thead className="bg-card text-left">
             <tr className="[&_th]:px-4 [&_th]:py-3 [&_th]:font-bold [&_th]:uppercase [&_th]:[&_th]:text-foreground sm:[&_th]:px-5">
@@ -44,7 +44,7 @@ export function SizeGuideContent() {
       </div>
 
       <div className="space-y-3 text-pretty leading-relaxed text-foreground/80">
-        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em] text-foreground">
+        <h3 className="flex items-center gap-2 text-lg font-bold text-foreground">
           <Ruler className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           How to measure
         </h3>
@@ -55,7 +55,7 @@ export function SizeGuideContent() {
         </p>
         <p className="flex items-start gap-2">
           <AlertTriangle
-            className="mt-0.5 size-4 shrink-0 text-lime-400"
+            className="mt-0.5 size-4 shrink-0 text-primary"
             strokeWidth={1.5}
             aria-hidden
           />

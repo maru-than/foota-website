@@ -69,14 +69,14 @@ export function MobileMenu({
                 onClick={close}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative border-b border-border px-4 py-4 text-lg font-bold uppercase tracking-[-0.02em] transition-colors duration-150 ease-worldkit",
-                  active ? "text-lime-400" : "text-foreground hover:text-lime-400",
+                  "relative border-b border-border px-4 py-4 text-lg font-bold uppercase transition-colors duration-150 ease-out",
+                  active ? "text-primary" : "text-foreground hover:text-primary",
                 )}
               >
                 {active ? (
                   <span
                     aria-hidden
-                    className="absolute inset-y-2 left-0 w-0.5 bg-lime-400"
+                    className="absolute inset-y-2 left-0 w-0.5 bg-primary"
                   />
                 ) : null}
                 {link.label}
@@ -91,7 +91,7 @@ export function MobileMenu({
           <button
             type="button"
             onClick={handle(openSearch)}
-            className="flex items-center gap-2.5 border border-lime-400/20 px-4 py-3 text-sm font-semibold uppercase text-foreground transition-colors hover:border-lime-400 hover:bg-lime-400/12"
+            className="flex items-center gap-2.5 border border-border px-4 py-3 text-sm font-semibold uppercase text-foreground transition-colors hover:border-primary hover:bg-accent"
           >
             <SearchIcon className="size-4" strokeWidth={1.5} />
             Search
@@ -99,17 +99,17 @@ export function MobileMenu({
           <button
             type="button"
             onClick={handle(openCart)}
-            className="flex items-center justify-between gap-2.5 border border-lime-400/20 px-4 py-3 text-sm font-semibold uppercase text-foreground transition-colors hover:border-lime-400 hover:bg-lime-400/12"
+            className="flex items-center justify-between gap-2.5 border border-border px-4 py-3 text-sm font-semibold uppercase text-foreground transition-colors hover:border-primary hover:bg-accent"
           >
             <span className="inline-flex items-center gap-2.5">
               <BagIcon className="size-4" strokeWidth={1.5} />
               Bag
             </span>
-            <b className="tabular-nums text-lime-400">{totalQuantity}</b>
+            <b className="tabular-nums text-primary">{totalQuantity}</b>
           </button>
         </div>
 
-        <div className="mt-auto border-t border-lime-400/20">
+        <div className="mt-auto border-t border-border">
           <div className="flex items-center gap-2 px-6 py-4 text-xs uppercase text-foreground/80">
             <Globe className="size-3.5" strokeWidth={1.5} />
             EN · USD

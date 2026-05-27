@@ -33,7 +33,7 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? <span className="eyebrow text-lime-400">{eyebrow}</span> : null}
+      {eyebrow ? <span className="eyebrow text-primary">{eyebrow}</span> : null}
       <div
         className={cn(
           "flex w-full items-end justify-between gap-6",
@@ -46,7 +46,7 @@ export function SectionHeading({
         {action ? (
           <Link
             href={action.href}
-            className="hidden shrink-0 items-center gap-1.5 border-b border-lime-400/20 pb-1 text-sm text-foreground transition-colors hover:border-lime-400 hover:text-lime-400 sm:inline-flex"
+            className="hidden shrink-0 items-center gap-1.5 border-b border-border pb-1 text-sm text-foreground transition-colors hover:border-primary hover:text-primary sm:inline-flex"
           >
             {action.label}
           </Link>

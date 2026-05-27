@@ -37,12 +37,12 @@ export function ProductCard({
     <Link
       href={`/products/${product.handle}`}
       aria-label={product.title}
-      className="group flex flex-col bg-muted transition-transform duration-300 ease-worldkit hover:-translate-y-1"
+      className="group flex flex-col bg-muted transition-transform duration-300 ease-out hover:-translate-y-1"
     >
       <div
         className={cn(
           "relative flex aspect-[4/5] items-center justify-center overflow-hidden",
-          primary ? "bg-white" : "jersey-frame grid-texture p-5",
+          primary ? "bg-white" : "bg-muted p-5",
         )}
       >
         {primary ? (
@@ -85,7 +85,7 @@ export function ProductCard({
               className={
                 meta.badge === "Host"
                   ? undefined
-                  : "border-lime-400 text-lime-400"
+                  : "border-primary text-primary"
               }
             >
               {meta.badge}
@@ -99,9 +99,9 @@ export function ProductCard({
         ) : null}
       </div>
 
-      <div className="flex flex-col gap-3 border border-t-0 border-lime-400/20 p-5">
+      <div className="flex flex-col gap-3 border border-t-0 border-border p-5">
         <div className="flex flex-col gap-1.5">
-          <span className="text-xl font-bold leading-none tracking-[-0.03em] text-lime-400">
+          <span className="text-xl font-bold leading-none text-primary">
             {meta.teamName ?? product.title}
           </span>
           {caption ? <span className="text-xs text-muted-foreground">{caption}</span> : null}

@@ -31,7 +31,7 @@ export function Header() {
     href === "/shop" ? pathname === "/shop" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-[calc(env(safe-area-inset-top)+1.75rem)] z-40 border-b border-lime-400/20 bg-background">
+    <header className="sticky top-[calc(env(safe-area-inset-top)+1.75rem)] z-40 border-b border-border bg-background">
       <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-[72px] lg:px-8">
         <button
           type="button"
@@ -53,7 +53,7 @@ export function Header() {
             width={224}
             height={224}
             priority
-            className="h-10 w-auto transition-transform duration-200 ease-worldkit lg:h-28 lg:translate-y-5 lg:drop-shadow-[0_18px_22px_rgba(0,0,0,0.22)] lg:hover:-translate-y-[calc(1.25rem-2px)] lg:hover:drop-shadow-[0_22px_28px_rgba(0,0,0,0.28)]"
+            className="h-10 w-auto transition-transform duration-200 ease-out lg:h-28 lg:translate-y-5 lg:drop-shadow-[0_18px_22px_rgba(0,0,0,0.22)] lg:hover:-translate-y-[calc(1.25rem-2px)] lg:hover:drop-shadow-[0_22px_28px_rgba(0,0,0,0.28)]"
           />
         </Link>
 
@@ -65,13 +65,13 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative py-1 text-xs font-semibold uppercase transition-colors duration-150 ease-worldkit",
-                  active ? "text-lime-400" : "text-foreground/80 hover:text-foreground",
+                  "relative py-1 text-xs font-semibold uppercase transition-colors duration-150 ease-out",
+                  active ? "text-primary" : "text-foreground/80 hover:text-foreground",
                 )}
               >
                 {link.label}
                 {active ? (
-                  <span className="absolute inset-x-0 -bottom-1 h-px bg-lime-400" />
+                  <span className="absolute inset-x-0 -bottom-1 h-px bg-primary" />
                 ) : null}
               </Link>
             );
@@ -91,7 +91,7 @@ export function Header() {
             type="button"
             onClick={openCart}
             aria-label={`Open bag, ${totalQuantity} item${totalQuantity === 1 ? "" : "s"}`}
-            className="relative flex size-11 items-center justify-center text-foreground transition-colors hover:text-lime-400"
+            className="relative flex size-11 items-center justify-center text-foreground transition-colors hover:text-primary"
           >
             <BagIcon className="size-6" strokeWidth={1.5} />
             {totalQuantity > 0 ? (
@@ -100,7 +100,7 @@ export function Header() {
               <span
                 key={totalQuantity}
                 aria-hidden
-                className="absolute -right-0.5 -top-0.5 inline-flex min-w-[18px] items-center justify-center rounded-full bg-lime-400 px-1 text-[10px] font-bold leading-none text-background tabular-nums motion-safe:animate-[bagPop_280ms_ease-out]"
+                className="absolute -right-0.5 -top-0.5 inline-flex min-w-[18px] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold leading-none text-background tabular-nums motion-safe:animate-[bagPop_280ms_ease-out]"
                 style={{ height: 18 }}
               >
                 {totalQuantity}

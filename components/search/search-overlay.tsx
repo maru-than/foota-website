@@ -90,7 +90,7 @@ export function SearchOverlay({
 
         <form
           onSubmit={goToResults}
-          className="flex items-center gap-3 border-b border-lime-400/20 pl-5 pr-2"
+          className="flex items-center gap-3 border-b border-border pl-5 pr-2"
         >
           <SearchIcon className="size-5 shrink-0 text-muted-foreground" strokeWidth={1.5} />
           <input
@@ -98,12 +98,12 @@ export function SearchOverlay({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search nations, confederations…"
-            className="h-14 flex-1 bg-transparent text-base tracking-[-0.02em] text-foreground outline-none placeholder:text-muted-foreground/60"
+            className="h-14 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground/60"
           />
           <button
             type="button"
             onClick={() => handleOpenChange(false)}
-            className="shrink-0 px-3 py-2 text-xs font-semibold uppercase text-muted-foreground transition-colors hover:text-lime-400 focus:outline-none focus-visible:text-lime-400"
+            className="shrink-0 px-3 py-2 text-xs font-semibold uppercase text-muted-foreground transition-colors hover:text-primary focus:outline-none focus-visible:text-primary"
           >
             Cancel
           </button>
@@ -129,7 +129,7 @@ export function SearchOverlay({
                       <div
                         className={cn(
                           "relative aspect-[4/5] w-11 shrink-0 overflow-hidden border border-border",
-                          p.featuredImage ? "bg-white" : "jersey-frame",
+                          p.featuredImage ? "bg-white" : "bg-muted",
                         )}
                       >
                         {p.featuredImage ? (
@@ -146,7 +146,7 @@ export function SearchOverlay({
                       </div>
                       <div className="flex-1">
                         {p.meta.teamName ? (
-                          <span className="text-[11px] uppercase text-lime-400">
+                          <span className="text-[11px] uppercase text-primary">
                             {p.meta.teamName}
                           </span>
                         ) : null}
@@ -165,7 +165,7 @@ export function SearchOverlay({
               <button
                 type="button"
                 onClick={goToResults}
-                className="block w-full border-t border-border px-5 py-3 text-left text-xs uppercase text-lime-400 transition-colors hover:bg-muted"
+                className="block w-full border-t border-border px-5 py-3 text-left text-xs uppercase text-primary transition-colors hover:bg-muted"
               >
                 View all results
               </button>

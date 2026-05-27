@@ -25,7 +25,7 @@ export async function ShippingPromise() {
 
   return (
     <div className="flex items-start gap-2.5 border border-border bg-card p-3 text-xs leading-snug text-foreground/80">
-      <Truck className="size-4 shrink-0 text-lime-400" strokeWidth={1.5} aria-hidden />
+      <Truck className="size-4 shrink-0 text-primary" strokeWidth={1.5} aria-hidden />
       <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
         <MapPin className="size-3 shrink-0 text-muted-foreground" strokeWidth={1.5} aria-hidden />
         <span className="font-bold text-foreground">{countryLabel}</span>

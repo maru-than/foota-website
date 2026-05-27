@@ -12,7 +12,7 @@ export function ShippingReturnsContent() {
   return (
     <div className="space-y-8 text-pretty leading-relaxed text-foreground/80 [&_h3]:text-foreground">
       <section className="space-y-3">
-        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
+        <h3 className="flex items-center gap-2 text-lg font-bold">
           <Truck className="size-5 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           Shipping
         </h3>
@@ -23,7 +23,7 @@ export function ShippingReturnsContent() {
         </p>
       </section>
       <section className="space-y-3">
-        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
+        <h3 className="flex items-center gap-2 text-lg font-bold">
           <Undo2 className="size-5 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           Returns
         </h3>
@@ -37,7 +37,7 @@ export function ShippingReturnsContent() {
         </p>
       </section>
       <section className="space-y-3">
-        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
+        <h3 className="flex items-center gap-2 text-lg font-bold">
           <AlertTriangle className="size-5 text-destructive" strokeWidth={1.5} aria-hidden />
           Customised items
         </h3>
@@ -55,7 +55,7 @@ export function ShippingReturnsContent() {
         </p>
       </section>
       <section className="space-y-3">
-        <h3 className="flex items-center gap-2 text-lg font-bold tracking-[-0.02em]">
+        <h3 className="flex items-center gap-2 text-lg font-bold">
           <Mail className="size-5 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           Order tracking
         </h3>

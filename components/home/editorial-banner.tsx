@@ -13,12 +13,12 @@ import { Container } from "@/components/ui/container";
 
 export function EditorialBanner() {
   return (
-    <section className="border-y border-lime-400/20 bg-card">
+    <section className="border-y border-border bg-card">
       <Container className="grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-20">
         <div>
-          <span className="eyebrow text-lime-400">The Worldkit view</span>
+          <span className="eyebrow text-primary">The Worldkit view</span>
           <h2 className="display mt-4 text-4xl leading-[1.02] sm:text-5xl">
-            More than a shirt<span className="text-lime-400">.</span>
+            More than a shirt<span className="text-primary">.</span>
           </h2>
         </div>
         <div>
@@ -34,11 +34,11 @@ export function EditorialBanner() {
             </p>
             <Link
               href="/customise"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-lime-400 transition-colors hover:text-lime-300"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary"
             >
               Create your own
               <ArrowRight
-                className="size-3.5 transition-transform duration-300 ease-worldkit group-hover:translate-x-1"
+                className="size-3.5 transition-transform duration-300 ease-out group-hover:translate-x-1"
                 strokeWidth={1.5}
               />
             </Link>

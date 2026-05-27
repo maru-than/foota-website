@@ -31,7 +31,7 @@ export function ProductGridSkeleton({
       {Array.from({ length: count }).map((_, i) => (
         <div key={i} className="flex flex-col bg-muted">
           <Skeleton className="aspect-[4/5] w-full" />
-          <div className="flex flex-col gap-3 border border-t-0 border-lime-400/20 p-5">
+          <div className="flex flex-col gap-3 border border-t-0 border-border p-5">
             <Skeleton className="h-5 w-2/3" />
             <Skeleton className="h-3 w-1/2" />
             <Skeleton className="mt-1 h-4 w-1/3" />

@@ -66,7 +66,7 @@ export default async function SearchPage({
               <Link
                 key={term}
                 href={`/search?q=${encodeURIComponent(term)}`}
-                className="border border-lime-400/20 bg-card px-3 py-1.5 transition-colors hover:border-lime-400 hover:text-lime-400"
+                className="border border-border bg-card px-3 py-1.5 transition-colors hover:border-primary hover:text-primary"
               >
                 {term}
               </Link>
@@ -76,7 +76,7 @@ export default async function SearchPage({
           <ProductGrid products={results} priorityCount={4} />
         ) : (
           <div className="flex flex-col items-center gap-4 py-16 text-center">
-            <p className="text-2xl font-bold tracking-[-0.03em]">
+            <p className="text-2xl font-bold">
               No jerseys match “{q}”.
             </p>
             <p className="max-w-md text-sm text-muted-foreground">

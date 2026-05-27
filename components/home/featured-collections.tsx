@@ -117,7 +117,7 @@ export function FeaturedCollections({
               <div key={collection.id}>
                 <Link
                   href={href}
-                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden border border-lime-400/20 bg-card p-6 transition-transform duration-300 ease-worldkit hover:-translate-y-1"
+                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden border border-border bg-card p-6 transition-transform duration-300 ease-out hover:-translate-y-1"
                 >
                   {isCustoms ? (
                     <>
@@ -134,7 +134,7 @@ export function FeaturedCollections({
                         alt=""
                         fill
                         sizes="(max-width: 768px) 50vw, 25vw"
-                        className="object-cover transition-transform duration-700 ease-worldkit group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                       {/* Dark fade for text legibility (motive image stays clean). */}
                       <div
@@ -145,20 +145,20 @@ export function FeaturedCollections({
                   ) : (
                     <div
                       aria-hidden
-                      className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full border border-lime-400/20 transition-transform duration-500 ease-worldkit group-hover:scale-110"
+                      className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full border border-border transition-transform duration-500 ease-out group-hover:scale-110"
                     />
                   )}
                   <div className="relative">
-                    <span className="eyebrow text-lime-400">
+                    <span className="eyebrow text-primary">
                       {isCustoms ? "Personalise" : "Collection"}
                     </span>
-                    <h3 className="mt-1 text-2xl font-bold leading-tight tracking-[-0.03em]">
+                    <h3 className="mt-1 text-2xl font-bold leading-tight">
                       {collection.title}
                     </h3>
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm text-foreground/80 transition-colors group-hover:text-lime-400">
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm text-foreground/80 transition-colors group-hover:text-primary">
                       {isCustoms ? "Build yours" : "Explore"}
                       <ArrowRight
-                        className="size-3.5 transition-transform duration-300 ease-worldkit group-hover:translate-x-1"
+                        className="size-3.5 transition-transform duration-300 ease-out group-hover:translate-x-1"
                         strokeWidth={1.5}
                       />
                     </span>

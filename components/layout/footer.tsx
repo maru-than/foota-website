@@ -23,7 +23,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-lime-400/20 bg-background">
+    <footer className="border-t border-border bg-background">
       <Container className="grid gap-12 py-16 lg:grid-cols-[1.5fr_2fr] lg:gap-16">
         <div className="max-w-sm">
           <Link href="/" aria-label="Worldkit Soccer — home" className="inline-block">
@@ -48,7 +48,7 @@ export function Footer() {
               <a
                 key={label}
                 href={href}
-                className="block py-3.5 text-xs uppercase text-muted-foreground transition-colors hover:text-lime-400"
+                className="block py-3.5 text-xs uppercase text-muted-foreground transition-colors hover:text-primary"
               >
                 {label}
               </a>
@@ -68,7 +68,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="block py-3 text-sm text-foreground/80 transition-colors hover:text-lime-400"
+                      className="block py-3 text-sm text-foreground/80 transition-colors hover:text-primary"
                     >
                       {link.label}
                     </Link>

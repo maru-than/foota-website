@@ -64,7 +64,7 @@ export function ProductBrowser({
             <ProductGrid products={products} priorityCount={4} />
           ) : (
             <div className="flex flex-col items-center gap-4 py-20 text-center">
-              <p className="text-2xl font-bold tracking-[-0.03em]">
+              <p className="text-2xl font-bold">
                 No jerseys match these filters.
               </p>
               <p className="text-sm text-muted-foreground">Try removing a filter or two.</p>

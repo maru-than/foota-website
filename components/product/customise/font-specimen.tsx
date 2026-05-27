@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Alphabet + digits display of the confederation's print font — read-only showcase.
+ * @file Alphabet + digits of the confederation's print font — read-only showcase.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT

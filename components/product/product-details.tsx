@@ -32,7 +32,7 @@ import { CUSTOM_MAX_NAME_CHARS, CUSTOM_PRICE_DELTA } from "@/lib/customisation";
 import type { Product } from "@/lib/shopify/types";
 
 /**
- * Inline trigger styled to match the prior <Link className="text-lime-400 underline">
+ * Inline trigger styled to match the prior <Link className="text-primary underline">
  * usage. Forwards ref/props so Radix Slot (asChild on the modal trigger) can wire
  * up its onClick, data-state, aria-* etc. onto the underlying <button>.
  */
@@ -45,7 +45,7 @@ const InlineTrigger = React.forwardRef<
       ref={ref}
       type="button"
       className={
-        "text-lime-400 underline underline-offset-2 transition-colors hover:text-lime-300 focus:outline-none focus-visible:text-lime-300" +
+        "text-primary underline underline-offset-2 transition-colors hover:text-primary focus:outline-none focus-visible:text-primary" +
         (className ? ` ${className}` : "")
       }
       {...props}
@@ -69,7 +69,7 @@ export function ProductDetails({ product }: { product: Product }) {
         </AccordionTrigger>
         <AccordionContent>
           <div
-            className="[&_a]:text-lime-400 [&_a]:underline [&_p]:mb-3 [&_p:last-child]:mb-0"
+            className="[&_a]:text-primary [&_a]:underline [&_p]:mb-3 [&_p:last-child]:mb-0"
             dangerouslySetInnerHTML={{
               __html: product.descriptionHtml || `<p>${product.description}</p>`,
             }}

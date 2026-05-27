@@ -24,9 +24,9 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="border border-lime-400/20 bg-card p-10 text-center">
-        <Check className="mx-auto size-7 text-lime-400" strokeWidth={1.5} />
-        <p className="mt-4 text-2xl font-bold tracking-[-0.03em]">Message sent.</p>
+      <div className="border border-border bg-card p-10 text-center">
+        <Check className="mx-auto size-7 text-primary" strokeWidth={1.5} />
+        <p className="mt-4 text-2xl font-bold">Message sent.</p>
         <p className="mt-2 text-sm text-muted-foreground">
           Thanks for reaching out — we&apos;ll reply within 1–2 working days.
         </p>
@@ -56,7 +56,7 @@ export function ContactForm() {
           required
           name="message"
           rows={6}
-          className="flex w-full rounded-none border border-input bg-card px-4 py-3 text-base tracking-[-0.03em] text-foreground transition-colors duration-150 ease-worldkit placeholder:text-muted-foreground/60 focus-visible:border-lime-400 focus-visible:outline-none sm:text-sm"
+          className="flex w-full rounded-none border border-input bg-card px-4 py-3 text-base text-foreground transition-colors duration-150 ease-out placeholder:text-muted-foreground/60 focus-visible:border-primary focus-visible:outline-none sm:text-sm"
         />
       </label>
       <Button type="submit">Send message</Button>

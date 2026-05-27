@@ -1,5 +1,5 @@
 /**
- * @file Formatted price display — optional strikethrough compare-at price, tabular nums.
+ * @file Formatted price — optional strikethrough compare-at price, tabular nums.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT

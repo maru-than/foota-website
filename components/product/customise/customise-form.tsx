@@ -31,7 +31,7 @@ export function CustomiseForm() {
   const remaining = CUSTOM_MAX_NAME_CHARS - name.length;
 
   return (
-    <div className="space-y-4 border border-lime-400/20 p-4">
+    <div className="space-y-4 border border-border p-4">
       <div className="grid grid-cols-[1fr_5rem] gap-3">
         <div>
           <label
@@ -52,8 +52,8 @@ export function CustomiseForm() {
             placeholder="YOUR NAME"
             maxLength={CUSTOM_MAX_NAME_CHARS}
             className={cn(
-              "block h-12 w-full border border-lime-400/20 bg-transparent px-3 text-sm font-bold uppercase text-foreground placeholder:text-muted-foreground/60",
-              "focus:border-lime-400 focus:outline-none focus-visible:border-lime-400",
+              "block h-12 w-full border border-border bg-transparent px-3 text-sm font-bold uppercase text-foreground placeholder:text-muted-foreground/60",
+              "focus:border-primary focus:outline-none focus-visible:border-primary",
             )}
             style={{
               fontFamily: fontSpec.family,
@@ -68,7 +68,7 @@ export function CustomiseForm() {
           >
             {remaining <= 3 ? (
               <AlertCircle
-                className="size-3 shrink-0 text-lime-400"
+                className="size-3 shrink-0 text-primary"
                 strokeWidth={1.5}
                 aria-hidden
               />
@@ -97,8 +97,8 @@ export function CustomiseForm() {
             placeholder="10"
             maxLength={2}
             className={cn(
-              "block h-12 w-full border border-lime-400/20 bg-transparent px-3 text-center text-base font-bold tracking-tight text-foreground placeholder:text-muted-foreground/60 tabular-nums",
-              "focus:border-lime-400 focus:outline-none focus-visible:border-lime-400",
+              "block h-12 w-full border border-border bg-transparent px-3 text-center text-base font-bold tracking-tight text-foreground placeholder:text-muted-foreground/60 tabular-nums",
+              "focus:border-primary focus:outline-none focus-visible:border-primary",
             )}
             style={{
               fontFamily: fontSpec.family,

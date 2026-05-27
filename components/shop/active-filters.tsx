@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Pill-chip display of applied filters — remove individually or clear all; hides when empty.
+ * @file Pill-chip of applied filters — remove individually or clear all; hides when empty.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -71,7 +71,7 @@ export function ActiveFilters() {
           type="button"
           onClick={c.remove}
           aria-label={`Remove filter ${c.label}`}
-          className="inline-flex min-h-9 items-center gap-1.5 border border-lime-400/40 bg-lime-400/12 pl-3 pr-2 text-xs font-semibold uppercase text-foreground transition-colors hover:border-lime-400 hover:bg-lime-400/20 focus:outline-none focus-visible:border-lime-400"
+          className="inline-flex min-h-9 items-center gap-1.5 border border-border bg-accent pl-3 pr-2 text-xs font-semibold uppercase text-foreground transition-colors hover:border-primary hover:bg-accent focus:outline-none focus-visible:border-primary"
         >
           <span>{c.label}</span>
           <X className="size-3.5 text-foreground/80" strokeWidth={1.75} />
@@ -80,7 +80,7 @@ export function ActiveFilters() {
       <button
         type="button"
         onClick={() => router.push(pathname, { scroll: false })}
-        className="ml-1 min-h-9 px-2 text-xs uppercase text-muted-foreground transition-colors hover:text-lime-400 focus:outline-none focus-visible:text-lime-400"
+        className="ml-1 min-h-9 px-2 text-xs uppercase text-muted-foreground transition-colors hover:text-primary focus:outline-none focus-visible:text-primary"
       >
         Clear all
       </button>

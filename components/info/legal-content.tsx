@@ -19,7 +19,7 @@ export function LegalDoc({
     <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-foreground/80">
       <p className="eyebrow text-muted-foreground">Last updated · {updated}</p>
       {children}
-      <p className="rounded-none border-l-2 border-lime-400/20 bg-card p-4 text-sm text-muted-foreground">
+      <p className="rounded-none border-l-2 border-border bg-card p-4 text-sm text-muted-foreground">
         This document is a template provided for transparency about how the
         store operates. It is not legal advice — have a qualified lawyer in
         your jurisdiction review it before relying on it in production.
@@ -39,7 +39,7 @@ export function LegalSection({
 }) {
   return (
     <section className={cn("space-y-3", className)}>
-      <h2 className="text-lg font-bold tracking-[-0.02em] text-foreground">{title}</h2>
+      <h2 className="text-lg font-bold text-foreground">{title}</h2>
       {children}
     </section>
   );

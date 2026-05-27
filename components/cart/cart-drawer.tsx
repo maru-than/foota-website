@@ -54,7 +54,7 @@ export function CartDrawer({
           <div className="flex flex-1 flex-col overflow-y-auto px-6 pb-6">
             <div className="flex flex-col items-center gap-4 pt-10 text-center">
               <BagIcon className="size-9 text-muted-foreground/60" strokeWidth={1.25} />
-              <p className="text-2xl font-bold tracking-[-0.03em]">
+              <p className="text-2xl font-bold">
                 Your locker is empty.
               </p>
               <p className="max-w-xs text-sm text-muted-foreground">
@@ -78,8 +78,8 @@ export function CartDrawer({
                       >
                         <div
                           className={cn(
-                            "relative aspect-[4/5] overflow-hidden border border-border transition-colors group-hover:border-lime-400/20",
-                            p.featuredImage ? "bg-white" : "jersey-frame",
+                            "relative aspect-[4/5] overflow-hidden border border-border transition-colors group-hover:border-border",
+                            p.featuredImage ? "bg-white" : "bg-muted",
                           )}
                         >
                           {p.featuredImage ? (
@@ -93,7 +93,7 @@ export function CartDrawer({
                           ) : null}
                         </div>
                         <div className="flex flex-col gap-0.5">
-                          <span className="text-sm font-bold leading-tight text-lime-400">
+                          <span className="text-sm font-bold leading-tight text-primary">
                             {p.meta.teamName ?? p.title}
                           </span>
                           <span className="text-xs tabular-nums text-muted-foreground">
@@ -135,7 +135,7 @@ export function CartDrawer({
               <button
                 type="button"
                 onClick={closeCart}
-                className="w-full text-center text-xs uppercase text-muted-foreground transition-colors hover:text-lime-400"
+                className="w-full text-center text-xs uppercase text-muted-foreground transition-colors hover:text-primary"
               >
                 Continue shopping
               </button>

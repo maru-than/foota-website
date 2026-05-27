@@ -124,7 +124,7 @@ export function Hero() {
             className="display text-center text-foreground"
             style={{ fontSize: "clamp(28px, 9vw, 64px)" }}
           >
-            A home for jerseys<span className="text-lime-400">.</span>
+            A home for jerseys<span className="text-primary">.</span>
           </h1>
 
           {/* CTAs fill the row on small phones (no wrapping at 280/320px),

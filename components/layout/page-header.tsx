@@ -1,5 +1,5 @@
 /**
- * @file Full-width hero section — optional bg photo, gradient legibility scrim, eyebrow / title / description.
+ * @file Full-width hero section — optional bg photo, gradient legibility scrim, / title / description.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -33,7 +33,7 @@ export function PageHeader({
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b border-lime-400/20",
+        "relative overflow-hidden border-b border-border",
         image ? "bg-background" : "bg-card",
       )}
     >
@@ -65,7 +65,7 @@ export function PageHeader({
           align === "center" && "text-center",
         )}
       >
-        {eyebrow ? <span className="eyebrow text-lime-400">{eyebrow}</span> : null}
+        {eyebrow ? <span className="eyebrow text-primary">{eyebrow}</span> : null}
         <h1 className="display mt-3 text-balance text-4xl leading-[1.02] sm:text-5xl">
           {title}
         </h1>

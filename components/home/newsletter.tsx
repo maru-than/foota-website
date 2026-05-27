@@ -11,10 +11,10 @@ import { NewsletterForm } from "@/components/layout/newsletter-form";
 
 export function Newsletter() {
   return (
-    <section className="border-t border-lime-400/20 bg-card py-16 lg:py-20">
+    <section className="border-t border-border bg-card py-16 lg:py-20">
       <Container>
         <div className="mx-auto flex max-w-xl flex-col items-center text-center">
-          <span className="eyebrow text-lime-400">Newsletter</span>
+          <span className="eyebrow text-primary">Newsletter</span>
           <h2 className="display mt-4 text-4xl leading-tight sm:text-5xl">
             Join the dressing room
           </h2>

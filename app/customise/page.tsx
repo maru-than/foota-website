@@ -48,7 +48,7 @@ const HOW = [
 export default function CustomisePage() {
   return (
     <>
-      <section className="border-b border-lime-400/20 py-16 lg:py-24">
+      <section className="border-b border-border py-16 lg:py-24">
         <Container>
           <div>
             <SectionHeading
@@ -61,14 +61,14 @@ export default function CustomisePage() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="/shop"
-                className="inline-flex items-center gap-1.5 bg-lime-400 px-5 py-3 text-sm font-semibold lowercase text-background transition-colors hover:bg-lime-300"
+                className="inline-flex items-center gap-1.5 bg-primary px-5 py-3 text-sm font-semibold lowercase text-background transition-colors hover:bg-primary/90"
               >
                 Pick a jersey
                 <ArrowRight className="size-3.5" strokeWidth={1.5} />
               </Link>
               <Link
                 href="/products/brazil-home?customise=open"
-                className="inline-flex items-center gap-1.5 border border-lime-400/20 px-5 py-3 text-sm font-semibold lowercase text-foreground transition-colors hover:border-lime-400 hover:bg-lime-400/12"
+                className="inline-flex items-center gap-1.5 border border-border px-5 py-3 text-sm font-semibold lowercase text-foreground transition-colors hover:border-primary hover:bg-accent"
               >
                 Try it on Brazil
                 <ArrowRight className="size-3.5" strokeWidth={1.5} />
@@ -86,9 +86,9 @@ export default function CustomisePage() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {HOW.map(({ Icon, title, note }, i) => (
               <div key={title}>
-                <div className="flex flex-col gap-3 border border-lime-400/20 p-6">
-                  <Icon className="size-5 text-lime-400" strokeWidth={1.5} />
-                  <h3 className="text-lg font-bold leading-tight tracking-[-0.03em] text-foreground">
+                <div className="flex flex-col gap-3 border border-border p-6">
+                  <Icon className="size-5 text-primary" strokeWidth={1.5} />
+                  <h3 className="text-lg font-bold leading-tight text-foreground">
                     {title}
                   </h3>
                   <p className="text-sm leading-relaxed text-foreground/80">{note}</p>
@@ -99,7 +99,7 @@ export default function CustomisePage() {
         </Container>
       </section>
 
-      <section className="border-y border-lime-400/20 bg-card py-16 lg:py-20">
+      <section className="border-y border-border bg-card py-16 lg:py-20">
         <Container>
           <div>
             <SectionHeading
@@ -111,7 +111,7 @@ export default function CustomisePage() {
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {CONFEDS.map((confed, i) => (
               <div key={confed}>
-                <div className="border border-lime-400/20 bg-background p-5">
+                <div className="border border-border bg-background p-5">
                   <FontSpecimen confederation={confed} />
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function CustomisePage() {
           <div>
             <h2 className="display text-3xl leading-tight sm:text-4xl">
               Ready to put your name on it
-              <span className="text-lime-400">.</span>
+              <span className="text-primary">.</span>
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-foreground/80">
               Customs are non-returnable. Please double-check spelling and number
@@ -134,7 +134,7 @@ export default function CustomisePage() {
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link
                 href="/shop"
-                className="inline-flex items-center gap-1.5 bg-lime-400 px-5 py-3 text-sm font-semibold lowercase text-background transition-colors hover:bg-lime-300"
+                className="inline-flex items-center gap-1.5 bg-primary px-5 py-3 text-sm font-semibold lowercase text-background transition-colors hover:bg-primary/90"
               >
                 Pick a jersey
                 <ArrowRight className="size-3.5" strokeWidth={1.5} />

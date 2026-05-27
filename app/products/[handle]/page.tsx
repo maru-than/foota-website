@@ -125,7 +125,7 @@ export default async function ProductPage({
             />
 
             <div className="lg:py-2">
-              <h1 className="text-3xl font-bold leading-none tracking-[-0.03em] text-lime-400 sm:text-4xl">
+              <h1 className="text-3xl font-bold leading-none text-primary sm:text-4xl">
                 {product.meta.teamName ?? product.title}
               </h1>
               <p className="mt-2 text-sm text-muted-foreground">{product.title}</p>
@@ -152,7 +152,7 @@ export default async function ProductPage({
       </Container>
 
       {reviews.length > 0 ? (
-        <section className="border-t border-lime-400/20 py-16 lg:py-20">
+        <section className="border-t border-border py-16 lg:py-20">
           <Container>
             <div>
               <SectionHeading

@@ -42,7 +42,7 @@ export function CartItem({
         onClick={onNavigate}
         className={cn(
           "relative h-[110px] w-24 shrink-0 overflow-hidden border border-border",
-          image ? "bg-white" : "jersey-frame",
+          image ? "bg-white" : "bg-muted",
         )}
       >
         {image ? (
@@ -57,7 +57,7 @@ export function CartItem({
           <Link
             href={`/products/${product.handle}`}
             onClick={onNavigate}
-            className="text-base font-bold leading-tight tracking-[-0.03em] text-lime-400 transition-colors hover:text-lime-300"
+            className="text-base font-bold leading-tight text-primary transition-colors hover:text-primary"
           >
             {product.title}
           </Link>
@@ -86,7 +86,7 @@ export function CartItem({
               type="button"
               onClick={() => updateItem(line.id, line.quantity - 1)}
               aria-label="Decrease quantity"
-              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-lime-400"
+              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-primary"
             >
               <Minus className="size-3.5" strokeWidth={1.5} />
             </button>
@@ -97,12 +97,12 @@ export function CartItem({
               type="button"
               onClick={() => updateItem(line.id, line.quantity + 1)}
               aria-label="Increase quantity"
-              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-lime-400"
+              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-primary"
             >
               <Plus className="size-3.5" strokeWidth={1.5} />
             </button>
           </div>
-          <span className={cn("text-sm font-bold tabular-nums text-lime-400")}>
+          <span className={cn("text-sm font-bold tabular-nums text-primary")}>
             {formatPrice(subtotal, currency)}
           </span>
         </div>

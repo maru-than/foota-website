@@ -57,7 +57,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
                 }}
                 className={cn(
                   "inline-flex items-center gap-1 text-[11px] font-semibold uppercase transition-colors",
-                  track === t ? "text-lime-400" : "text-muted-foreground hover:text-foreground",
+                  track === t ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 <Icon className="size-3.5" strokeWidth={1.5} aria-hidden />
@@ -83,10 +83,10 @@ export function CustomiseTemplates({ product }: { product: Product }) {
                 onClick={() => applyTemplate(item.name, item.number)}
                 aria-pressed={active}
                 className={cn(
-                  "flex h-9 items-center gap-2 border px-2.5 text-xs font-bold uppercase transition-colors duration-150 ease-worldkit",
+                  "flex h-9 items-center gap-2 border px-2.5 text-xs font-bold uppercase transition-colors duration-150 ease-out",
                   active
-                    ? "border-lime-400 bg-lime-400 text-background"
-                    : "border-lime-400/20 text-foreground hover:border-lime-400 hover:bg-lime-400/12",
+                    ? "border-primary bg-primary text-background"
+                    : "border-border text-foreground hover:border-primary hover:bg-accent",
                 )}
               >
                 <span>{item.name}</span>

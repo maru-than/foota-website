@@ -62,7 +62,7 @@ function CheckRow({
       <span
         className={cn(
           "flex size-4 shrink-0 items-center justify-center border transition-colors",
-          checked ? "border-lime-400 bg-lime-400 text-background" : "border-lime-400/20",
+          checked ? "border-primary bg-primary text-background" : "border-border",
         )}
       >
         {checked ? <Check className="size-3" strokeWidth={2.5} /> : null}
@@ -120,7 +120,7 @@ export function FilterPanel({
             <button
               type="button"
               onClick={() => router.push(pathname, { scroll: false })}
-              className="text-xs uppercase text-muted-foreground transition-colors hover:text-lime-400"
+              className="text-xs uppercase text-muted-foreground transition-colors hover:text-primary"
             >
               Clear all
             </button>
@@ -133,7 +133,7 @@ export function FilterPanel({
           <button
             type="button"
             onClick={() => router.push(pathname, { scroll: false })}
-            className="text-xs uppercase text-muted-foreground transition-colors hover:text-lime-400"
+            className="text-xs uppercase text-muted-foreground transition-colors hover:text-primary"
           >
             Clear all
           </button>

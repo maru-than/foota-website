@@ -83,7 +83,7 @@ export function ProductGallery({
 
   if (images.length === 0 && !backSlot) {
     return (
-      <div className="jersey-frame grid-texture relative aspect-[4/5] w-full overflow-hidden border border-lime-400/20">
+      <div className="bg-muted relative aspect-[4/5] w-full overflow-hidden border border-border">
         <JerseyPlaceholder
           label={meta.teamName ?? undefined}
           sublabel={meta.season ?? undefined}
@@ -109,7 +109,7 @@ export function ProductGallery({
               slideRefs.current[i] = el;
             }}
             data-index={i}
-            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden border border-lime-400/20 bg-white"
+            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden border border-border bg-white"
           >
             <Image
               src={img.url}
@@ -128,7 +128,7 @@ export function ProductGallery({
               slideRefs.current[backIndex] = el;
             }}
             data-index={backIndex}
-            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden border border-lime-400/20 bg-background"
+            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden border border-border bg-background"
           >
             {backSlot}
           </div>
@@ -137,11 +137,11 @@ export function ProductGallery({
 
       {/* Desktop active tile — either an image or the back slot. */}
       {active === backIndex && backSlot ? (
-        <div className="relative hidden aspect-[4/5] w-full overflow-hidden border border-lime-400/20 bg-background md:block">
+        <div className="relative hidden aspect-[4/5] w-full overflow-hidden border border-border bg-background md:block">
           {backSlot}
         </div>
       ) : (
-        <div className="relative hidden aspect-[4/5] w-full overflow-hidden border border-lime-400/20 bg-white md:block">
+        <div className="relative hidden aspect-[4/5] w-full overflow-hidden border border-border bg-white md:block">
           <Image
             src={(images[active] ?? images[0]).url}
             alt={(images[active] ?? images[0]).altText || title}
@@ -170,7 +170,7 @@ export function ProductGallery({
                 <span
                   className={cn(
                     "block size-1.5 rounded-full transition-colors",
-                    i === active ? "bg-lime-400" : "bg-border",
+                    i === active ? "bg-primary" : "bg-border",
                   )}
                 />
               </button>
@@ -187,7 +187,7 @@ export function ProductGallery({
                 aria-label={`View image ${i + 1}`}
                 className={cn(
                   "relative aspect-[4/5] overflow-hidden border bg-white transition-colors",
-                  i === active ? "border-lime-400" : "border-border hover:border-lime-400/20",
+                  i === active ? "border-primary" : "border-border hover:border-border",
                 )}
               >
                 <Image src={img.url} alt="" fill sizes="120px" className="object-contain p-1.5" />
@@ -202,8 +202,8 @@ export function ProductGallery({
                 className={cn(
                   "relative aspect-[4/5] overflow-hidden border bg-background transition-colors",
                   active === backIndex
-                    ? "border-lime-400"
-                    : "border-border hover:border-lime-400/20",
+                    ? "border-primary"
+                    : "border-border hover:border-border",
                 )}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
