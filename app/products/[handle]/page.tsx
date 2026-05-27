@@ -19,7 +19,6 @@ import { RelatedProducts } from "@/components/product/related-products";
 import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
 import { Container } from "@/components/ui/container";
 import { Price } from "@/components/ui/price";
-import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getTestimonialsForProduct } from "@/lib/testimonials";
 import {
@@ -155,13 +154,13 @@ export default async function ProductPage({
       {reviews.length > 0 ? (
         <section className="border-t border-lime-400/20 py-16 lg:py-20">
           <Container>
-            <Reveal>
+            <div>
               <SectionHeading
                 eyebrow="Reviews"
                 title="From the locker room"
                 description="What other buyers said about this shirt and its confederation."
               />
-            </Reveal>
+            </div>
             <div className="mt-10">
               <TestimonialGrid items={reviews} columns={2} />
             </div>

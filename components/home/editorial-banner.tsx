@@ -10,19 +10,18 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 
 export function EditorialBanner() {
   return (
     <section className="border-y border-lime-400/20 bg-card">
       <Container className="grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-20">
-        <Reveal>
+        <div>
           <span className="eyebrow text-lime-400">The Worldkit view</span>
           <h2 className="display mt-4 text-4xl leading-[1.02] sm:text-5xl">
             More than a shirt<span className="text-lime-400">.</span>
           </h2>
-        </Reveal>
-        <Reveal delay={120}>
+        </div>
+        <div>
           <div className="space-y-4 text-pretty leading-relaxed text-foreground/80">
             <p>
               A jersey is a summer you can wear. The nation you back for a month,
@@ -44,7 +43,7 @@ export function EditorialBanner() {
               />
             </Link>
           </div>
-        </Reveal>
+        </div>
       </Container>
     </section>
   );

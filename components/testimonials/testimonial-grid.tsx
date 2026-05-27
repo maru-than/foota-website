@@ -6,7 +6,6 @@
  * @since 2026-05-26
  */
 
-import { Reveal } from "@/components/ui/reveal";
 import type { Testimonial } from "@/lib/testimonials";
 import { cn } from "@/lib/utils";
 
@@ -30,9 +29,9 @@ export function TestimonialGrid({
       )}
     >
       {items.map((t, i) => (
-        <Reveal key={t.id} delay={i * 70}>
+        <div key={t.id}>
           <TestimonialCard testimonial={t} />
-        </Reveal>
+        </div>
       ))}
     </div>
   );

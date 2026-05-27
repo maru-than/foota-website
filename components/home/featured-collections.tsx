@@ -12,7 +12,6 @@ import { ArrowRight } from "lucide-react";
 
 import { teamColors } from "@/components/ui/jersey-placeholder";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { fontFor } from "@/lib/customisation";
 import type { Collection } from "@/lib/shopify/types";
@@ -100,13 +99,13 @@ export function FeaturedCollections({
   return (
     <section className="py-16 lg:py-20">
       <Container>
-        <Reveal>
+        <div>
           <SectionHeading
             eyebrow="Collections"
             title="Find your nation"
             description="Start with the hosts, a confederation, or the latest drops."
           />
-        </Reveal>
+        </div>
         <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
           {list.map((collection, i) => {
             const isCustoms = collection.handle === "customs";
@@ -115,7 +114,7 @@ export function FeaturedCollections({
               ? "/customise"
               : `/collections/${collection.handle}`;
             return (
-              <Reveal key={collection.id} delay={i * 70}>
+              <div key={collection.id}>
                 <Link
                   href={href}
                   className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden border border-lime-400/20 bg-card p-6 transition-transform duration-300 ease-worldkit hover:-translate-y-1"
@@ -165,7 +164,7 @@ export function FeaturedCollections({
                     </span>
                   </div>
                 </Link>
-              </Reveal>
+              </div>
             );
           })}
         </div>

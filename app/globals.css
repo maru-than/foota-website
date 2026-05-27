@@ -4,12 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ================================================================== */
-/*  FOOTA — shadcn integration                                          */
-/*  Base palette: `mist` (preset b7BFd4aoa). Accent: Tailwind lime-400. */
-/*  Site is dark-only; <html class="dark"> is set in app/layout.tsx.    */
-/* ================================================================== */
-
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.148 0.004 228.8);
@@ -17,10 +11,8 @@
   --card-foreground: oklch(0.148 0.004 228.8);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.148 0.004 228.8);
-  /* --primary / --ring overridden to lime-400 so stock shadcn primitives
-     (Button default, focus rings) are on-brand without per-call className. */
-  --primary: oklch(0.852 0.199 126.665); /* lime-400 #a3e635 */
-  --primary-foreground: oklch(0.274 0.072 132.109); /* lime-950 */
+  --primary: oklch(0.841 0.238 128.85);
+  --primary-foreground: oklch(0.405 0.101 131.063);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.963 0.002 197.1);
@@ -30,8 +22,21 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.925 0.005 214.3);
   --input: oklch(0.925 0.005 214.3);
-  --ring: oklch(0.852 0.199 126.665); /* lime-400 */
+  --ring: oklch(0.723 0.014 214.4);
+  --chart-1: oklch(0.872 0.007 219.6);
+  --chart-2: oklch(0.56 0.021 213.5);
+  --chart-3: oklch(0.45 0.017 213.2);
+  --chart-4: oklch(0.378 0.015 216);
+  --chart-5: oklch(0.275 0.011 216.9);
   --radius: 0.45rem;
+  --sidebar: oklch(0.987 0.002 197.1);
+  --sidebar-foreground: oklch(0.148 0.004 228.8);
+  --sidebar-primary: oklch(0.648 0.2 131.684);
+  --sidebar-primary-foreground: oklch(0.986 0.031 120.757);
+  --sidebar-accent: oklch(0.963 0.002 197.1);
+  --sidebar-accent-foreground: oklch(0.218 0.008 223.9);
+  --sidebar-border: oklch(0.925 0.005 214.3);
+  --sidebar-ring: oklch(0.723 0.014 214.4);
 }
 
 .dark {
@@ -41,8 +46,8 @@
   --card-foreground: oklch(0.987 0.002 197.1);
   --popover: oklch(0.218 0.008 223.9);
   --popover-foreground: oklch(0.987 0.002 197.1);
-  --primary: oklch(0.852 0.199 126.665); /* lime-400 */
-  --primary-foreground: oklch(0.274 0.072 132.109); /* lime-950 */
+  --primary: oklch(0.768 0.233 130.85);
+  --primary-foreground: oklch(0.405 0.101 131.063);
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.275 0.011 216.9);
@@ -52,22 +57,44 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.852 0.199 126.665); /* lime-400 */
+  --ring: oklch(0.56 0.021 213.5);
+  --chart-1: oklch(0.872 0.007 219.6);
+  --chart-2: oklch(0.56 0.021 213.5);
+  --chart-3: oklch(0.45 0.017 213.2);
+  --chart-4: oklch(0.378 0.015 216);
+  --chart-5: oklch(0.275 0.011 216.9);
+  --sidebar: oklch(0.218 0.008 223.9);
+  --sidebar-foreground: oklch(0.987 0.002 197.1);
+  --sidebar-primary: oklch(0.768 0.233 130.85);
+  --sidebar-primary-foreground: oklch(0.274 0.072 132.109);
+  --sidebar-accent: oklch(0.275 0.011 216.9);
+  --sidebar-accent-foreground: oklch(0.987 0.002 197.1);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.56 0.021 213.5);
 }
-
-/* ------------------------------------------------------------------ */
-/*  Shadcn @theme inline — preset b7BFd4aoa's semantic mapping.        */
-/*  --color-accent intentionally omitted so foota's @theme bridge      */
-/*  below wins and `bg-accent` resolves to lime-400 during migration.  */
-/* ------------------------------------------------------------------ */
 
 @theme inline {
   --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -87,166 +114,4 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-/* ------------------------------------------------------------------ */
-/*  Project tokens — fonts + motion only. All color tokens are either  */
-/*  shadcn semantics (above) or Tailwind's stock lime palette.         */
-/* ------------------------------------------------------------------ */
-
-@theme {
-  --font-display: var(--font-gambarino), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-
-  --ease-worldkit: cubic-bezier(0.22, 1, 0.36, 1);
-  --animate-ticker: ticker 40s linear infinite;
-  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
-  --animate-accordion-down: accordion-down 0.25s var(--ease-worldkit);
-  --animate-accordion-up: accordion-up 0.2s var(--ease-worldkit);
-}
-
-@keyframes bagPop {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.25); }
-  100% { transform: scale(1); }
-}
-
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@keyframes pulse-dot {
-  50% { opacity: 0.4; }
-}
-
-@keyframes accordion-down {
-  from { height: 0; opacity: 0; }
-  to { height: var(--radix-accordion-content-height); opacity: 1; }
-}
-
-@keyframes accordion-up {
-  from { height: var(--radix-accordion-content-height); opacity: 1; }
-  to { height: 0; opacity: 0; }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    letter-spacing: -0.03em;
-    font-feature-settings: "ss01", "cv11";
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    @apply bg-background text-foreground;
-  }
-
-  /* Headings use Geist (UI font) bold — Gambarino is reserved for logo/hero. */
-  h1, h2, h3, h4 {
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.02;
-  }
-
-  ::selection {
-    background-color: var(--color-lime-400);
-    color: var(--color-lime-950);
-  }
-
-  ::placeholder {
-    color: var(--muted-foreground);
-  }
-
-  html {
-    @apply font-sans;
-  }
-}
-
-@layer utilities {
-  /* Uppercase micro label. */
-  .eyebrow {
-    font-family: var(--font-sans);
-    text-transform: uppercase;
-    font-size: 0.6875rem; /* 11px */
-    font-weight: 600;
-    line-height: 1;
-  }
-
-  /* Gambarino display lockup — natural case, regular weight only (no other
-     weight exists, so pin 400 and disable faux-bold), -5% tracking for the
-     tight editorial feel. */
-  .display {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-synthesis: none;
-    letter-spacing: -0.05em;
-    line-height: 1;
-  }
-
-  /* Scroll-reveal — gated on `.js` so content is visible without JS. */
-  .js .reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition:
-      opacity 0.6s var(--ease-worldkit),
-      transform 0.6s var(--ease-worldkit);
-    will-change: opacity, transform;
-  }
-  .js .reveal[data-revealed="true"] {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Dark jersey image backplate + lime hairline textures. */
-  .jersey-frame {
-    background: radial-gradient(120% 80% at 50% 35%, #2c2c2c 0%, #161616 75%);
-  }
-  .grid-texture::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      90deg,
-      transparent 0 28px,
-      color-mix(in oklab, var(--color-lime-400) 3%, transparent) 28px 30px
-    );
-    pointer-events: none;
-  }
-  .hero-grid-texture::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      90deg,
-      transparent 0 calc(100% / 12 - 1px),
-      color-mix(in oklab, var(--color-lime-400) 4%, transparent) calc(100% / 12 - 1px) calc(100% / 12)
-    );
-    pointer-events: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .js .reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.001ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.001ms !important;
-    }
-  }
 }

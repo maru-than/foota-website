@@ -9,7 +9,6 @@
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { MOCK_CONFEDERATIONS } from "@/lib/mock-data";
 
@@ -17,15 +16,15 @@ export function ShopByConfederation() {
   return (
     <section className="border-t border-border py-16 lg:py-20">
       <Container>
-        <Reveal>
+        <div>
           <SectionHeading
             eyebrow="By confederation"
             title="Shop by region"
             description="Six confederations, 48 nations, one summer."
             action={{ label: "All nations", href: "/shop" }}
           />
-        </Reveal>
-        <Reveal className="mt-10">
+        </div>
+        <div className="mt-10">
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {MOCK_CONFEDERATIONS.map((c) => (
               <li key={c.handle}>
@@ -48,7 +47,7 @@ export function ShopByConfederation() {
               </li>
             ))}
           </ul>
-        </Reveal>
+        </div>
       </Container>
     </section>
   );

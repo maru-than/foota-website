@@ -23,7 +23,6 @@ import {
 } from "country-flag-icons/react/3x2";
 
 import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
 
 type Nation = {
@@ -99,7 +98,7 @@ export function Hero() {
       {/* pb reserves room for the absolute tablist below. At ≤340px the
           tablist wraps to 3 rows (~156px) + bottom-10 → ~196px needed. */}
       <div className="relative flex min-h-[600px] flex-col items-center justify-center gap-5 px-6 pb-[200px] pt-12 sm:gap-6 sm:pb-[160px] md:pb-32 lg:min-h-[90svh]">
-        <Reveal className="flex flex-col items-center gap-5 sm:gap-6">
+        <div className="flex flex-col items-center gap-5 sm:gap-6">
           <div className="relative h-[220px] w-[176px] shrink-0 sm:h-[260px] sm:w-[208px] lg:h-[300px] lg:w-[240px]">
             {NATIONS.map(({ slug, name }) => (
               <Image
@@ -140,7 +139,7 @@ export function Hero() {
               <Link href="/shop">See all</Link>
             </Button>
           </div>
-        </Reveal>
+        </div>
       </div>
 
       {/* Nation flag selector. */}

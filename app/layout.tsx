@@ -1,5 +1,5 @@
 /**
- * @file Root layout — Geist + Gambarino fonts, header, footer, cart provider, cookie banner, analytics, viewport.
+ * @file Root layout — Geist font, header, footer, cart provider, cookie banner, analytics, viewport.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -8,10 +8,8 @@
 
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
-import localFont from "next/font/local";
 import "./globals.css";
 
-import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -24,17 +22,8 @@ import { getCollectionProducts } from "@/lib/shopify/collections";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const geist = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
   subsets: ["latin"],
-  display: "swap",
-});
-
-// Gambarino — Worldkit display face, used for hero lockups only.
-const gambarino = localFont({
-  src: "./fonts/Gambarino-Regular.woff2",
-  variable: "--font-gambarino",
-  weight: "400",
-  style: "normal",
   display: "swap",
 });
 
@@ -75,12 +64,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#111111",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
-  // Required for env(safe-area-inset-*) to resolve to non-zero values on iOS;
-  // unlocks the sticky-bar / sheet / announcement-bar insets below.
   viewportFit: "cover",
 };
 
@@ -95,26 +81,15 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`dark ${geist.variable} ${gambarino.variable} h-full`}
-    >
-      <body className="flex min-h-full flex-col">
-        {/* Enables CSS-only reveal animations; content stays visible without JS. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
-          }}
-        />
+    <html lang="en" suppressHydrationWarning className={`dark ${geist.variable}`}>
+      <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-lime-400 focus:px-4 focus:py-2 focus:text-background"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
         >
           Skip to content
         </a>
         <CartProvider initialCart={cart}>
-          <AnnouncementBar />
           <Header />
           <main id="main" className="flex-1">
             {children}

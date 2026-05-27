@@ -12,7 +12,6 @@ import { ArrowRight, Flame, ShieldCheck, Truck } from "lucide-react";
 
 import { FontSpecimen } from "@/components/product/customise/font-specimen";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import {
   CUSTOM_MAX_NAME_CHARS,
@@ -51,14 +50,14 @@ export default function CustomisePage() {
     <>
       <section className="border-b border-lime-400/20 py-16 lg:py-24">
         <Container>
-          <Reveal>
+          <div>
             <SectionHeading
               eyebrow="Personalise"
               title="The name on the back is yours."
               description={`Add any name (up to ${CUSTOM_MAX_NAME_CHARS} characters) and any number from 0 to 99 to any 2026 World Cup jersey. Flat $${CUSTOM_PRICE_DELTA} add-on per shirt.`}
             />
-          </Reveal>
-          <Reveal delay={120}>
+          </div>
+          <div>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="/shop"
@@ -75,18 +74,18 @@ export default function CustomisePage() {
                 <ArrowRight className="size-3.5" strokeWidth={1.5} />
               </Link>
             </div>
-          </Reveal>
+          </div>
         </Container>
       </section>
 
       <section className="py-16 lg:py-20">
         <Container>
-          <Reveal>
+          <div>
             <SectionHeading eyebrow="How it works" title="From input to heat-press" />
-          </Reveal>
+          </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {HOW.map(({ Icon, title, note }, i) => (
-              <Reveal key={title} delay={i * 80}>
+              <div key={title}>
                 <div className="flex flex-col gap-3 border border-lime-400/20 p-6">
                   <Icon className="size-5 text-lime-400" strokeWidth={1.5} />
                   <h3 className="text-lg font-bold leading-tight tracking-[-0.03em] text-foreground">
@@ -94,7 +93,7 @@ export default function CustomisePage() {
                   </h3>
                   <p className="text-sm leading-relaxed text-foreground/80">{note}</p>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
         </Container>
@@ -102,20 +101,20 @@ export default function CustomisePage() {
 
       <section className="border-y border-lime-400/20 bg-card py-16 lg:py-20">
         <Container>
-          <Reveal>
+          <div>
             <SectionHeading
               eyebrow="Letter sets"
               title="Six fonts, one for each confederation"
               description="Pick a nation and the matching font ships automatically — the same letter set the federation uses on stadium kits."
             />
-          </Reveal>
+          </div>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {CONFEDS.map((confed, i) => (
-              <Reveal key={confed} delay={i * 60}>
+              <div key={confed}>
                 <div className="border border-lime-400/20 bg-background p-5">
                   <FontSpecimen confederation={confed} />
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
         </Container>
@@ -123,7 +122,7 @@ export default function CustomisePage() {
 
       <section className="py-16 lg:py-20">
         <Container className="max-w-2xl text-center">
-          <Reveal>
+          <div>
             <h2 className="display text-3xl leading-tight sm:text-4xl">
               Ready to put your name on it
               <span className="text-lime-400">.</span>
@@ -141,7 +140,7 @@ export default function CustomisePage() {
                 <ArrowRight className="size-3.5" strokeWidth={1.5} />
               </Link>
             </div>
-          </Reveal>
+          </div>
         </Container>
       </section>
     </>
