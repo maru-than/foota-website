@@ -41,7 +41,7 @@ export function CartItem({
         href={`/products/${product.handle}`}
         onClick={onNavigate}
         className={cn(
-          "relative h-[110px] w-24 shrink-0 overflow-hidden border border-line-1",
+          "relative h-[110px] w-24 shrink-0 overflow-hidden border border-border",
           image ? "bg-white" : "jersey-frame",
         )}
       >
@@ -57,7 +57,7 @@ export function CartItem({
           <Link
             href={`/products/${product.handle}`}
             onClick={onNavigate}
-            className="text-base font-bold leading-tight tracking-[-0.03em] text-accent transition-colors hover:text-accent-hi"
+            className="text-base font-bold leading-tight tracking-[-0.03em] text-lime-400 transition-colors hover:text-lime-300"
           >
             {product.title}
           </Link>
@@ -65,28 +65,28 @@ export function CartItem({
             type="button"
             onClick={() => removeItem(line.id)}
             aria-label={`Remove ${product.title}`}
-            className="-mr-2 -mt-2 flex h-9 w-9 shrink-0 items-center justify-center text-fg-3 transition-colors hover:text-danger"
+            className="-mr-2 -mt-2 flex h-9 w-9 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-destructive"
           >
             <X className="size-4" strokeWidth={1.5} />
           </button>
         </div>
-        <span className="mt-1 text-xs text-fg-3">Size {size}</span>
+        <span className="mt-1 text-xs text-muted-foreground">Size {size}</span>
         {customLabel ? (
-          <span className="mt-0.5 text-xs uppercase text-fg-2">
+          <span className="mt-0.5 text-xs uppercase text-foreground/80">
             {customLabel}
-            <span className="ml-2 text-fg-3 normal-case tracking-normal">
+            <span className="ml-2 text-muted-foreground normal-case tracking-normal">
               · +{formatPrice(line.customisation?.priceDelta.amount ?? "0", currency)}
             </span>
           </span>
         ) : null}
 
         <div className="mt-auto flex items-center justify-between pt-3">
-          <div className="flex items-center border border-line-2">
+          <div className="flex items-center border border-input">
             <button
               type="button"
               onClick={() => updateItem(line.id, line.quantity - 1)}
               aria-label="Decrease quantity"
-              className="flex size-11 items-center justify-center text-fg-1 transition-colors hover:text-accent"
+              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-lime-400"
             >
               <Minus className="size-3.5" strokeWidth={1.5} />
             </button>
@@ -97,12 +97,12 @@ export function CartItem({
               type="button"
               onClick={() => updateItem(line.id, line.quantity + 1)}
               aria-label="Increase quantity"
-              className="flex size-11 items-center justify-center text-fg-1 transition-colors hover:text-accent"
+              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-lime-400"
             >
               <Plus className="size-3.5" strokeWidth={1.5} />
             </button>
           </div>
-          <span className={cn("text-sm font-bold tabular-nums text-accent")}>
+          <span className={cn("text-sm font-bold tabular-nums text-lime-400")}>
             {formatPrice(subtotal, currency)}
           </span>
         </div>

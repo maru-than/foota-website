@@ -17,7 +17,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function CollectionLoading() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-line-accent bg-bg-2">
+      <section className="relative overflow-hidden border-b border-lime-400/20 bg-card">
         <Container className="relative py-16 lg:py-24">
           <Skeleton className="h-3 w-20" />
           <Skeleton className="mt-3 h-12 w-72 max-w-full" />
@@ -28,7 +28,7 @@ export default function CollectionLoading() {
         <div className="md:grid md:grid-cols-[220px_1fr] md:gap-10 lg:grid-cols-[240px_1fr] lg:gap-12">
           <div className="hidden md:block" />
           <div>
-            <div className="mb-8 flex items-center justify-between gap-4 border-b border-line-1 pb-4">
+            <div className="mb-8 flex items-center justify-between gap-4 border-b border-border pb-4">
               <Skeleton className="h-10 w-24" />
               <Skeleton className="h-10 w-40" />
             </div>

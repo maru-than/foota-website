@@ -71,16 +71,16 @@ export function ActiveFilters() {
           type="button"
           onClick={c.remove}
           aria-label={`Remove filter ${c.label}`}
-          className="inline-flex min-h-9 items-center gap-1.5 border border-accent-40 bg-accent-12 pl-3 pr-2 text-xs font-semibold uppercase text-fg-1 transition-colors hover:border-accent hover:bg-accent-20 focus:outline-none focus-visible:border-accent"
+          className="inline-flex min-h-9 items-center gap-1.5 border border-lime-400/40 bg-lime-400/12 pl-3 pr-2 text-xs font-semibold uppercase text-foreground transition-colors hover:border-lime-400 hover:bg-lime-400/20 focus:outline-none focus-visible:border-lime-400"
         >
           <span>{c.label}</span>
-          <X className="size-3.5 text-fg-2" strokeWidth={1.75} />
+          <X className="size-3.5 text-foreground/80" strokeWidth={1.75} />
         </button>
       ))}
       <button
         type="button"
         onClick={() => router.push(pathname, { scroll: false })}
-        className="ml-1 min-h-9 px-2 text-xs uppercase text-fg-3 transition-colors hover:text-accent focus:outline-none focus-visible:text-accent"
+        className="ml-1 min-h-9 px-2 text-xs uppercase text-muted-foreground transition-colors hover:text-lime-400 focus:outline-none focus-visible:text-lime-400"
       >
         Clear all
       </button>

@@ -22,7 +22,7 @@ export function CheckoutButton({ cart }: { cart: Cart }) {
         <Button disabled className="w-full">
           Checkout
         </Button>
-        <p className="text-center text-xs text-fg-3">
+        <p className="text-center text-xs text-muted-foreground">
           Connect a Shopify store to enable secure checkout.
         </p>
       </div>

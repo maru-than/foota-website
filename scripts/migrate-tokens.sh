@@ -33,6 +33,9 @@ for f in "$@"; do
     -e 's|bg-accent-12|bg-lime-400/12|g' \
     -e 's|bg-accent-20|bg-lime-400/20|g' \
     -e 's|bg-accent-40|bg-lime-400/40|g' \
+    -e 's|border-accent-12|border-lime-400/12|g' \
+    -e 's|border-accent-20|border-lime-400/20|g' \
+    -e 's|border-accent-40|border-lime-400/40|g' \
     -e 's/text-accent-hi/text-lime-300/g' \
     -e 's/text-accent-lo/text-lime-500/g' \
     -e 's|border-line-accent|border-lime-400/20|g' \

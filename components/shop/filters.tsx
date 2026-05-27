@@ -36,8 +36,8 @@ function FilterGroup({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-t border-line-1 py-5 first:border-t-0 first:pt-0">
-      <h3 className="eyebrow mb-3 text-fg-3">{title}</h3>
+    <div className="border-t border-border py-5 first:border-t-0 first:pt-0">
+      <h3 className="eyebrow mb-3 text-muted-foreground">{title}</h3>
       {/* On mobile the drawer scrolls already; nesting a scroll region inside
           it traps touch. Only constrain height from md: up where the panel is
           a desktop sidebar. */}
@@ -62,13 +62,13 @@ function CheckRow({
       <span
         className={cn(
           "flex size-4 shrink-0 items-center justify-center border transition-colors",
-          checked ? "border-accent bg-accent text-bg-1" : "border-line-accent",
+          checked ? "border-lime-400 bg-lime-400 text-background" : "border-lime-400/20",
         )}
       >
         {checked ? <Check className="size-3" strokeWidth={2.5} /> : null}
       </span>
       <input type="checkbox" className="sr-only" checked={checked} onChange={onToggle} />
-      <span className={cn(checked ? "text-fg-1" : "text-fg-2")}>{label}</span>
+      <span className={cn(checked ? "text-foreground" : "text-foreground/80")}>{label}</span>
     </label>
   );
 }
@@ -120,7 +120,7 @@ export function FilterPanel({
             <button
               type="button"
               onClick={() => router.push(pathname, { scroll: false })}
-              className="text-xs uppercase text-fg-3 transition-colors hover:text-accent"
+              className="text-xs uppercase text-muted-foreground transition-colors hover:text-lime-400"
             >
               Clear all
             </button>
@@ -133,7 +133,7 @@ export function FilterPanel({
           <button
             type="button"
             onClick={() => router.push(pathname, { scroll: false })}
-            className="text-xs uppercase text-fg-3 transition-colors hover:text-accent"
+            className="text-xs uppercase text-muted-foreground transition-colors hover:text-lime-400"
           >
             Clear all
           </button>
@@ -198,7 +198,7 @@ function PriceFilter({ min, max }: { min: number; max: number }) {
           onChange={(e) => setMinVal(e.target.value)}
           className="h-11 px-3"
         />
-        <span className="text-fg-3">–</span>
+        <span className="text-muted-foreground">–</span>
         <Input
           type="number"
           inputMode="numeric"

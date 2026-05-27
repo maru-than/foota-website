@@ -39,7 +39,7 @@ export default function ShopLoading() {
             </div>
           </aside>
           <div>
-            <div className="mb-8 flex items-center justify-between gap-4 border-b border-line-1 pb-4">
+            <div className="mb-8 flex items-center justify-between gap-4 border-b border-border pb-4">
               <Skeleton className="h-10 w-24" />
               <Skeleton className="h-10 w-40" />
             </div>

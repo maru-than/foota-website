@@ -45,7 +45,7 @@ export function CartDrawer({
           <SheetTitle>
             Your bag{" "}
             {totalQuantity > 0 ? (
-              <span className="tabular-nums text-fg-3">({totalQuantity})</span>
+              <span className="tabular-nums text-muted-foreground">({totalQuantity})</span>
             ) : null}
           </SheetTitle>
         </SheetHeader>
@@ -53,11 +53,11 @@ export function CartDrawer({
         {lines.length === 0 ? (
           <div className="flex flex-1 flex-col overflow-y-auto px-6 pb-6">
             <div className="flex flex-col items-center gap-4 pt-10 text-center">
-              <BagIcon className="size-9 text-fg-4" strokeWidth={1.25} />
+              <BagIcon className="size-9 text-muted-foreground/60" strokeWidth={1.25} />
               <p className="text-2xl font-bold tracking-[-0.03em]">
                 Your locker is empty.
               </p>
-              <p className="max-w-xs text-sm text-fg-3">
+              <p className="max-w-xs text-sm text-muted-foreground">
                 Add a jersey to get started — all 48 nations are in.
               </p>
               <Button asChild onClick={closeCart} className="mt-2">
@@ -66,8 +66,8 @@ export function CartDrawer({
             </div>
 
             {recommendations.length > 0 ? (
-              <div className="mt-10 border-t border-line-1 pt-6">
-                <p className="eyebrow text-fg-3">Most wanted</p>
+              <div className="mt-10 border-t border-border pt-6">
+                <p className="eyebrow text-muted-foreground">Most wanted</p>
                 <ul className="mt-4 grid grid-cols-2 gap-3">
                   {recommendations.map((p) => (
                     <li key={p.id}>
@@ -78,7 +78,7 @@ export function CartDrawer({
                       >
                         <div
                           className={cn(
-                            "relative aspect-[4/5] overflow-hidden border border-line-1 transition-colors group-hover:border-line-accent",
+                            "relative aspect-[4/5] overflow-hidden border border-border transition-colors group-hover:border-lime-400/20",
                             p.featuredImage ? "bg-white" : "jersey-frame",
                           )}
                         >
@@ -93,10 +93,10 @@ export function CartDrawer({
                           ) : null}
                         </div>
                         <div className="flex flex-col gap-0.5">
-                          <span className="text-sm font-bold leading-tight text-accent">
+                          <span className="text-sm font-bold leading-tight text-lime-400">
                             {p.meta.teamName ?? p.title}
                           </span>
-                          <span className="text-xs tabular-nums text-fg-3">
+                          <span className="text-xs tabular-nums text-muted-foreground">
                             {formatPrice(
                               p.priceRange.minVariantPrice.amount,
                               p.priceRange.minVariantPrice.currencyCode,
@@ -119,23 +119,23 @@ export function CartDrawer({
             </div>
             <SheetFooter className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-fg-3">Subtotal</span>
+                <span className="text-sm text-muted-foreground">Subtotal</span>
                 {cart ? (
                   <Price
                     amount={cart.cost.subtotalAmount.amount}
                     currencyCode={cart.cost.subtotalAmount.currencyCode}
-                    className="text-base font-bold text-fg-1"
+                    className="text-base font-bold text-foreground"
                   />
                 ) : null}
               </div>
-              <p className="text-xs text-fg-3">
+              <p className="text-xs text-muted-foreground">
                 Shipping and taxes calculated at checkout.
               </p>
               {cart ? <CheckoutButton cart={cart} /> : null}
               <button
                 type="button"
                 onClick={closeCart}
-                className="w-full text-center text-xs uppercase text-fg-3 transition-colors hover:text-accent"
+                className="w-full text-center text-xs uppercase text-muted-foreground transition-colors hover:text-lime-400"
               >
                 Continue shopping
               </button>

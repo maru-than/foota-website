@@ -61,12 +61,12 @@ export default async function SearchPage({
       <Container className="py-12 lg:py-16">
         {!q ? (
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="text-fg-3">Try:</span>
+            <span className="text-muted-foreground">Try:</span>
             {SUGGESTIONS.map((term) => (
               <Link
                 key={term}
                 href={`/search?q=${encodeURIComponent(term)}`}
-                className="border border-line-accent bg-bg-2 px-3 py-1.5 transition-colors hover:border-accent hover:text-accent"
+                className="border border-lime-400/20 bg-card px-3 py-1.5 transition-colors hover:border-lime-400 hover:text-lime-400"
               >
                 {term}
               </Link>
@@ -79,7 +79,7 @@ export default async function SearchPage({
             <p className="text-2xl font-bold tracking-[-0.03em]">
               No jerseys match “{q}”.
             </p>
-            <p className="max-w-md text-sm text-fg-3">
+            <p className="max-w-md text-sm text-muted-foreground">
               Try a nation or confederation — or browse all 48.
             </p>
             <Button asChild variant="secondary">
