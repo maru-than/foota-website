@@ -61,7 +61,7 @@ function CheckRow({
     <label className="flex min-h-11 cursor-pointer items-center gap-2.5 py-2 text-sm">
       <span
         className={cn(
-          "flex size-4 shrink-0 items-center justify-center border transition-colors",
+          "flex size-4 shrink-0 items-center justify-center rounded-sm border transition-colors",
           checked ? "border-primary bg-primary text-background" : "border-border",
         )}
       >

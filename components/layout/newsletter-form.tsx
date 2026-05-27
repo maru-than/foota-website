@@ -39,7 +39,10 @@ export function NewsletterForm({ className }: { className?: string }) {
   return (
     <form
       onSubmit={onSubmit}
-      className={cn("flex border border-border", className)}
+      className={cn(
+        "flex overflow-hidden rounded-full border border-border bg-background",
+        className,
+      )}
     >
       <input
         type="email"
@@ -48,12 +51,12 @@ export function NewsletterForm({ className }: { className?: string }) {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@inbox.com"
         aria-label="Email address"
-        className="min-w-0 flex-1 bg-transparent px-4 text-base text-foreground outline-none placeholder:text-muted-foreground/60 sm:text-sm"
+        className="min-w-0 flex-1 bg-transparent pl-5 pr-3 text-base text-foreground outline-none placeholder:text-muted-foreground/60 sm:text-sm"
       />
       <button
         type="submit"
         aria-label="Subscribe"
-        className="flex min-h-11 shrink-0 items-center justify-center bg-primary px-4 text-background transition-colors duration-150 ease-out hover:bg-primary/90"
+        className="flex min-h-11 shrink-0 items-center justify-center bg-primary px-5 text-primary-foreground transition-colors duration-150 ease-out hover:bg-primary/90"
       >
         <ArrowRight className="size-4" strokeWidth={1.5} />
       </button>

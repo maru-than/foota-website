@@ -148,7 +148,7 @@ export function ProductDetails({ product }: { product: Product }) {
               number from 0–99 to the back. Officially heat-pressed lettering.
               Add-on price: ${CUSTOM_PRICE_DELTA.toFixed(0)}.
             </p>
-            <div className="mb-4 flex items-start gap-2 border border-danger/40 bg-destructive/5 p-3">
+            <div className="mb-4 flex items-start gap-2 rounded-md border border-destructive/40 bg-destructive/5 p-3">
               <AlertTriangle
                 className="mt-0.5 size-4 shrink-0 text-destructive"
                 strokeWidth={1.5}

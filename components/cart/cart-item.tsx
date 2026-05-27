@@ -41,7 +41,7 @@ export function CartItem({
         href={`/products/${product.handle}`}
         onClick={onNavigate}
         className={cn(
-          "relative h-[110px] w-24 shrink-0 overflow-hidden border border-border",
+          "relative h-[110px] w-24 shrink-0 overflow-hidden rounded-lg border border-border",
           image ? "bg-white" : "bg-muted",
         )}
       >
@@ -81,7 +81,7 @@ export function CartItem({
         ) : null}
 
         <div className="mt-auto flex items-center justify-between pt-3">
-          <div className="flex items-center border border-input">
+          <div className="flex items-center rounded-md border border-input">
             <button
               type="button"
               onClick={() => updateItem(line.id, line.quantity - 1)}

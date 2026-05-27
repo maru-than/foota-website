@@ -19,7 +19,7 @@ const ROWS = [
 export function SizeGuideContent() {
   return (
     <div className="space-y-8">
-      <div className="overflow-hidden border border-border">
+      <div className="overflow-hidden rounded-lg border border-border">
         <table className="w-full text-sm">
           <thead className="bg-card text-left">
             <tr className="[&_th]:px-4 [&_th]:py-3 [&_th]:font-bold [&_th]:uppercase [&_th]:[&_th]:text-foreground sm:[&_th]:px-5">

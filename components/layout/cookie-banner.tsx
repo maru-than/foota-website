@@ -12,7 +12,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
 import {
   onConsentChange,
   readConsent,
@@ -42,9 +41,9 @@ export function CookieBanner() {
       role="dialog"
       aria-modal="false"
       aria-label="Cookie consent"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 backdrop-blur"
+      className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-5xl rounded-xl border border-border bg-background/95 shadow-lg shadow-black/20 backdrop-blur lg:inset-x-6 lg:bottom-6"
     >
-      <Container className="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:gap-6 lg:py-5">
+      <div className="flex flex-col gap-4 px-5 py-4 lg:flex-row lg:items-center lg:gap-6 lg:px-6 lg:py-5">
         <div className="flex-1 text-sm leading-relaxed text-foreground/80">
           <p>
             We use strictly necessary cookies to run the store, and — with
@@ -68,7 +67,7 @@ export function CookieBanner() {
             Accept all
           </Button>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

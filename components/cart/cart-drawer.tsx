@@ -78,7 +78,7 @@ export function CartDrawer({
                       >
                         <div
                           className={cn(
-                            "relative aspect-[4/5] overflow-hidden border border-border transition-colors group-hover:border-border",
+                            "relative aspect-[4/5] overflow-hidden rounded-lg border border-border transition-colors group-hover:border-border",
                             p.featuredImage ? "bg-white" : "bg-muted",
                           )}
                         >

@@ -37,7 +37,7 @@ export function ProductCard({
     <Link
       href={`/products/${product.handle}`}
       aria-label={product.title}
-      className="group flex flex-col bg-muted transition-transform duration-300 ease-out hover:-translate-y-1"
+      className="group flex flex-col overflow-hidden rounded-xl bg-muted transition-transform duration-300 ease-out hover:-translate-y-1"
     >
       <div
         className={cn(
@@ -99,7 +99,7 @@ export function ProductCard({
         ) : null}
       </div>
 
-      <div className="flex flex-col gap-3 border border-t-0 border-border p-5">
+      <div className="flex flex-col gap-3 p-5">
         <div className="flex flex-col gap-1.5">
           <span className="text-xl font-bold leading-none text-primary">
             {meta.teamName ?? product.title}

@@ -83,7 +83,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
                 onClick={() => applyTemplate(item.name, item.number)}
                 aria-pressed={active}
                 className={cn(
-                  "flex h-9 items-center gap-2 border px-2.5 text-xs font-bold uppercase transition-colors duration-150 ease-out",
+                  "flex h-9 items-center gap-2 rounded-full border px-3 text-xs font-bold uppercase transition-colors duration-150 ease-out",
                   active
                     ? "border-primary bg-primary text-background"
                     : "border-border text-foreground hover:border-primary hover:bg-accent",

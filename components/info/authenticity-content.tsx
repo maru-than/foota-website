@@ -44,7 +44,7 @@ export function AuthenticityContent() {
 
       <section className="grid gap-3 sm:grid-cols-3">
         {POINTS.map(({ name, text, Icon }) => (
-          <div key={name} className="border border-border bg-card p-4">
+          <div key={name} className="rounded-lg border border-border bg-card p-4">
             <h4 className="eyebrow flex items-center gap-1.5 text-primary">
               <Icon className="size-3.5" strokeWidth={1.5} aria-hidden />
               {name}

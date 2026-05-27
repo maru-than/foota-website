@@ -24,7 +24,7 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="border border-border bg-card p-10 text-center">
+      <div className="rounded-xl border border-border bg-card p-10 text-center">
         <Check className="mx-auto size-7 text-primary" strokeWidth={1.5} />
         <p className="mt-4 text-2xl font-bold">Message sent.</p>
         <p className="mt-2 text-sm text-muted-foreground">

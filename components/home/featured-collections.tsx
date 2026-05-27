@@ -73,7 +73,7 @@ export function FeaturedCollections({
               <div key={collection.id}>
                 <Link
                   href={href}
-                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden border border-border bg-card p-6 transition-transform duration-300 ease-out hover:-translate-y-1"
+                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-xl border border-border bg-card p-6 transition-transform duration-300 ease-out hover:-translate-y-1"
                 >
                   {image ? (
                     <>
