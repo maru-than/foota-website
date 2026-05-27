@@ -1,5 +1,5 @@
 /**
- * @file Root layout — Geist (body) + Instrument Serif (display), header, footer, cart provider, cookie banner, analytics, viewport.
+ * @file Root layout — Geist (body) + EB Garamond (display), header, footer, cart provider, cookie banner, analytics, viewport. Light-only.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -7,7 +7,7 @@
  */
 
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif } from "next/font/google";
+import { Geist, EB_Garamond } from "next/font/google";
 import "./globals.css";
 
 import { CookieBanner } from "@/components/layout/cookie-banner";
@@ -28,11 +28,12 @@ const geist = Geist({
 });
 
 // Editorial display face — used on hero H1, section H2s, PDP product title,
-// page H1s. Only weight available is 400, with italic.
-const instrumentSerif = Instrument_Serif({
+// page H1s. EB Garamond ships with 400/500/600/700/800 + italics; the site
+// only uses 400 (regular) and 500 (medium) for accents.
+const ebGaramond = EB_Garamond({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -42,39 +43,41 @@ const siteUrl = resolveSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Worldkit Soccer | A home for jerseys",
-    template: "%s | Worldkit Soccer",
+    default: "Worldkit Soccer — A home for jerseys",
+    template: "%s · Worldkit Soccer",
   },
   description:
-    "Shop 2026 FIFA World Cup home and away jerseys for every nation in the 48-team field — dispatched worldwide.",
+    "2026 World Cup home and away jerseys from all 48 nations — united by one ball. Five regions, forty-eight nations, dispatched worldwide.",
   applicationName: "Worldkit Soccer",
   keywords: [
     "2026 World Cup jerseys",
     "national team jerseys",
     "2026 home and away kits",
     "football shirts",
+    "soccer jerseys",
     "USA Canada Mexico 2026",
+    "World Cup kits 48 nations",
   ],
   authors: [{ name: "Worldkit Soccer" }],
   openGraph: {
     type: "website",
     siteName: "Worldkit Soccer",
-    title: "Worldkit Soccer | A home for jerseys",
+    title: "Worldkit Soccer — A home for jerseys",
     description:
-      "2026 World Cup home and away jerseys from all 48 nations. A home for jerseys.",
+      "Every 2026 World Cup home and away kit. Five regions. Forty-eight nations. Dispatched worldwide.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Worldkit Soccer | A home for jerseys",
+    title: "Worldkit Soccer — A home for jerseys",
     description:
-      "2026 World Cup home and away jerseys from all 48 nations. A home for jerseys.",
+      "Every 2026 World Cup home and away kit. Five regions. Forty-eight nations. Dispatched worldwide.",
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  colorScheme: "dark",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -93,8 +96,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      className={`dark ${geist.variable} ${instrumentSerif.variable}`}
+      className={`${geist.variable} ${ebGaramond.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
         <a

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Site nav — floating centered pill on desktop, full-width sticky on mobile. Logo overflows downward on desktop.
+ * @file Site nav — floating centered pill on desktop, full-width sticky on mobile. Logo fits inside the pill.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -39,7 +39,7 @@ export function Header() {
         // Desktop: detach from edges, center as a backdrop-blur pill with
         // visible padding above the page. Drop the bottom border (the pill
         // floats over content, doesn't anchor a horizontal rule).
-        "lg:fixed lg:inset-x-0 lg:top-6 lg:mx-auto lg:w-fit lg:max-w-[calc(100vw-3rem)] lg:rounded-full lg:border lg:bg-background/70 lg:backdrop-blur-md lg:shadow-lg lg:shadow-black/20",
+        "lg:fixed lg:inset-x-0 lg:top-6 lg:mx-auto lg:w-fit lg:max-w-[calc(100vw-3rem)] lg:rounded-full lg:border lg:bg-background/70 lg:backdrop-blur-md lg:shadow-lg lg:shadow-black/5",
       )}
     >
       <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-14 lg:gap-24 lg:px-5">
@@ -65,7 +65,7 @@ export function Header() {
             width={224}
             height={224}
             priority
-            className="h-10 w-auto lg:h-20"
+            className="h-9 w-auto lg:h-10"
           />
         </Link>
 
@@ -77,7 +77,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative py-1 text-xs font-medium uppercase transition-colors duration-150 ease-out",
+                  "relative py-1 text-sm transition-colors duration-150 ease-out",
                   active ? "text-foreground" : "text-foreground/70 hover:text-foreground",
                 )}
               >

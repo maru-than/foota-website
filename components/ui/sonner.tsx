@@ -1,7 +1,7 @@
 "use client"
 
 /**
- * @file shadcn Toaster wrapper around sonner — locked to dark theme with lucide icons.
+ * @file shadcn Toaster wrapper around sonner — locked to light theme with lucide icons.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -11,11 +11,11 @@
 import { Toaster as Sonner, type ToasterProps } from "sonner"
 import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from "lucide-react"
 
-// Site is dark-only — lock the Toaster theme rather than wire up next-themes.
+// Site is light-only — lock the Toaster theme to match.
 const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
-      theme="dark"
+      theme="light"
       className="toaster group"
       icons={{
         success: (
