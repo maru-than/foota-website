@@ -91,7 +91,10 @@ export default async function RootLayout({
         </a>
         <CartProvider initialCart={cart}>
           <Header />
-          <main id="main" className="flex-1">
+          {/* Top padding on desktop reserves space for the fixed floating
+              header pill (top-6 + h-14 = ~80px); mobile keeps its sticky
+              flow-anchored header so no padding needed. */}
+          <main id="main" className="flex-1 lg:pt-24">
             {children}
           </main>
           <Footer />

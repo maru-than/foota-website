@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Sticky top nav — logo, desktop menu with active state, mobile-menu trigger, search / cart icons.
+ * @file Site nav — floating centered pill on desktop, full-width sticky on mobile. Logo overflows downward on desktop.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -32,8 +32,17 @@ export function Header() {
     href === "/shop" ? pathname === "/shop" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-[calc(env(safe-area-inset-top)+1.75rem)] z-40 border-b border-border bg-background">
-      <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-[72px] lg:px-8">
+    <header
+      className={cn(
+        // Mobile: full-width sticky, opaque background, bottom border.
+        "sticky top-0 z-40 border-b border-border bg-background",
+        // Desktop: detach from edges, center as a backdrop-blur pill with
+        // visible padding above the page. Drop the bottom border (the pill
+        // floats over content, doesn't anchor a horizontal rule).
+        "lg:fixed lg:inset-x-0 lg:top-6 lg:mx-auto lg:w-fit lg:max-w-[calc(100vw-3rem)] lg:rounded-full lg:border lg:bg-background/70 lg:backdrop-blur-md lg:shadow-lg lg:shadow-black/20",
+      )}
+    >
+      <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-14 lg:gap-6 lg:px-5">
         <Button
           type="button"
           variant="ghost"
