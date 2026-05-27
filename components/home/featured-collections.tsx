@@ -36,7 +36,7 @@ const CUSTOMS_TILE: Collection = {
   id: "customs",
   handle: "customs",
   title: "Customise",
-  description: "Add your name on the back · +$15",
+  description: "Add your name on the back · +$5",
   image: null,
   seo: { title: "Customise", description: "" },
 };

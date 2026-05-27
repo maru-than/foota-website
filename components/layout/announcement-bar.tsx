@@ -10,7 +10,7 @@ const ITEMS = [
   "Worldwide shipping available",
   "Summer 2026 · all 48 nations",
   "Home & away kits in stock",
-  "Add your name & number · +$15",
+  "Add your name & number · +$5",
   "Dispatched in 48h",
 ];
 

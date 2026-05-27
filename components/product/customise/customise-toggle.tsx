@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { useCustomise } from "./customise-context";
 
 /**
- * Segmented control for the buy box: Blank vs Custom (+$15). Mirrors the
+ * Segmented control for the buy box: Blank vs Custom (+$5). Mirrors the
  * size selector's visual weight so the buyer sees customisation as another
  * routine choice, not an upsell pop-out.
  */

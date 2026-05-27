@@ -22,7 +22,7 @@
 import type { Money } from "./shopify/types";
 
 /** Flat customisation add-on per shirt, in USD. */
-export const CUSTOM_PRICE_DELTA = 15;
+export const CUSTOM_PRICE_DELTA = 5;
 
 /** Maximum characters for the back-of-shirt name. */
 export const CUSTOM_MAX_NAME_CHARS = 12;
