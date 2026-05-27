@@ -34,7 +34,7 @@ export function SizeGuideContent() {
                 key={row.size}
                 className="border-t border-border [&_td]:px-4 [&_td]:py-3 sm:[&_td]:px-5"
               >
-                <td className="font-bold tabular-nums text-foreground">{row.size}</td>
+                <td className="tabular-nums text-foreground">{row.size}</td>
                 <td className="tabular-nums text-foreground/80">{row.chest}</td>
                 <td className="tabular-nums text-foreground/80">{row.length}</td>
               </tr>
@@ -44,7 +44,7 @@ export function SizeGuideContent() {
       </div>
 
       <div className="space-y-3 text-pretty leading-relaxed text-foreground/80">
-        <h3 className="flex items-center gap-2 text-lg font-bold text-foreground">
+        <h3 className="flex items-center gap-2 text-lg text-foreground">
           <Ruler className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
           How to measure
         </h3>

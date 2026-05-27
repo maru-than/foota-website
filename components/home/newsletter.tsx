@@ -14,8 +14,10 @@ export function Newsletter() {
     <section className="border-t border-border bg-card py-16 lg:py-20">
       <Container>
         <div className="mx-auto flex max-w-xl flex-col items-center text-center">
-          <span className="eyebrow text-primary">Newsletter</span>
-          <h2 className="display mt-4 text-4xl leading-tight sm:text-5xl">
+          <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">
+            Newsletter
+          </span>
+          <h2 className="font-display mt-4 text-4xl leading-tight text-foreground sm:text-5xl lg:text-6xl">
             Join the dressing room
           </h2>
           <p className="mt-4 text-pretty leading-relaxed text-foreground/80">

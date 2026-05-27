@@ -17,7 +17,7 @@ export function LegalDoc({
 }) {
   return (
     <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-foreground/80">
-      <p className="eyebrow text-muted-foreground">Last updated · {updated}</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Last updated · {updated}</p>
       {children}
       <p className="rounded-none border-l-2 border-border bg-card p-4 text-sm text-muted-foreground">
         This document is a template provided for transparency about how the
@@ -39,7 +39,7 @@ export function LegalSection({
 }) {
   return (
     <section className={cn("space-y-3", className)}>
-      <h2 className="text-lg font-bold text-foreground">{title}</h2>
+      <h2 className="text-lg text-foreground">{title}</h2>
       {children}
     </section>
   );

@@ -59,7 +59,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
           {FOOTER_NAV.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <h3 className="eyebrow text-muted-foreground">{column.title}</h3>
+              <h3 className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{column.title}</h3>
               {/* Per-link py-2.5 makes each row ≥44 px tappable; the prior
                   space-y-2.5 is no longer needed because the padding provides
                   the same visual rhythm. */}

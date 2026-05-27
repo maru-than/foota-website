@@ -125,7 +125,7 @@ export default async function ProductPage({
             />
 
             <div className="lg:py-2">
-              <h1 className="text-3xl font-bold leading-none text-primary sm:text-4xl">
+              <h1 className="font-display text-4xl leading-none text-foreground sm:text-5xl lg:text-6xl">
                 {product.meta.teamName ?? product.title}
               </h1>
               <p className="mt-2 text-sm text-muted-foreground">{product.title}</p>

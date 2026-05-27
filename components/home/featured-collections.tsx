@@ -97,10 +97,10 @@ export function FeaturedCollections({
                     />
                   )}
                   <div className="relative">
-                    <span className="eyebrow text-primary">
+                    <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">
                       {isCustoms ? "Personalise" : "Collection"}
                     </span>
-                    <h3 className="mt-1 text-2xl font-bold leading-tight">
+                    <h3 className="mt-2 font-display text-3xl leading-tight text-foreground lg:text-4xl">
                       {stripConfederation(collection.title)}
                     </h3>
                     <span className="mt-3 inline-flex items-center gap-1.5 text-sm text-foreground/80 transition-colors group-hover:text-primary">

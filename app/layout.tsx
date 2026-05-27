@@ -1,5 +1,5 @@
 /**
- * @file Root layout — Geist font, header, footer, cart provider, cookie banner, analytics, viewport.
+ * @file Root layout — Geist (body) + Instrument Serif (display), header, footer, cart provider, cookie banner, analytics, viewport.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -7,7 +7,7 @@
  */
 
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 import { CookieBanner } from "@/components/layout/cookie-banner";
@@ -24,6 +24,16 @@ import { resolveSiteUrl } from "@/lib/site-url";
 const geist = Geist({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// Editorial display face — used on hero H1, section H2s, PDP product title,
+// page H1s. Only weight available is 400, with italic.
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -81,7 +91,11 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html lang="en" suppressHydrationWarning className={`dark ${geist.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`dark ${geist.variable} ${instrumentSerif.variable}`}
+    >
       <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
         <a
           href="#main"

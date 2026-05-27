@@ -51,11 +51,11 @@ export function PageHeader({
           {/* Legibility scrim — darker at the bottom where copy sits. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-bg-0/90 via-bg-0/60 to-bg-0/20"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-background/20"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-bg-0/80 to-transparent"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background/80 to-transparent"
           />
         </>
       ) : null}
@@ -65,8 +65,12 @@ export function PageHeader({
           align === "center" && "text-center",
         )}
       >
-        {eyebrow ? <span className="eyebrow text-primary">{eyebrow}</span> : null}
-        <h1 className="display mt-3 text-balance text-4xl leading-[1.02] sm:text-5xl">
+        {eyebrow ? (
+          <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">
+            {eyebrow}
+          </span>
+        ) : null}
+        <h1 className="font-display mt-3 text-balance text-4xl leading-[1.02] sm:text-5xl lg:text-6xl">
           {title}
         </h1>
         {description ? (

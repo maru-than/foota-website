@@ -26,7 +26,7 @@ export function ContactForm() {
     return (
       <div className="rounded-xl border border-border bg-card p-10 text-center">
         <Check className="mx-auto size-7 text-primary" strokeWidth={1.5} />
-        <p className="mt-4 text-2xl font-bold">Message sent.</p>
+        <p className="mt-4 font-display text-3xl text-foreground">Message sent.</p>
         <p className="mt-2 text-sm text-muted-foreground">
           Thanks for reaching out — we&apos;ll reply within 1–2 working days.
         </p>

@@ -16,8 +16,10 @@ export function EditorialBanner() {
     <section className="border-y border-border bg-card">
       <Container className="grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-20">
         <div>
-          <span className="eyebrow text-primary">The Worldkit view</span>
-          <h2 className="display mt-4 text-4xl leading-[1.02] sm:text-5xl">
+          <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">
+            The Worldkit view
+          </span>
+          <h2 className="font-display mt-4 text-4xl leading-[1.02] text-foreground sm:text-5xl lg:text-6xl">
             More than a shirt<span className="text-primary">.</span>
           </h2>
         </div>

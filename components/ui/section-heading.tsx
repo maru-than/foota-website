@@ -33,14 +33,18 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? <span className="eyebrow text-primary">{eyebrow}</span> : null}
+      {eyebrow ? (
+        <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">
+          {eyebrow}
+        </span>
+      ) : null}
       <div
         className={cn(
           "flex w-full items-end justify-between gap-6",
           align === "center" && "justify-center",
         )}
       >
-        <h2 className="display text-balance text-4xl leading-[1.02] sm:text-5xl">
+        <h2 className="font-display text-balance text-4xl leading-[1.02] sm:text-5xl lg:text-6xl">
           {title}
         </h2>
         {action ? (

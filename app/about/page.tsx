@@ -30,7 +30,7 @@ export default function AboutPage() {
       <Container className="py-12 lg:py-16">
         <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-foreground/80 [&_h2]:text-foreground">
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold">
+            <h2 className="font-display text-3xl">
               Built for the summer of 2026
             </h2>
             <p>
@@ -41,7 +41,7 @@ export default function AboutPage() {
             </p>
           </section>
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold">What we stock</h2>
+            <h2 className="font-display text-3xl">What we stock</h2>
             <p>
               All 48 qualified nations, from the co-hosts to the debutants —
               shop your continent, your rivals or your second team.
@@ -49,7 +49,7 @@ export default function AboutPage() {
             </p>
           </section>
           <section className="space-y-3">
-            <h2 className="text-2xl font-bold">How we work</h2>
+            <h2 className="font-display text-3xl">How we work</h2>
             <p>
               Every shirt is inspected before it ships and dispatched worldwide in
               48 hours. Checkout, payments and fulfilment run securely through

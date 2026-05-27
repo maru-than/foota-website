@@ -76,7 +76,7 @@ export default async function SearchPage({
           <ProductGrid products={results} priorityCount={4} />
         ) : (
           <div className="flex flex-col items-center gap-4 py-16 text-center">
-            <p className="text-2xl font-bold">
+            <p className="font-display text-3xl text-foreground">
               No jerseys match “{q}”.
             </p>
             <p className="max-w-md text-sm text-muted-foreground">

@@ -23,13 +23,13 @@ export default function CartPage() {
 
   return (
     <Container className="py-12 lg:py-16">
-      <h1 className="display text-4xl leading-none sm:text-5xl">
+      <h1 className="font-display text-4xl leading-none text-foreground sm:text-5xl lg:text-6xl">
         Your bag
       </h1>
 
       {lines.length === 0 ? (
         <div className="flex flex-col items-center gap-4 py-24 text-center">
-          <p className="text-3xl font-bold">Your locker is empty.</p>
+          <p className="font-display text-3xl text-foreground">Your locker is empty.</p>
           <p className="max-w-md text-sm text-muted-foreground">
             Add a jersey to get started — all 48 nations are in.
           </p>
@@ -47,7 +47,7 @@ export default function CartPage() {
 
           <aside className="lg:sticky lg:top-32 lg:h-fit">
             <div className="border border-border bg-card p-6">
-              <h2 className="text-sm font-bold uppercase">
+              <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                 Order summary
               </h2>
               <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-sm">
@@ -56,7 +56,7 @@ export default function CartPage() {
                   <Price
                     amount={cart.cost.subtotalAmount.amount}
                     currencyCode={cart.cost.subtotalAmount.currencyCode}
-                    className="text-base font-bold text-foreground"
+                    className="text-base text-foreground"
                   />
                 ) : null}
               </div>

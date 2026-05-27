@@ -36,7 +36,7 @@ export function CustomiseForm() {
         <div>
           <label
             htmlFor={nameId}
-            className="eyebrow mb-2 flex items-center gap-1.5 text-muted-foreground"
+            className="mb-2 flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground"
           >
             <Type className="size-3.5" strokeWidth={1.5} aria-hidden />
             Name on back
@@ -82,7 +82,7 @@ export function CustomiseForm() {
         <div>
           <label
             htmlFor={numberId}
-            className="eyebrow mb-2 flex items-center gap-1.5 text-muted-foreground"
+            className="mb-2 flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground"
           >
             <Hash className="size-3.5" strokeWidth={1.5} aria-hidden />
             Number

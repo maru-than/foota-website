@@ -121,8 +121,8 @@ export function Hero() {
           </div>
 
           <h1
-            className="display text-center text-foreground"
-            style={{ fontSize: "clamp(28px, 9vw, 64px)" }}
+            className="font-display text-center leading-none text-foreground"
+            style={{ fontSize: "clamp(48px, 11vw, 112px)" }}
           >
             A home for jerseys<span className="text-primary">.</span>
           </h1>

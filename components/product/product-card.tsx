@@ -99,7 +99,7 @@ export function ProductCard({
 
       <div className="flex flex-col gap-3 p-5">
         <div className="flex flex-col gap-1.5">
-          <span className="text-xl font-bold leading-none text-primary">
+          <span className="font-display text-2xl leading-none text-foreground">
             {meta.teamName ?? product.title}
           </span>
           {caption ? <span className="text-xs text-muted-foreground">{caption}</span> : null}
@@ -108,7 +108,7 @@ export function ProductCard({
           amount={money.amount}
           currencyCode={money.currencyCode}
           compareAt={product.compareAtPrice}
-          className="text-sm font-bold text-foreground"
+          className="text-sm text-foreground"
         />
       </div>
     </Link>

@@ -67,7 +67,7 @@ export function CartDrawer({
 
             {recommendations.length > 0 ? (
               <div className="mt-10 border-t border-border pt-6">
-                <p className="eyebrow text-muted-foreground">Most wanted</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Most wanted</p>
                 <ul className="mt-4 grid grid-cols-2 gap-3">
                   {recommendations.map((p) => (
                     <li key={p.id}>

@@ -34,7 +34,7 @@ export function AuthenticityContent() {
   return (
     <div className="space-y-8 text-pretty leading-relaxed text-foreground/80 [&_h3]:text-foreground">
       <section className="space-y-3">
-        <h3 className="text-lg font-bold">What you get</h3>
+        <h3 className="text-lg">What you get</h3>
         <p>
           Worldkit Soccer stocks 2026 home and away jerseys for all 48 nations in the field. Every
           jersey is inspected on arrival — stitching, crest, fonts and finish
@@ -45,7 +45,7 @@ export function AuthenticityContent() {
       <section className="grid gap-3 sm:grid-cols-3">
         {POINTS.map(({ name, text, Icon }) => (
           <div key={name} className="rounded-lg border border-border bg-card p-4">
-            <h4 className="eyebrow flex items-center gap-1.5 text-primary">
+            <h4 className="flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
               <Icon className="size-3.5" strokeWidth={1.5} aria-hidden />
               {name}
             </h4>
@@ -55,7 +55,7 @@ export function AuthenticityContent() {
       </section>
 
       <section className="space-y-3">
-        <h3 className="text-lg font-bold">Inspection</h3>
+        <h3 className="text-lg">Inspection</h3>
         <p>
           Each shirt is photographed, measured and condition-checked. Any
           notable details are described on the product page — no surprises when
@@ -64,7 +64,7 @@ export function AuthenticityContent() {
       </section>
 
       <section className="space-y-3">
-        <h3 className="text-lg font-bold">Customisation</h3>
+        <h3 className="text-lg">Customisation</h3>
         <p>
           Custom names and numbers are heat-pressed in-house with the same
           equipment used on stadium kits. Letter sets match the official font
@@ -85,10 +85,10 @@ export function AuthenticityContent() {
       {testimonials.length > 0 ? (
         <section className="space-y-4">
           <div>
-            <span className="eyebrow text-primary">In their words</span>
-            <h3 className="mt-1 text-lg font-bold">
-              From recent buyers
-            </h3>
+            <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">
+              In their words
+            </span>
+            <h3 className="mt-1 text-lg">From recent buyers</h3>
           </div>
           <TestimonialGrid items={testimonials} columns={3} />
         </section>

@@ -84,7 +84,7 @@ export default function CustomisePage() {
               <div key={title}>
                 <div className="flex flex-col gap-3 rounded-xl border border-border p-6">
                   <Icon className="size-5 text-primary" strokeWidth={1.5} />
-                  <h3 className="text-lg font-bold leading-tight text-foreground">
+                  <h3 className="text-lg leading-tight text-foreground">
                     {title}
                   </h3>
                   <p className="text-sm leading-relaxed text-foreground/80">{note}</p>
@@ -98,7 +98,7 @@ export default function CustomisePage() {
       <section className="py-16 lg:py-20">
         <Container className="max-w-2xl text-center">
           <div>
-            <h2 className="text-3xl leading-tight sm:text-4xl">
+            <h2 className="font-display text-4xl leading-tight text-foreground sm:text-5xl lg:text-6xl">
               Ready to put your name on it
               <span className="text-primary">.</span>
             </h2>
