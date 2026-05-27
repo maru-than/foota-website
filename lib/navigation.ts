@@ -13,11 +13,8 @@ export interface NavLink {
 
 export const MAIN_NAV: NavLink[] = [
   { label: "Shop", href: "/shop" },
-  { label: "Best Sellers", href: "/collections/best-sellers" },
   { label: "Hosts", href: "/collections/hosts" },
-  { label: "Europe", href: "/collections/uefa" },
-  { label: "South America", href: "/collections/conmebol" },
-  { label: "New Arrivals", href: "/collections/new-arrivals" },
+  { label: "Customise", href: "/customise" },
 ];
 
 export const FOOTER_NAV: { title: string; links: NavLink[] }[] = [
