@@ -134,14 +134,14 @@ export function ProductBuyBox({ product }: { product: Product }) {
       <div className="flex items-center gap-2 text-sm">
         {available ? (
           customEnabled ? (
-            <Clock className="size-4 text-accent" strokeWidth={1.5} aria-hidden />
+            <Clock className="size-4 text-lime-400" strokeWidth={1.5} aria-hidden />
           ) : (
-            <PackageCheck className="size-4 text-accent" strokeWidth={1.5} aria-hidden />
+            <PackageCheck className="size-4 text-lime-400" strokeWidth={1.5} aria-hidden />
           )
         ) : (
-          <XCircle className="size-4 text-danger" strokeWidth={1.5} aria-hidden />
+          <XCircle className="size-4 text-destructive" strokeWidth={1.5} aria-hidden />
         )}
-        <span className="text-fg-3">
+        <span className="text-muted-foreground">
           {available
             ? customEnabled
               ? "Heat-press lead time · 5–7 days"
@@ -161,13 +161,13 @@ export function ProductBuyBox({ product }: { product: Product }) {
 
       {/* Single column on phones — at 375px the 3-col version wraps every
           title to 3 lines. From sm: up the original row layout is fine. */}
-      <div className="grid grid-cols-1 gap-4 border-t border-line-1 pt-5 sm:grid-cols-3 sm:gap-3">
+      <div className="grid grid-cols-1 gap-4 border-t border-border pt-5 sm:grid-cols-3 sm:gap-3">
         {trust.map(({ Icon, title, note }) => (
           <div key={title} className="flex gap-2.5">
-            <Icon className="size-[18px] shrink-0 text-accent" strokeWidth={1.5} />
+            <Icon className="size-[18px] shrink-0 text-lime-400" strokeWidth={1.5} />
             <div className="flex flex-col gap-0.5">
-              <b className="text-xs font-bold tracking-[-0.02em] text-fg-1">{title}</b>
-              <span className="text-[11px] leading-snug text-fg-3">{note}</span>
+              <b className="text-xs font-bold tracking-[-0.02em] text-foreground">{title}</b>
+              <span className="text-[11px] leading-snug text-muted-foreground">{note}</span>
             </div>
           </div>
         ))}
@@ -179,7 +179,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
         aria-hidden={!showSticky}
         className={cn(
           // Apple's "slide & spring" curve — feels native vs. a linear ease.
-          "fixed inset-x-0 bottom-0 z-30 flex items-center justify-between gap-3 border-t border-line-accent bg-bg-1/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none lg:hidden",
+          "fixed inset-x-0 bottom-0 z-30 flex items-center justify-between gap-3 border-t border-lime-400/20 bg-background/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none lg:hidden",
           showSticky
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-full opacity-0",
@@ -187,7 +187,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
       >
         <div className="flex min-w-0 flex-col leading-tight">
           {selected.Size ? (
-            <span className="flex items-center gap-1 truncate text-[11px] uppercase text-fg-3">
+            <span className="flex items-center gap-1 truncate text-[11px] uppercase text-muted-foreground">
               <Tag className="size-3 shrink-0" strokeWidth={1.5} aria-hidden />
               <span className="truncate">
                 Size {selected.Size}
@@ -199,7 +199,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
             amount={price.amount}
             currencyCode={price.currencyCode}
             compareAt={product.compareAtPrice}
-            className="text-sm font-bold text-accent"
+            className="text-sm font-bold text-lime-400"
           />
         </div>
         <Button

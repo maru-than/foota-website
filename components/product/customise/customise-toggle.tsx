@@ -23,7 +23,7 @@ export function CustomiseToggle() {
   return (
     <div>
       <div className="mb-2.5 flex items-center justify-between">
-        <span className="eyebrow text-fg-3">Personalise</span>
+        <span className="eyebrow text-muted-foreground">Personalise</span>
       </div>
       <div
         role="group"
@@ -37,8 +37,8 @@ export function CustomiseToggle() {
           className={cn(
             "flex h-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
             !enabled
-              ? "border-accent bg-accent text-bg-1"
-              : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",
+              ? "border-lime-400 bg-lime-400 text-background"
+              : "border-lime-400/20 text-foreground hover:border-lime-400 hover:bg-lime-400/12",
           )}
         >
           Blank
@@ -50,8 +50,8 @@ export function CustomiseToggle() {
           className={cn(
             "flex h-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
             enabled
-              ? "border-accent bg-accent text-bg-1"
-              : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",
+              ? "border-lime-400 bg-lime-400 text-background"
+              : "border-lime-400/20 text-foreground hover:border-lime-400 hover:bg-lime-400/12",
           )}
         >
           Name &amp; number

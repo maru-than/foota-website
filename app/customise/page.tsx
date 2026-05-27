@@ -49,7 +49,7 @@ const HOW = [
 export default function CustomisePage() {
   return (
     <>
-      <section className="border-b border-line-accent py-16 lg:py-24">
+      <section className="border-b border-lime-400/20 py-16 lg:py-24">
         <Container>
           <Reveal>
             <SectionHeading
@@ -62,14 +62,14 @@ export default function CustomisePage() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="/shop"
-                className="inline-flex items-center gap-1.5 bg-accent px-5 py-3 text-sm font-semibold lowercase text-bg-0 transition-colors hover:bg-accent-hi"
+                className="inline-flex items-center gap-1.5 bg-lime-400 px-5 py-3 text-sm font-semibold lowercase text-background transition-colors hover:bg-lime-300"
               >
                 Pick a jersey
                 <ArrowRight className="size-3.5" strokeWidth={1.5} />
               </Link>
               <Link
                 href="/products/brazil-home?customise=open"
-                className="inline-flex items-center gap-1.5 border border-line-accent px-5 py-3 text-sm font-semibold lowercase text-fg-1 transition-colors hover:border-accent hover:bg-accent-12"
+                className="inline-flex items-center gap-1.5 border border-lime-400/20 px-5 py-3 text-sm font-semibold lowercase text-foreground transition-colors hover:border-lime-400 hover:bg-lime-400/12"
               >
                 Try it on Brazil
                 <ArrowRight className="size-3.5" strokeWidth={1.5} />
@@ -87,12 +87,12 @@ export default function CustomisePage() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {HOW.map(({ Icon, title, note }, i) => (
               <Reveal key={title} delay={i * 80}>
-                <div className="flex flex-col gap-3 border border-line-accent p-6">
-                  <Icon className="size-5 text-accent" strokeWidth={1.5} />
-                  <h3 className="text-lg font-bold leading-tight tracking-[-0.03em] text-fg-1">
+                <div className="flex flex-col gap-3 border border-lime-400/20 p-6">
+                  <Icon className="size-5 text-lime-400" strokeWidth={1.5} />
+                  <h3 className="text-lg font-bold leading-tight tracking-[-0.03em] text-foreground">
                     {title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-fg-2">{note}</p>
+                  <p className="text-sm leading-relaxed text-foreground/80">{note}</p>
                 </div>
               </Reveal>
             ))}
@@ -100,7 +100,7 @@ export default function CustomisePage() {
         </Container>
       </section>
 
-      <section className="border-y border-line-accent bg-bg-2 py-16 lg:py-20">
+      <section className="border-y border-lime-400/20 bg-card py-16 lg:py-20">
         <Container>
           <Reveal>
             <SectionHeading
@@ -112,7 +112,7 @@ export default function CustomisePage() {
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {CONFEDS.map((confed, i) => (
               <Reveal key={confed} delay={i * 60}>
-                <div className="border border-line-accent bg-bg-1 p-5">
+                <div className="border border-lime-400/20 bg-background p-5">
                   <FontSpecimen confederation={confed} />
                 </div>
               </Reveal>
@@ -126,16 +126,16 @@ export default function CustomisePage() {
           <Reveal>
             <h2 className="display text-3xl leading-tight sm:text-4xl">
               Ready to put your name on it
-              <span className="text-accent">.</span>
+              <span className="text-lime-400">.</span>
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-fg-2">
+            <p className="mt-4 text-sm leading-relaxed text-foreground/80">
               Customs are non-returnable. Please double-check spelling and number
               before adding to the bag — every shirt is heat-pressed to order.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link
                 href="/shop"
-                className="inline-flex items-center gap-1.5 bg-accent px-5 py-3 text-sm font-semibold lowercase text-bg-0 transition-colors hover:bg-accent-hi"
+                className="inline-flex items-center gap-1.5 bg-lime-400 px-5 py-3 text-sm font-semibold lowercase text-background transition-colors hover:bg-lime-300"
               >
                 Pick a jersey
                 <ArrowRight className="size-3.5" strokeWidth={1.5} />

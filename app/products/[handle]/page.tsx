@@ -99,17 +99,17 @@ export default async function ProductPage({
       <Container className="py-8 lg:py-12">
         <nav
           aria-label="Breadcrumb"
-          className="mb-6 flex items-center gap-1.5 text-xs text-fg-3"
+          className="mb-6 flex items-center gap-1.5 text-xs text-muted-foreground"
         >
-          <Link href="/" className="transition-colors hover:text-fg-1">
+          <Link href="/" className="transition-colors hover:text-foreground">
             Home
           </Link>
           <span aria-hidden>/</span>
-          <Link href="/shop" className="transition-colors hover:text-fg-1">
+          <Link href="/shop" className="transition-colors hover:text-foreground">
             Shop
           </Link>
           <span aria-hidden>/</span>
-          <span className="text-fg-1">{product.title}</span>
+          <span className="text-foreground">{product.title}</span>
         </nav>
 
         <CustomiseProvider product={product}>
@@ -126,17 +126,17 @@ export default async function ProductPage({
             />
 
             <div className="lg:py-2">
-              <h1 className="text-3xl font-bold leading-none tracking-[-0.03em] text-accent sm:text-4xl">
+              <h1 className="text-3xl font-bold leading-none tracking-[-0.03em] text-lime-400 sm:text-4xl">
                 {product.meta.teamName ?? product.title}
               </h1>
-              <p className="mt-2 text-sm text-fg-3">{product.title}</p>
+              <p className="mt-2 text-sm text-muted-foreground">{product.title}</p>
 
               <div className="mt-5">
                 <Price
                   amount={price.amount}
                   currencyCode={price.currencyCode}
                   compareAt={product.compareAtPrice}
-                  className="text-2xl font-bold text-fg-1"
+                  className="text-2xl font-bold text-foreground"
                 />
               </div>
 
@@ -153,7 +153,7 @@ export default async function ProductPage({
       </Container>
 
       {reviews.length > 0 ? (
-        <section className="border-t border-line-accent py-16 lg:py-20">
+        <section className="border-t border-lime-400/20 py-16 lg:py-20">
           <Container>
             <Reveal>
               <SectionHeading

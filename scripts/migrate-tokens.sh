@@ -58,6 +58,9 @@ for f in "$@"; do
     -e 's/border-line-1/border-border/g' \
     -e 's/border-line-2/border-input/g' \
     -e 's/border-line-3/border-border/g' \
+    -e 's/bg-line-1/bg-border/g' \
+    -e 's/bg-line-2/bg-input/g' \
+    -e 's/bg-line-3/bg-border/g' \
     -e 's/bg-danger/bg-destructive/g' \
     -e 's/text-danger/text-destructive/g' \
     "$f"

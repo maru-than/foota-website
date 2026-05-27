@@ -31,12 +31,12 @@ export function CustomiseForm() {
   const remaining = CUSTOM_MAX_NAME_CHARS - name.length;
 
   return (
-    <div className="space-y-4 border border-line-accent p-4">
+    <div className="space-y-4 border border-lime-400/20 p-4">
       <div className="grid grid-cols-[1fr_5rem] gap-3">
         <div>
           <label
             htmlFor={nameId}
-            className="eyebrow mb-2 flex items-center gap-1.5 text-fg-3"
+            className="eyebrow mb-2 flex items-center gap-1.5 text-muted-foreground"
           >
             <Type className="size-3.5" strokeWidth={1.5} aria-hidden />
             Name on back
@@ -52,8 +52,8 @@ export function CustomiseForm() {
             placeholder="YOUR NAME"
             maxLength={CUSTOM_MAX_NAME_CHARS}
             className={cn(
-              "block h-12 w-full border border-line-accent bg-transparent px-3 text-sm font-bold uppercase text-fg-1 placeholder:text-fg-4",
-              "focus:border-accent focus:outline-none focus-visible:border-accent",
+              "block h-12 w-full border border-lime-400/20 bg-transparent px-3 text-sm font-bold uppercase text-foreground placeholder:text-muted-foreground/60",
+              "focus:border-lime-400 focus:outline-none focus-visible:border-lime-400",
             )}
             style={{
               fontFamily: fontSpec.family,
@@ -64,11 +64,11 @@ export function CustomiseForm() {
           />
           <p
             id={`${nameId}-help`}
-            className="mt-1.5 flex items-center gap-1 text-[11px] text-fg-3"
+            className="mt-1.5 flex items-center gap-1 text-[11px] text-muted-foreground"
           >
             {remaining <= 3 ? (
               <AlertCircle
-                className="size-3 shrink-0 text-accent"
+                className="size-3 shrink-0 text-lime-400"
                 strokeWidth={1.5}
                 aria-hidden
               />
@@ -82,7 +82,7 @@ export function CustomiseForm() {
         <div>
           <label
             htmlFor={numberId}
-            className="eyebrow mb-2 flex items-center gap-1.5 text-fg-3"
+            className="eyebrow mb-2 flex items-center gap-1.5 text-muted-foreground"
           >
             <Hash className="size-3.5" strokeWidth={1.5} aria-hidden />
             Number
@@ -97,23 +97,23 @@ export function CustomiseForm() {
             placeholder="10"
             maxLength={2}
             className={cn(
-              "block h-12 w-full border border-line-accent bg-transparent px-3 text-center text-base font-bold tracking-tight text-fg-1 placeholder:text-fg-4 tabular-nums",
-              "focus:border-accent focus:outline-none focus-visible:border-accent",
+              "block h-12 w-full border border-lime-400/20 bg-transparent px-3 text-center text-base font-bold tracking-tight text-foreground placeholder:text-muted-foreground/60 tabular-nums",
+              "focus:border-lime-400 focus:outline-none focus-visible:border-lime-400",
             )}
             style={{
               fontFamily: fontSpec.family,
               fontWeight: fontSpec.weight,
             }}
           />
-          <p className="mt-1.5 text-[11px] text-fg-3">0–99</p>
+          <p className="mt-1.5 text-[11px] text-muted-foreground">0–99</p>
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-line-1 pt-3">
-        <span className="text-[11px] uppercase text-fg-3">
+      <div className="flex items-center justify-between gap-3 border-t border-border pt-3">
+        <span className="text-[11px] uppercase text-muted-foreground">
           Font
         </span>
-        <span className="text-xs text-fg-1">{fontSpec.label}</span>
+        <span className="text-xs text-foreground">{fontSpec.label}</span>
       </div>
     </div>
   );

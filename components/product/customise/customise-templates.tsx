@@ -37,7 +37,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
   return (
     <div>
       <div className="mb-2.5 flex items-center justify-between">
-        <span className="eyebrow text-fg-3">Quick picks</span>
+        <span className="eyebrow text-muted-foreground">Quick picks</span>
         <div role="tablist" aria-label="Quick picks" className="flex gap-3">
           {(["legends", "squad", "mine"] as Track[]).map((t) => {
             const Icon = t === "legends" ? Trophy : t === "squad" ? Users : PencilLine;
@@ -57,7 +57,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
                 }}
                 className={cn(
                   "inline-flex items-center gap-1 text-[11px] font-semibold uppercase transition-colors",
-                  track === t ? "text-accent" : "text-fg-3 hover:text-fg-1",
+                  track === t ? "text-lime-400" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 <Icon className="size-3.5" strokeWidth={1.5} aria-hidden />
@@ -69,7 +69,7 @@ export function CustomiseTemplates({ product }: { product: Product }) {
       </div>
 
       {track === "mine" ? (
-        <p className="text-xs text-fg-3">
+        <p className="text-xs text-muted-foreground">
           Type any name and number above — that&rsquo;s it.
         </p>
       ) : (
@@ -85,12 +85,12 @@ export function CustomiseTemplates({ product }: { product: Product }) {
                 className={cn(
                   "flex h-9 items-center gap-2 border px-2.5 text-xs font-bold uppercase transition-colors duration-150 ease-worldkit",
                   active
-                    ? "border-accent bg-accent text-bg-1"
-                    : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",
+                    ? "border-lime-400 bg-lime-400 text-background"
+                    : "border-lime-400/20 text-foreground hover:border-lime-400 hover:bg-lime-400/12",
                 )}
               >
                 <span>{item.name}</span>
-                <span className="tabular-nums text-fg-3 group-aria-pressed:text-bg-1">
+                <span className="tabular-nums text-muted-foreground group-aria-pressed:text-background">
                   {item.number}
                 </span>
               </button>

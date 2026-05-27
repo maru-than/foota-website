@@ -34,16 +34,16 @@ export function FontSpecimen({
 
   return (
     <div className={className}>
-      <p className="eyebrow mb-2 text-fg-3">{f.label}</p>
+      <p className="eyebrow mb-2 text-muted-foreground">{f.label}</p>
       <p
-        className="break-words text-base uppercase text-fg-1"
+        className="break-words text-base uppercase text-foreground"
         style={style}
         aria-hidden
       >
         {ALPHA}
       </p>
       <p
-        className="mt-1 break-words text-base text-fg-1 tabular-nums"
+        className="mt-1 break-words text-base text-foreground tabular-nums"
         style={style}
         aria-hidden
       >

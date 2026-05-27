@@ -49,12 +49,12 @@ export function VariantSelector({
       {product.options.map((option) => (
         <div key={option.id}>
           <div className="mb-2.5 flex items-center justify-between">
-            <span className="eyebrow text-fg-3">{option.name}</span>
+            <span className="eyebrow text-muted-foreground">{option.name}</span>
             {option.name.toLowerCase() === "size" ? (
               <SizeGuideModal>
                 <button
                   type="button"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-accent transition-colors hover:text-accent-hi focus:outline-none focus-visible:text-accent-hi"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-lime-400 transition-colors hover:text-lime-300 focus:outline-none focus-visible:text-lime-300"
                 >
                   <Ruler className="size-3.5" strokeWidth={1.5} aria-hidden />
                   Size guide
@@ -76,10 +76,10 @@ export function VariantSelector({
                   className={cn(
                     "flex size-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
                     isSelected
-                      ? "border-accent bg-accent text-bg-1"
-                      : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",
+                      ? "border-lime-400 bg-lime-400 text-background"
+                      : "border-lime-400/20 text-foreground hover:border-lime-400 hover:bg-lime-400/12",
                     !available &&
-                      "cursor-not-allowed border-line-1 text-fg-4 line-through hover:border-line-1 hover:bg-transparent",
+                      "cursor-not-allowed border-border text-muted-foreground/60 line-through hover:border-border hover:bg-transparent",
                   )}
                 >
                   {value}
