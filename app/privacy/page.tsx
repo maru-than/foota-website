@@ -30,13 +30,13 @@ export default function PrivacyPage() {
         title="Privacy Policy"
         description="How we collect, use and protect your data."
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <LegalDoc updated={UPDATED}>
           <LegalSection title="Who we are">
             <p>
               Worldkit Soccer (“we”, “us”) operates this store. If you contact
               us about your data, write to{" "}
-              <a className="underline hover:text-accent" href="mailto:privacy@worldkit.example">
+              <a className="underline hover:text-primary" href="mailto:privacy@worldkit.example">
                 privacy@worldkit.example
               </a>
               .
@@ -95,7 +95,7 @@ export default function PrivacyPage() {
               Depending on where you live, you can request access, correction,
               deletion, portability, or object to certain processing. To
               exercise these, email{" "}
-              <a className="underline hover:text-accent" href="mailto:privacy@worldkit.example">
+              <a className="underline hover:text-primary" href="mailto:privacy@worldkit.example">
                 privacy@worldkit.example
               </a>{" "}
               from the address on your order. We respond within 30 days.
@@ -107,7 +107,7 @@ export default function PrivacyPage() {
               We use strictly necessary cookies to run the store (cart, login,
               fraud checks), and — with your consent — analytics cookies to
               understand how the site is used. Read more in our{" "}
-              <Link href="/cookies" className="underline hover:text-accent">
+              <Link href="/cookies" className="underline hover:text-primary">
                 Cookie Policy
               </Link>
               .

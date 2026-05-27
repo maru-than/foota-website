@@ -8,7 +8,6 @@
 
 import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getFeaturedTestimonials } from "@/lib/testimonials";
 
@@ -17,15 +16,15 @@ export function TestimonialsSection() {
   if (items.length === 0) return null;
 
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-24 lg:py-40">
       <Container>
-        <Reveal>
+        <div>
           <SectionHeading
             eyebrow="Worn worldwide"
             title="What collectors are saying"
-            description="Verified reviews from buyers across all six confederations."
+            description="Verified reviews from buyers worldwide."
           />
-        </Reveal>
+        </div>
         <div className="mt-10">
           <TestimonialGrid items={items} columns={3} />
         </div>

@@ -1,63 +1,80 @@
 /**
- * @file shadcn button primitive — primary / ghost / secondary / danger / link variants, Slot composition.
+ * @file shadcn Button — default/outline/secondary/ghost/destructive/link variants, six sizes.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
  * @since 2026-05-25
  */
 
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from "radix-ui"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-none font-bold tracking-[-0.03em] transition-[background-color,border-color,color,transform] duration-150 ease-worldkit active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-1 disabled:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        primary:
-          "bg-accent text-bg-1 hover:bg-accent-hi active:bg-accent-lo disabled:bg-bg-3 disabled:text-fg-4",
-        ghost:
-          "border border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12 disabled:opacity-50",
+        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        outline:
+          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground aria-pressed:border-2 aria-pressed:border-primary aria-pressed:bg-background aria-pressed:text-foreground aria-pressed:hover:bg-background aria-pressed:hover:text-foreground",
         secondary:
-          "border border-line-1 bg-bg-3 text-fg-1 hover:bg-bg-4 disabled:opacity-50",
-        danger: "bg-danger text-bg-1 hover:opacity-90 disabled:opacity-50",
-        link: "h-auto px-0 text-accent underline-offset-4 hover:text-accent-hi hover:underline",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+        ghost:
+          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+        destructive:
+          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20",
+        link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-9 px-4 text-[13px]",
-        default: "h-12 px-6 text-sm",
-        lg: "h-14 px-8 text-sm",
+        // foota: bumped from stock shadcn defaults (h-8/h-9/h-7) — the original
+        // heights read as thin on the foota PDP next to the large product
+        // photography. xl is added for hero-level CTAs.
+        default:
+          "h-10 gap-1.5 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
+        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-9 gap-1 rounded-[min(var(--radius-md),12px)] px-3.5 text-[0.85rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-12 gap-2 px-6 text-base has-data-[icon=inline-end]:pr-5 has-data-[icon=inline-start]:pl-5",
+        xl: "h-14 gap-2.5 px-8 text-base has-data-[icon=inline-end]:pr-7 has-data-[icon=inline-start]:pl-7",
         icon: "size-10",
+        "icon-xs":
+          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm":
+          "size-8 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
+        "icon-lg": "size-12",
+        "icon-xl": "size-14",
       },
     },
     defaultVariants: {
-      variant: "primary",
+      variant: "default",
       size: "default",
     },
-  },
-);
+  }
+)
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+function Button({
+  className,
+  variant = "default",
+  size = "default",
+  asChild = false,
+  ...props
+}: React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean
+  }) {
+  const Comp = asChild ? Slot.Root : "button"
+
+  return (
+    <Comp
+      data-slot="button"
+      data-variant={variant}
+      data-size={size}
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  )
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
-Button.displayName = "Button";
-
-export { Button, buttonVariants };
+export { Button, buttonVariants }

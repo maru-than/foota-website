@@ -32,7 +32,7 @@ import { CUSTOM_MAX_NAME_CHARS, CUSTOM_PRICE_DELTA } from "@/lib/customisation";
 import type { Product } from "@/lib/shopify/types";
 
 /**
- * Inline trigger styled to match the prior <Link className="text-accent underline">
+ * Inline trigger styled to match the prior <Link className="text-primary underline">
  * usage. Forwards ref/props so Radix Slot (asChild on the modal trigger) can wire
  * up its onClick, data-state, aria-* etc. onto the underlying <button>.
  */
@@ -45,7 +45,7 @@ const InlineTrigger = React.forwardRef<
       ref={ref}
       type="button"
       className={
-        "text-accent underline underline-offset-2 transition-colors hover:text-accent-hi focus:outline-none focus-visible:text-accent-hi" +
+        "text-primary underline underline-offset-2 transition-colors hover:text-primary focus:outline-none focus-visible:text-primary" +
         (className ? ` ${className}` : "")
       }
       {...props}
@@ -58,18 +58,18 @@ export function ProductDetails({ product }: { product: Product }) {
     <Accordion
       type="multiple"
       defaultValue={["description"]}
-      className="border-t border-line-1"
+      className="border-t border-border"
     >
       <AccordionItem value="description">
         <AccordionTrigger>
           <span className="flex items-center gap-2">
-            <FileText className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+            <FileText className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
             Description
           </span>
         </AccordionTrigger>
         <AccordionContent>
           <div
-            className="[&_a]:text-accent [&_a]:underline [&_p]:mb-3 [&_p:last-child]:mb-0"
+            className="[&_a]:text-primary [&_a]:underline [&_p]:mb-3 [&_p:last-child]:mb-0"
             dangerouslySetInnerHTML={{
               __html: product.descriptionHtml || `<p>${product.description}</p>`,
             }}
@@ -80,7 +80,7 @@ export function ProductDetails({ product }: { product: Product }) {
       <AccordionItem value="authenticity">
         <AccordionTrigger>
           <span className="flex items-center gap-2">
-            <ShieldCheck className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+            <ShieldCheck className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
             Condition &amp; Quality Check
           </span>
         </AccordionTrigger>
@@ -100,7 +100,7 @@ export function ProductDetails({ product }: { product: Product }) {
       <AccordionItem value="size">
         <AccordionTrigger>
           <span className="flex items-center gap-2">
-            <Ruler className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+            <Ruler className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
             Size Guide
           </span>
         </AccordionTrigger>
@@ -118,7 +118,7 @@ export function ProductDetails({ product }: { product: Product }) {
       <AccordionItem value="shipping">
         <AccordionTrigger>
           <span className="flex items-center gap-2">
-            <Truck className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+            <Truck className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
             Shipping &amp; Returns
           </span>
         </AccordionTrigger>
@@ -138,32 +138,32 @@ export function ProductDetails({ product }: { product: Product }) {
         <AccordionItem value="customisation">
           <AccordionTrigger>
             <span className="flex items-center gap-2">
-              <PencilLine className="size-4 text-fg-3" strokeWidth={1.5} aria-hidden />
+              <PencilLine className="size-4 text-muted-foreground" strokeWidth={1.5} aria-hidden />
               Name &amp; number printing
             </span>
           </AccordionTrigger>
           <AccordionContent>
             <p className="mb-3">
               Add any name (up to {CUSTOM_MAX_NAME_CHARS} characters) and a
-              number from 0–99 to the back. Heat-pressed with the official{" "}
-              {product.meta.confederation ?? "confederation"} letter set.
+              number from 0–99 to the back. Officially heat-pressed lettering.
               Add-on price: ${CUSTOM_PRICE_DELTA.toFixed(0)}.
             </p>
-            <div className="mb-4 flex items-start gap-2 border border-danger/40 bg-danger/5 p-3">
+            <div className="mb-4 flex items-start gap-2 rounded-md border border-destructive/40 bg-destructive/5 p-3">
               <AlertTriangle
-                className="mt-0.5 size-4 shrink-0 text-danger"
+                className="mt-0.5 size-4 shrink-0 text-destructive"
                 strokeWidth={1.5}
                 aria-hidden
               />
               <p>
                 Customised shirts ship in 5–7 days and are{" "}
-                <b className="text-fg-1">non-returnable</b> — please
+                <b className="text-foreground">non-returnable</b> — please
                 double-check spelling before adding to the bag.
               </p>
             </div>
             <FontSpecimen
               confederation={product.meta.confederation}
-              className="border-t border-line-1 pt-4"
+              className="border-t border-border pt-4"
+              showLabel={false}
             />
           </AccordionContent>
         </AccordionItem>

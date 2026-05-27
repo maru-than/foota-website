@@ -14,11 +14,11 @@ import { Container } from "@/components/ui/container";
 export default function NotFound() {
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-5 py-24 text-center">
-      <span className="eyebrow text-accent">404</span>
-      <h1 className="display text-4xl sm:text-5xl">
+      <span className="text-xs text-muted-foreground">404</span>
+      <h1 className="font-display text-4xl sm:text-5xl">
         Off the pitch.
       </h1>
-      <p className="max-w-md text-pretty text-fg-3">
+      <p className="max-w-md text-pretty text-muted-foreground">
         We couldn&apos;t find that page. The jersey you&apos;re after might be
         with one of the other 47 nations.
       </p>

@@ -27,22 +27,22 @@ export default function ContactPage() {
         description="Questions about a shirt, an order or authenticity? We're happy to help."
         image="/pages/contact.png"
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <div className="grid gap-12 lg:grid-cols-[1fr_320px]">
           <div className="max-w-2xl">
             <ContactForm />
           </div>
-          <aside className="space-y-8 text-sm text-fg-3">
+          <aside className="space-y-8 text-sm text-muted-foreground">
             <div>
-              <h2 className="eyebrow text-fg-1">Email</h2>
+              <h2 className="text-xs text-foreground">Email</h2>
               <p className="mt-2">hello@worldkitsoccer.com</p>
             </div>
             <div>
-              <h2 className="eyebrow text-fg-1">Support hours</h2>
+              <h2 className="text-xs text-foreground">Support hours</h2>
               <p className="mt-2">Monday – Friday, 9:00 – 17:00 CET</p>
             </div>
             <div>
-              <h2 className="eyebrow text-fg-1">Returns</h2>
+              <h2 className="text-xs text-foreground">Returns</h2>
               <p className="mt-2">
                 See shipping &amp; returns for our full policy before getting in
                 touch about a return.

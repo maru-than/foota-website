@@ -51,7 +51,7 @@ export default function CookiesPage() {
         title="Cookie Policy"
         description="What cookies we set, why, and how to change your mind."
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <LegalDoc updated={UPDATED}>
           <LegalSection title="What cookies are">
             <p>
@@ -66,11 +66,11 @@ export default function CookiesPage() {
               {CATEGORIES.map((c) => (
                 <div
                   key={c.name}
-                  className="border border-line-accent bg-bg-2 p-4"
+                  className="border border-border bg-card p-4"
                 >
-                  <h3 className="eyebrow text-accent">{c.name}</h3>
+                  <h3 className="text-xs text-muted-foreground">{c.name}</h3>
                   <p className="mt-2 text-sm">{c.purpose}</p>
-                  <p className="mt-3 text-xs uppercase text-fg-3">
+                  <p className="mt-3 text-xs text-muted-foreground">
                     {c.optional ? "Optional" : "Always on"}
                   </p>
                 </div>

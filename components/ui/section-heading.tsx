@@ -33,29 +33,39 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? <span className="eyebrow text-accent">{eyebrow}</span> : null}
+      {eyebrow ? (
+        <span className="text-xs text-muted-foreground">{eyebrow}</span>
+      ) : null}
       <div
         className={cn(
           "flex w-full items-end justify-between gap-6",
           align === "center" && "justify-center",
         )}
       >
-        <h2 className="display text-balance text-4xl leading-[1.02] sm:text-5xl">
+        <h2 className="font-display text-balance text-4xl leading-[1.02] sm:text-5xl lg:text-6xl">
           {title}
         </h2>
         {action ? (
           <Link
             href={action.href}
-            className="hidden shrink-0 items-center gap-1.5 border-b border-line-accent pb-1 text-sm text-fg-1 transition-colors hover:border-accent hover:text-accent sm:inline-flex"
+            className="hidden shrink-0 items-center gap-1.5 border-b border-border pb-1 text-sm text-foreground transition-colors hover:border-primary hover:text-primary sm:inline-flex"
           >
             {action.label}
           </Link>
         ) : null}
       </div>
       {description ? (
-        <p className="max-w-2xl text-pretty text-sm leading-relaxed text-fg-2 sm:text-base">
+        <p className="max-w-2xl text-pretty text-sm leading-relaxed text-foreground/80 sm:text-base">
           {description}
         </p>
+      ) : null}
+      {action ? (
+        <Link
+          href={action.href}
+          className="inline-flex w-fit items-center gap-1.5 border-b border-border pb-1 text-sm text-foreground transition-colors hover:border-primary hover:text-primary sm:hidden"
+        >
+          {action.label} →
+        </Link>
       ) : null}
     </div>
   );

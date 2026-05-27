@@ -29,7 +29,7 @@ export function NewsletterForm({ className }: { className?: string }) {
 
   if (submitted) {
     return (
-      <p className={cn("flex items-center gap-2 text-sm text-accent", className)}>
+      <p className={cn("flex items-center gap-2 text-sm text-primary", className)}>
         <Check className="size-4" strokeWidth={1.5} />
         You&apos;re on the list. Watch your inbox.
       </p>
@@ -39,7 +39,10 @@ export function NewsletterForm({ className }: { className?: string }) {
   return (
     <form
       onSubmit={onSubmit}
-      className={cn("flex border border-line-accent", className)}
+      className={cn(
+        "flex overflow-hidden rounded-full border border-border bg-background",
+        className,
+      )}
     >
       <input
         type="email"
@@ -48,12 +51,12 @@ export function NewsletterForm({ className }: { className?: string }) {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@inbox.com"
         aria-label="Email address"
-        className="min-w-0 flex-1 bg-transparent px-4 text-base tracking-[-0.03em] text-fg-1 outline-none placeholder:text-fg-4 sm:text-sm"
+        className="min-w-0 flex-1 bg-transparent pl-5 pr-3 text-base text-foreground outline-none placeholder:text-muted-foreground/60 sm:text-sm"
       />
       <button
         type="submit"
         aria-label="Subscribe"
-        className="flex min-h-11 shrink-0 items-center justify-center bg-accent px-4 text-bg-1 transition-colors duration-150 ease-worldkit hover:bg-accent-hi"
+        className="flex min-h-11 shrink-0 items-center justify-center bg-primary px-5 text-primary-foreground transition-colors duration-150 ease-out hover:bg-primary/90"
       >
         <ArrowRight className="size-4" strokeWidth={1.5} />
       </button>

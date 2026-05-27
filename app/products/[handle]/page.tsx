@@ -19,7 +19,6 @@ import { RelatedProducts } from "@/components/product/related-products";
 import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
 import { Container } from "@/components/ui/container";
 import { Price } from "@/components/ui/price";
-import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getTestimonialsForProduct } from "@/lib/testimonials";
 import {
@@ -99,21 +98,21 @@ export default async function ProductPage({
       <Container className="py-8 lg:py-12">
         <nav
           aria-label="Breadcrumb"
-          className="mb-6 flex items-center gap-1.5 text-xs text-fg-3"
+          className="mb-6 flex items-center gap-1.5 text-xs text-muted-foreground"
         >
-          <Link href="/" className="transition-colors hover:text-fg-1">
+          <Link href="/" className="transition-colors hover:text-foreground">
             Home
           </Link>
           <span aria-hidden>/</span>
-          <Link href="/shop" className="transition-colors hover:text-fg-1">
+          <Link href="/shop" className="transition-colors hover:text-foreground">
             Shop
           </Link>
           <span aria-hidden>/</span>
-          <span className="text-fg-1">{product.title}</span>
+          <span className="text-foreground">{product.title}</span>
         </nav>
 
         <CustomiseProvider product={product}>
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
+          <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:gap-14">
             <ProductGallery
               images={product.images}
               title={product.title}
@@ -126,17 +125,27 @@ export default async function ProductPage({
             />
 
             <div className="lg:py-2">
-              <h1 className="text-3xl font-bold leading-none tracking-[-0.03em] text-accent sm:text-4xl">
+              {(() => {
+                const eyebrow = [product.meta.type, product.meta.season]
+                  .filter(Boolean)
+                  .join(" · ");
+                return eyebrow ? (
+                  <p className="mb-3 text-xs tracking-[-0.02em] text-foreground/40">
+                    {eyebrow}
+                  </p>
+                ) : null;
+              })()}
+              <h1 className="font-display text-4xl leading-none tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                 {product.meta.teamName ?? product.title}
+                <span className="text-lime-500">.</span>
               </h1>
-              <p className="mt-2 text-sm text-fg-3">{product.title}</p>
 
               <div className="mt-5">
                 <Price
                   amount={price.amount}
                   currencyCode={price.currencyCode}
                   compareAt={product.compareAtPrice}
-                  className="text-2xl font-bold text-fg-1"
+                  className="text-3xl text-foreground"
                 />
               </div>
 
@@ -153,15 +162,15 @@ export default async function ProductPage({
       </Container>
 
       {reviews.length > 0 ? (
-        <section className="border-t border-line-accent py-16 lg:py-20">
+        <section className="border-t border-border py-24 lg:py-40">
           <Container>
-            <Reveal>
+            <div>
               <SectionHeading
                 eyebrow="Reviews"
                 title="From the locker room"
-                description="What other buyers said about this shirt and its confederation."
+                description="What other buyers said about this shirt."
               />
-            </Reveal>
+            </div>
             <div className="mt-10">
               <TestimonialGrid items={reviews} columns={2} />
             </div>

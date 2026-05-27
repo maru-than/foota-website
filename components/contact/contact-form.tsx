@@ -24,10 +24,10 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="border border-line-accent bg-bg-2 p-10 text-center">
-        <Check className="mx-auto size-7 text-accent" strokeWidth={1.5} />
-        <p className="mt-4 text-2xl font-bold tracking-[-0.03em]">Message sent.</p>
-        <p className="mt-2 text-sm text-fg-3">
+      <div className="rounded-xl border border-border bg-card p-10 text-center">
+        <Check className="mx-auto size-7 text-primary" strokeWidth={1.5} />
+        <p className="mt-4 font-display text-3xl text-foreground">Message sent.</p>
+        <p className="mt-2 text-sm text-muted-foreground">
           Thanks for reaching out — we&apos;ll reply within 1–2 working days.
         </p>
       </div>
@@ -38,25 +38,25 @@ export function ContactForm() {
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1.5 block text-sm text-fg-2">Name</span>
+          <span className="mb-1.5 block text-sm text-foreground/80">Name</span>
           <Input required name="name" autoComplete="name" />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-sm text-fg-2">Email</span>
+          <span className="mb-1.5 block text-sm text-foreground/80">Email</span>
           <Input required type="email" name="email" autoComplete="email" />
         </label>
       </div>
       <label className="block">
-        <span className="mb-1.5 block text-sm text-fg-2">Subject</span>
+        <span className="mb-1.5 block text-sm text-foreground/80">Subject</span>
         <Input name="subject" />
       </label>
       <label className="block">
-        <span className="mb-1.5 block text-sm text-fg-2">Message</span>
+        <span className="mb-1.5 block text-sm text-foreground/80">Message</span>
         <textarea
           required
           name="message"
           rows={6}
-          className="flex w-full rounded-none border border-line-2 bg-bg-2 px-4 py-3 text-base tracking-[-0.03em] text-fg-1 transition-colors duration-150 ease-worldkit placeholder:text-fg-4 focus-visible:border-accent focus-visible:outline-none sm:text-sm"
+          className="flex w-full rounded-none border border-input bg-card px-4 py-3 text-base text-foreground transition-colors duration-150 ease-out placeholder:text-muted-foreground/60 focus-visible:border-primary focus-visible:outline-none sm:text-sm"
         />
       </label>
       <Button type="submit">Send message</Button>

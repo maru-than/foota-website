@@ -24,16 +24,16 @@ export async function ShippingPromise() {
   const eta = lo === hi ? `${lo} day${lo === 1 ? "" : "s"}` : `${lo}–${hi} days`;
 
   return (
-    <div className="flex items-start gap-2.5 border border-line-1 bg-bg-2 p-3 text-xs leading-snug text-fg-2">
-      <Truck className="size-4 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
+    <div className="flex items-start gap-2.5 border border-border bg-card p-3 text-xs leading-snug text-foreground/80">
+      <Truck className="size-4 shrink-0 text-primary" strokeWidth={1.5} aria-hidden />
       <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
-        <MapPin className="size-3 shrink-0 text-fg-3" strokeWidth={1.5} aria-hidden />
-        <span className="font-bold text-fg-1">{countryLabel}</span>
-        <span aria-hidden className="text-fg-3">·</span>
-        <Clock className="size-3 shrink-0 text-fg-3" strokeWidth={1.5} aria-hidden />
+        <MapPin className="size-3 shrink-0 text-muted-foreground" strokeWidth={1.5} aria-hidden />
+        <span className="font-bold text-foreground">{countryLabel}</span>
+        <span aria-hidden className="text-muted-foreground">·</span>
+        <Clock className="size-3 shrink-0 text-muted-foreground" strokeWidth={1.5} aria-hidden />
         <span>tracked delivery in {eta}</span>
-        <span aria-hidden className="text-fg-3">·</span>
-        <Gift className="size-3 shrink-0 text-fg-3" strokeWidth={1.5} aria-hidden />
+        <span aria-hidden className="text-muted-foreground">·</span>
+        <Gift className="size-3 shrink-0 text-muted-foreground" strokeWidth={1.5} aria-hidden />
         <span>free over {freeOverFormatted}</span>
       </p>
     </div>

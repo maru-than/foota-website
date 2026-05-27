@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Filter drawer (mobile) / sidebar (desktop) — confederation, nation, type, size, price range.
+ * @file Filter drawer (mobile) / sidebar (desktop) — nation, type, size, price range.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -36,8 +36,8 @@ function FilterGroup({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-t border-line-1 py-5 first:border-t-0 first:pt-0">
-      <h3 className="eyebrow mb-3 text-fg-3">{title}</h3>
+    <div className="border-t border-border py-5 first:border-t-0 first:pt-0">
+      <h3 className="mb-3 text-xs text-muted-foreground">{title}</h3>
       {/* On mobile the drawer scrolls already; nesting a scroll region inside
           it traps touch. Only constrain height from md: up where the panel is
           a desktop sidebar. */}
@@ -61,14 +61,14 @@ function CheckRow({
     <label className="flex min-h-11 cursor-pointer items-center gap-2.5 py-2 text-sm">
       <span
         className={cn(
-          "flex size-4 shrink-0 items-center justify-center border transition-colors",
-          checked ? "border-accent bg-accent text-bg-1" : "border-line-accent",
+          "flex size-4 shrink-0 items-center justify-center rounded-sm border transition-colors",
+          checked ? "border-primary bg-primary text-background" : "border-border",
         )}
       >
         {checked ? <Check className="size-3" strokeWidth={2.5} /> : null}
       </span>
       <input type="checkbox" className="sr-only" checked={checked} onChange={onToggle} />
-      <span className={cn(checked ? "text-fg-1" : "text-fg-2")}>{label}</span>
+      <span className={cn(checked ? "text-foreground" : "text-foreground/80")}>{label}</span>
     </label>
   );
 }
@@ -97,7 +97,6 @@ export function FilterPanel({
   };
 
   const groups: { key: string; title: string; values: string[]; scroll?: boolean }[] = [
-    { key: "confederation", title: "Confederation", values: facets.confederations },
     { key: "nation", title: "Nation", values: facets.nations, scroll: true },
     { key: "type", title: "Type", values: facets.types },
     { key: "size", title: "Size", values: facets.sizes },
@@ -115,12 +114,12 @@ export function FilterPanel({
     <div>
       {showHeader ? (
         <div className="flex items-center justify-between pb-4">
-          <span className="text-sm font-bold uppercase">Filters</span>
+          <span className="text-xs font-medium text-muted-foreground">Filters</span>
           {showClear ? (
             <button
               type="button"
               onClick={() => router.push(pathname, { scroll: false })}
-              className="text-xs uppercase text-fg-3 transition-colors hover:text-accent"
+              className="text-xs text-muted-foreground transition-colors hover:text-primary"
             >
               Clear all
             </button>
@@ -133,7 +132,7 @@ export function FilterPanel({
           <button
             type="button"
             onClick={() => router.push(pathname, { scroll: false })}
-            className="text-xs uppercase text-fg-3 transition-colors hover:text-accent"
+            className="text-xs text-muted-foreground transition-colors hover:text-primary"
           >
             Clear all
           </button>
@@ -198,7 +197,7 @@ function PriceFilter({ min, max }: { min: number; max: number }) {
           onChange={(e) => setMinVal(e.target.value)}
           className="h-11 px-3"
         />
-        <span className="text-fg-3">–</span>
+        <span className="text-muted-foreground">–</span>
         <Input
           type="number"
           inputMode="numeric"
@@ -225,7 +224,7 @@ export function FiltersDrawer({
 }) {
   const [open, setOpen] = useState(false);
   const searchParams = useSearchParams();
-  const keys = ["confederation", "nation", "type", "size"];
+  const keys = ["nation", "type", "size"];
   const active =
     keys.reduce((sum, k) => sum + getValues(searchParams, k).length, 0) +
     (searchParams.get("minPrice") || searchParams.get("maxPrice") ? 1 : 0);

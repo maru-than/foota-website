@@ -81,29 +81,29 @@ export function SearchOverlay({
           e.preventDefault();
           inputRef.current?.focus();
         }}
-        hideClose
+        showCloseButton={false}
       >
         <DialogTitle className="sr-only">Search jerseys</DialogTitle>
         <DialogDescription className="sr-only">
-          Search World Cup 2026 jerseys by nation or confederation.
+          Search World Cup 2026 jerseys by nation.
         </DialogDescription>
 
         <form
           onSubmit={goToResults}
-          className="flex items-center gap-3 border-b border-line-accent pl-5 pr-2"
+          className="flex items-center gap-3 border-b border-border pl-5 pr-2"
         >
-          <SearchIcon className="size-5 shrink-0 text-fg-3" strokeWidth={1.5} />
+          <SearchIcon className="size-5 shrink-0 text-muted-foreground" strokeWidth={1.5} />
           <input
             ref={inputRef}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search nations, confederations…"
-            className="h-14 flex-1 bg-transparent text-base tracking-[-0.02em] text-fg-1 outline-none placeholder:text-fg-4"
+            placeholder="Search nations…"
+            className="h-14 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground/60"
           />
           <button
             type="button"
             onClick={() => handleOpenChange(false)}
-            className="shrink-0 px-3 py-2 text-xs font-semibold uppercase text-fg-3 transition-colors hover:text-accent focus:outline-none focus-visible:text-accent"
+            className="shrink-0 px-3 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-primary focus:outline-none focus-visible:text-primary"
           >
             Cancel
           </button>
@@ -111,7 +111,7 @@ export function SearchOverlay({
 
         <div className="max-h-[52vh] overflow-y-auto">
           {showEmpty ? (
-            <p className="px-5 py-8 text-center text-sm text-fg-3">
+            <p className="px-5 py-8 text-center text-sm text-muted-foreground">
               No jerseys match &ldquo;{query.trim()}&rdquo;.
             </p>
           ) : null}
@@ -124,12 +124,12 @@ export function SearchOverlay({
                     <Link
                       href={`/products/${p.handle}`}
                       onClick={() => handleOpenChange(false)}
-                      className="flex items-center gap-4 px-5 py-3 transition-colors hover:bg-bg-3"
+                      className="flex items-center gap-4 px-5 py-3 transition-colors hover:bg-muted"
                     >
                       <div
                         className={cn(
-                          "relative aspect-[4/5] w-11 shrink-0 overflow-hidden border border-line-1",
-                          p.featuredImage ? "bg-white" : "jersey-frame",
+                          "relative aspect-[4/5] w-11 shrink-0 overflow-hidden border border-border",
+                          p.featuredImage ? "bg-white" : "bg-muted",
                         )}
                       >
                         {p.featuredImage ? (
@@ -146,13 +146,13 @@ export function SearchOverlay({
                       </div>
                       <div className="flex-1">
                         {p.meta.teamName ? (
-                          <span className="text-[11px] uppercase text-accent">
+                          <span className="text-[11px] text-primary">
                             {p.meta.teamName}
                           </span>
                         ) : null}
-                        <p className="text-sm text-fg-1">{p.title}</p>
+                        <p className="text-sm text-foreground">{p.title}</p>
                       </div>
-                      <span className="text-sm font-bold tabular-nums text-fg-3">
+                      <span className="text-sm font-bold tabular-nums text-muted-foreground">
                         {formatPrice(
                           p.priceRange.minVariantPrice.amount,
                           p.priceRange.minVariantPrice.currencyCode,
@@ -165,7 +165,7 @@ export function SearchOverlay({
               <button
                 type="button"
                 onClick={goToResults}
-                className="block w-full border-t border-line-1 px-5 py-3 text-left text-xs uppercase text-accent transition-colors hover:bg-bg-3"
+                className="block w-full border-t border-border px-5 py-3 text-left text-xs text-primary transition-colors hover:bg-muted"
               >
                 View all results
               </button>
@@ -173,9 +173,9 @@ export function SearchOverlay({
           ) : null}
 
           {query.trim().length < 2 ? (
-            <p className="px-5 py-8 text-center text-sm text-fg-3">
-              Try a nation or confederation — &ldquo;Brazil&rdquo;,
-              &ldquo;Morocco&rdquo;, &ldquo;UEFA&rdquo;.
+            <p className="px-5 py-8 text-center text-sm text-muted-foreground">
+              Try a nation — &ldquo;Brazil&rdquo;, &ldquo;Morocco&rdquo;,
+              &ldquo;Argentina&rdquo;.
             </p>
           ) : null}
         </div>

@@ -58,3 +58,15 @@ export function onConsentChange(
   window.addEventListener(EVENT, listener);
   return () => window.removeEventListener(EVENT, listener);
 }
+
+/**
+ * `useSyncExternalStore`-compatible subscribe — same as onConsentChange but
+ * with the React-expected `() => void` cleanup contract. Separate from the
+ * imperative handler version so the store snapshot stays referentially stable
+ * (no closure over `handler`).
+ */
+export function subscribeToConsent(onChange: () => void): () => void {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener(EVENT, onChange);
+  return () => window.removeEventListener(EVENT, onChange);
+}

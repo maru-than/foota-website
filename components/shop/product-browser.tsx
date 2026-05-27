@@ -43,15 +43,15 @@ export function ProductBrowser({
             <ActiveFilters />
           </Suspense>
 
-          <div className="mb-8 flex items-center justify-between gap-4 border-b border-line-1 pb-4">
+          <div className="mb-8 flex items-center justify-between gap-4 border-b border-border pb-4">
             <div className="flex items-center gap-4">
               <div className="md:hidden">
                 <Suspense fallback={null}>
                   <FiltersDrawer facets={facets} resultCount={products.length} />
                 </Suspense>
               </div>
-              <p className="whitespace-nowrap text-sm text-fg-3">
-                <b className="font-bold tabular-nums text-fg-1">{products.length}</b>{" "}
+              <p className="whitespace-nowrap text-sm text-muted-foreground">
+                <b className="font-bold tabular-nums text-foreground">{products.length}</b>{" "}
                 {products.length === 1 ? "jersey" : "jerseys"}
               </p>
             </div>
@@ -64,10 +64,10 @@ export function ProductBrowser({
             <ProductGrid products={products} priorityCount={4} />
           ) : (
             <div className="flex flex-col items-center gap-4 py-20 text-center">
-              <p className="text-2xl font-bold tracking-[-0.03em]">
+              <p className="text-2xl font-bold">
                 No jerseys match these filters.
               </p>
-              <p className="text-sm text-fg-3">Try removing a filter or two.</p>
+              <p className="text-sm text-muted-foreground">Try removing a filter or two.</p>
               <Button asChild variant="secondary">
                 <Link href={clearHref}>Clear filters</Link>
               </Button>

@@ -83,7 +83,7 @@ export function ProductGallery({
 
   if (images.length === 0 && !backSlot) {
     return (
-      <div className="jersey-frame grid-texture relative aspect-[4/5] w-full overflow-hidden border border-line-accent">
+      <div className="bg-muted relative aspect-[4/5] w-full overflow-hidden rounded-xl border border-border">
         <JerseyPlaceholder
           label={meta.teamName ?? undefined}
           sublabel={meta.season ?? undefined}
@@ -109,7 +109,7 @@ export function ProductGallery({
               slideRefs.current[i] = el;
             }}
             data-index={i}
-            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden border border-line-accent bg-white"
+            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden rounded-xl border border-border bg-white"
           >
             <Image
               src={img.url}
@@ -128,93 +128,73 @@ export function ProductGallery({
               slideRefs.current[backIndex] = el;
             }}
             data-index={backIndex}
-            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden border border-line-accent bg-bg-1"
+            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden rounded-xl border border-border bg-background"
           >
             {backSlot}
           </div>
         ) : null}
       </div>
 
-      {/* Desktop active tile — either an image or the back slot. */}
+      {/* Desktop active tile — either an image on the hero-style layered
+          lime backdrop, or the back slot (no backdrop — the back preview
+          composes its own scene). */}
       {active === backIndex && backSlot ? (
-        <div className="relative hidden aspect-[4/5] w-full overflow-hidden border border-line-accent bg-bg-1 md:block">
+        <div className="relative hidden aspect-[4/5] w-full overflow-hidden rounded-xl border border-border bg-background md:block">
           {backSlot}
         </div>
       ) : (
-        <div className="relative hidden aspect-[4/5] w-full overflow-hidden border border-line-accent bg-white md:block">
+        <div className="relative hidden aspect-[4/5] w-full md:block">
+          {/* Lime fill block, offset back-left — mirrors the hero composition. */}
+          <div
+            aria-hidden
+            className="absolute left-0 top-[7%] h-[78%] w-[78%] bg-lime-200"
+          />
+          {/* Grid square — CSS gradient, no overflow math.
+              Inset shadow stands in for the outer border without eating space. */}
+          <div
+            aria-hidden
+            className="absolute left-[8%] top-[15%] h-[78%] w-[78%] bg-white"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, rgba(163, 230, 53, 0.55) 1px, transparent 1px), linear-gradient(to bottom, rgba(163, 230, 53, 0.55) 1px, transparent 1px)",
+              backgroundSize: "5% 5%",
+              boxShadow: "inset 0 0 0 1px rgba(163, 230, 53, 0.55)",
+            }}
+          />
+          {/* Jersey — front of stack, fills the full tile so it can read
+              through the grid via its transparent margins. */}
           <Image
             src={(images[active] ?? images[0]).url}
             alt={(images[active] ?? images[0]).altText || title}
             fill
             priority
             sizes="50vw"
-            className="object-contain p-6"
+            className="relative object-contain p-6"
           />
         </div>
       )}
 
       {slideCount > 1 ? (
-        <>
-          {/* Mobile dots paginator — bigger tap targets than thumbnails on a phone. */}
-          <div className="flex justify-center gap-2 md:hidden" aria-hidden>
-            {Array.from({ length: slideCount }).map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => scrollTo(i)}
-                aria-label={
-                  i === backIndex ? "View back preview" : `Go to image ${i + 1}`
-                }
-                className="flex h-6 w-6 items-center justify-center"
-              >
-                <span
-                  className={cn(
-                    "block size-1.5 rounded-full transition-colors",
-                    i === active ? "bg-accent" : "bg-line-3",
-                  )}
-                />
-              </button>
-            ))}
-          </div>
-
-          {/* Desktop thumbnail strip */}
-          <div className="hidden grid-cols-5 gap-2 md:grid">
-            {images.map((img, i) => (
-              <button
-                key={`${img.url}-${i}-thumb`}
-                type="button"
-                onClick={() => setActive(i)}
-                aria-label={`View image ${i + 1}`}
+        <div className="flex justify-center gap-2 md:hidden" aria-hidden>
+          {Array.from({ length: slideCount }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => scrollTo(i)}
+              aria-label={
+                i === backIndex ? "View back preview" : `Go to image ${i + 1}`
+              }
+              className="flex h-6 w-6 items-center justify-center"
+            >
+              <span
                 className={cn(
-                  "relative aspect-[4/5] overflow-hidden border bg-white transition-colors",
-                  i === active ? "border-accent" : "border-line-1 hover:border-line-accent",
+                  "block size-1.5 rounded-full transition-colors",
+                  i === active ? "bg-primary" : "bg-border",
                 )}
-              >
-                <Image src={img.url} alt="" fill sizes="120px" className="object-contain p-1.5" />
-              </button>
-            ))}
-            {backSlot ? (
-              <button
-                key="back-slot-thumb"
-                type="button"
-                onClick={() => setActive(backIndex)}
-                aria-label="View back preview"
-                className={cn(
-                  "relative aspect-[4/5] overflow-hidden border bg-bg-1 transition-colors",
-                  active === backIndex
-                    ? "border-accent"
-                    : "border-line-1 hover:border-line-accent",
-                )}
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-[9px] font-semibold uppercase text-fg-3">
-                    Back
-                  </span>
-                </div>
-              </button>
-            ) : null}
-          </div>
-        </>
+              />
+            </button>
+          ))}
+        </div>
       ) : null}
     </div>
   );

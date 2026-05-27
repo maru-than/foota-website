@@ -16,13 +16,13 @@ import {
   useState,
   useTransition,
 } from "react";
+import { toast } from "sonner";
 
 import {
   addItemAction,
   removeItemAction,
   updateItemAction,
 } from "@/app/actions/cart";
-import { Toast, type ToastSpec } from "@/components/ui/toast";
 import type {
   Cart,
   CartLine,
@@ -187,7 +187,6 @@ export function CartProvider({
   const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [toast, setToast] = useState<ToastSpec | null>(null);
 
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
@@ -204,9 +203,7 @@ export function CartProvider({
       // Premium pattern — toast confirms the add without interrupting browsing;
       // the user opens the bag explicitly via the toast action or the header.
       const name = product.meta.teamName ?? product.title;
-      setToast({
-        id: Date.now(),
-        title: `${name} added to bag`,
+      toast.success(`${name} added to bag`, {
         action: { label: "View bag", onClick: () => setIsOpen(true) },
       });
       startTransition(async () => {
@@ -272,12 +269,7 @@ export function CartProvider({
     removeItem,
   };
 
-  return (
-    <CartContext.Provider value={value}>
-      {children}
-      <Toast toast={toast} onDismiss={() => setToast(null)} />
-    </CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export function useCart(): CartContextValue {

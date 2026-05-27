@@ -1,13 +1,21 @@
 /**
- * @file Minimal loading placeholder — pulsing gray box, no external dependency.
+ * @file shadcn Skeleton — animated placeholder block.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
  * @since 2026-05-25
  */
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-export function Skeleton({ className }: { className?: string }) {
-  return <div className={cn("animate-pulse bg-bg-3", className)} />;
+function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="skeleton"
+      className={cn("animate-pulse rounded-md bg-muted", className)}
+      {...props}
+    />
+  )
 }
+
+export { Skeleton }

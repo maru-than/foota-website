@@ -28,7 +28,7 @@ export default function SizeGuidePage() {
         description="Use these measurements as a guide before picking your size."
         image="/pages/size-guide.png"
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <div className="max-w-3xl">
           <SizeGuideContent />
         </div>

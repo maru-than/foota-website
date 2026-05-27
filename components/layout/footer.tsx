@@ -23,8 +23,8 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line-accent bg-bg-1">
-      <Container className="grid gap-12 py-16 lg:grid-cols-[1.5fr_2fr] lg:gap-16">
+    <footer className="border-t border-border bg-background">
+      <Container className="grid gap-12 py-20 lg:grid-cols-[1fr_2fr] lg:gap-20 lg:py-28">
         <div className="max-w-sm">
           <Link href="/" aria-label="Worldkit Soccer — home" className="inline-block">
             <Image
@@ -35,40 +35,22 @@ export function Footer() {
               className="h-20 w-auto sm:h-24"
             />
           </Link>
-          <p className="mt-4 text-sm leading-relaxed text-fg-2">
+          <p className="mt-4 text-sm leading-relaxed text-foreground/80">
             A home for jerseys. 2026 World Cup home & away kits — every nation,
             dispatched worldwide.
           </p>
-
-          {/* py-2.5 on each anchor grows the touch row to ≥44 px without
-              widening the visual gap. -my-2.5 absorbs the leading edge so the
-              cluster sits where it used to. */}
-          <div className="mt-7 -my-2.5 flex flex-wrap gap-x-5">
-            {SOCIALS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                className="block py-3.5 text-xs uppercase text-fg-3 transition-colors hover:text-accent"
-              >
-                {label}
-              </a>
-            ))}
-          </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-3 sm:gap-x-8">
           {FOOTER_NAV.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <h3 className="eyebrow text-fg-3">{column.title}</h3>
-              {/* Per-link py-2.5 makes each row ≥44 px tappable; the prior
-                  space-y-2.5 is no longer needed because the padding provides
-                  the same visual rhythm. */}
+              <h3 className="text-xs text-muted-foreground">{column.title}</h3>
               <ul className="mt-2">
                 {column.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="block py-3 text-sm text-fg-2 transition-colors hover:text-accent"
+                      className="block py-2.5 text-sm text-foreground/80 transition-colors hover:text-foreground"
                     >
                       {link.label}
                     </Link>
@@ -80,11 +62,21 @@ export function Footer() {
         </div>
       </Container>
 
-      <div className="border-t border-line-1">
-        <Container className="flex flex-col items-center justify-between gap-3 py-5 text-[11px] uppercase text-fg-3 sm:flex-row">
+      <div className="border-t border-border">
+        <Container className="flex flex-col items-center justify-between gap-3 py-5 text-[11px] text-muted-foreground sm:flex-row">
           <span>© {year} Worldkit Soccer</span>
-          <span className="hidden sm:block">A home for jerseys · Dispatched worldwide</span>
-          <span className="inline-flex items-center gap-2 text-fg-1">
+          <div className="flex flex-wrap items-center gap-x-5">
+            {SOCIALS.map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                className="transition-colors hover:text-foreground"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+          <span className="inline-flex items-center gap-2 text-foreground">
             <Globe className="size-3.5" strokeWidth={1.5} /> EN · USD
           </span>
         </Container>

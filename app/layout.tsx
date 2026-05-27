@@ -1,5 +1,5 @@
 /**
- * @file Root layout — Geist + Gambarino fonts, header, footer, cart provider, cookie banner, analytics, viewport.
+ * @file Root layout — Geist (body) + EB Garamond (display), header, footer, cart provider, cookie banner, analytics, viewport. Light-only.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -7,33 +7,34 @@
  */
 
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
-import localFont from "next/font/local";
+import { Geist, EB_Garamond } from "next/font/google";
 import "./globals.css";
 
-import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { SiteAnalytics } from "@/components/layout/site-analytics";
 import { CartProvider } from "@/components/cart/cart-provider";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { Toaster } from "@/components/ui/sonner";
 import { getCart } from "@/lib/shopify/cart";
 import { getCollectionProducts } from "@/lib/shopify/collections";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const geist = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-// Gambarino — Worldkit display face, used for hero lockups only.
-const gambarino = localFont({
-  src: "./fonts/Gambarino-Regular.woff2",
-  variable: "--font-gambarino",
-  weight: "400",
-  style: "normal",
+// Editorial display face — used on hero H1, section H2s, PDP product title,
+// page H1s. EB Garamond ships with 400/500/600/700/800 + italics; the site
+// only uses 400 (regular) and 500 (medium) for accents.
+const ebGaramond = EB_Garamond({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -42,44 +43,43 @@ const siteUrl = resolveSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Worldkit Soccer | A home for jerseys",
-    template: "%s | Worldkit Soccer",
+    default: "Worldkit Soccer — A home for jerseys",
+    template: "%s · Worldkit Soccer",
   },
   description:
-    "Shop 2026 FIFA World Cup home and away jerseys for every nation in the 48-team field — dispatched worldwide.",
+    "2026 World Cup home and away jerseys from all 48 nations — united by one ball. Five regions, forty-eight nations, dispatched worldwide.",
   applicationName: "Worldkit Soccer",
   keywords: [
     "2026 World Cup jerseys",
     "national team jerseys",
     "2026 home and away kits",
     "football shirts",
+    "soccer jerseys",
     "USA Canada Mexico 2026",
+    "World Cup kits 48 nations",
   ],
   authors: [{ name: "Worldkit Soccer" }],
   openGraph: {
     type: "website",
     siteName: "Worldkit Soccer",
-    title: "Worldkit Soccer | A home for jerseys",
+    title: "Worldkit Soccer — A home for jerseys",
     description:
-      "2026 World Cup home and away jerseys from all 48 nations. A home for jerseys.",
+      "Every 2026 World Cup home and away kit. Five regions. Forty-eight nations. Dispatched worldwide.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Worldkit Soccer | A home for jerseys",
+    title: "Worldkit Soccer — A home for jerseys",
     description:
-      "2026 World Cup home and away jerseys from all 48 nations. A home for jerseys.",
+      "Every 2026 World Cup home and away kit. Five regions. Forty-eight nations. Dispatched worldwide.",
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#111111",
-  colorScheme: "dark",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
-  // Required for env(safe-area-inset-*) to resolve to non-zero values on iOS;
-  // unlocks the sticky-bar / sheet / announcement-bar insets below.
   viewportFit: "cover",
 };
 
@@ -96,32 +96,28 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      className={`${geist.variable} ${gambarino.variable} h-full`}
+      className={`${geist.variable} ${ebGaramond.variable}`}
     >
-      <body className="flex min-h-full flex-col">
-        {/* Enables CSS-only reveal animations; content stays visible without JS. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
-          }}
-        />
+      <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-accent focus:px-4 focus:py-2 focus:text-bg-1"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
         >
           Skip to content
         </a>
         <CartProvider initialCart={cart}>
-          <AnnouncementBar />
           <Header />
-          <main id="main" className="flex-1">
+          {/* Top padding on desktop reserves space for the fixed floating
+              header pill (top-6 + h-14 = ~80px); mobile keeps its sticky
+              flow-anchored header so no padding needed. */}
+          <main id="main" className="flex-1 lg:pt-24">
             {children}
           </main>
           <Footer />
           <CartDrawer recommendations={bestSellers} />
           <CookieBanner />
           <SiteAnalytics />
+          <Toaster />
         </CartProvider>
       </body>
     </html>

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Pill-chip display of applied filters — remove individually or clear all; hides when empty.
+ * @file Pill-chip of applied filters — remove individually or clear all; hides when empty.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -24,7 +24,7 @@ import {
  * open the filter drawer just to see what they applied.
  */
 
-const FACET_KEYS = ["confederation", "nation", "type", "size"] as const;
+const FACET_KEYS = ["nation", "type", "size"] as const;
 
 export function ActiveFilters() {
   const router = useRouter();
@@ -71,16 +71,16 @@ export function ActiveFilters() {
           type="button"
           onClick={c.remove}
           aria-label={`Remove filter ${c.label}`}
-          className="inline-flex min-h-9 items-center gap-1.5 border border-accent-40 bg-accent-12 pl-3 pr-2 text-xs font-semibold uppercase text-fg-1 transition-colors hover:border-accent hover:bg-accent-20 focus:outline-none focus-visible:border-accent"
+          className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-border bg-accent pl-3.5 pr-2.5 text-xs font-medium text-foreground transition-colors hover:border-primary hover:bg-accent focus:outline-none focus-visible:border-primary"
         >
           <span>{c.label}</span>
-          <X className="size-3.5 text-fg-2" strokeWidth={1.75} />
+          <X className="size-3.5 text-foreground/80" strokeWidth={1.75} />
         </button>
       ))}
       <button
         type="button"
         onClick={() => router.push(pathname, { scroll: false })}
-        className="ml-1 min-h-9 px-2 text-xs uppercase text-fg-3 transition-colors hover:text-accent focus:outline-none focus-visible:text-accent"
+        className="ml-1 min-h-9 px-2 text-xs text-muted-foreground transition-colors hover:text-primary focus:outline-none focus-visible:text-primary"
       >
         Clear all
       </button>

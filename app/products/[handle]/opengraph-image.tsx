@@ -1,5 +1,5 @@
 /**
- * @file Dynamic OG image for PDPs — jersey image, name, price and federation badge composited via sharp.
+ * @file Dynamic OG image for PDPs — jersey on a lime block, EB Garamond name + price.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -33,21 +33,31 @@ export const alt = "Worldkit Soccer product";
  *  per-handle in module scope so a popular product warms after one render. */
 const _jerseyPng = new Map<string, string>();
 
-async function jerseyDataUrl(publicPath: string): Promise<string | null> {
-  if (_jerseyPng.has(publicPath)) return _jerseyPng.get(publicPath)!;
+async function jerseyDataUrl(source: string): Promise<string | null> {
+  if (_jerseyPng.has(source)) return _jerseyPng.get(source)!;
   try {
-    const file = path.join(process.cwd(), "public", publicPath.replace(/^\//, ""));
+    // Sharp accepts either a filesystem path or a Buffer. Local paths are
+    // /-prefixed (mock-data); Shopify URLs come back fully-qualified — pull
+    // the bytes over the wire in that case.
+    let input: Buffer | string;
+    if (/^https?:\/\//i.test(source)) {
+      const r = await fetch(source);
+      if (!r.ok) return null;
+      input = Buffer.from(await r.arrayBuffer());
+    } else {
+      input = path.join(process.cwd(), "public", source.replace(/^\//, ""));
+    }
     // `fit: contain` defaults to OPAQUE BLACK padding; the jerseys are taller
     // than wide, so without an alpha=0 background we get black side bars.
-    const png = await sharp(file)
-      .resize(560, 560, {
+    const png = await sharp(input)
+      .resize(520, 560, {
         fit: "contain",
         background: { r: 0, g: 0, b: 0, alpha: 0 },
       })
       .png()
       .toBuffer();
     const url = `data:image/png;base64,${png.toString("base64")}`;
-    _jerseyPng.set(publicPath, url);
+    _jerseyPng.set(source, url);
     return url;
   } catch {
     return null;
@@ -89,7 +99,7 @@ export default async function Image({
     product.priceRange.minVariantPrice.amount,
     product.priceRange.minVariantPrice.currencyCode,
   );
-  const eyebrow = [product.meta.confederation, product.meta.season]
+  const eyebrow = [product.meta.type, product.meta.season]
     .filter(Boolean)
     .join(" · ");
   const teamName = product.meta.teamName ?? product.title;
@@ -108,25 +118,13 @@ export default async function Image({
             gap: 48,
           }}
         >
-          {/* Jersey sits on the frame bg directly — no panel chrome. */}
-          {jersey ? (
-            <img
-              src={jersey}
-              alt=""
-              width={420}
-              height={420}
-              style={{ objectFit: "contain" }}
-            />
-          ) : null}
-
-          {/* Title + price. Subtitle dropped — eyebrow already names the
-              confederation and season. */}
+          {/* Title + price on the left — title in EB Garamond, price beneath. */}
           <div
             style={{
               flex: 1,
               display: "flex",
               flexDirection: "column",
-              gap: 28,
+              gap: 24,
             }}
           >
             {product.meta.badge ? (
@@ -134,19 +132,55 @@ export default async function Image({
                 <OgChip variant="solid">{product.meta.badge}</OgChip>
               </div>
             ) : null}
-            <OgTitle size={92}>{teamName}</OgTitle>
+            <OgTitle size={96}>{teamName}</OgTitle>
             <div
               style={{
                 display: "flex",
                 fontSize: 56,
-                fontWeight: 700,
-                color: OG_COLORS.accent,
                 letterSpacing: -1,
+                fontFamily: "EB Garamond, serif",
+                color: OG_COLORS.fg,
               }}
             >
               {price}
             </div>
           </div>
+
+          {/* Jersey on layered lime block — the hero composition, reused. */}
+          {jersey ? (
+            <div
+              style={{
+                position: "relative",
+                width: 380,
+                height: 460,
+                display: "flex",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  top: 60,
+                  width: 320,
+                  height: 320,
+                  backgroundColor: OG_COLORS.limeBlock,
+                  display: "flex",
+                }}
+              />
+              <img
+                src={jersey}
+                alt=""
+                width={340}
+                height={440}
+                style={{
+                  position: "absolute",
+                  left: 20,
+                  top: 10,
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+          ) : null}
         </div>
       </OgFrame>
     ),

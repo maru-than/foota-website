@@ -1,5 +1,5 @@
 /**
- * @file Full-width hero section — optional bg photo, gradient legibility scrim, eyebrow / title / description.
+ * @file Full-width hero section — optional bg photo, gradient legibility scrim, / title / description.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -33,8 +33,8 @@ export function PageHeader({
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b border-line-accent",
-        image ? "bg-bg-0" : "bg-bg-2",
+        "relative overflow-hidden border-b border-border",
+        image ? "bg-background" : "bg-card",
       )}
     >
       {image ? (
@@ -51,28 +51,32 @@ export function PageHeader({
           {/* Legibility scrim — darker at the bottom where copy sits. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-bg-0/90 via-bg-0/60 to-bg-0/20"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-background/20"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-bg-0/80 to-transparent"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background/80 to-transparent"
           />
         </>
       ) : null}
       <Container
         className={cn(
-          "relative py-16 lg:py-24",
+          "relative py-20 lg:py-32",
           align === "center" && "text-center",
         )}
       >
-        {eyebrow ? <span className="eyebrow text-accent">{eyebrow}</span> : null}
-        <h1 className="display mt-3 text-balance text-4xl leading-[1.02] sm:text-5xl">
+        {eyebrow ? (
+          <span className="text-xs text-muted-foreground">
+            {eyebrow}
+          </span>
+        ) : null}
+        <h1 className="font-display mt-3 text-balance text-4xl leading-[1.02] sm:text-5xl lg:text-6xl">
           {title}
         </h1>
         {description ? (
           <p
             className={cn(
-              "mt-4 max-w-2xl text-pretty leading-relaxed text-fg-2",
+              "mt-4 max-w-2xl text-pretty leading-relaxed text-foreground/80",
               align === "center" && "mx-auto",
             )}
           >

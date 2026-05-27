@@ -17,6 +17,30 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
+ * Strip FIFA confederation abbreviations (UEFA / CONMEBOL / CONCACAF / CAF /
+ * AFC / OFC) from a Shopify-sourced title or description. World Cup 2026 is
+ * the only competition we sell against — buyers don't need to see the
+ * federation acronyms, but the Shopify backend names some collections
+ * "UEFA — Europe" / "CONMEBOL — South America".
+ */
+const CONFEDERATION_ABBRS = [
+  "UEFA",
+  "CONMEBOL",
+  "CONCACAF",
+  "CAF",
+  "AFC",
+  "OFC",
+];
+const CONFEDERATION_REGEX = new RegExp(
+  `\\b(?:${CONFEDERATION_ABBRS.join("|")})\\b(?:\\s*—\\s*|\\s+)?`,
+  "g",
+);
+export function stripConfederation(text: string | null | undefined): string {
+  if (!text) return "";
+  return text.replace(CONFEDERATION_REGEX, "").trim();
+}
+
+/**
  * Format a money amount as e.g. "$119.00". MVP is USD-only; the second
  * argument is accepted for compatibility with the Shopify Money shape but
  * ignored — every price renders with a US dollar prefix.

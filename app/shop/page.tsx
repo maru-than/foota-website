@@ -21,7 +21,7 @@ import {
 export const metadata: Metadata = {
   title: "Shop All Jerseys",
   description:
-    "Every 2026 FIFA World Cup home and away jersey — all 48 nations. Filter by confederation, nation, type and size.",
+    "Every 2026 FIFA World Cup home and away jersey — all 48 nations. Filter by nation, type and size.",
   alternates: { canonical: "/shop" },
 };
 
@@ -42,7 +42,7 @@ export default async function ShopPage({
       <PageHeader
         eyebrow="Summer 2026"
         title="Shop all jerseys"
-        description="2026 home and away jerseys — all 48 nations. Filter by confederation, nation, type and size."
+        description="2026 home and away jerseys — all 48 nations. Filter by nation, type and size."
       />
       <ProductBrowser products={products} facets={facets} clearHref="/shop" />
     </>

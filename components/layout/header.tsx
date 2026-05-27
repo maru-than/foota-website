@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Sticky top nav — logo, desktop menu with active state, mobile-menu trigger, search / cart icons.
+ * @file Site nav — floating centered pill on desktop, full-width sticky on mobile. Logo fits inside the pill.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Menu, Search } from "lucide-react";
 
 import { useCart } from "@/components/cart/cart-provider";
+import { Button } from "@/components/ui/button";
 import { BagIcon } from "@/components/ui/icons/bag";
 import { SearchOverlay } from "@/components/search/search-overlay";
 import { MAIN_NAV } from "@/lib/navigation";
@@ -31,16 +32,27 @@ export function Header() {
     href === "/shop" ? pathname === "/shop" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-[calc(env(safe-area-inset-top)+1.75rem)] z-40 border-b border-line-accent bg-bg-1">
-      <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-[72px] lg:px-8">
-        <button
+    <header
+      className={cn(
+        // Mobile: full-width sticky, opaque background, bottom border.
+        "sticky top-0 z-40 border-b border-border bg-background",
+        // Desktop: detach from edges, center as a backdrop-blur pill with
+        // visible padding above the page. Drop the bottom border (the pill
+        // floats over content, doesn't anchor a horizontal rule).
+        "lg:fixed lg:inset-x-0 lg:top-6 lg:mx-auto lg:w-fit lg:max-w-[calc(100vw-3rem)] lg:rounded-full lg:border lg:bg-background/70 lg:backdrop-blur-md lg:shadow-lg lg:shadow-black/5",
+      )}
+    >
+      <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-14 lg:gap-24 lg:px-5">
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           onClick={() => setMenuOpen(true)}
           aria-label="Open menu"
-          className="-ml-2 flex size-11 items-center justify-center text-fg-1 transition-colors hover:bg-bg-3 lg:hidden"
+          className="-ml-2 lg:hidden"
         >
           <Menu className="size-5" strokeWidth={1.5} />
-        </button>
+        </Button>
 
         <Link
           href="/"
@@ -53,11 +65,11 @@ export function Header() {
             width={224}
             height={224}
             priority
-            className="h-10 w-auto transition-transform duration-200 ease-worldkit lg:h-28 lg:translate-y-5 lg:drop-shadow-[0_18px_22px_rgba(0,0,0,0.22)] lg:hover:-translate-y-[calc(1.25rem-2px)] lg:hover:drop-shadow-[0_22px_28px_rgba(0,0,0,0.28)]"
+            className="h-9 w-auto lg:h-10"
           />
         </Link>
 
-        <nav className="ml-6 hidden flex-1 items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-8 lg:ml-3 lg:flex">
           {MAIN_NAV.map((link) => {
             const active = isActive(link.href);
             return (
@@ -65,48 +77,44 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative py-1 text-xs font-semibold uppercase transition-colors duration-150 ease-worldkit",
-                  active ? "text-accent" : "text-fg-2 hover:text-fg-1",
+                  "relative py-1 text-sm transition-colors duration-150 ease-out",
+                  active ? "text-foreground" : "text-foreground/20 hover:text-foreground",
                 )}
               >
                 {link.label}
-                {active ? (
-                  <span className="absolute inset-x-0 -bottom-1 h-px bg-accent" />
-                ) : null}
               </Link>
             );
           })}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1">
-          <button
+        <div className="ml-auto flex items-center gap-1 lg:ml-6">
+          <Button
             type="button"
+            variant="ghost"
+            size="icon"
             onClick={openSearch}
             aria-label="Search"
-            className="flex size-11 items-center justify-center text-fg-1 transition-colors hover:bg-bg-3"
           >
             <Search className="size-5" strokeWidth={1.5} />
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="ghost"
+            size="icon"
             onClick={openCart}
             aria-label={`Open bag, ${totalQuantity} item${totalQuantity === 1 ? "" : "s"}`}
-            className="relative flex size-11 items-center justify-center text-fg-1 transition-colors hover:text-accent"
+            className="relative w-auto gap-1 px-2"
           >
-            <BagIcon className="size-6" strokeWidth={1.5} />
+            <BagIcon className="size-5" strokeWidth={1.5} />
             {totalQuantity > 0 ? (
-              /* key re-mounts the badge on every quantity change → CSS-only
-                 bounce confirms the add succeeded. */
               <span
-                key={totalQuantity}
                 aria-hidden
-                className="absolute -right-0.5 -top-0.5 inline-flex min-w-[18px] items-center justify-center rounded-full bg-accent px-1 text-[10px] font-bold leading-none text-bg-1 tabular-nums motion-safe:animate-[bagPop_280ms_ease-out]"
-                style={{ height: 18 }}
+                className="text-xs tabular-nums text-muted-foreground"
               >
-                {totalQuantity}
+                ({totalQuantity})
               </span>
             ) : null}
-          </button>
+          </Button>
         </div>
       </div>
 

@@ -19,7 +19,7 @@ import { searchProducts } from "@/lib/shopify/products";
 
 export const metadata: Metadata = {
   title: "Search",
-  description: "Search World Cup 2026 jerseys by nation or confederation.",
+  description: "Search World Cup 2026 jerseys by nation.",
   alternates: { canonical: "/search" },
 };
 
@@ -42,7 +42,7 @@ export default async function SearchPage({
         description={
           q
             ? `${results.length} ${results.length === 1 ? "jersey" : "jerseys"} found.`
-            : "Find a 2026 jersey by nation or confederation."
+            : "Find a 2026 jersey by nation."
         }
       >
         <form action="/search" className="mt-6 flex max-w-md gap-2">
@@ -58,15 +58,15 @@ export default async function SearchPage({
         </form>
       </PageHeader>
 
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         {!q ? (
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="text-fg-3">Try:</span>
+            <span className="text-muted-foreground">Try:</span>
             {SUGGESTIONS.map((term) => (
               <Link
                 key={term}
                 href={`/search?q=${encodeURIComponent(term)}`}
-                className="border border-line-accent bg-bg-2 px-3 py-1.5 transition-colors hover:border-accent hover:text-accent"
+                className="border border-border bg-card px-3 py-1.5 transition-colors hover:border-primary hover:text-primary"
               >
                 {term}
               </Link>
@@ -76,11 +76,11 @@ export default async function SearchPage({
           <ProductGrid products={results} priorityCount={4} />
         ) : (
           <div className="flex flex-col items-center gap-4 py-16 text-center">
-            <p className="text-2xl font-bold tracking-[-0.03em]">
+            <p className="font-display text-3xl text-foreground">
               No jerseys match “{q}”.
             </p>
-            <p className="max-w-md text-sm text-fg-3">
-              Try a nation or confederation — or browse all 48.
+            <p className="max-w-md text-sm text-muted-foreground">
+              Try a nation — or browse all 48.
             </p>
             <Button asChild variant="secondary">
               <Link href="/shop">Browse all jerseys</Link>

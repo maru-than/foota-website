@@ -28,7 +28,7 @@ export default function ShippingReturnsPage() {
         description="Getting your jersey, and what to do if it isn't quite right."
         image="/pages/shipping-returns.png"
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <div className="max-w-3xl">
           <ShippingReturnsContent />
         </div>

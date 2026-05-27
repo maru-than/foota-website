@@ -1,5 +1,5 @@
 /**
- * @file Formatted price display — optional strikethrough compare-at price, tabular nums.
+ * @file Formatted price — optional strikethrough compare-at price, tabular nums.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -27,15 +27,15 @@ export function Price({
 
   if (!hasCompare) {
     return (
-      <span className={cn("tabular-nums", className)}>
+      <span className={cn("font-display tabular-nums", className)}>
         {formatPrice(amount, currencyCode)}
       </span>
     );
   }
 
   return (
-    <span className="inline-flex items-baseline gap-2 tabular-nums">
-      <span className="text-[0.82em] font-normal text-fg-3 line-through decoration-fg-3/60">
+    <span className="inline-flex items-baseline gap-2 font-display tabular-nums">
+      <span className="text-[0.82em] font-normal text-muted-foreground line-through decoration-fg-3/60">
         {formatPrice(compareAt.amount, compareAt.currencyCode)}
       </span>
       <span className={className}>{formatPrice(amount, currencyCode)}</span>

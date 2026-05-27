@@ -11,6 +11,7 @@
 import { Ruler } from "lucide-react";
 
 import { SizeGuideModal } from "@/components/info/size-guide-modal";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/shopify/types";
 
@@ -49,16 +50,13 @@ export function VariantSelector({
       {product.options.map((option) => (
         <div key={option.id}>
           <div className="mb-2.5 flex items-center justify-between">
-            <span className="eyebrow text-fg-3">{option.name}</span>
+            <span className="text-xs text-muted-foreground">{option.name}</span>
             {option.name.toLowerCase() === "size" ? (
               <SizeGuideModal>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-accent transition-colors hover:text-accent-hi focus:outline-none focus-visible:text-accent-hi"
-                >
+                <Button type="button" variant="link" size="sm">
                   <Ruler className="size-3.5" strokeWidth={1.5} aria-hidden />
                   Size guide
-                </button>
+                </Button>
               </SizeGuideModal>
             ) : null}
           </div>
@@ -67,23 +65,22 @@ export function VariantSelector({
               const isSelected = selected[option.name] === value;
               const available = isValueAvailable(product, selected, option.name, value);
               return (
-                <button
+                <Button
                   key={value}
                   type="button"
+                  variant="outline"
                   disabled={!available}
                   aria-pressed={isSelected}
                   onClick={() => onChange(option.name, value)}
                   className={cn(
-                    "flex size-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
-                    isSelected
-                      ? "border-accent bg-accent text-bg-1"
-                      : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",
-                    !available &&
-                      "cursor-not-allowed border-line-1 text-fg-4 line-through hover:border-line-1 hover:bg-transparent",
+                    // Fixed width so "S" and "XXL" render at the same pixel
+                    // width — uniform chip grid regardless of label length.
+                    "w-12 px-0",
+                    !available && "line-through opacity-50",
                   )}
                 >
                   {value}
-                </button>
+                </Button>
               );
             })}
           </div>

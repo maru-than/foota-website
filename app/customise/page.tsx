@@ -1,5 +1,5 @@
 /**
- * @file Customisation landing — name & number printing explained, with pricing, fonts and confederation breakdown.
+ * @file Customisation landing — name & number printing explained, with pricing and process.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -10,9 +10,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Flame, ShieldCheck, Truck } from "lucide-react";
 
-import { FontSpecimen } from "@/components/product/customise/font-specimen";
+import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import {
   CUSTOM_MAX_NAME_CHARS,
@@ -22,11 +21,9 @@ import {
 export const metadata: Metadata = {
   title: "Customise — name & number printing",
   description:
-    "Add any name and any number (0–99) to the back of any 2026 World Cup jersey. Heat-pressed in the official confederation font, dispatched in 5–7 days.",
+    "Add any name and any number (0–99) to the back of any 2026 World Cup jersey. Officially heat-pressed, dispatched in 5–7 days.",
   alternates: { canonical: "/customise" },
 };
-
-const CONFEDS = ["UEFA", "CONMEBOL", "CONCACAF", "CAF", "AFC", "OFC"];
 
 const HOW = [
   {
@@ -36,8 +33,8 @@ const HOW = [
   },
   {
     Icon: ShieldCheck,
-    title: "Confederation-accurate font",
-    note: "The letter set matches the one used by your nation's federation. Six fonts covered.",
+    title: "Authentic lettering",
+    note: "The letter set matches the official font used on stadium kits.",
   },
   {
     Icon: Truck,
@@ -49,99 +46,75 @@ const HOW = [
 export default function CustomisePage() {
   return (
     <>
-      <section className="border-b border-line-accent py-16 lg:py-24">
+      <section className="border-b border-border py-20 lg:py-32">
         <Container>
-          <Reveal>
+          <div>
             <SectionHeading
               eyebrow="Personalise"
               title="The name on the back is yours."
               description={`Add any name (up to ${CUSTOM_MAX_NAME_CHARS} characters) and any number from 0 to 99 to any 2026 World Cup jersey. Flat $${CUSTOM_PRICE_DELTA} add-on per shirt.`}
             />
-          </Reveal>
-          <Reveal delay={120}>
+          </div>
+          <div>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                href="/shop"
-                className="inline-flex items-center gap-1.5 bg-accent px-5 py-3 text-sm font-semibold lowercase text-bg-0 transition-colors hover:bg-accent-hi"
-              >
-                Pick a jersey
-                <ArrowRight className="size-3.5" strokeWidth={1.5} />
-              </Link>
-              <Link
-                href="/products/brazil-home?customise=open"
-                className="inline-flex items-center gap-1.5 border border-line-accent px-5 py-3 text-sm font-semibold lowercase text-fg-1 transition-colors hover:border-accent hover:bg-accent-12"
-              >
-                Try it on Brazil
-                <ArrowRight className="size-3.5" strokeWidth={1.5} />
-              </Link>
+              <Button asChild size="lg">
+                <Link href="/shop">
+                  Pick a jersey
+                  <ArrowRight className="size-4" strokeWidth={1.5} />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/products/brazil-home?customise=open">
+                  Try it on Brazil
+                  <ArrowRight className="size-4" strokeWidth={1.5} />
+                </Link>
+              </Button>
             </div>
-          </Reveal>
+          </div>
         </Container>
       </section>
 
-      <section className="py-16 lg:py-20">
+      <section className="py-24 lg:py-40">
         <Container>
-          <Reveal>
+          <div>
             <SectionHeading eyebrow="How it works" title="From input to heat-press" />
-          </Reveal>
+          </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {HOW.map(({ Icon, title, note }, i) => (
-              <Reveal key={title} delay={i * 80}>
-                <div className="flex flex-col gap-3 border border-line-accent p-6">
-                  <Icon className="size-5 text-accent" strokeWidth={1.5} />
-                  <h3 className="text-lg font-bold leading-tight tracking-[-0.03em] text-fg-1">
+            {HOW.map(({ Icon, title, note }) => (
+              <div key={title}>
+                <div className="flex flex-col gap-3 rounded-xl border border-border p-6">
+                  <Icon className="size-5 text-muted-foreground" strokeWidth={1.5} />
+                  <h3 className="text-lg leading-tight text-foreground">
                     {title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-fg-2">{note}</p>
+                  <p className="text-sm leading-relaxed text-foreground/80">{note}</p>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="border-y border-line-accent bg-bg-2 py-16 lg:py-20">
-        <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow="Letter sets"
-              title="Six fonts, one for each confederation"
-              description="Pick a nation and the matching font ships automatically — the same letter set the federation uses on stadium kits."
-            />
-          </Reveal>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {CONFEDS.map((confed, i) => (
-              <Reveal key={confed} delay={i * 60}>
-                <div className="border border-line-accent bg-bg-1 p-5">
-                  <FontSpecimen confederation={confed} />
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-16 lg:py-20">
+      <section className="py-24 lg:py-40">
         <Container className="max-w-2xl text-center">
-          <Reveal>
-            <h2 className="display text-3xl leading-tight sm:text-4xl">
+          <div>
+            <h2 className="font-display text-4xl leading-tight text-foreground sm:text-5xl lg:text-6xl">
               Ready to put your name on it
-              <span className="text-accent">.</span>
+              <span className="text-primary">.</span>
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-fg-2">
+            <p className="mt-4 text-sm leading-relaxed text-foreground/80">
               Customs are non-returnable. Please double-check spelling and number
               before adding to the bag — every shirt is heat-pressed to order.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/shop"
-                className="inline-flex items-center gap-1.5 bg-accent px-5 py-3 text-sm font-semibold lowercase text-bg-0 transition-colors hover:bg-accent-hi"
-              >
-                Pick a jersey
-                <ArrowRight className="size-3.5" strokeWidth={1.5} />
-              </Link>
+              <Button asChild size="lg">
+                <Link href="/shop">
+                  Pick a jersey
+                  <ArrowRight className="size-4" strokeWidth={1.5} />
+                </Link>
+              </Button>
             </div>
-          </Reveal>
+          </div>
         </Container>
       </section>
     </>

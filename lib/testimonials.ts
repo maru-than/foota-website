@@ -72,7 +72,7 @@ export const TESTIMONIALS: Testimonial[] = [
     country: "US",
     rating: 5,
     quote:
-      "Got my daughter's name on the back for her birthday — the font is exactly the one UEFA uses. She hasn't taken it off since.",
+      "Got my daughter's name on the back for her birthday — the font matches the official stadium kit exactly. She hasn't taken it off since.",
     confederation: "CONCACAF",
     featured: true,
     date: "2026-04-02",

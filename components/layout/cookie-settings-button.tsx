@@ -8,31 +8,29 @@
  * @since 2026-05-26
  */
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
   clearConsent,
-  onConsentChange,
   readConsent,
-  type CookieConsent,
+  subscribeToConsent,
 } from "@/lib/cookie-consent";
 
 /** Lets visitors re-open the consent banner from /cookies. */
 export function CookieSettingsButton() {
-  const [current, setCurrent] = useState<CookieConsent | null>(null);
-
-  useEffect(() => {
-    setCurrent(readConsent());
-    return onConsentChange((value) => setCurrent(value));
-  }, []);
+  const current = useSyncExternalStore(
+    subscribeToConsent,
+    readConsent,
+    () => null,
+  );
 
   return (
     <div className="flex flex-wrap items-center gap-3">
       <Button variant="secondary" size="sm" onClick={() => clearConsent()}>
         Change my preferences
       </Button>
-      <span className="text-xs text-fg-3">
+      <span className="text-xs text-muted-foreground">
         {current === "accepted"
           ? "Current: all cookies accepted."
           : current === "rejected"

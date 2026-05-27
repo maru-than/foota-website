@@ -28,7 +28,7 @@ export default function AuthenticityPage() {
         description="Every 2026 shirt is inspected before it ships."
         image="/pages/authenticity.png"
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <div className="max-w-3xl">
           <AuthenticityContent />
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Alphabet + digits display of the confederation's print font — read-only showcase.
+ * @file Alphabet + digits in the matchday print font — read-only showcase.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -14,16 +14,19 @@ const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const DIGITS = "0123456789";
 
 /**
- * Inline specimen of the printed-name font. Lives in the PDP accordion
- * and on /customise. Rendered as plain text spans (not SVG) so it
- * inherits the page's font-family variable and stays crisp at any size.
+ * Inline specimen of the printed-name font. Rendered as plain text spans
+ * (not SVG) so it inherits the page's font-family variable and stays crisp
+ * at any size. `confederation` selects the font family internally; the
+ * federation name is never surfaced — we just label it "Print font".
  */
 export function FontSpecimen({
   confederation,
   className,
+  showLabel = true,
 }: {
   confederation: string | null | undefined;
   className?: string;
+  showLabel?: boolean;
 }) {
   const f = fontFor(confederation);
   const style = {
@@ -34,16 +37,20 @@ export function FontSpecimen({
 
   return (
     <div className={className}>
-      <p className="eyebrow mb-2 text-fg-3">{f.label}</p>
+      {showLabel ? (
+        <p className="mb-2 text-xs font-medium text-muted-foreground">
+          Print font
+        </p>
+      ) : null}
       <p
-        className="break-words text-base uppercase text-fg-1"
+        className="break-words text-base uppercase text-foreground"
         style={style}
         aria-hidden
       >
         {ALPHA}
       </p>
       <p
-        className="mt-1 break-words text-base text-fg-1 tabular-nums"
+        className="mt-1 break-words text-base text-foreground tabular-nums"
         style={style}
         aria-hidden
       >

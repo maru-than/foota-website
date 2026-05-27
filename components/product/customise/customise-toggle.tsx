@@ -8,7 +8,7 @@
  * @since 2026-05-26
  */
 
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { useCustomise } from "./customise-context";
 
 /**
@@ -23,39 +23,29 @@ export function CustomiseToggle() {
   return (
     <div>
       <div className="mb-2.5 flex items-center justify-between">
-        <span className="eyebrow text-fg-3">Personalise</span>
+        <span className="text-xs text-muted-foreground">Personalise</span>
       </div>
       <div
         role="group"
         aria-label="Personalise"
         className="grid grid-cols-2 gap-1.5"
       >
-        <button
+        <Button
           type="button"
+          variant="outline"
           aria-pressed={!enabled}
           onClick={() => setEnabled(false)}
-          className={cn(
-            "flex h-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
-            !enabled
-              ? "border-accent bg-accent text-bg-1"
-              : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",
-          )}
         >
           Blank
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant="outline"
           aria-pressed={enabled}
           onClick={() => setEnabled(true)}
-          className={cn(
-            "flex h-12 items-center justify-center border text-sm font-bold tracking-[-0.03em] transition-colors duration-150 ease-worldkit",
-            enabled
-              ? "border-accent bg-accent text-bg-1"
-              : "border-line-accent text-fg-1 hover:border-accent hover:bg-accent-12",
-          )}
         >
           Name &amp; number
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ export default function ShopLoading() {
       <PageHeader
         eyebrow="Summer 2026"
         title="Shop all jerseys"
-        description="2026 home and away jerseys — all 48 nations. Filter by confederation, nation, type and size."
+        description="2026 home and away jerseys — all 48 nations. Filter by nation, type and size."
       />
       <Container className="py-10 lg:py-14">
         <div className="md:grid md:grid-cols-[220px_1fr] md:gap-10 lg:grid-cols-[240px_1fr] lg:gap-12">
@@ -39,7 +39,7 @@ export default function ShopLoading() {
             </div>
           </aside>
           <div>
-            <div className="mb-8 flex items-center justify-between gap-4 border-b border-line-1 pb-4">
+            <div className="mb-8 flex items-center justify-between gap-4 border-b border-border pb-4">
               <Skeleton className="h-10 w-24" />
               <Skeleton className="h-10 w-40" />
             </div>

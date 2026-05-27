@@ -1,186 +1,122 @@
-"use client";
-
 /**
- * @file Rotating hero — famous back-of-shirt prints with flag icons cycling through eight nations.
+ * @file Editorial split-screen hero — Worldkit copy + daily nation jersey on a lime grid.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
  * @since 2026-05-25
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  AR,
-  BR,
-  DE,
-  ES,
-  FR,
-  GB_ENG,
-  NL,
-  PT,
-} from "country-flag-icons/react/3x2";
+import { ArrowRight } from "lucide-react";
 
-import { Reveal } from "@/components/ui/reveal";
-import { cn } from "@/lib/utils";
+type Nation = { slug: string; name: string };
 
-type Nation = {
-  slug: string;
-  name: string;
-  Flag: React.ComponentType<{
-    title?: string;
-    className?: string;
-    style?: React.CSSProperties;
-  }>;
-};
-
-/* 8 most famous footballing nations. */
+/* The eight most famous footballing nations. The active hero shirt rotates
+ * by UTC day — each day shows a different nation, deterministic per server
+ * render so SSR/CSR stay consistent and the lint purity rule is satisfied. */
 const NATIONS: Nation[] = [
-  { slug: "brazil", name: "Brazil", Flag: BR },
-  { slug: "argentina", name: "Argentina", Flag: AR },
-  { slug: "germany", name: "Germany", Flag: DE },
-  { slug: "france", name: "France", Flag: FR },
-  { slug: "england", name: "England", Flag: GB_ENG },
-  { slug: "spain", name: "Spain", Flag: ES },
-  { slug: "portugal", name: "Portugal", Flag: PT },
-  { slug: "netherlands", name: "Netherlands", Flag: NL },
+  { slug: "brazil", name: "Brazil" },
+  { slug: "argentina", name: "Argentina" },
+  { slug: "germany", name: "Germany" },
+  { slug: "france", name: "France" },
+  { slug: "england", name: "England" },
+  { slug: "spain", name: "Spain" },
+  { slug: "portugal", name: "Portugal" },
+  { slug: "netherlands", name: "Netherlands" },
 ];
 
-const AUTO_MS = 3000;
-const MANUAL_HOLD_MS = 6000;
+function pickNationOfTheDay(): Nation {
+  const dayIndex = Math.floor(Date.now() / 86_400_000) % NATIONS.length;
+  return NATIONS[dayIndex];
+}
+
+/* 18×18 of 22px cells = 396px. The grid is rendered as a CSS background
+ * pattern so the lines stay pixel-perfect regardless of container math —
+ * 196 wrapped flex children were one row off on a 280px frame because the
+ * 1px outer border ate into the inner area. */
+const GRID_LINE_COLOR = "rgba(163, 230, 53, 0.55)"; // lime-400 / 55%
+const GRID_BG_IMAGE = `linear-gradient(to right, ${GRID_LINE_COLOR} 1px, transparent 1px), linear-gradient(to bottom, ${GRID_LINE_COLOR} 1px, transparent 1px)`;
 
 export function Hero() {
-  const [activeSlug, setActiveSlug] = useState(NATIONS[0].slug);
-  const [mode, setMode] = useState<"auto" | "manual">("auto");
-  const active = NATIONS.find((n) => n.slug === activeSlug) ?? NATIONS[0];
-
-  /* Auto-advance one frame per AUTO_MS while in auto mode. Honors
-     prefers-reduced-motion — page reload handles preference changes, so we
-     read the matchMedia once and bail if reduced. */
-  useEffect(() => {
-    if (mode !== "auto") return;
-    if (typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => {
-      setActiveSlug((slug) => {
-        const i = NATIONS.findIndex((n) => n.slug === slug);
-        return NATIONS[(i + 1) % NATIONS.length].slug;
-      });
-    }, AUTO_MS);
-    return () => window.clearInterval(id);
-  }, [mode]);
-
-  /* After a manual click, hold for 3s then resume auto. */
-  const resumeTimer = useRef<number | null>(null);
-  useEffect(() => () => {
-    if (resumeTimer.current) window.clearTimeout(resumeTimer.current);
-  }, []);
-
-  const handleSelect = useCallback((slug: string) => {
-    setActiveSlug(slug);
-    setMode("manual");
-    if (resumeTimer.current) window.clearTimeout(resumeTimer.current);
-    resumeTimer.current = window.setTimeout(() => {
-      setMode("auto");
-    }, MANUAL_HOLD_MS);
-  }, []);
+  const active = pickNationOfTheDay();
 
   return (
-    <section className="relative overflow-hidden bg-bg-0">
-      {/* 8-column grid — the spine of the Worldkit mark. */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 flex">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="h-full flex-1 border-r border-white/20" />
-        ))}
-      </div>
+    <section className="bg-background">
+      <div className="grid min-h-[80svh] grid-cols-1 items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-0 lg:py-32">
+        {/* LEFT — copy + CTAs */}
+        <div className="flex flex-col items-start gap-6 lg:items-center">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col">
+              <h1
+                className="font-display leading-none tracking-tight whitespace-nowrap text-foreground"
+                style={{ fontSize: "clamp(36px, 4.2vw, 56px)" }}
+              >
+                <span className="block">Worldkit,</span>
+                <span className="block">A home for jerseys.</span>
+              </h1>
+              <p className="mt-2 text-base tracking-[-0.02em] text-foreground/30">
+                2026 World Cup. 48 nations. Dispatched worldwide.
+              </p>
+            </div>
 
-      {/* pb reserves room for the absolute tablist below. At ≤340px the
-          tablist wraps to 3 rows (~156px) + bottom-10 → ~196px needed. */}
-      <div className="relative flex min-h-[600px] flex-col items-center justify-center gap-5 px-6 pb-[200px] pt-12 sm:gap-6 sm:pb-[160px] md:pb-32 lg:min-h-[90svh]">
-        <Reveal className="flex flex-col items-center gap-5 sm:gap-6">
-          <div className="relative h-[220px] w-[176px] shrink-0 sm:h-[260px] sm:w-[208px] lg:h-[300px] lg:w-[240px]">
-            {NATIONS.map(({ slug, name }) => (
-              <Image
-                key={slug}
-                src={`/jerseys/home-transparent/${slug}.webp`}
-                alt={slug === active.slug ? `${name} 2026 home jersey` : ""}
-                aria-hidden={slug !== active.slug}
-                fill
-                /* All 8 are rendered at mount (only opacity flips), and the
-                   auto-rotate may settle on any of them — mark every one as
-                   priority so the actual LCP image isn't lazy-loaded. */
-                priority
-                sizes="(max-width: 640px) 176px, (max-width: 1024px) 208px, 240px"
-                className={cn(
-                  "object-contain transition-opacity duration-300 ease-out",
-                  slug === active.slug ? "opacity-100" : "opacity-0",
-                )}
-              />
-            ))}
+            <div className="flex flex-col items-start gap-1">
+              <Link
+                href={`/products/${active.slug}-away`}
+                className="inline-flex items-center gap-3 rounded-full bg-lime-400 px-4 py-[11px] text-[15px] tracking-[-0.04em] text-gray-950 shadow-[inset_0_0_4px_0_rgba(255,255,255,1)] transition-colors hover:bg-lime-500"
+              >
+                Explore the {active.name.toLowerCase()} kit
+                <ArrowRight className="size-3" strokeWidth={2} />
+              </Link>
+              <Link
+                href="/shop"
+                className="inline-flex items-center rounded-full bg-neutral-950 px-4 py-[11px] text-[15px] tracking-[-0.04em] text-white shadow-[inset_0_0_4px_0_rgba(255,255,255,0.2),0_0_1px_0_rgba(0,0,0,0.25)] transition-colors hover:bg-neutral-900"
+              >
+                See all
+              </Link>
+            </div>
           </div>
+        </div>
 
-          <h1
-            className="display text-center text-fg-1"
-            style={{ fontSize: "clamp(28px, 9vw, 64px)" }}
-          >
-            A home for jerseys<span className="text-accent">.</span>
-          </h1>
+        {/* RIGHT — jersey layered over lime grid.
+            Proportions: lime block & grid are 90%×77% of the container;
+            jersey fills 90%×100%. The container scales from ~300px wide on
+            phones up to 440px on desktop via `aspect-[440/515]` + max-w,
+            so every layer scales together — no breakpoint-specific math. */}
+        <div className="flex items-center justify-center">
+          <div className="relative aspect-[440/515] w-full max-w-[280px] sm:max-w-[380px] lg:max-w-[440px]">
+            {/* Lime fill block, offset back-left */}
+            <div
+              className="absolute left-0 top-[15.5%] aspect-square w-[90%] bg-lime-200"
+              aria-hidden
+            />
 
-          {/* CTAs fill the row on small phones (no wrapping at 280/320px),
-              lock to 160px from sm: up so the design intent is preserved on
-              tablets/desktop. whitespace-nowrap defends against subpixel
-              wrap on the lowercase 20px labels. */}
-          <div className="flex w-full max-w-[336px] items-center justify-center gap-3 sm:max-w-none">
-            <Link
-              href={`/products/${active.slug}-home`}
-              className="inline-flex flex-1 items-center justify-center whitespace-nowrap bg-accent px-3 py-3 text-[20px] font-semibold lowercase text-bg-0 transition-colors hover:bg-accent-hi sm:w-[160px] sm:flex-none sm:px-5"
-            >
-              buy now
-            </Link>
-            <Link
-              href="/shop"
-              className="inline-flex flex-1 items-center justify-center whitespace-nowrap border border-white/25 px-3 py-3 text-[20px] font-semibold lowercase text-fg-1 transition-colors hover:border-white/60 hover:bg-white/5 sm:w-[160px] sm:flex-none sm:px-5"
-            >
-              see all
-            </Link>
+            {/* White grid square — 22px CSS-gradient pattern. The cell size
+                is absolute so the grid stays crisp at every breakpoint
+                (count varies, density reads the same). Hidden on the very
+                smallest viewports where the layered card gets too dense. */}
+            <div
+              className="absolute left-[10%] top-[23.3%] hidden aspect-square w-[90%] bg-white sm:block"
+              aria-hidden
+              style={{
+                backgroundImage: GRID_BG_IMAGE,
+                backgroundSize: "22px 22px",
+                boxShadow: "inset 0 0 0 1px rgba(163, 230, 53, 0.55)",
+              }}
+            />
+
+            {/* Jersey — front of stack, fills the full container so it can
+                read through grid + lime via its transparent margins. */}
+            <Image
+              src={`/jerseys/away-transparent/${active.slug}.webp`}
+              alt={`${active.name} 2026 away jersey`}
+              fill
+              priority
+              sizes="(max-width: 640px) 252px, (max-width: 1024px) 342px, 396px"
+              className="absolute left-[10%] top-0 h-full w-[90%] object-contain"
+            />
           </div>
-        </Reveal>
-      </div>
-
-      {/* Nation flag selector. */}
-      <div
-        role="tablist"
-        aria-label="Choose a nation"
-        className="absolute inset-x-0 bottom-10 flex flex-wrap items-center justify-center gap-3 px-6 sm:gap-4"
-      >
-        {NATIONS.map(({ slug, name, Flag }) => {
-          const isActive = slug === activeSlug;
-          return (
-            <button
-              key={slug}
-              role="tab"
-              aria-selected={isActive}
-              aria-label={name}
-              onClick={() => handleSelect(slug)}
-              className={cn(
-                "group relative overflow-hidden transition-transform duration-200",
-                "h-[44px] w-[64px] sm:h-[48px] sm:w-[70px]",
-                isActive && "scale-110",
-              )}
-            >
-              <Flag
-                title={name}
-                className="h-full w-full object-cover transition-[filter] duration-200 group-hover:!filter-none"
-                style={
-                  isActive
-                    ? undefined
-                    : { filter: "brightness(0.6) saturate(0.75)" }
-                }
-              />
-            </button>
-          );
-        })}
+        </div>
       </div>
     </section>
   );

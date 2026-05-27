@@ -9,7 +9,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Badge, jerseyBadgeVariant } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { Jersey, teamColors } from "@/components/ui/jersey-placeholder";
 import { Price } from "@/components/ui/price";
 import { cn } from "@/lib/utils";
@@ -28,21 +28,19 @@ export function ProductCard({
   const sizes =
     "(max-width: 640px) 45vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 22vw";
   const kit = teamColors(meta.teamName ?? product.title, meta.type);
-  const chips = product.variants.slice(0, 4);
-  const extra = product.variants.length - chips.length;
-  const caption = [meta.confederation, meta.season].filter(Boolean).join(" · ");
+  const caption = [meta.type, meta.season].filter(Boolean).join(" · ");
   const money = product.priceRange.minVariantPrice;
 
   return (
     <Link
       href={`/products/${product.handle}`}
       aria-label={product.title}
-      className="group flex flex-col bg-bg-3 transition-transform duration-300 ease-worldkit hover:-translate-y-1"
+      className="group flex flex-col overflow-hidden rounded-md bg-muted shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_-2px_rgba(0,0,0,0.06)] transition-shadow duration-300 ease-out hover:shadow-[0_2px_4px_rgba(0,0,0,0.06),0_12px_24px_-4px_rgba(0,0,0,0.10)]"
     >
       <div
         className={cn(
           "relative flex aspect-[4/5] items-center justify-center overflow-hidden",
-          primary ? "bg-white" : "jersey-frame grid-texture p-5",
+          primary ? "bg-white" : "bg-muted p-5",
         )}
       >
         {primary ? (
@@ -79,7 +77,17 @@ export function ProductCard({
 
         {meta.badge ? (
           <span className="absolute left-3 top-3 z-[3]">
-            <Badge variant={jerseyBadgeVariant(meta.badge)}>{meta.badge}</Badge>
+            <Badge
+              // Host marquee → lime fill; everything else → lime outline.
+              variant={meta.badge === "Host" ? "default" : "outline"}
+              className={
+                meta.badge === "Host"
+                  ? undefined
+                  : "border-primary text-primary"
+              }
+            >
+              {meta.badge}
+            </Badge>
           </span>
         ) : null}
         {!product.availableForSale ? (
@@ -89,18 +97,18 @@ export function ProductCard({
         ) : null}
       </div>
 
-      <div className="flex flex-col gap-3 border border-t-0 border-line-accent p-5">
+      <div className="flex flex-col gap-3 p-5">
         <div className="flex flex-col gap-1.5">
-          <span className="text-xl font-bold leading-none tracking-[-0.03em] text-accent">
+          <span className="font-display text-2xl leading-none text-foreground">
             {meta.teamName ?? product.title}
           </span>
-          {caption ? <span className="text-xs text-fg-3">{caption}</span> : null}
+          {caption ? <span className="text-xs text-muted-foreground">{caption}</span> : null}
         </div>
         <Price
           amount={money.amount}
           currencyCode={money.currencyCode}
           compareAt={product.compareAtPrice}
-          className="text-sm font-bold text-fg-1"
+          className="text-sm text-foreground"
         />
       </div>
     </Link>

@@ -10,20 +10,21 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 
 export function EditorialBanner() {
   return (
-    <section className="border-y border-line-accent bg-bg-2">
+    <section className="border-y border-border bg-card">
       <Container className="grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-20">
-        <Reveal>
-          <span className="eyebrow text-accent">The Worldkit view</span>
-          <h2 className="display mt-4 text-4xl leading-[1.02] sm:text-5xl">
-            More than a shirt<span className="text-accent">.</span>
+        <div>
+          <span className="text-xs text-muted-foreground">
+            The Worldkit view
+          </span>
+          <h2 className="font-display mt-4 text-4xl leading-[1.02] text-foreground sm:text-5xl lg:text-6xl">
+            More than a shirt<span className="text-primary">.</span>
           </h2>
-        </Reveal>
-        <Reveal delay={120}>
-          <div className="space-y-4 text-pretty leading-relaxed text-fg-2">
+        </div>
+        <div>
+          <div className="space-y-4 text-pretty leading-relaxed text-foreground/80">
             <p>
               A jersey is a summer you can wear. The nation you back for a month,
               the shirt you pull on for every kickoff, the badge you defend in
@@ -35,16 +36,16 @@ export function EditorialBanner() {
             </p>
             <Link
               href="/customise"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-hi"
+              className="group inline-flex items-center gap-1.5 text-sm text-foreground underline underline-offset-4 transition-colors hover:text-foreground/80"
             >
               Create your own
               <ArrowRight
-                className="size-3.5 transition-transform duration-300 ease-worldkit group-hover:translate-x-1"
+                className="size-3.5 transition-transform duration-300 ease-out group-hover:translate-x-1"
                 strokeWidth={1.5}
               />
             </Link>
           </div>
-        </Reveal>
+        </div>
       </Container>
     </section>
   );

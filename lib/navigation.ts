@@ -1,5 +1,5 @@
 /**
- * @file Top-level navigation + footer link definitions — main nav, confederation routes, shop categories, help / legal.
+ * @file Top-level navigation + footer link definitions — main nav, shop categories, help / legal.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -12,12 +12,9 @@ export interface NavLink {
 }
 
 export const MAIN_NAV: NavLink[] = [
-  { label: "Shop", href: "/shop" },
-  { label: "Best Sellers", href: "/collections/best-sellers" },
+  { label: "Jerseys", href: "/shop" },
   { label: "Hosts", href: "/collections/hosts" },
   { label: "Europe", href: "/collections/uefa" },
-  { label: "South America", href: "/collections/conmebol" },
-  { label: "New Arrivals", href: "/collections/new-arrivals" },
 ];
 
 export const FOOTER_NAV: { title: string; links: NavLink[] }[] = [
@@ -27,20 +24,11 @@ export const FOOTER_NAV: { title: string; links: NavLink[] }[] = [
       { label: "All Nations", href: "/shop" },
       { label: "Best Sellers", href: "/collections/best-sellers" },
       { label: "Hosts", href: "/collections/hosts" },
+      { label: "Europe", href: "/collections/uefa" },
+      { label: "South America", href: "/collections/conmebol" },
       { label: "Customise", href: "/customise" },
       { label: "New Arrivals", href: "/collections/new-arrivals" },
       { label: "Search", href: "/search" },
-    ],
-  },
-  {
-    title: "Confederations",
-    links: [
-      { label: "Europe", href: "/collections/uefa" },
-      { label: "South America", href: "/collections/conmebol" },
-      { label: "N. & C. America", href: "/collections/concacaf" },
-      { label: "Africa", href: "/collections/caf" },
-      { label: "Asia", href: "/collections/afc" },
-      { label: "Oceania", href: "/collections/ofc" },
     ],
   },
   {
@@ -49,12 +37,9 @@ export const FOOTER_NAV: { title: string; links: NavLink[] }[] = [
       { label: "Size Guide", href: "/size-guide" },
       { label: "Shipping & Returns", href: "/shipping-returns" },
       { label: "Authenticity", href: "/authenticity" },
+      { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],
-  },
-  {
-    title: "Worldkit",
-    links: [{ label: "About", href: "/about" }],
   },
   {
     title: "Legal",

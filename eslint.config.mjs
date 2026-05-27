@@ -6,6 +6,18 @@ import jsdoc from "eslint-plugin-jsdoc";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  // Allow underscore-prefixed args / vars to be unused — the foota convention
+  // for "kept for signature compatibility, deliberately ignored" parameters
+  // (e.g. formatPrice's `_currencyCode` Shopify-shape arg).
+  {
+    files: ["**/*.{ts,tsx,js,mjs}"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+    },
+  },
   // File-overview signing — every authored TS/TSX file must carry the JSDoc
   // header block with all five required tags. See AGENTS.md → File headers.
   {
