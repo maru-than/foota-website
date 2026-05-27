@@ -18,7 +18,7 @@ export default function CollectionLoading() {
   return (
     <>
       <section className="relative overflow-hidden border-b border-border bg-card">
-        <Container className="relative py-16 lg:py-24">
+        <Container className="relative py-20 lg:py-32">
           <Skeleton className="h-3 w-20" />
           <Skeleton className="mt-3 h-12 w-72 max-w-full" />
           <Skeleton className="mt-4 h-4 w-96 max-w-full" />

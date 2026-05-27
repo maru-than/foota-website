@@ -152,7 +152,7 @@ export default async function ProductPage({
       </Container>
 
       {reviews.length > 0 ? (
-        <section className="border-t border-border py-16 lg:py-20">
+        <section className="border-t border-border py-24 lg:py-40">
           <Container>
             <div>
               <SectionHeading

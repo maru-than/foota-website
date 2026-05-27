@@ -27,7 +27,7 @@ export default function AboutPage() {
         description="The home for the World Cup 2026 — every nation's home and away kit, in one place."
         image="/pages/about.png"
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <div className="max-w-3xl space-y-10 text-pretty leading-relaxed text-foreground/80 [&_h2]:text-foreground">
           <section className="space-y-3">
             <h2 className="font-display text-3xl">

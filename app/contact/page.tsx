@@ -27,7 +27,7 @@ export default function ContactPage() {
         description="Questions about a shirt, an order or authenticity? We're happy to help."
         image="/pages/contact.png"
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <div className="grid gap-12 lg:grid-cols-[1fr_320px]">
           <div className="max-w-2xl">
             <ContactForm />

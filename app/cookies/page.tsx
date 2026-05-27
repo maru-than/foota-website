@@ -51,7 +51,7 @@ export default function CookiesPage() {
         title="Cookie Policy"
         description="What cookies we set, why, and how to change your mind."
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <LegalDoc updated={UPDATED}>
           <LegalSection title="What cookies are">
             <p>

@@ -11,7 +11,7 @@ import { NewsletterForm } from "@/components/layout/newsletter-form";
 
 export function Newsletter() {
   return (
-    <section className="border-t border-border bg-card py-16 lg:py-20">
+    <section className="border-t border-border bg-card py-24 lg:py-40">
       <Container>
         <div className="mx-auto flex max-w-xl flex-col items-center text-center">
           <span className="text-xs tracking-[0.18em] uppercase text-muted-foreground">

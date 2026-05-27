@@ -53,7 +53,7 @@ export function FeaturedCollections({
   if (list.length === 0) return null;
 
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-24 lg:py-40">
       <Container>
         <div>
           <SectionHeading
@@ -73,7 +73,7 @@ export function FeaturedCollections({
               <div key={collection.id}>
                 <Link
                   href={href}
-                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-xl border border-border bg-card p-6 transition-transform duration-300 ease-out hover:-translate-y-1"
+                  className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-md border border-border bg-card p-6 transition-opacity duration-300 ease-out hover:opacity-90"
                 >
                   {image ? (
                     <>

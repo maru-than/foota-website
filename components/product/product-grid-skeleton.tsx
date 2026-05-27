@@ -24,7 +24,7 @@ export function ProductGridSkeleton({
     <div
       aria-hidden
       className={cn(
-        "grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4",
+        "grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3",
         className,
       )}
     >

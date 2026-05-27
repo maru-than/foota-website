@@ -46,7 +46,7 @@ const HOW = [
 export default function CustomisePage() {
   return (
     <>
-      <section className="border-b border-border py-16 lg:py-24">
+      <section className="border-b border-border py-20 lg:py-32">
         <Container>
           <div>
             <SectionHeading
@@ -74,7 +74,7 @@ export default function CustomisePage() {
         </Container>
       </section>
 
-      <section className="py-16 lg:py-20">
+      <section className="py-24 lg:py-40">
         <Container>
           <div>
             <SectionHeading eyebrow="How it works" title="From input to heat-press" />
@@ -95,7 +95,7 @@ export default function CustomisePage() {
         </Container>
       </section>
 
-      <section className="py-16 lg:py-20">
+      <section className="py-24 lg:py-40">
         <Container className="max-w-2xl text-center">
           <div>
             <h2 className="font-display text-4xl leading-tight text-foreground sm:text-5xl lg:text-6xl">

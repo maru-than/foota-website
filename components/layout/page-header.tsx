@@ -61,7 +61,7 @@ export function PageHeader({
       ) : null}
       <Container
         className={cn(
-          "relative py-16 lg:py-24",
+          "relative py-20 lg:py-32",
           align === "center" && "text-center",
         )}
       >

@@ -16,7 +16,7 @@ export function TestimonialsSection() {
   if (items.length === 0) return null;
 
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-24 lg:py-40">
       <Container>
         <div>
           <SectionHeading

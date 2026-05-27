@@ -58,7 +58,7 @@ export default async function SearchPage({
         </form>
       </PageHeader>
 
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         {!q ? (
           <div className="flex flex-wrap items-center gap-2 text-sm">
             <span className="text-muted-foreground">Try:</span>

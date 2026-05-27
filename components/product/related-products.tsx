@@ -15,7 +15,7 @@ export function RelatedProducts({ products }: { products: Product[] }) {
   if (products.length === 0) return null;
 
   return (
-    <section className="border-t border-border py-16 lg:py-20">
+    <section className="border-t border-border py-24 lg:py-40">
       <Container>
         <SectionHeading eyebrow="You might also like" title="More nations" />
         <div className="mt-8">

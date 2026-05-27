@@ -30,7 +30,7 @@ export default function PrivacyPage() {
         title="Privacy Policy"
         description="How we collect, use and protect your data."
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <LegalDoc updated={UPDATED}>
           <LegalSection title="Who we are">
             <p>

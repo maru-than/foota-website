@@ -22,7 +22,7 @@ export default function CartPage() {
   const lines = cart?.lines ?? [];
 
   return (
-    <Container className="py-12 lg:py-16">
+    <Container className="py-20 lg:py-32">
       <h1 className="font-display text-4xl leading-none text-foreground sm:text-5xl lg:text-6xl">
         Your bag
       </h1>

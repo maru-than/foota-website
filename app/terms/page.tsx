@@ -30,7 +30,7 @@ export default function TermsPage() {
         title="Terms of Service"
         description="The terms that govern your use of the store."
       />
-      <Container className="py-12 lg:py-16">
+      <Container className="py-20 lg:py-32">
         <LegalDoc updated={UPDATED}>
           <LegalSection title="Agreement">
             <p>

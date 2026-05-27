@@ -65,7 +65,7 @@ export function Header() {
             width={224}
             height={224}
             priority
-            className="h-10 w-auto transition-transform duration-200 ease-out lg:h-28 lg:translate-y-5 lg:drop-shadow-[0_18px_22px_rgba(0,0,0,0.22)] lg:hover:-translate-y-[calc(1.25rem-2px)] lg:hover:drop-shadow-[0_22px_28px_rgba(0,0,0,0.28)]"
+            className="h-10 w-auto lg:h-28 lg:translate-y-5 lg:drop-shadow-[0_18px_22px_rgba(0,0,0,0.22)]"
           />
         </Link>
 
