@@ -29,7 +29,7 @@ export function NewsletterForm({ className }: { className?: string }) {
 
   if (submitted) {
     return (
-      <p className={cn("flex items-center gap-2 text-sm text-accent", className)}>
+      <p className={cn("flex items-center gap-2 text-sm text-lime-400", className)}>
         <Check className="size-4" strokeWidth={1.5} />
         You&apos;re on the list. Watch your inbox.
       </p>
@@ -39,7 +39,7 @@ export function NewsletterForm({ className }: { className?: string }) {
   return (
     <form
       onSubmit={onSubmit}
-      className={cn("flex border border-line-accent", className)}
+      className={cn("flex border border-lime-400/20", className)}
     >
       <input
         type="email"
@@ -48,12 +48,12 @@ export function NewsletterForm({ className }: { className?: string }) {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@inbox.com"
         aria-label="Email address"
-        className="min-w-0 flex-1 bg-transparent px-4 text-base tracking-[-0.03em] text-fg-1 outline-none placeholder:text-fg-4 sm:text-sm"
+        className="min-w-0 flex-1 bg-transparent px-4 text-base tracking-[-0.03em] text-foreground outline-none placeholder:text-muted-foreground/60 sm:text-sm"
       />
       <button
         type="submit"
         aria-label="Subscribe"
-        className="flex min-h-11 shrink-0 items-center justify-center bg-accent px-4 text-bg-1 transition-colors duration-150 ease-worldkit hover:bg-accent-hi"
+        className="flex min-h-11 shrink-0 items-center justify-center bg-lime-400 px-4 text-background transition-colors duration-150 ease-worldkit hover:bg-lime-300"
       >
         <ArrowRight className="size-4" strokeWidth={1.5} />
       </button>

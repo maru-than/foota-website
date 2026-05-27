@@ -69,14 +69,14 @@ export function MobileMenu({
                 onClick={close}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative border-b border-line-1 px-4 py-4 text-lg font-bold uppercase tracking-[-0.02em] transition-colors duration-150 ease-worldkit",
-                  active ? "text-accent" : "text-fg-1 hover:text-accent",
+                  "relative border-b border-border px-4 py-4 text-lg font-bold uppercase tracking-[-0.02em] transition-colors duration-150 ease-worldkit",
+                  active ? "text-lime-400" : "text-foreground hover:text-lime-400",
                 )}
               >
                 {active ? (
                   <span
                     aria-hidden
-                    className="absolute inset-y-2 left-0 w-0.5 bg-accent"
+                    className="absolute inset-y-2 left-0 w-0.5 bg-lime-400"
                   />
                 ) : null}
                 {link.label}
@@ -91,7 +91,7 @@ export function MobileMenu({
           <button
             type="button"
             onClick={handle(openSearch)}
-            className="flex items-center gap-2.5 border border-line-accent px-4 py-3 text-sm font-semibold uppercase text-fg-1 transition-colors hover:border-accent hover:bg-accent-12"
+            className="flex items-center gap-2.5 border border-lime-400/20 px-4 py-3 text-sm font-semibold uppercase text-foreground transition-colors hover:border-lime-400 hover:bg-lime-400/12"
           >
             <SearchIcon className="size-4" strokeWidth={1.5} />
             Search
@@ -99,22 +99,22 @@ export function MobileMenu({
           <button
             type="button"
             onClick={handle(openCart)}
-            className="flex items-center justify-between gap-2.5 border border-line-accent px-4 py-3 text-sm font-semibold uppercase text-fg-1 transition-colors hover:border-accent hover:bg-accent-12"
+            className="flex items-center justify-between gap-2.5 border border-lime-400/20 px-4 py-3 text-sm font-semibold uppercase text-foreground transition-colors hover:border-lime-400 hover:bg-lime-400/12"
           >
             <span className="inline-flex items-center gap-2.5">
               <BagIcon className="size-4" strokeWidth={1.5} />
               Bag
             </span>
-            <b className="tabular-nums text-accent">{totalQuantity}</b>
+            <b className="tabular-nums text-lime-400">{totalQuantity}</b>
           </button>
         </div>
 
-        <div className="mt-auto border-t border-line-accent">
-          <div className="flex items-center gap-2 px-6 py-4 text-xs uppercase text-fg-2">
+        <div className="mt-auto border-t border-lime-400/20">
+          <div className="flex items-center gap-2 px-6 py-4 text-xs uppercase text-foreground/80">
             <Globe className="size-3.5" strokeWidth={1.5} />
             EN · USD
           </div>
-          <div className="border-t border-line-1 px-6 py-6">
+          <div className="border-t border-border px-6 py-6">
             <Image
               src="/logo.png"
               alt="Worldkit Soccer"
@@ -122,7 +122,7 @@ export function MobileMenu({
               height={200}
               className="h-16 w-auto"
             />
-            <p className="mt-3 text-sm text-fg-2">A home for jerseys.</p>
+            <p className="mt-3 text-sm text-foreground/80">A home for jerseys.</p>
           </div>
         </div>
       </SheetContent>

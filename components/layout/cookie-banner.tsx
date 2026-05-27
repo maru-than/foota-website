@@ -42,15 +42,15 @@ export function CookieBanner() {
       role="dialog"
       aria-modal="false"
       aria-label="Cookie consent"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-line-accent bg-bg-1/95 backdrop-blur"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-lime-400/20 bg-background/95 backdrop-blur"
     >
       <Container className="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:gap-6 lg:py-5">
-        <div className="flex-1 text-sm leading-relaxed text-fg-2">
+        <div className="flex-1 text-sm leading-relaxed text-foreground/80">
           <p>
             We use strictly necessary cookies to run the store, and — with
             your permission — analytics cookies to understand how the site is
             used. Read our{" "}
-            <Link href="/cookies" className="underline hover:text-accent">
+            <Link href="/cookies" className="underline hover:text-lime-400">
               Cookie Policy
             </Link>
             .

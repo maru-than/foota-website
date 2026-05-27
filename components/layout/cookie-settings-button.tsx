@@ -32,7 +32,7 @@ export function CookieSettingsButton() {
       <Button variant="secondary" size="sm" onClick={() => clearConsent()}>
         Change my preferences
       </Button>
-      <span className="text-xs text-fg-3">
+      <span className="text-xs text-muted-foreground">
         {current === "accepted"
           ? "Current: all cookies accepted."
           : current === "rejected"

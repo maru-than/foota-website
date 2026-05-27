@@ -33,8 +33,8 @@ export function PageHeader({
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b border-line-accent",
-        image ? "bg-bg-0" : "bg-bg-2",
+        "relative overflow-hidden border-b border-lime-400/20",
+        image ? "bg-background" : "bg-card",
       )}
     >
       {image ? (
@@ -65,14 +65,14 @@ export function PageHeader({
           align === "center" && "text-center",
         )}
       >
-        {eyebrow ? <span className="eyebrow text-accent">{eyebrow}</span> : null}
+        {eyebrow ? <span className="eyebrow text-lime-400">{eyebrow}</span> : null}
         <h1 className="display mt-3 text-balance text-4xl leading-[1.02] sm:text-5xl">
           {title}
         </h1>
         {description ? (
           <p
             className={cn(
-              "mt-4 max-w-2xl text-pretty leading-relaxed text-fg-2",
+              "mt-4 max-w-2xl text-pretty leading-relaxed text-foreground/80",
               align === "center" && "mx-auto",
             )}
           >
