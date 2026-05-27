@@ -42,7 +42,7 @@ export function Header() {
         "lg:fixed lg:inset-x-0 lg:top-6 lg:mx-auto lg:w-fit lg:max-w-[calc(100vw-3rem)] lg:rounded-full lg:border lg:bg-background/70 lg:backdrop-blur-md lg:shadow-lg lg:shadow-black/20",
       )}
     >
-      <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-14 lg:gap-6 lg:px-5">
+      <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-14 lg:gap-24 lg:px-5">
         <Button
           type="button"
           variant="ghost"
@@ -65,11 +65,11 @@ export function Header() {
             width={224}
             height={224}
             priority
-            className="h-10 w-auto lg:h-28 lg:translate-y-5 lg:drop-shadow-[0_18px_22px_rgba(0,0,0,0.22)]"
+            className="h-10 w-auto lg:h-20"
           />
         </Link>
 
-        <nav className="ml-6 hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-2 lg:ml-3 lg:flex">
           {MAIN_NAV.map((link) => {
             const active = isActive(link.href);
             return (
@@ -90,15 +90,7 @@ export function Header() {
           })}
         </nav>
 
-        {/* Desktop separator + breathing room between the link cluster and
-            the icon cluster. Mobile hides the divider since the icons sit
-            edge-aligned anyway. */}
-        <span
-          aria-hidden
-          className="ml-auto hidden h-5 w-px bg-border lg:ml-8 lg:block"
-        />
-
-        <div className="ml-auto flex items-center gap-1 lg:ml-2">
+        <div className="ml-auto flex items-center gap-1 lg:ml-6">
           <Button
             type="button"
             variant="ghost"
