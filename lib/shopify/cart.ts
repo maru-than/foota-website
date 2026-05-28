@@ -8,7 +8,7 @@
 
 import { cookies } from "next/headers";
 
-import { customisationDelta } from "../customisation";
+import { customisationDelta, GROUP_ID_KEY } from "../customisation";
 import { findMockVariant } from "../mock-data";
 import { isShopifyConfigured, shopifyFetch } from "./client";
 import {
@@ -26,6 +26,7 @@ import type {
   Money,
   ShopifyAttribute,
   ShopifyCart,
+  ShopifyCartLine,
 } from "./types";
 
 type CookieStore = Awaited<ReturnType<typeof cookies>>;
@@ -33,6 +34,15 @@ type CookieStore = Awaited<ReturnType<typeof cookies>>;
 const CART_COOKIE = "cartId";
 const MOCK_CART_COOKIE = "mockCart";
 const ONE_YEAR = 60 * 60 * 24 * 365;
+
+/**
+ * Variant GID of the "Name & Number Printing" add-on product. When set, a
+ * customised jersey is added alongside a paired printing line so the upcharge
+ * is collected at checkout. When unset (e.g. mock/dev), we degrade gracefully
+ * to an attribute-only line that carries the name/number but no extra charge.
+ */
+const CUSTOMISATION_VARIANT_ID =
+  process.env.SHOPIFY_CUSTOMISATION_VARIANT_ID ?? "";
 
 function cookieOptions() {
   return {
@@ -85,16 +95,92 @@ function sameCustomisation(
   return a.name === b.name && a.number === b.number;
 }
 
+interface CartLineInput {
+  merchandiseId: string;
+  quantity: number;
+  attributes?: ShopifyAttribute[];
+}
+
+/** Stable id pairing a jersey line with its printing add-on line. */
+function groupIdFor(
+  merchandiseId: string,
+  customisation: CartLineCustomisation,
+): string {
+  return `${merchandiseId}#${customisation.name ?? ""}|${customisation.number ?? ""}`;
+}
+
 /** Build a Shopify cart-line `attributes` payload from a customisation. */
 function attributesFor(
-  customisation: CartLineCustomisation | undefined,
-): ShopifyAttribute[] | undefined {
-  if (!customisation) return undefined;
-  const out: ShopifyAttribute[] = [];
+  customisation: CartLineCustomisation,
+  groupId: string,
+): ShopifyAttribute[] {
+  const out: ShopifyAttribute[] = [{ key: GROUP_ID_KEY, value: groupId }];
   if (customisation.name) out.push({ key: "name", value: customisation.name });
   if (customisation.number) out.push({ key: "number", value: customisation.number });
+  // Resilience: keep the per-unit delta so degraded (no add-on variant) mode
+  // can still surface the +price label. The real charge rides the add-on line.
   out.push({ key: "priceDelta", value: customisation.priceDelta.amount });
-  return out.length > 0 ? out : undefined;
+  return out;
+}
+
+/**
+ * Expand an add-to-cart request into Shopify line inputs. A plain jersey is a
+ * single line; a customised jersey becomes the jersey line plus a paired
+ * "Name & Number Printing" add-on line (when the add-on variant is configured)
+ * so the upcharge is a real, checkout-collected line item. Both lines carry
+ * the same `_groupId` so they merge on re-add and move together on
+ * update/remove.
+ */
+function buildLineInputs(
+  merchandiseId: string,
+  quantity: number,
+  customisation: CartLineCustomisation | undefined,
+): CartLineInput[] {
+  const hasContent = Boolean(
+    customisation && (customisation.name || customisation.number),
+  );
+  if (!customisation || !hasContent) return [{ merchandiseId, quantity }];
+
+  const groupId = groupIdFor(merchandiseId, customisation);
+  const attributes = attributesFor(customisation, groupId);
+  const jerseyLine: CartLineInput = { merchandiseId, quantity, attributes };
+  if (!CUSTOMISATION_VARIANT_ID) return [jerseyLine];
+
+  const printingLine: CartLineInput = {
+    merchandiseId: CUSTOMISATION_VARIANT_ID,
+    quantity,
+    attributes,
+  };
+  return [jerseyLine, printingLine];
+}
+
+/** The `_groupId` attribute of a raw Shopify cart line, if any. */
+function groupIdOfLine(line: ShopifyCartLine): string | undefined {
+  return line.attributes?.find((a) => a.key === GROUP_ID_KEY)?.value;
+}
+
+/**
+ * Line ids that move together with `lineId`: itself plus any paired add-on
+ * line sharing its `_groupId`. Reads the live cart so pairing survives page
+ * reloads (the client only ever holds the folded jersey line id).
+ */
+async function pairedLineIds(
+  cartId: string,
+  lineId: string,
+): Promise<string[]> {
+  const data = await shopifyFetch<{ cart: ShopifyCart | null }>({
+    query: getCartQuery,
+    variables: { cartId },
+    cache: "no-store",
+  });
+  const lines = data.cart ? data.cart.lines.edges.map((e) => e.node) : [];
+  const target = lines.find((l) => l.id === lineId);
+  const groupId = target ? groupIdOfLine(target) : undefined;
+  if (!groupId) return [lineId];
+  const ids = lines
+    .filter((l) => groupIdOfLine(l) === groupId)
+    .map((l) => l.id);
+  return ids.length > 0 ? ids : [lineId];
 }
 
 /** Stable line key for the mock cart. Lets two custom lines of the same
@@ -179,16 +265,13 @@ async function realAddToCart(
   customisation: CartLineCustomisation | undefined,
 ): Promise<Cart> {
   const existing = store.get(CART_COOKIE)?.value;
-  const attributes = attributesFor(customisation);
-  const lineInput = attributes
-    ? { merchandiseId, quantity, attributes }
-    : { merchandiseId, quantity };
+  const lines = buildLineInputs(merchandiseId, quantity, customisation);
 
   if (existing) {
     try {
       const data = await shopifyFetch<{ cartLinesAdd: CartMutationResult }>({
         query: addToCartMutation,
-        variables: { cartId: existing, lines: [lineInput] },
+        variables: { cartId: existing, lines },
         cache: "no-store",
       });
       if (data.cartLinesAdd.cart) return reshapeCart(data.cartLinesAdd.cart);
@@ -199,7 +282,7 @@ async function realAddToCart(
 
   const data = await shopifyFetch<{ cartCreate: CartMutationResult }>({
     query: createCartMutation,
-    variables: { lines: [lineInput] },
+    variables: { lines },
     cache: "no-store",
   });
   const cart = data.cartCreate.cart;
@@ -216,9 +299,10 @@ async function realUpdateCart(
   const cartId = store.get(CART_COOKIE)?.value;
   if (!cartId) throw new Error("No active cart.");
 
+  const ids = await pairedLineIds(cartId, lineId);
   const data = await shopifyFetch<{ cartLinesUpdate: CartMutationResult }>({
     query: updateCartMutation,
-    variables: { cartId, lines: [{ id: lineId, quantity }] },
+    variables: { cartId, lines: ids.map((id) => ({ id, quantity })) },
     cache: "no-store",
   });
   if (!data.cartLinesUpdate.cart) throw new Error("Unable to update cart.");
@@ -232,9 +316,10 @@ async function realRemoveFromCart(
   const cartId = store.get(CART_COOKIE)?.value;
   if (!cartId) throw new Error("No active cart.");
 
+  const ids = await pairedLineIds(cartId, lineId);
   const data = await shopifyFetch<{ cartLinesRemove: CartMutationResult }>({
     query: removeFromCartMutation,
-    variables: { cartId, lineIds: [lineId] },
+    variables: { cartId, lineIds: ids },
     cache: "no-store",
   });
   if (!data.cartLinesRemove.cart) throw new Error("Unable to remove from cart.");

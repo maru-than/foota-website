@@ -24,6 +24,22 @@ import type { Money } from "./shopify/types";
 /** Flat customisation add-on per shirt, in USD. */
 export const CUSTOM_PRICE_DELTA = 5;
 
+/**
+ * Handle of the Shopify add-on product that carries the printing charge.
+ * When a jersey is customised we add a paired line for this product so the
+ * +CUSTOM_PRICE_DELTA is collected at Shopify's hosted checkout (Basic plan
+ * can't adjust line prices via Functions). The cart layer folds this line
+ * back into its parent jersey line for display.
+ */
+export const CUSTOMISATION_HANDLE = "name-number-printing";
+
+/**
+ * Cart-line attribute key pairing a jersey line with its printing add-on
+ * line. Both lines carry the same value so they can be reconciled, updated,
+ * and removed together.
+ */
+export const GROUP_ID_KEY = "_groupId";
+
 /** Maximum characters for the back-of-shirt name. */
 export const CUSTOM_MAX_NAME_CHARS = 12;
 

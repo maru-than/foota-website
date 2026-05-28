@@ -51,6 +51,15 @@ function priceOf(product: Product): number {
   return Number.parseFloat(product.priceRange.minVariantPrice.amount);
 }
 
+/** Storefront query fragment that hides internal/add-on products. */
+const EXCLUDE_SYSTEM = "-tag:system";
+
+/** False for internal/add-on products (e.g. the printing add-on) that must
+ *  never appear in listings, search, new arrivals, or recommendations. */
+function isListable(product: Product): boolean {
+  return !product.tags.includes("system");
+}
+
 /* ------------------------- filtering / sorting ------------------------- */
 
 export function applyFilters(
@@ -186,11 +195,13 @@ export async function getProducts(opts?: {
     const { sortKey, reverse } = SHOPIFY_PRODUCT_SORT[sort];
     const data = await shopifyFetch<{ products: Connection<ShopifyProduct> }>({
       query: getProductsQuery,
-      variables: { first, sortKey, reverse, query: null },
+      variables: { first, sortKey, reverse, query: EXCLUDE_SYSTEM },
       tags: [TAGS.products],
       revalidate: 60,
     });
-    products = reshapeProducts(data.products.edges.map((e) => e.node));
+    products = reshapeProducts(data.products.edges.map((e) => e.node)).filter(
+      isListable,
+    );
   } else {
     products = getMockProducts();
   }
@@ -216,11 +227,18 @@ export async function getNewArrivals(limit = 8): Promise<Product[]> {
 
   const data = await shopifyFetch<{ products: Connection<ShopifyProduct> }>({
     query: getProductsQuery,
-    variables: { first: limit, sortKey: "CREATED_AT", reverse: true, query: null },
+    variables: {
+      first: limit,
+      sortKey: "CREATED_AT",
+      reverse: true,
+      query: EXCLUDE_SYSTEM,
+    },
     tags: [TAGS.products],
     revalidate: 60,
   });
-  return reshapeProducts(data.products.edges.map((e) => e.node));
+  return reshapeProducts(data.products.edges.map((e) => e.node)).filter(
+    isListable,
+  );
 }
 
 export async function searchProducts(query: string): Promise<Product[]> {
@@ -229,11 +247,18 @@ export async function searchProducts(query: string): Promise<Product[]> {
 
   const data = await shopifyFetch<{ products: Connection<ShopifyProduct> }>({
     query: getProductsQuery,
-    variables: { first: 50, sortKey: "RELEVANCE", reverse: false, query },
+    variables: {
+      first: 50,
+      sortKey: "RELEVANCE",
+      reverse: false,
+      query: `${query} ${EXCLUDE_SYSTEM}`,
+    },
     tags: [TAGS.products],
     revalidate: 60,
   });
-  return reshapeProducts(data.products.edges.map((e) => e.node));
+  return reshapeProducts(data.products.edges.map((e) => e.node)).filter(
+    isListable,
+  );
 }
 
 export async function getProductRecommendations(
@@ -250,5 +275,7 @@ export async function getProductRecommendations(
     tags: [TAGS.products],
     revalidate: 60,
   });
-  return reshapeProducts(data.productRecommendations ?? []).slice(0, limit);
+  return reshapeProducts(data.productRecommendations ?? [])
+    .filter(isListable)
+    .slice(0, limit);
 }

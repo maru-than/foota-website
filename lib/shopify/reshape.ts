@@ -6,7 +6,11 @@
  * @since 2026-05-25
  */
 
-import { customisationDelta } from "../customisation";
+import {
+  CUSTOMISATION_HANDLE,
+  customisationDelta,
+  GROUP_ID_KEY,
+} from "../customisation";
 import type {
   Cart,
   CartLine,
@@ -17,9 +21,10 @@ import type {
   JerseyBadge,
   JerseyMeta,
   JerseyType,
+  Money,
   Product,
-  ShopifyAttribute,
   ShopifyCart,
+  ShopifyCartLine,
   ShopifyCollection,
   ShopifyImage,
   ShopifyProduct,
@@ -158,76 +163,111 @@ export function reshapeCollection(collection: ShopifyCollection): Collection {
   };
 }
 
-function parseCustomisationAttributes(
-  attributes: ShopifyAttribute[] | undefined,
-  fallbackCurrency: string,
+function groupIdOf(line: ShopifyCartLine): string | undefined {
+  return line.attributes?.find((a) => a.key === GROUP_ID_KEY)?.value;
+}
+
+function isPrintingLine(line: ShopifyCartLine): boolean {
+  return line.merchandise.product.handle === CUSTOMISATION_HANDLE;
+}
+
+/**
+ * Build the customisation for a jersey line. When a paired printing add-on
+ * line exists, the per-unit delta is derived from that line's real cost (so
+ * displayed totals match Shopify's checkout). Otherwise we fall back to the
+ * line's `priceDelta` attribute (degraded mode with no add-on variant).
+ */
+function resolveCustomisation(
+  jerseyLine: ShopifyCartLine,
+  printing: ShopifyCartLine | undefined,
 ): CartLineCustomisation | undefined {
+  const attributes = jerseyLine.attributes;
   if (!attributes || attributes.length === 0) return undefined;
   const byKey = new Map(attributes.map((a) => [a.key.toLowerCase(), a.value]));
   const name = byKey.get("name");
   const number = byKey.get("number");
   if (!name && !number) return undefined;
-  const deltaAmount = byKey.get("pricedelta");
+
+  const currency = jerseyLine.merchandise.price.currencyCode;
+  let priceDelta: Money;
+  if (printing && jerseyLine.quantity > 0) {
+    const perUnit =
+      Number.parseFloat(printing.cost.totalAmount.amount) / jerseyLine.quantity;
+    priceDelta = {
+      amount: perUnit.toFixed(2),
+      currencyCode: printing.cost.totalAmount.currencyCode,
+    };
+  } else {
+    const deltaAttr = byKey.get("pricedelta");
+    priceDelta = deltaAttr
+      ? { amount: deltaAttr, currencyCode: currency }
+      : customisationDelta(currency);
+  }
+
   return {
     name: name || undefined,
     number: number || undefined,
-    priceDelta: deltaAmount
-      ? { amount: deltaAmount, currencyCode: fallbackCurrency }
-      : customisationDelta(fallbackCurrency),
+    priceDelta,
   };
 }
 
 export function reshapeCart(cart: ShopifyCart): Cart {
-  const lines: CartLine[] = removeEdges(cart.lines).map((line) => ({
-    id: line.id,
-    quantity: line.quantity,
-    cost: line.cost,
-    customisation: parseCustomisationAttributes(
-      line.attributes,
-      line.merchandise.price.currencyCode,
-    ),
-    merchandise: {
-      id: line.merchandise.id,
-      title: line.merchandise.title,
-      selectedOptions: line.merchandise.selectedOptions,
-      price: line.merchandise.price,
-      product: {
-        id: line.merchandise.product.id,
-        handle: line.merchandise.product.handle,
-        title: line.merchandise.product.title,
-        featuredImage: line.merchandise.product.featuredImage
-          ? reshapeImage(
-              line.merchandise.product.featuredImage,
-              line.merchandise.product.title,
-            )
-          : null,
-        teamName: parseJerseyMeta(line.merchandise.product.tags ?? []).teamName,
-      },
-    },
-  }));
+  const rawLines = removeEdges(cart.lines);
 
-  // Shopify can't compute the customisation delta server-side — re-apply it
-  // here so consumers see a consistent subtotal regardless of mock vs real.
-  let extraDelta = 0;
-  const currency = cart.cost.subtotalAmount.currencyCode;
-  for (const line of lines) {
-    if (line.customisation) {
-      extraDelta +=
-        Number.parseFloat(line.customisation.priceDelta.amount) * line.quantity;
-    }
+  // Index printing add-on lines by group id so each can be folded into its
+  // parent jersey line and never shown as a standalone row.
+  const printingByGroup = new Map<string, ShopifyCartLine>();
+  for (const line of rawLines) {
+    const groupId = groupIdOf(line);
+    if (groupId && isPrintingLine(line)) printingByGroup.set(groupId, line);
   }
-  const subtotal =
-    Number.parseFloat(cart.cost.subtotalAmount.amount) + extraDelta;
-  const total =
-    Number.parseFloat(cart.cost.totalAmount.amount) + extraDelta;
+
+  const lines: CartLine[] = [];
+  for (const line of rawLines) {
+    if (isPrintingLine(line)) continue; // folded into its jersey line below
+
+    const groupId = groupIdOf(line);
+    const printing = groupId ? printingByGroup.get(groupId) : undefined;
+
+    lines.push({
+      id: line.id,
+      quantity: line.quantity,
+      cost: line.cost,
+      customisation: resolveCustomisation(line, printing),
+      merchandise: {
+        id: line.merchandise.id,
+        title: line.merchandise.title,
+        selectedOptions: line.merchandise.selectedOptions,
+        price: line.merchandise.price,
+        product: {
+          id: line.merchandise.product.id,
+          handle: line.merchandise.product.handle,
+          title: line.merchandise.product.title,
+          featuredImage: line.merchandise.product.featuredImage
+            ? reshapeImage(
+                line.merchandise.product.featuredImage,
+                line.merchandise.product.title,
+              )
+            : null,
+          teamName: parseJerseyMeta(line.merchandise.product.tags ?? [])
+            .teamName,
+        },
+      },
+    });
+  }
+
+  // Shopify's cart cost already includes the printing add-on lines, so we use
+  // it verbatim. Only the badge count needs recomputing — Shopify counts the
+  // add-on lines, which the buyer perceives as part of the jersey.
+  const totalQuantity = lines.reduce((n, l) => n + l.quantity, 0);
 
   return {
     id: cart.id,
     checkoutUrl: cart.checkoutUrl,
-    totalQuantity: cart.totalQuantity,
+    totalQuantity,
     cost: {
-      subtotalAmount: { amount: subtotal.toFixed(2), currencyCode: currency },
-      totalAmount: { amount: total.toFixed(2), currencyCode: currency },
+      subtotalAmount: cart.cost.subtotalAmount,
+      totalAmount: cart.cost.totalAmount,
       totalTaxAmount: cart.cost.totalTaxAmount ?? null,
     },
     lines,
