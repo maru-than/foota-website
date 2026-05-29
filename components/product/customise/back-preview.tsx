@@ -194,7 +194,7 @@ export function BackPreview({ meta }: { meta: JerseyMeta }) {
       {showHint ? (
         <div className="pointer-events-none absolute inset-x-0 bottom-4 text-center">
           <p className="inline-block bg-background/70 px-3 py-1.5 text-[11px] text-foreground/80 backdrop-blur">
-            Add your name on the back →
+            Add your name on the back<span className="hidden md:inline"> →</span>
           </p>
         </div>
       ) : null}

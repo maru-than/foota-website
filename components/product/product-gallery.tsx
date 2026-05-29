@@ -109,7 +109,7 @@ export function ProductGallery({
               slideRefs.current[i] = el;
             }}
             data-index={i}
-            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden rounded-xl border border-border bg-white"
+            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden rounded-xl bg-white"
           >
             <Image
               src={img.url}
@@ -117,7 +117,7 @@ export function ProductGallery({
               fill
               priority={i === 0}
               sizes="100vw"
-              className="object-contain p-6"
+              className="scale-95 object-contain p-6"
             />
           </div>
         ))}
@@ -128,7 +128,7 @@ export function ProductGallery({
               slideRefs.current[backIndex] = el;
             }}
             data-index={backIndex}
-            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden rounded-xl border border-border bg-background"
+            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden rounded-xl bg-background"
           >
             {backSlot}
           </div>
@@ -175,7 +175,7 @@ export function ProductGallery({
       )}
 
       {slideCount > 1 ? (
-        <div className="flex justify-center gap-2 md:hidden" aria-hidden>
+        <div className="flex justify-center gap-1 md:hidden" aria-hidden>
           {Array.from({ length: slideCount }).map((_, i) => (
             <button
               key={i}
@@ -184,7 +184,7 @@ export function ProductGallery({
               aria-label={
                 i === backIndex ? "View back preview" : `Go to image ${i + 1}`
               }
-              className="flex h-6 w-6 items-center justify-center"
+              className="flex h-6 w-4 items-center justify-center"
             >
               <span
                 className={cn(

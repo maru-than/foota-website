@@ -8,21 +8,12 @@
  * @since 2026-05-25
  */
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  ArrowRight,
-  Clock,
-  PackageCheck,
-  ShoppingBag,
-  Tag,
-  XCircle,
-} from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowRight, Clock, PackageCheck, XCircle } from "lucide-react";
 
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
-import { Price } from "@/components/ui/price";
-import { formatCustomLabel } from "@/lib/customisation";
-import { cn, formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 import type { Product, ProductVariant } from "@/lib/shopify/types";
 import { CustomiseForm } from "./customise/customise-form";
 import { CustomiseTemplates } from "./customise/customise-templates";
@@ -65,40 +56,6 @@ export function ProductBuyBox({ product }: { product: Product }) {
     amount: effectiveAmount.toFixed(2),
     currencyCode: basePrice.currencyCode,
   };
-  const customLabel = formatCustomLabel(customisation);
-
-  // Sticky bar visibility — two independent signals:
-  //  • inlineVisible: true while the inline Add-to-bag is on screen (no point
-  //    showing a second CTA).
-  //  • footerVisible: true once the page footer enters the viewport (free the
-  //    footer's copyright / locale switcher from permanent occlusion).
-  // Bar shows only when both are false.
-  const inlineButtonRef = useRef<HTMLDivElement>(null);
-  const [inlineVisible, setInlineVisible] = useState(true);
-  const [footerVisible, setFooterVisible] = useState(false);
-  useEffect(() => {
-    const el = inlineButtonRef.current;
-    if (!el || typeof IntersectionObserver === "undefined") return;
-    const obs = new IntersectionObserver(
-      ([entry]) => setInlineVisible(entry.isIntersecting),
-      { threshold: 0 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  useEffect(() => {
-    if (typeof IntersectionObserver === "undefined") return;
-    const footer = document.querySelector("footer");
-    if (!footer) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => setFooterVisible(entry.isIntersecting),
-      { threshold: 0 },
-    );
-    obs.observe(footer);
-    return () => obs.disconnect();
-  }, []);
-  const showSticky = !inlineVisible && !footerVisible;
-
   function onChange(optionName: string, value: string) {
     setSelected((prev) => ({ ...prev, [optionName]: value }));
   }
@@ -134,7 +91,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
         </span>
       </div>
 
-      <div ref={inlineButtonRef}>
+      <div>
         <Button
           onClick={add}
           disabled={!available || isPending}
@@ -145,46 +102,6 @@ export function ProductBuyBox({ product }: { product: Product }) {
             ? `Add to bag — ${formatPrice(price.amount, price.currencyCode)}`
             : "Sold out"}
           {available ? <ArrowRight className="size-4" strokeWidth={1.5} /> : null}
-        </Button>
-      </div>
-
-{/* Sticky add-to-bag bar — mobile only. Visible only while the inline
-          CTA is scrolled past, so the footer is reachable at page bottom. */}
-      <div
-        aria-hidden={!showSticky}
-        className={cn(
-          // Apple's "slide & spring" curve — feels native vs. a linear ease.
-          "fixed inset-x-0 bottom-0 z-30 flex items-center justify-between gap-3 border-t border-border bg-background/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none lg:hidden",
-          showSticky
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none translate-y-full opacity-0",
-        )}
-      >
-        <div className="flex min-w-0 flex-col leading-tight">
-          {selected.Size ? (
-            <span className="flex items-center gap-1 truncate text-[11px] text-muted-foreground">
-              <Tag className="size-3 shrink-0" strokeWidth={1.5} aria-hidden />
-              <span className="truncate">
-                Size {selected.Size}
-                {customLabel ? ` · ${customLabel}` : null}
-              </span>
-            </span>
-          ) : null}
-          <Price
-            amount={price.amount}
-            currencyCode={price.currencyCode}
-            compareAt={product.compareAtPrice}
-            className="text-sm text-foreground"
-          />
-        </div>
-        <Button
-          size="lg"
-          onClick={add}
-          disabled={!available || isPending}
-          className="shrink-0 rounded-full bg-lime-400 text-gray-950 shadow-[inset_0_0_4px_0_rgba(255,255,255,1)] hover:bg-lime-500 disabled:bg-neutral-950 disabled:text-white disabled:opacity-100"
-        >
-          {available ? "Add to bag" : "Sold out"}
-          {available ? <ShoppingBag className="size-4" strokeWidth={1.5} /> : null}
         </Button>
       </div>
     </div>

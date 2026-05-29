@@ -130,7 +130,7 @@ export default async function ProductPage({
                   .filter(Boolean)
                   .join(" · ");
                 return eyebrow ? (
-                  <p className="mb-3 text-xs tracking-[-0.02em] text-foreground/40">
+                  <p className="mb-1.5 text-xs tracking-[-0.02em] text-foreground/40">
                     {eyebrow}
                   </p>
                 ) : null;
@@ -140,7 +140,7 @@ export default async function ProductPage({
                 <span className="text-lime-500">.</span>
               </h1>
 
-              <div className="mt-5">
+              <div className="mt-2">
                 <Price
                   amount={price.amount}
                   currencyCode={price.currencyCode}
