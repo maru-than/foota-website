@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "eslint",
     "headers": "node scripts/add-file-headers.mjs",
-    "convert:jerseys": "node scripts/convert-jerseys.mjs"
+    "convert:jerseys": "node scripts/convert-jerseys.mjs",
+    "brand:checkout": "node scripts/brand-checkout.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
