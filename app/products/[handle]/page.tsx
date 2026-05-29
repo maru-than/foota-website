@@ -179,6 +179,8 @@ export default async function ProductPage({
       ) : null}
 
       <RelatedProducts products={related} />
+
+      <div aria-hidden className="h-20 md:hidden" />
     </>
   );
 }

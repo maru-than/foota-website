@@ -91,12 +91,12 @@ export function ProductBuyBox({ product }: { product: Product }) {
         </span>
       </div>
 
-      <div>
+      <div className="fixed inset-x-4 bottom-4 z-40 md:static md:inset-auto md:z-auto">
         <Button
           onClick={add}
           disabled={!available || isPending}
           size="lg"
-          className="w-full rounded-full bg-lime-400 text-gray-950 shadow-[inset_0_0_4px_0_rgba(255,255,255,1)] hover:bg-lime-500 disabled:bg-neutral-950 disabled:text-white disabled:opacity-100 disabled:shadow-[inset_0_0_4px_0_rgba(255,255,255,0.2),0_0_1px_0_rgba(0,0,0,0.25)]"
+          className="w-full rounded-full bg-lime-400 text-gray-950 shadow-[0_8px_24px_-4px_rgba(0,0,0,0.25),inset_0_0_4px_0_rgba(255,255,255,1)] hover:bg-lime-500 disabled:bg-neutral-950 disabled:text-white disabled:opacity-100 disabled:shadow-[inset_0_0_4px_0_rgba(255,255,255,0.2),0_0_1px_0_rgba(0,0,0,0.25)] md:shadow-[inset_0_0_4px_0_rgba(255,255,255,1)]"
         >
           {available
             ? `Add to bag — ${formatPrice(price.amount, price.currencyCode)}`

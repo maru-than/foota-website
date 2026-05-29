@@ -109,7 +109,7 @@ export function ProductGallery({
               slideRefs.current[i] = el;
             }}
             data-index={i}
-            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden rounded-xl bg-white"
+            className="relative aspect-square w-full shrink-0 snap-center overflow-hidden rounded-xl bg-white"
           >
             <Image
               src={img.url}
@@ -117,7 +117,7 @@ export function ProductGallery({
               fill
               priority={i === 0}
               sizes="100vw"
-              className="scale-95 object-contain p-6"
+              className="object-contain p-4"
             />
           </div>
         ))}
@@ -128,7 +128,7 @@ export function ProductGallery({
               slideRefs.current[backIndex] = el;
             }}
             data-index={backIndex}
-            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden rounded-xl bg-background"
+            className="relative aspect-square w-full shrink-0 snap-center overflow-hidden rounded-xl bg-background"
           >
             {backSlot}
           </div>
