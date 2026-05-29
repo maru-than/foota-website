@@ -40,7 +40,11 @@ export function CartDrawer({
     <Sheet open={isOpen} onOpenChange={setOpen}>
       {/* aria-describedby={undefined} silences Radix's "Missing Description"
           warning — the bag has no narrative to describe beyond its title. */}
-      <SheetContent side="right" className="p-0" aria-describedby={undefined}>
+      <SheetContent
+        side="right"
+        className="p-0 data-[side=right]:w-screen data-[side=right]:max-w-none data-[side=right]:sm:max-w-md"
+        aria-describedby={undefined}
+      >
         <SheetHeader>
           <SheetTitle>
             Your bag{" "}

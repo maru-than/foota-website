@@ -25,7 +25,7 @@ export function CartItem({
   line: CartLine;
   onNavigate?: () => void;
 }) {
-  const { updateItem, removeItem } = useCart();
+  const { updateItem, removeItem, isPending } = useCart();
   const { product } = line.merchandise;
   const image = product.featuredImage;
   const size =
@@ -57,7 +57,7 @@ export function CartItem({
           <Link
             href={`/products/${product.handle}`}
             onClick={onNavigate}
-            className="text-base font-bold leading-tight text-primary transition-colors hover:text-primary"
+            className="text-base font-medium leading-tight text-foreground transition-colors hover:text-primary"
           >
             {product.title}
           </Link>
@@ -85,8 +85,9 @@ export function CartItem({
             <button
               type="button"
               onClick={() => updateItem(line.id, line.quantity - 1)}
+              disabled={isPending}
               aria-label="Decrease quantity"
-              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-primary"
+              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-primary disabled:pointer-events-none disabled:opacity-40"
             >
               <Minus className="size-3.5" strokeWidth={1.5} />
             </button>
@@ -96,8 +97,9 @@ export function CartItem({
             <button
               type="button"
               onClick={() => updateItem(line.id, line.quantity + 1)}
+              disabled={isPending}
               aria-label="Increase quantity"
-              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-primary"
+              className="flex size-11 items-center justify-center text-foreground transition-colors hover:text-primary disabled:pointer-events-none disabled:opacity-40"
             >
               <Plus className="size-3.5" strokeWidth={1.5} />
             </button>

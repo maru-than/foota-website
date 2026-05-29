@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @file Full-page search modal — real-time input, debounced server action, product cards, keyboard-aware.
+ * @file Search modal — full-screen on mobile, centered card on desktop; debounced server action, suggestion chips, product rows.
  * @author Maruthan
  * @copyright 2026 Maruthan
  * @license MIT
@@ -12,7 +12,7 @@ import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Search as SearchIcon } from "lucide-react";
+import { Search as SearchIcon, X } from "lucide-react";
 
 import {
   Dialog,
@@ -24,6 +24,9 @@ import { JerseyPlaceholder } from "@/components/ui/jersey-placeholder";
 import { cn, formatPrice } from "@/lib/utils";
 import { searchAction } from "@/app/actions/search";
 import type { Product } from "@/lib/shopify/types";
+
+/** Empty-state quick picks — tap to populate the query. */
+const SUGGESTIONS = ["Brazil", "Argentina", "Morocco", "England"];
 
 export function SearchOverlay({
   open,
@@ -71,12 +74,17 @@ export function SearchOverlay({
     router.push(`/search?q=${encodeURIComponent(term)}`);
   }
 
+  function pick(term: string) {
+    setQuery(term);
+    inputRef.current?.focus();
+  }
+
   const showEmpty = query.trim().length >= 2 && results.length === 0 && !isPending;
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent
-        className="top-[12vh] max-w-2xl translate-y-0 p-0"
+        className="flex flex-col gap-0 overflow-hidden p-0 inset-0 top-0 left-0 h-dvh w-screen max-h-none max-w-none translate-x-0 translate-y-0 rounded-none sm:inset-auto sm:top-[12vh] sm:left-1/2 sm:h-auto sm:max-h-[76vh] sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:translate-y-0 sm:rounded-xl"
         onOpenAutoFocus={(e) => {
           e.preventDefault();
           inputRef.current?.focus();
@@ -90,7 +98,7 @@ export function SearchOverlay({
 
         <form
           onSubmit={goToResults}
-          className="flex items-center gap-3 border-b border-border pl-5 pr-2"
+          className="flex shrink-0 items-center gap-3 border-b border-border pl-5 pr-2 pt-[env(safe-area-inset-top)] sm:pt-0"
         >
           <SearchIcon className="size-5 shrink-0 text-muted-foreground" strokeWidth={1.5} />
           <input
@@ -98,8 +106,21 @@ export function SearchOverlay({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search nations…"
-            className="h-14 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground/60"
+            className="h-16 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground/60 sm:h-14"
           />
+          {query ? (
+            <button
+              type="button"
+              onClick={() => {
+                setQuery("");
+                inputRef.current?.focus();
+              }}
+              aria-label="Clear search"
+              className="shrink-0 rounded-full p-2 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <X className="size-4" strokeWidth={1.5} />
+            </button>
+          ) : null}
           <button
             type="button"
             onClick={() => handleOpenChange(false)}
@@ -109,9 +130,9 @@ export function SearchOverlay({
           </button>
         </form>
 
-        <div className="max-h-[52vh] overflow-y-auto">
+        <div className="flex-1 overflow-y-auto pb-[env(safe-area-inset-bottom)]">
           {showEmpty ? (
-            <p className="px-5 py-8 text-center text-sm text-muted-foreground">
+            <p className="px-5 py-10 text-center text-sm text-muted-foreground">
               No jerseys match &ldquo;{query.trim()}&rdquo;.
             </p>
           ) : null}
@@ -124,11 +145,11 @@ export function SearchOverlay({
                     <Link
                       href={`/products/${p.handle}`}
                       onClick={() => handleOpenChange(false)}
-                      className="flex items-center gap-4 px-5 py-3 transition-colors hover:bg-muted"
+                      className="flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-muted"
                     >
                       <div
                         className={cn(
-                          "relative aspect-[4/5] w-11 shrink-0 overflow-hidden border border-border",
+                          "relative aspect-[4/5] w-14 shrink-0 overflow-hidden rounded-md",
                           p.featuredImage ? "bg-white" : "bg-muted",
                         )}
                       >
@@ -137,22 +158,22 @@ export function SearchOverlay({
                             src={p.featuredImage.url}
                             alt={p.featuredImage.altText}
                             fill
-                            sizes="44px"
-                            className="object-contain p-1"
+                            sizes="56px"
+                            className="object-contain p-1.5"
                           />
                         ) : (
-                          <JerseyPlaceholder label={p.meta.teamName ?? undefined} className="p-1" />
+                          <JerseyPlaceholder label={p.meta.teamName ?? undefined} className="p-1.5" />
                         )}
                       </div>
-                      <div className="flex-1">
+                      <div className="min-w-0 flex-1">
                         {p.meta.teamName ? (
-                          <span className="text-[11px] text-primary">
+                          <span className="text-xs text-primary">
                             {p.meta.teamName}
                           </span>
                         ) : null}
-                        <p className="text-sm text-foreground">{p.title}</p>
+                        <p className="truncate text-base text-foreground">{p.title}</p>
                       </div>
-                      <span className="text-sm font-bold tabular-nums text-muted-foreground">
+                      <span className="shrink-0 text-sm tabular-nums text-foreground">
                         {formatPrice(
                           p.priceRange.minVariantPrice.amount,
                           p.priceRange.minVariantPrice.currencyCode,
@@ -165,7 +186,7 @@ export function SearchOverlay({
               <button
                 type="button"
                 onClick={goToResults}
-                className="block w-full border-t border-border px-5 py-3 text-left text-xs text-primary transition-colors hover:bg-muted"
+                className="block w-full border-t border-border px-5 py-4 text-left text-sm text-primary transition-colors hover:bg-muted"
               >
                 View all results
               </button>
@@ -173,10 +194,21 @@ export function SearchOverlay({
           ) : null}
 
           {query.trim().length < 2 ? (
-            <p className="px-5 py-8 text-center text-sm text-muted-foreground">
-              Try a nation — &ldquo;Brazil&rdquo;, &ldquo;Morocco&rdquo;,
-              &ldquo;Argentina&rdquo;.
-            </p>
+            <div className="px-5 py-8">
+              <p className="text-xs text-muted-foreground">Popular nations</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {SUGGESTIONS.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    onClick={() => pick(s)}
+                    className="rounded-full border border-border px-3.5 py-2 text-sm text-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
           ) : null}
         </div>
       </DialogContent>

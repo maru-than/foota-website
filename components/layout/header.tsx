@@ -59,13 +59,16 @@ export function Header() {
           aria-label="Worldkit Soccer — home"
           className="relative z-10 flex items-center"
         >
+          <span className="font-display text-xl font-medium tracking-tight text-foreground lg:hidden">
+            Worldkit
+          </span>
           <Image
             src="/logo.png"
             alt="Worldkit Soccer"
             width={224}
             height={224}
             priority
-            className="h-9 w-auto lg:h-10"
+            className="hidden h-9 w-auto lg:block lg:h-10"
           />
         </Link>
 
